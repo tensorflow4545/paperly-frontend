@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -15,10 +16,16 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-              <span className="text-white font-bold text-lg">P</span>
+            <div className="w-8 h-8 rounded-md flex items-center justify-center overflow-hidden">
+              <Image 
+                src="/logo.png" 
+                alt="Paperly Logo" 
+                width={32} 
+                height={32}
+                className="object-contain"
+              />
             </div>
-            <span className="text-xl font-semibold text-gray-900">Paprly</span>
+            <span className="text-xl font-semibold text-gray-900">Paperly</span>
           </div>
 
           {/* Desktop Navigation */}

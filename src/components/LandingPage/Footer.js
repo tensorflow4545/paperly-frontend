@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 export default function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200 py-12">
@@ -8,10 +10,16 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white font-bold text-lg">P</span>
+              <div className="w-8 h-8 rounded-md flex items-center justify-center overflow-hidden">
+                <Image 
+                  src="/logo.png" 
+                  alt="Paperly Logo" 
+                  width={32} 
+                  height={32}
+                  className="object-contain"
+                />
               </div>
-              <span className="text-xl font-semibold text-gray-900">Paprly</span>
+              <span className="text-xl font-semibold text-gray-900">Paperly</span>
             </div>
             <p className="text-gray-600 leading-relaxed">
               The simplest way to create professional invoices for your freelance business.
