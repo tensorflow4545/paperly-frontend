@@ -4,7 +4,7 @@ export default function StructuredData() {
     "@type": "WebApplication",
     "name": "Paperly - Free Invoice Generator",
     "description": "Generate free invoices online instantly with Paperly. Create professional invoices for freelancers, businesses, and consultants. No signup required. Free invoice generator with templates, GST compliance, and instant sharing.",
-    "url": "https://paperly.in",
+    "url": "https://paprly.in",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web Browser",
     "offers": {
@@ -25,7 +25,7 @@ export default function StructuredData() {
       "Online invoice maker",
       "Free invoice templates"
     ],
-    "screenshot": "https://paperly.in/screenshot.png",
+    "screenshot": "https://paprly.in/screenshot.png",
     "softwareVersion": "1.0",
     "author": {
       "@type": "Organization",
@@ -38,7 +38,7 @@ export default function StructuredData() {
     },
     "potentialAction": {
       "@type": "UseAction",
-      "target": "https://paperly.in/invoice-generator"
+      "target": "https://paprly.in/invoice-generator"
     }
   };
 
@@ -77,8 +77,8 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Paperly",
-    "url": "https://paperly.in",
-    "logo": "https://paperly.in/logo.png",
+    "url": "https://paprly.in",
+    "logo": "https://paprly.in/logo.png",
     "description": "Free online invoice generator for freelancers, businesses, and consultants",
     "sameAs": [
       "https://twitter.com/paperly",
