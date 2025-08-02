@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import Navbar from "../../components/LandingPage/Navbar"
 import Footer from "../../components/LandingPage/Footer"
+import TemplatesPage from "@/components/ReciptPage/Templates"
 
 
 
@@ -39,6 +40,8 @@ export default function CodePage() {
 
 
         </div>
+
+        <TemplatesPage/>
 
 
         {/* what each template cover section */}
