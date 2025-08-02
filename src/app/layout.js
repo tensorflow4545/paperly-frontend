@@ -13,32 +13,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Paperly - Create Professional Invoices in Seconds | No Signup Required",
-  description: "Create professional invoices instantly with Paperly. No signup required. Designed for Indian businesses, freelancers, and consultants. Drag & drop builder, customizable templates, and instant sharing.",
-  keywords: "invoice generator, professional invoices, Indian business, freelancer invoices, invoice templates, drag drop builder, instant invoice, no signup, invoice software, billing software, GST invoice, tax invoice",
+  title: "Generate Free Invoice Online | Paperly - Professional Invoice Generator | No Signup Required",
+  description: "Generate free invoices online instantly with Paperly. Create professional invoices for freelancers, businesses, and consultants. No signup required. Free invoice generator with templates, GST compliance, and instant sharing.",
+  keywords: "generate free invoice, free invoice generator, online invoice maker, professional invoice templates, freelancer invoice, business invoice, GST invoice generator, tax invoice online, invoice software free, billing software, create invoice online, invoice maker free, Indian invoice generator, invoice templates free, instant invoice generator, no signup invoice, drag drop invoice builder, invoice sharing, PDF invoice generator",
   authors: [{ name: "Paperly Team" }],
   creator: "Paperly",
   publisher: "Paperly",
-  robots: "index, follow",
+  robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   openGraph: {
-    title: "Paperly - Create Professional Invoices in Seconds",
-    description: "Create professional invoices instantly with Paperly. No signup required. Perfect for Indian businesses and freelancers.",
+    title: "Generate Free Invoice Online | Paperly - Professional Invoice Generator",
+    description: "Generate free invoices online instantly with Paperly. Create professional invoices for freelancers, businesses, and consultants. No signup required.",
     type: "website",
     locale: "en_US",
     siteName: "Paperly",
+    url: "https://paperly.in",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Paperly - Professional Invoice Generator",
+        alt: "Generate Free Invoice Online - Paperly Professional Invoice Generator",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paperly - Create Professional Invoices in Seconds",
-    description: "Create professional invoices instantly with Paperly. No signup required.",
+    title: "Generate Free Invoice Online | Paperly - Professional Invoice Generator",
+    description: "Generate free invoices online instantly with Paperly. Create professional invoices for freelancers, businesses, and consultants. No signup required.",
     images: ["/og-image.png"],
   },
   viewport: "width=device-width, initial-scale=1",
@@ -50,6 +51,10 @@ export const metadata = {
   },
   alternates: {
     canonical: "https://paperly.in",
+  },
+  other: {
+    "google-site-verification": "your-verification-code",
+    "msvalidate.01": "your-bing-verification-code",
   },
 };
 
