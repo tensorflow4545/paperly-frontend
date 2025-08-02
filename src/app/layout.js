@@ -26,7 +26,7 @@ export const metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Paperly",
-    url: "https://paperly.in",
+    url: "https://paprly.in",
     images: [
       {
         url: "/og-image.png",
@@ -50,7 +50,7 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   alternates: {
-    canonical: "https://paperly.in",
+    canonical: "https://paprly.in",
   },
   other: {
     "google-site-verification": "your-verification-code",
