@@ -1,5 +1,5 @@
 "use client"
-
+import Head from "next/head"
 import React from "react"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
@@ -50,6 +50,14 @@ export default function CodePage() {
     <>
       <Navbar />
       <>
+      <Head>
+        <title>Invoice Template | Paprly</title>
+        <meta
+          name="description"
+          content="Download professional invoice templates for free from Paprly. Simple, clean, and customizable for freelancers and businesses."
+        />
+        <link rel="canonical" href="https://paprly.in/template" />
+      </Head>
 
         {/* Hero section */}
         <div className="w-full min-h-[300px] md:h-[362px] bg-[#FEFCE8] items-center justify-center flex px-4">
