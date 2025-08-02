@@ -31,18 +31,18 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Product</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                <a href="/template" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                   Templates
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Examples
+                  Upcoming Features
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Pricing
+                  Help
                 </a>
               </li>
             </ul>
