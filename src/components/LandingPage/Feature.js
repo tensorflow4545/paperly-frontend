@@ -6,10 +6,10 @@ export default function FeaturesSection() {
       <div className="max-w-6xl mx-auto px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Everything You Need to Invoice Like a Pro
           </h2>
-          <p className="text-lg text-gray-600">Zero design hassle. Drag. Drop. Share.</p>
+          <p className="text-base sm:text-lg text-gray-600">Zero design hassle. Drag. Drop. Share.</p>
         </div>
 
         {/* Features Grid */}

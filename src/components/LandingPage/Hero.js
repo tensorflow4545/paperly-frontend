@@ -44,18 +44,18 @@ export default function LandingPage() {
             {/* Main heading */}
             <div className="space-y-4">
               <motion.h1 
-                className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                Create Professional{" "}
+                Generate Free Invoice{" "}
                 <motion.span 
                   className="text-gray-800"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  Invoices
+                  Online
                 </motion.span>{" "}
                 in{" "}
                 <motion.span 
@@ -67,7 +67,7 @@ export default function LandingPage() {
                 </motion.span>
               </motion.h1>
               <motion.h2 
-                className="text-4xl lg:text-5xl font-bold text-gray-700"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-700"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -105,8 +105,8 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Designed for freelancers, consultants, and small businesses. Create, preview, download, or share invoices
-              — instantly and professionally.
+              Generate free invoices online instantly. Create professional invoices for freelancers, businesses, and consultants. 
+              No signup required. Free invoice generator with templates, GST compliance, and instant sharing.
             </motion.p>
 
             {/* CTA Buttons */}
