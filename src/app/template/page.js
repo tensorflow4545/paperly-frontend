@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { FileText, Edit3, Download, Users, Calendar, DollarSign, CreditCard, Shield, BarChart3, Briefcase, Palette, Wrench, UserCheck } from "lucide-react"
 import Navbar from "../../components/LandingPage/Navbar"
 import Footer from "../../components/LandingPage/Footer"
+import TemplatesPage from "@/components/ReciptPage/Templates"
 
 
 
@@ -81,6 +82,8 @@ export default function CodePage() {
 
 
         </div>
+
+        <TemplatesPage/>
 
         {/* How It Works Section */}
         <div className="w-full bg-white py-8 md:py-16">
