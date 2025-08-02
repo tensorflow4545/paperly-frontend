@@ -58,12 +58,12 @@ export default function CodePage() {
                              <h1 className="font-medium text-3xl md:text-4xl lg:text-5xl tracking-tight text-gray-900 leading-tight">
                  Generate Free Invoice
                  Online Templates
-               </h1>
+              </h1>
                              <h2 className="text-gray-600 text-base md:text-lg leading-relaxed">
                  Generate free invoices online with professionally designed templates tailored for freelancers, 
                  businesses, and consultants. Each template includes everything you need to create professional 
                  invoices — from client details to payment terms. Free invoice generator with no signup required.
-               </h2>
+              </h2>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button onClick={handleBackToHome} className="bg-white w-full sm:w-[156px] h-[45px] cursor-pointer hover:bg-gray-100 text-gray-700 font-semibold px-4 py-2 rounded-md  transition-all duration-200">Back to Home</button>
@@ -125,34 +125,34 @@ export default function CodePage() {
 
               {/* Right Side - Professional Video Frame */}
               <div className="relative order-1 lg:order-2">
-                <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
+                <div className="relative w-full h-[280px] sm:h-[320px] md:h-[350px] lg:h-[400px] bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
                   {/* Video-like interface with realistic elements */}
                   <div className="absolute inset-0 bg-white">
                     {/* Browser-like header */}
-                    <div className="absolute top-0 left-0 right-0 h-6 md:h-8 bg-gray-100 border-b border-gray-200 flex items-center px-2 md:px-3">
+                    <div className="absolute top-0 left-0 right-0 h-5 sm:h-6 md:h-8 bg-gray-100 border-b border-gray-200 flex items-center px-2 md:px-3">
                       <div className="flex space-x-1 md:space-x-2">
-                        <div className="w-2 h-2 md:w-3 md:h-3 bg-red-400 rounded-full"></div>
-                        <div className="w-2 h-2 md:w-3 md:h-3 bg-yellow-400 rounded-full"></div>
-                        <div className="w-2 h-2 md:w-3 md:h-3 bg-green-400 rounded-full"></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-red-400 rounded-full"></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-yellow-400 rounded-full"></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-green-400 rounded-full"></div>
                       </div>
                       <div className="flex-1 flex justify-center">
-                        <div className="bg-white rounded-md px-2 md:px-3 py-1 text-xs text-gray-500 border border-gray-200">
+                        <div className="bg-white rounded-md px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 text-xs text-gray-500 border border-gray-200">
                           paperly.in/template
                         </div>
                       </div>
                     </div>
 
                     {/* Main content area */}
-                    <div className="absolute top-6 md:top-8 left-0 right-0 bottom-0 p-3 md:p-6">
+                    <div className="absolute top-5 sm:top-6 md:top-8 left-0 right-0 bottom-0 p-2 sm:p-3 md:p-6">
                       {/* Animated content based on current step */}
                       <div className="h-full flex flex-col">
                         {/* Step indicator */}
-                        <div className="flex items-center justify-between mb-4 md:mb-6">
+                        <div className="flex items-center justify-between mb-2 sm:mb-4 md:mb-6">
                           <div className="flex space-x-1 md:space-x-2">
                             {[0, 1, 2].map((step) => (
                               <div
                                 key={step}
-                                className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
+                                className={`w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
                                   currentStep === step 
                                     ? 'bg-gray-800 scale-125' 
                                     : 'bg-gray-300'
@@ -168,135 +168,135 @@ export default function CodePage() {
                           {currentStep === 0 && (
                             <div className="h-full">
                                                              {/* Template Selection Interface */}
-                               <div className="mb-3">
-                                 <h3 className="text-sm font-semibold text-gray-900 mb-2">Choose Template</h3>
-                                 <div className="grid grid-cols-2 gap-2">
-                                   <div className="bg-blue-50 border border-blue-200 rounded-md p-2 cursor-pointer hover:bg-blue-100 transition-colors">
-                                     <div className="w-6 h-6 bg-blue-500 rounded-md mb-1 flex items-center justify-center">
-                                       <Users className="w-3 h-3 text-white" />
+                               <div className="mb-2 sm:mb-3">
+                                 <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Choose Template</h3>
+                                 <div className="grid grid-cols-2 gap-1 sm:gap-2">
+                                   <div className="bg-blue-50 border border-blue-200 rounded-md p-1.5 sm:p-2 cursor-pointer hover:bg-blue-100 transition-colors">
+                                     <div className="w-4 h-4 sm:w-6 sm:h-6 bg-blue-500 rounded-md mb-1 flex items-center justify-center">
+                                       <Users className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                                      </div>
                                      <div className="text-xs text-gray-600">Freelancer</div>
                                    </div>
-                                   <div className="bg-gray-50 border border-gray-200 rounded-md p-2 cursor-pointer hover:bg-gray-100 transition-colors">
-                                     <div className="w-6 h-6 bg-gray-500 rounded-md mb-1 flex items-center justify-center">
-                                       <Briefcase className="w-3 h-3 text-white" />
+                                   <div className="bg-gray-50 border border-gray-200 rounded-md p-1.5 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors">
+                                     <div className="w-4 h-4 sm:w-6 sm:h-6 bg-gray-500 rounded-md mb-1 flex items-center justify-center">
+                                       <Briefcase className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                                      </div>
                                      <div className="text-xs text-gray-600">Business</div>
                                    </div>
-                                   <div className="bg-gray-50 border border-gray-200 rounded-md p-2 cursor-pointer hover:bg-gray-100 transition-colors">
-                                     <div className="w-6 h-6 bg-gray-500 rounded-md mb-1 flex items-center justify-center">
-                                       <Wrench className="w-3 h-3 text-white" />
+                                   <div className="bg-gray-50 border border-gray-200 rounded-md p-1.5 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors">
+                                     <div className="w-4 h-4 sm:w-6 sm:h-6 bg-gray-500 rounded-md mb-1 flex items-center justify-center">
+                                       <Wrench className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                                      </div>
                                      <div className="text-xs text-gray-600">Service</div>
                                    </div>
-                                   <div className="bg-gray-50 border border-gray-200 rounded-md p-2 cursor-pointer hover:bg-gray-100 transition-colors">
-                                     <div className="w-6 h-6 bg-gray-500 rounded-md mb-1 flex items-center justify-center">
-                                       <UserCheck className="w-3 h-3 text-white" />
+                                   <div className="bg-gray-50 border border-gray-200 rounded-md p-1.5 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors">
+                                     <div className="w-4 h-4 sm:w-6 sm:h-6 bg-gray-500 rounded-md mb-1 flex items-center justify-center">
+                                       <UserCheck className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                                      </div>
                                      <div className="text-xs text-gray-600">Consultant</div>
                                    </div>
                                  </div>
                                </div>
                               
-                              {/* Preview Area */}
-                              <div className="bg-gray-50 rounded-md p-3 border border-gray-200">
-                                <div className="flex items-center justify-between mb-2">
-                                  <div className="text-xs font-medium text-gray-700">INVOICE</div>
-                                  <div className="text-xs text-gray-500">#INV-001</div>
-                                </div>
-                                <div className="space-y-1">
-                                  <div className="h-2 bg-gray-300 rounded w-3/4"></div>
-                                  <div className="h-2 bg-gray-300 rounded w-1/2"></div>
-                                  <div className="h-2 bg-gray-300 rounded w-2/3"></div>
-                                </div>
-                              </div>
+                                                             {/* Preview Area */}
+                               <div className="bg-gray-50 rounded-md p-2 sm:p-3 border border-gray-200">
+                                 <div className="flex items-center justify-between mb-1 sm:mb-2">
+                                   <div className="text-xs font-medium text-gray-700">INVOICE</div>
+                                   <div className="text-xs text-gray-500">#INV-001</div>
+                                 </div>
+                                 <div className="space-y-1">
+                                   <div className="h-1.5 sm:h-2 bg-gray-300 rounded w-3/4"></div>
+                                   <div className="h-1.5 sm:h-2 bg-gray-300 rounded w-1/2"></div>
+                                   <div className="h-1.5 sm:h-2 bg-gray-300 rounded w-2/3"></div>
+                                 </div>
+                               </div>
                             </div>
                           )}
 
                           {currentStep === 1 && (
-                            <div className="h-full">
-                              {/* Form Interface */}
-                              <div className="space-y-3">
-                                <div>
-                                  <label className="block text-xs font-medium text-gray-700 mb-1">Business Name</label>
-                                  <div className="h-6 bg-gray-100 rounded border border-gray-200 px-2 flex items-center">
-                                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                                    <div className="ml-2 text-xs text-gray-600">Acme Design Studio</div>
-                                  </div>
-                                </div>
-                                
-                                <div>
-                                  <label className="block text-xs font-medium text-gray-700 mb-1">Client Email</label>
-                                  <div className="h-6 bg-gray-100 rounded border border-gray-200 px-2 flex items-center">
-                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                    <div className="ml-2 text-xs text-gray-600">client@example.com</div>
-                                  </div>
-                                </div>
-                                
-                                <div>
-                                  <label className="block text-xs font-medium text-gray-700 mb-1">Services</label>
-                                  <div className="space-y-1">
-                                    <div className="flex justify-between items-center">
-                                      <div className="text-xs text-gray-600">Web Design</div>
-                                      <div className="text-xs text-gray-600">$500</div>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                      <div className="text-xs text-gray-600">Logo Design</div>
-                                      <div className="text-xs text-gray-600">$200</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                                                         <div className="h-full">
+                               {/* Form Interface */}
+                               <div className="space-y-2 sm:space-y-3">
+                                 <div>
+                                   <label className="block text-xs font-medium text-gray-700 mb-1">Business Name</label>
+                                   <div className="h-5 sm:h-6 bg-gray-100 rounded border border-gray-200 px-2 flex items-center">
+                                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                                     <div className="ml-2 text-xs text-gray-600">Acme Design Studio</div>
+                                   </div>
+                                 </div>
+                                 
+                                 <div>
+                                   <label className="block text-xs font-medium text-gray-700 mb-1">Client Email</label>
+                                   <div className="h-5 sm:h-6 bg-gray-100 rounded border border-gray-200 px-2 flex items-center">
+                                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                     <div className="ml-2 text-xs text-gray-600">client@example.com</div>
+                                   </div>
+                                 </div>
+                                 
+                                 <div>
+                                   <label className="block text-xs font-medium text-gray-700 mb-1">Services</label>
+                                   <div className="space-y-1">
+                                     <div className="flex justify-between items-center">
+                                       <div className="text-xs text-gray-600">Web Design</div>
+                                       <div className="text-xs text-gray-600">$500</div>
+                                     </div>
+                                     <div className="flex justify-between items-center">
+                                       <div className="text-xs text-gray-600">Logo Design</div>
+                                       <div className="text-xs text-gray-600">$200</div>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
                           )}
 
                           {currentStep === 2 && (
-                            <div className="h-full">
-                              {/* Download/Share Interface */}
-                              <div className="space-y-3">
-                                <div className="bg-green-50 border border-green-200 rounded-md p-3">
-                                  <div className="flex items-center justify-between">
-                                    <div className="text-xs font-medium text-green-800">Invoice Generated!</div>
-                                    <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                                      <div className="w-2 h-2 bg-white rounded-full"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                
-                                <div className="space-y-2">
-                                  <button className="w-full h-8 bg-blue-500 text-white text-xs font-medium rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center">
-                                    <Download className="w-3 h-3 mr-1" />
-                                    Download PDF
-                                  </button>
-                                  <button className="w-full h-8 bg-gray-500 text-white text-xs font-medium rounded-md hover:bg-gray-600 transition-colors flex items-center justify-center">
-                                    <FileText className="w-3 h-3 mr-1" />
-                                    Send via Email
-                                  </button>
-                                </div>
-                                
-                                <div className="bg-gray-50 rounded-md p-2">
-                                  <div className="text-xs text-gray-600 mb-1">Share Link</div>
-                                  <div className="h-5 bg-white border border-gray-200 rounded px-2 flex items-center">
-                                    <div className="text-xs text-gray-400">paperly.in/inv/abc123</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                                                         <div className="h-full">
+                               {/* Download/Share Interface */}
+                               <div className="space-y-2 sm:space-y-3">
+                                 <div className="bg-green-50 border border-green-200 rounded-md p-2 sm:p-3">
+                                   <div className="flex items-center justify-between">
+                                     <div className="text-xs font-medium text-green-800">Invoice Generated!</div>
+                                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full flex items-center justify-center">
+                                       <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></div>
+                                     </div>
+                                   </div>
+                                 </div>
+                                 
+                                 <div className="space-y-1.5 sm:space-y-2">
+                                   <button className="w-full h-6 sm:h-8 bg-blue-500 text-white text-xs font-medium rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center">
+                                     <Download className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
+                                     Download PDF
+                                   </button>
+                                   <button className="w-full h-6 sm:h-8 bg-gray-500 text-white text-xs font-medium rounded-md hover:bg-gray-600 transition-colors flex items-center justify-center">
+                                     <FileText className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
+                                     Send via Email
+                                   </button>
+                                 </div>
+                                 
+                                 <div className="bg-gray-50 rounded-md p-1.5 sm:p-2">
+                                   <div className="text-xs text-gray-600 mb-1">Share Link</div>
+                                   <div className="h-4 sm:h-5 bg-white border border-gray-200 rounded px-2 flex items-center">
+                                     <div className="text-xs text-gray-400">paperly.in/inv/abc123</div>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
                           )}
                         </div>
 
-                        {/* Bottom toolbar */}
-                        <div className="flex justify-between items-center pt-3 md:pt-4 border-t border-gray-100">
-                          <div className="flex space-x-1 md:space-x-2">
-                            <div className="w-6 h-4 md:w-8 md:h-6 bg-gray-200 rounded flex items-center justify-center">
-                              <div className="w-2 h-2 md:w-3 md:h-3 bg-gray-400 rounded-sm"></div>
-                            </div>
-                            <div className="w-6 h-4 md:w-8 md:h-6 bg-gray-200 rounded flex items-center justify-center">
-                              <div className="w-2 h-2 md:w-3 md:h-3 bg-gray-400 rounded-sm"></div>
-                            </div>
-                          </div>
-                          <div className="text-xs text-gray-400">Ready</div>
-                        </div>
+                                                 {/* Bottom toolbar */}
+                         <div className="flex justify-between items-center pt-2 sm:pt-3 md:pt-4 border-t border-gray-100">
+                           <div className="flex space-x-1 md:space-x-2">
+                             <div className="w-4 h-3 sm:w-6 sm:h-4 md:w-8 md:h-6 bg-gray-200 rounded flex items-center justify-center">
+                               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-400 rounded-sm"></div>
+                             </div>
+                             <div className="w-4 h-3 sm:w-6 sm:h-4 md:w-8 md:h-6 bg-gray-200 rounded flex items-center justify-center">
+                               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-400 rounded-sm"></div>
+                             </div>
+                           </div>
+                           <div className="text-xs text-gray-400">Ready</div>
+                         </div>
                       </div>
                     </div>
 
@@ -415,8 +415,8 @@ export default function CodePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-              <button className="bg-white w-full sm:w-auto h-[45px] sm:h-[50px] hover:bg-transparent hover:border-1 hover:border-white hover:rounded-md hover:text-white text-gray-700 cursor-pointer font-semibold px-6 py-2 rounded-md transition-all duration-200">Start With Blank Document</button>
-              <button className="bg-transparent border border-white hover:bg-white hover:text-gray-600 text-white cursor-pointer font-semibold px-6 py-2 rounded-md transition-all duration-200 w-full sm:w-auto h-[45px] sm:h-[50px]">Create a custom Template</button>
+              <button className="bg-white w-full sm:w-auto h-[45px] sm:h-[60px] hover:bg-transparent hover:border-1 hover:border-white hover:rounded-md hover:text-white text-gray-700 cursor-pointer font-semibold px-6 py-1 rounded-md transition-all duration-200">Start With Blank Document</button>
+              <button className="bg-transparent border border-white hover:bg-white hover:text-gray-600 text-white cursor-pointer font-semibold px-6 py-1 rounded-md transition-all duration-200 w-full sm:w-auto h-[45px] sm:h-[60px]">Create a custom Template</button>
             </div>
           
           </div>
