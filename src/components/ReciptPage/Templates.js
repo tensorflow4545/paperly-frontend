@@ -232,7 +232,7 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">From:</div>
                 <div className="font-bold text-sm">Digital Solutions LLC</div>
                 <div className="text-gray-600 text-xs">GST: 27ABCDE1234F1Z5</div>
-                <div className="text-gray-600 text-xs">info@digitalsolutions.com</div>
+                <div className="text-gray-600 text-xs">info@dig.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 987-6543</div>
                 <div className="text-gray-600 text-xs">San Francisco, CA</div>
               </div>
@@ -315,7 +315,7 @@ function TemplatePreview({ template, onPreview }) {
                 </div>
                 <div className="text-right">
                   <div className="text-xs text-black">Project: CRM System</div>
-                  <div className="text-xs text-black">Contract #CP-2024-001</div>
+                  <div className="text-xs text-black"></div>
                 </div>
               </div>
             </div>
@@ -415,7 +415,7 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">From:</div>
                 <div className="font-bold text-sm">Innovation Agency Ltd.</div>
                 <div className="text-gray-600 text-xs">Tax ID: 12-3456789</div>
-                <div className="text-gray-600 text-xs">billing@innovationagency.com</div>
+                <div className="text-gray-600 text-xs">b@gmail.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 789-0123</div>
                 <div className="text-gray-600 text-xs">New York, NY</div>
               </div>
@@ -528,7 +528,7 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">Agency:</div>
                 <div className="font-bold text-sm">Design Studio Pro</div>
                 <div className="text-gray-600 text-xs">Creative Director: Sarah Chen</div>
-                <div className="text-gray-600 text-xs">sarah@designstudiopro.com</div>
+                <div className="text-gray-600 text-xs">b@gmail.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 234-5678</div>
               </div>
               <div>
@@ -851,7 +851,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">From:</div>
                 <div className="font-bold text-2xl">Digital Solutions LLC</div>
                 <div className="text-gray-600 text-lg">GST: 27ABCDE1234F1Z5</div>
-                <div className="text-gray-600 text-lg">info@digitalsolutions.com</div>
+                <div className="text-gray-600 text-lg">info@dig.com</div>
                 <div className="text-gray-600 text-lg">+1 (555) 987-6543</div>
                 <div className="text-gray-600 text-lg">San Francisco, CA</div>
               </div>
@@ -934,7 +934,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 </div>
                 <div className="text-right">
                   <div className="text-lg text-black">Project: CRM System</div>
-                  <div className="text-lg text-black">Contract #CP-2024-001</div>
+                  <div className="text-lg text-black"></div>
                 </div>
               </div>
             </div>
@@ -1034,7 +1034,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">From:</div>
                 <div className="font-bold text-2xl">Innovation Agency Ltd.</div>
                 <div className="text-gray-600 text-lg">Tax ID: 12-3456789</div>
-                <div className="text-gray-600 text-lg">billing@innovationagency.com</div>
+                <div className="text-gray-600 text-lg">b@gmail.com</div>
                 <div className="text-gray-600 text-lg">+1 (555) 789-0123</div>
                 <div className="text-gray-600 text-lg">New York, NY</div>
               </div>
@@ -1147,7 +1147,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">Agency:</div>
                 <div className="font-bold text-2xl">Design Studio Pro</div>
                 <div className="text-gray-600 text-lg">Creative Director: Sarah Chen</div>
-                <div className="text-gray-600 text-lg">sarah@designstudiopro.com</div>
+                <div className="text-gray-600 text-lg">b@gmail.com</div>
                 <div className="text-gray-600 text-lg">+1 (555) 234-5678</div>
               </div>
               <div>

@@ -94,7 +94,7 @@ function EditorContent() {
       },
       businessedge: {
         senderName: "Digital Solutions LLC",
-        senderEmail: "info@digitalsolutions.com",
+        senderEmail: "info@dig.com",
         senderPhone: "+1 (555) 987-6543",
         senderAddress: "San Francisco, CA",
         senderTaxId: "GST: 27ABCDE1234F1Z5",
