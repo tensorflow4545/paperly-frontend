@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense, useCallback } from "react"
 import { useSearchParams } from "next/navigation"
 import EditorLayout from "@/components/Editor/EditorLayout"
 
-export default function EditorPage() {
+function EditorContent() {
   const searchParams = useSearchParams()
   const templateId = searchParams.get("template")
   
@@ -99,72 +99,78 @@ export default function EditorPage() {
         senderAddress: "San Francisco, CA",
         senderTaxId: "GST: 27ABCDE1234F1Z5",
         recipientName: "Global Enterprises Ltd.",
-        recipientEmail: "accounts@globalent.com",
-        recipientAddress: "London, UK",
+        recipientEmail: "accounts@globalenterprises.com",
+        recipientAddress: "456 Corporate Ave, London, UK",
         recipientTaxId: "VAT: GB123456789",
         invoiceNumber: "BE-2024-003",
         items: [
-          { id: 1, description: "Web Development", quantity: 1, rate: 3500, amount: 3500 },
-          { id: 2, description: "SEO Optimization", quantity: 1, rate: 800, amount: 800 }
+          { id: 1, description: "Digital Transformation Consulting", quantity: 20, rate: 200, amount: 4000 },
+          { id: 2, description: "System Integration", quantity: 1, rate: 5000, amount: 5000 },
+          { id: 3, description: "Training & Support", quantity: 8, rate: 150, amount: 1200 }
         ],
-        subtotal: 4300,
+        subtotal: 10200,
         taxRate: 15,
-        taxAmount: 645,
-        total: 4945
+        taxAmount: 1530,
+        total: 11730
       },
       contractorplus: {
-        senderName: "Alex Rodriguez",
-        senderTitle: "Senior Full-Stack Developer",
-        senderEmail: "alex@devpro.com",
+        senderName: "Mike Chen",
+        senderTitle: "Independent Contractor",
+        senderEmail: "mike@contractor.com",
         senderPhone: "+1 (555) 456-7890",
-        recipientName: "TechCorp Solutions",
-        recipientEmail: "billing@techcorp.com",
-        recipientAddress: "San Francisco, CA",
+        senderAddress: "Austin, TX",
+        recipientName: "Construction Co.",
+        recipientEmail: "payments@constructionco.com",
+        recipientAddress: "789 Build St, Austin, TX 78701",
         invoiceNumber: "CP-2024-004",
         items: [
-          { id: 1, description: "Milestone 1: Backend API", quantity: 40, rate: 75, amount: 3000 },
-          { id: 2, description: "Milestone 2: Frontend UI", quantity: 25, rate: 75, amount: 1875 }
+          { id: 1, description: "Electrical Work", quantity: 16, rate: 75, amount: 1200 },
+          { id: 2, description: "Materials", quantity: 1, rate: 450, amount: 450 },
+          { id: 3, description: "Permit Fees", quantity: 1, rate: 200, amount: 200 }
         ],
-        subtotal: 4875,
-        total: 5375
+        subtotal: 1850,
+        taxRate: 8.25,
+        taxAmount: 152.63,
+        total: 2002.63
       },
       enterpriseinvoice: {
-        senderName: "Innovation Agency Ltd.",
-        senderEmail: "billing@innovationagency.com",
-        senderPhone: "+1 (555) 789-0123",
+        senderName: "Enterprise Solutions Inc.",
+        senderEmail: "billing@enterprisesolutions.com",
+        senderPhone: "+1 (555) 321-6547",
         senderAddress: "New York, NY",
-        senderTaxId: "Tax ID: 12-3456789",
-        recipientName: "Global Tech Solutions",
-        recipientEmail: "accounts@globaltech.com",
-        recipientAddress: "London, UK",
-        recipientTaxId: "VAT: GB987654321",
+        senderTaxId: "EIN: 12-3456789",
+        recipientName: "Fortune 500 Corp",
+        recipientEmail: "procurement@fortune500.com",
+        recipientAddress: "1000 Corporate Blvd, NY 10001",
+        recipientTaxId: "TAX ID: 98-7654321",
         invoiceNumber: "EI-2024-005",
         items: [
-          { id: 1, description: "UI/UX Design", quantity: 1, rate: 2500, amount: 2500 },
-          { id: 2, description: "Brand Guidelines", quantity: 1, rate: 800, amount: 800 },
-          { id: 3, description: "Frontend Development", quantity: 1, rate: 4200, amount: 4200 },
-          { id: 4, description: "Backend API", quantity: 1, rate: 3800, amount: 3800 },
-          { id: 5, description: "Testing & Quality Assurance", quantity: 1, rate: 1500, amount: 1500 }
+          { id: 1, description: "Enterprise Software License", quantity: 100, rate: 500, amount: 50000 },
+          { id: 2, description: "Implementation Services", quantity: 40, rate: 300, amount: 12000 },
+          { id: 3, description: "Annual Support", quantity: 1, rate: 15000, amount: 15000 },
+          { id: 4, description: "Custom Development", quantity: 80, rate: 200, amount: 16000 }
         ],
-        subtotal: 12800,
-        taxRate: 20,
-        taxAmount: 2560,
-        total: 15360
+        subtotal: 93000,
+        taxRate: 8.875,
+        taxAmount: 8253.75,
+        total: 101253.75
       },
       creativeagency: {
-        senderName: "Design Studio Pro",
-        senderTitle: "Creative Director: Sarah Chen",
-        senderEmail: "sarah@designstudiopro.com",
-        senderPhone: "+1 (555) 234-5678",
-        recipientName: "Innovation Tech Co.",
-        recipientTitle: "Marketing Director: Mike Johnson",
-        recipientEmail: "mike@innovationtech.com",
+        senderName: "Creative Studio Agency",
+        senderEmail: "hello@creativestudio.com",
+        senderPhone: "+1 (555) 789-0123",
+        senderAddress: "Los Angeles, CA",
+        senderTaxId: "EIN: 45-6789012",
+        recipientName: "Fashion Brand LLC",
+        recipientEmail: "marketing@fashionbrand.com",
+        recipientAddress: "567 Style Ave, LA 90210",
+        recipientTaxId: "TAX ID: 34-5678901",
         invoiceNumber: "CA-2024-006",
         items: [
-          { id: 1, description: "Brand Analysis & Competitor Research", quantity: 1, rate: 2500, amount: 2500 },
-          { id: 2, description: "User Persona Development", quantity: 1, rate: 1800, amount: 1800 },
-          { id: 3, description: "Logo Design (3 concepts)", quantity: 1, rate: 3200, amount: 3200 },
-          { id: 4, description: "Brand Guidelines & Style Guide", quantity: 1, rate: 2800, amount: 2800 },
+          { id: 1, description: "Brand Identity Design", quantity: 1, rate: 5000, amount: 5000 },
+          { id: 2, description: "Logo Design (3 concepts)", quantity: 1, rate: 2500, amount: 2500 },
+          { id: 3, description: "Marketing Materials", quantity: 1, rate: 3000, amount: 3000 },
+          { id: 4, description: "Social Media Graphics", quantity: 1, rate: 2000, amount: 2000 },
           { id: 5, description: "Website Mockups (3 rounds)", quantity: 1, rate: 4500, amount: 4500 },
           { id: 6, description: "Final Logo Files (AI, EPS, PNG)", quantity: 1, rate: 1200, amount: 1200 },
           { id: 7, description: "Brand Asset Package", quantity: 1, rate: 1500, amount: 1500 }
@@ -207,7 +213,7 @@ export default function EditorPage() {
     }))
   }
 
-  const calculateTotals = () => {
+  const calculateTotals = useCallback(() => {
     const subtotal = invoiceData.items.reduce((sum, item) => {
       const quantity = parseFloat(item.quantity) || 0
       const rate = parseFloat(item.rate) || 0
@@ -223,11 +229,11 @@ export default function EditorPage() {
       taxAmount,
       total
     }))
-  }
+  }, [invoiceData.items, invoiceData.taxRate])
 
   useEffect(() => {
     calculateTotals()
-  }, [invoiceData.items, invoiceData.taxRate])
+  }, [calculateTotals])
 
   if (!templateId) {
     return (
@@ -255,5 +261,13 @@ export default function EditorPage() {
       addItem={addItem}
       removeItem={removeItem}
     />
+  )
+}
+
+export default function EditorPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditorContent />
+    </Suspense>
   )
 } 
