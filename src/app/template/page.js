@@ -76,7 +76,7 @@ export default function CodePage() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button onClick={handleBackToHome} className="bg-white w-full sm:w-[156px] h-[45px] cursor-pointer hover:bg-gray-100 text-gray-700 font-semibold px-4 py-2 rounded-md  transition-all duration-200">Back to Home</button>
-              <button className="bg-gray-600 w-full sm:w-[156px] h-[45px] cursor-pointer hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-md  transition-all duration-200">Generate Invoice</button>
+              <button className="bg-gray-600 w-full sm:w-[156px] h-[45px] cursor-pointer hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-md  transition-all duration-200">Blank Template</button>
             </div>
           </div>
 

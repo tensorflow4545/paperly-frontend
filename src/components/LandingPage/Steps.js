@@ -28,9 +28,9 @@ export default function StepsSection() {
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
                 <span className="text-white font-bold text-xl">1</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Choose Template</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Start with Blank Template</h3>
               <p className="text-gray-600 leading-relaxed">
-                Pick from our collection of professional invoice templates designed for freelancers.
+                Begin with a clean slate and build your invoice from scratch with our powerful editor.
               </p>
             </div>
 
@@ -39,9 +39,9 @@ export default function StepsSection() {
               <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
                 <span className="text-white font-bold text-xl">2</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Add Details</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Add Your Details</h3>
               <p className="text-gray-600 leading-relaxed">
-                Fill in your business info, client details, and invoice items with our smart form.
+                Include your business info, client details, services rendered, and payment terms.
               </p>
             </div>
 
@@ -50,9 +50,9 @@ export default function StepsSection() {
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
                 <span className="text-white font-bold text-xl">3</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Share or Download</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Send to Client</h3>
               <p className="text-gray-600 leading-relaxed">
-                Download as PDF, share via email, or send a payment link to your client.
+                Download as PDF, share via email, or send a payment link directly to your client.
               </p>
             </div>
           </div>

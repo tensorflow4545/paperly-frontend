@@ -26,7 +26,7 @@ export default function Navbar() {
                 className="object-contain"
               />
             </div>
-            <span className="text-xl font-semibold text-gray-900">Paperly</span>
+            <span className="text-xl font-semibold text-gray-900">Paprly</span>
           </Link>
 
           {/* Desktop Navigation */}
