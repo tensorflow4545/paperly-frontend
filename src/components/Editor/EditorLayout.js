@@ -550,44 +550,44 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
 
   const panelContent = {
     basic: (
-      <div className="space-y-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 bg-[#fefce8] rounded-xl border border-gray-200">
-            <FileText className="w-6 h-6 text-black" />
+      <div className="space-y-4 lg:space-y-6">
+        <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
+          <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
+            <FileText className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Basic Information</h3>
-            <p className="text-sm text-gray-600">Invoice number and dates</p>
+            <h3 className="text-sm lg:text-lg font-semibold text-gray-900">Basic Information</h3>
+            <p className="text-xs lg:text-sm text-gray-600">Invoice number and dates</p>
           </div>
         </div>
-        <div className="space-y-5">
+        <div className="space-y-3 lg:space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Invoice Number</label>
+            <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Invoice Number</label>
             <input
               type="text"
               value={invoiceData.invoiceNumber}
               onChange={(e) => updateInvoiceData("invoiceNumber", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm"
+              className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
               placeholder="INV-2024-001"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Invoice Date</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Invoice Date</label>
               <input
                 type="date"
                 value={invoiceData.invoiceDate}
                 onChange={(e) => updateInvoiceData("invoiceDate", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Due Date</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Due Date</label>
               <input
                 type="date"
                 value={invoiceData.dueDate}
                 onChange={(e) => updateInvoiceData("dueDate", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
               />
             </div>
           </div>
@@ -595,78 +595,78 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
       </div>
     ),
     sender: (
-      <div className="space-y-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 bg-[#fefce8] rounded-xl border border-gray-200">
-            <User className="w-6 h-6 text-black" />
+      <div className="space-y-4 lg:space-y-6">
+        <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
+          <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
+            <User className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Your Information</h3>
-            <p className="text-sm text-gray-600">Your business details</p>
+            <h3 className="text-sm lg:text-lg font-semibold text-gray-900">Your Information</h3>
+            <p className="text-xs lg:text-sm text-gray-600">Your business details</p>
           </div>
         </div>
-        <div className="space-y-5">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-3 lg:space-y-5">
+          <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Name</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Name</label>
               <input
                 type="text"
                 value={invoiceData.senderName}
                 onChange={(e) => updateInvoiceData("senderName", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 placeholder="Your Name or Company"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Title</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Title</label>
               <input
                 type="text"
                 value={invoiceData.senderTitle}
                 onChange={(e) => updateInvoiceData("senderTitle", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 placeholder="Your Title"
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Email</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Email</label>
               <input
                 type="email"
                 value={invoiceData.senderEmail}
                 onChange={(e) => updateInvoiceData("senderEmail", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 placeholder="your@email.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Phone</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Phone</label>
               <input
                 type="tel"
                 value={invoiceData.senderPhone}
                 onChange={(e) => updateInvoiceData("senderPhone", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 placeholder="+1 (555) 123-4567"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Address</label>
+            <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Address</label>
             <textarea
               value={invoiceData.senderAddress}
               onChange={(e) => updateInvoiceData("senderAddress", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm"
-              rows="3"
+              className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm text-xs lg:text-base"
+              rows="2"
               placeholder="Your address"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Tax ID</label>
+            <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Tax ID</label>
             <input
               type="text"
               value={invoiceData.senderTaxId}
               onChange={(e) => updateInvoiceData("senderTaxId", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm"
+              className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm text-xs lg:text-base"
               placeholder="GST: 27ABCDE1234F1Z5"
             />
           </div>
@@ -674,132 +674,124 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
       </div>
     ),
     recipient: (
-      <div className="space-y-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 bg-[#fefce8] rounded-xl border border-gray-200">
-            <Building2 className="w-6 h-6 text-black" />
+      <div className="space-y-4 lg:space-y-6">
+        <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
+          <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
+            <Building2 className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Client Information</h3>
-            <p className="text-sm text-gray-600">Client details</p>
+            <h3 className="text-sm lg:text-lg font-semibold text-gray-900">Client Information</h3>
+            <p className="text-xs lg:text-sm text-gray-600">Client details</p>
           </div>
         </div>
-        <div className="space-y-5">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-3 lg:space-y-5">
+          <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Name</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Name</label>
               <input
                 type="text"
                 value={invoiceData.recipientName}
                 onChange={(e) => updateInvoiceData("recipientName", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 placeholder="Client Name or Company"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Title</label>
-              <input
-                type="text"
-                value={invoiceData.recipientTitle || ""}
-                onChange={(e) => updateInvoiceData("recipientTitle", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm"
-                placeholder="Client Title"
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Email</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Email</label>
               <input
                 type="email"
                 value={invoiceData.recipientEmail}
                 onChange={(e) => updateInvoiceData("recipientEmail", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm"
-                placeholder="client@company.com"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm text-xs lg:text-base"
+                placeholder="client@email.com"
               />
             </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Phone</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Phone</label>
               <input
                 type="tel"
                 value={invoiceData.recipientPhone}
                 onChange={(e) => updateInvoiceData("recipientPhone", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 placeholder="+1 (555) 987-6543"
+              />
+            </div>
+            <div>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Tax ID</label>
+              <input
+                type="text"
+                value={invoiceData.recipientTaxId}
+                onChange={(e) => updateInvoiceData("recipientTaxId", e.target.value)}
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm text-xs lg:text-base"
+                placeholder="VAT: GB123456789"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Address</label>
+            <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Address</label>
             <textarea
               value={invoiceData.recipientAddress}
               onChange={(e) => updateInvoiceData("recipientAddress", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm"
-              rows="3"
+              className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm text-xs lg:text-base"
+              rows="2"
               placeholder="Client address"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Tax ID</label>
-            <input
-              type="text"
-              value={invoiceData.recipientTaxId}
-              onChange={(e) => updateInvoiceData("recipientTaxId", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm"
-              placeholder="VAT: GB123456789"
             />
           </div>
         </div>
       </div>
     ),
     items: (
-      <div className="space-y-6">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-[#fefce8] rounded-xl border border-gray-200">
-              <ShoppingCart className="w-6 h-6 text-black" />
+      <div className="space-y-4 lg:space-y-6">
+        <div className="flex items-center justify-between mb-4 lg:mb-6">
+          <div className="flex items-center gap-2 lg:gap-3">
+            <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
+              <ShoppingCart className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">Items & Services</h3>
-              <p className="text-sm text-gray-600">Products and services</p>
+              <h3 className="text-sm lg:text-lg font-semibold text-gray-900">Items & Services</h3>
+              <p className="text-xs lg:text-sm text-gray-600">Products and services</p>
             </div>
           </div>
           <button
             onClick={addItem}
-            className="flex items-center gap-2 px-3 py-2 bg-[#fefce8] text-black rounded-lg hover:bg-[#f7f3d0] transition-all font-medium text-sm shadow-md"
+            className="flex items-center gap-1 lg:gap-2 px-2 py-1.5 lg:px-3 lg:py-2 bg-[#fefce8] text-black rounded-lg lg:rounded-xl hover:bg-[#f7f3d0] transition-all font-medium text-xs lg:text-sm shadow-md"
           >
-            <Plus className="w-4 h-4" />
-            Add Item
+            <Plus className="w-3 h-3 lg:w-4 lg:h-4" />
+            <span className="hidden sm:inline">Add Item</span>
+            <span className="sm:hidden">Add</span>
           </button>
         </div>
-        <div className="space-y-4 max-h-96 overflow-y-auto custom-scrollbar">
+        <div className="space-y-3 lg:space-y-4 max-h-96 overflow-y-auto custom-scrollbar">
           {invoiceData.items.map((item, index) => (
-            <div key={item.id} className="border-2 border-gray-200 rounded-xl p-5 space-y-4 bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div key={item.id} className="border-2 border-gray-200 rounded-lg lg:rounded-xl p-3 lg:p-5 space-y-3 lg:space-y-4 bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full">Item {index + 1}</span>
+                <span className="text-xs lg:text-sm font-medium text-gray-700 bg-gray-100 px-2 py-1 lg:px-3 lg:py-1 rounded-full">Item {index + 1}</span>
                 {invoiceData.items.length > 1 && (
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="flex items-center gap-1 text-red-600 hover:text-red-700 text-sm transition-colors font-medium"
+                    className="flex items-center gap-1 text-red-600 hover:text-red-700 text-xs lg:text-sm transition-colors font-medium"
                   >
-                    <Trash2 className="w-4 h-4" />
-                    Remove
+                    <Trash2 className="w-3 h-3 lg:w-4 lg:h-4" />
+                    <span className="hidden sm:inline">Remove</span>
+                    <span className="sm:hidden">Del</span>
                   </button>
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">Description</label>
+                <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Description</label>
                 <input
                   type="text"
                   value={item.description}
                   onChange={(e) => updateItem(item.id, "description", e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white shadow-sm"
+                  className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                   placeholder="Service description"
                 />
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-2 lg:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Quantity</label>
+                  <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Quantity</label>
                   <input
                     type="number"
                     value={item.quantity}
@@ -809,13 +801,13 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
                       const rate = Number.parseFloat(item.rate) || 0
                       updateItem(item.id, "amount", quantity * rate)
                     }}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white shadow-sm"
+                    className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                     min="0"
                     step="0.01"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Rate</label>
+                  <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Rate</label>
                   <input
                     type="number"
                     value={item.rate}
@@ -825,18 +817,18 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
                       const rate = Number.parseFloat(e.target.value) || 0
                       updateItem(item.id, "amount", quantity * rate)
                     }}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white shadow-sm"
+                    className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                     min="0"
                     step="0.01"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Amount</label>
+                  <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Amount</label>
                   <input
                     type="number"
                     value={item.amount}
                     readOnly
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 shadow-sm"
+                    className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl bg-gray-50 shadow-sm text-xs lg:text-base"
                   />
                 </div>
               </div>
@@ -846,24 +838,24 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
       </div>
     ),
     payment: (
-      <div className="space-y-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 bg-[#fefce8] rounded-xl border border-gray-200">
-            <CreditCard className="w-6 h-6 text-black" />
+      <div className="space-y-4 lg:space-y-6">
+        <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
+          <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
+            <CreditCard className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Payment Details</h3>
-            <p className="text-sm text-gray-600">Currency, tax, and terms</p>
+            <h3 className="text-sm lg:text-lg font-semibold text-gray-900">Payment Details</h3>
+            <p className="text-xs lg:text-sm text-gray-600">Currency, tax, and terms</p>
           </div>
         </div>
-        <div className="space-y-5">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-3 lg:space-y-5">
+          <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Currency</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Currency</label>
               <select
                 value={invoiceData.currency}
                 onChange={(e) => updateInvoiceData("currency", e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
               >
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
@@ -873,67 +865,55 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Tax Rate (%)</label>
+              <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Tax Rate (%)</label>
               <input
                 type="number"
                 value={invoiceData.taxRate}
                 onChange={(e) => updateInvoiceData("taxRate", Number.parseFloat(e.target.value) || 0)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white shadow-sm"
+                className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 min="0"
-                max="100"
                 step="0.01"
+                placeholder="0"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Payment Terms</label>
-            <input
-              type="text"
+            <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Payment Terms</label>
+            <select
               value={invoiceData.paymentTerms}
               onChange={(e) => updateInvoiceData("paymentTerms", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white shadow-sm"
-              placeholder="Net 30"
-            />
+              className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
+            >
+              <option value="Net 30">Net 30</option>
+              <option value="Net 15">Net 15</option>
+              <option value="Net 60">Net 60</option>
+              <option value="Due on Receipt">Due on Receipt</option>
+              <option value="Custom">Custom</option>
+            </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Notes</label>
+            <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Notes</label>
             <textarea
               value={invoiceData.notes}
               onChange={(e) => updateInvoiceData("notes", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white shadow-sm"
-              rows="3"
+              className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
+              rows="2"
               placeholder="Additional notes..."
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">Terms & Conditions</label>
+            <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Terms & Conditions</label>
             <textarea
               value={invoiceData.terms}
               onChange={(e) => updateInvoiceData("terms", e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white shadow-sm"
-              rows="3"
-              placeholder="Payment terms, late fees, etc..."
+              className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
+              rows="2"
+              placeholder="Terms and conditions..."
             />
-          </div>
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-5 rounded-xl space-y-3 border border-gray-200 shadow-sm">
-            <div className="flex justify-between text-sm">
-              <span className="font-medium text-gray-700">Subtotal:</span>
-              <span className="font-semibold text-gray-900">${invoiceData.subtotal.toFixed(2)}</span>
-            </div>
-            {invoiceData.taxRate > 0 && (
-              <div className="flex justify-between text-sm">
-                <span className="font-medium text-gray-700">Tax ({invoiceData.taxRate}%):</span>
-                <span className="font-semibold text-gray-900">${invoiceData.taxAmount.toFixed(2)}</span>
-              </div>
-            )}
-            <div className="flex justify-between text-lg font-semibold border-t border-gray-300 pt-3">
-              <span className="text-gray-900">Total:</span>
-              <span className="text-gray-900">${invoiceData.total.toFixed(2)}</span>
-            </div>
           </div>
         </div>
       </div>
-    ),
+    )
   }
 
   return (
@@ -1078,32 +1058,32 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
                 WebkitBackdropFilter: 'blur(2px)'
               }}
             >
-              <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-xl max-h-[85vh] overflow-hidden shadow-2xl">
-                <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-lg font-semibold text-gray-900">Edit {activeEditPanel.charAt(0).toUpperCase() + activeEditPanel.slice(1)}</h3>
+              <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-xl max-h-[90vh] overflow-hidden shadow-2xl">
+                <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-base font-semibold text-gray-900">Edit {activeEditPanel.charAt(0).toUpperCase() + activeEditPanel.slice(1)}</h3>
                   </div>
-                  <button onClick={closeEditPanel} className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
-                    <X className="w-5 h-5 text-gray-600" />
+                  <button onClick={closeEditPanel} className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors">
+                    <X className="w-4 h-4 text-gray-600" />
                   </button>
                 </div>
-                <div className="overflow-y-auto p-4 custom-scrollbar max-h-[calc(85vh-140px)]">
+                <div className="overflow-y-auto p-3 custom-scrollbar max-h-[calc(90vh-120px)]">
                   {panelContent[activeEditPanel]}
                 </div>
                 {/* Mobile Save Button */}
-                <div className="border-t border-gray-200 p-4 bg-gray-50">
-                  <div className="flex gap-3">
+                <div className="border-t border-gray-200 p-3 bg-gray-50">
+                  <div className="flex gap-2">
                     <button
                       onClick={closeEditPanel}
-                      className="flex-1 px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-lg transition-colors font-medium"
+                      className="flex-1 px-3 py-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-lg transition-colors font-medium text-sm"
                     >
                       Cancel
                     </button>
                     <button
                       onClick={closeEditPanel}
-                      className="flex-1 px-4 py-3 bg-[#fefce8] text-black rounded-lg font-medium transition-all hover:bg-[#f7f3d0] flex items-center justify-center gap-2"
+                      className="flex-1 px-3 py-2.5 bg-[#fefce8] text-black rounded-lg font-medium transition-all hover:bg-[#f7f3d0] flex items-center justify-center gap-2 text-sm"
                     >
-                      <Save className="w-4 h-4" />
+                      <Save className="w-3.5 h-3.5" />
                       Save Changes
                     </button>
                   </div>
