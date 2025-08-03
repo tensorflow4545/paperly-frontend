@@ -15,22 +15,22 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
   // Custom scrollbar styles
   const scrollbarStyles = `
     .custom-scrollbar::-webkit-scrollbar {
-      width: 5px;
+      width: 8px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: #f8fafc;
-      border-radius: 3px;
+      background: #f1f5f9;
+      border-radius: 4px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 3px;
+      background: #94a3b8;
+      border-radius: 4px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
+      background: #64748b;
     }
     .custom-scrollbar {
       scrollbar-width: thin;
-      scrollbar-color: #cbd5e1 #f8fafc;
+      scrollbar-color: #94a3b8 #f1f5f9;
     }
     .scrollbar-hide {
       -ms-overflow-style: none;
@@ -550,7 +550,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
 
   const panelContent = {
     basic: (
-      <div className="space-y-4 lg:space-y-6">
+      <div className="space-y-4 lg:space-y-6 pb-4">
         <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
           <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
             <FileText className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
@@ -595,7 +595,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
       </div>
     ),
     sender: (
-      <div className="space-y-4 lg:space-y-6">
+      <div className="space-y-4 lg:space-y-6 pb-4">
         <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
           <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
             <User className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
@@ -674,7 +674,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
       </div>
     ),
     recipient: (
-      <div className="space-y-4 lg:space-y-6">
+      <div className="space-y-4 lg:space-y-6 pb-4">
         <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
           <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
             <Building2 className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
@@ -743,7 +743,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
       </div>
     ),
     items: (
-      <div className="space-y-4 lg:space-y-6">
+      <div className="space-y-4 lg:space-y-6 pb-4">
         <div className="flex items-center justify-between mb-4 lg:mb-6">
           <div className="flex items-center gap-2 lg:gap-3">
             <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
@@ -763,7 +763,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
             <span className="sm:hidden">Add</span>
           </button>
         </div>
-        <div className="space-y-3 lg:space-y-4 max-h-96 overflow-y-auto custom-scrollbar">
+        <div className="space-y-3 lg:space-y-4 max-h-80 lg:max-h-96 overflow-y-auto custom-scrollbar pb-4">
           {invoiceData.items.map((item, index) => (
             <div key={item.id} className="border-2 border-gray-200 rounded-lg lg:rounded-xl p-3 lg:p-5 space-y-3 lg:space-y-4 bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
@@ -837,9 +837,9 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
         </div>
       </div>
     ),
-    payment: (
-      <div className="space-y-4 lg:space-y-6">
-        <div className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6">
+        payment: (
+      <div className="space-y-3 lg:space-y-6 pb-4">
+        <div className="flex items-center gap-2 lg:gap-3 mb-3 lg:mb-6">
           <div className="p-2 lg:p-3 bg-[#fefce8] rounded-lg lg:rounded-xl border border-gray-200">
             <CreditCard className="w-4 h-4 lg:w-6 lg:h-6 text-black" />
           </div>
@@ -848,7 +848,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
             <p className="text-xs lg:text-sm text-gray-600">Currency, tax, and terms</p>
           </div>
         </div>
-        <div className="space-y-3 lg:space-y-5">
+        <div className="space-y-2 lg:space-y-5">
           <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div>
               <label className="block text-xs lg:text-sm font-medium text-gray-700 mb-2 lg:mb-3">Currency</label>
@@ -869,7 +869,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
               <input
                 type="number"
                 value={invoiceData.taxRate}
-                onChange={(e) => updateInvoiceData("taxRate", Number.parseFloat(e.target.value) || 0)}
+                onChange={(e) => updateInvoiceData("taxRate", e.target.value)}
                 className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-base"
                 min="0"
                 step="0.01"
@@ -910,6 +910,33 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
               rows="2"
               placeholder="Terms and conditions..."
             />
+          </div>
+          {/* Total Amount Section */}
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-2 lg:p-5 rounded-lg lg:rounded-xl space-y-2 lg:space-y-3 border border-gray-200 shadow-sm mb-4">
+            <div className="flex justify-between text-xs lg:text-sm">
+              <span className="font-medium text-gray-700">Subtotal:</span>
+              <span className="font-semibold text-gray-900">${invoiceData.subtotal.toFixed(2)}</span>
+            </div>
+            {invoiceData.taxRate > 0 && (
+              <div className="flex justify-between text-xs lg:text-sm">
+                <span className="font-medium text-gray-700">Tax ({invoiceData.taxRate}%):</span>
+                <span className="font-semibold text-gray-900">${invoiceData.taxAmount.toFixed(2)}</span>
+              </div>
+            )}
+            <div className="flex justify-between items-center text-sm lg:text-base font-semibold border-t border-gray-300 pt-2 lg:pt-3">
+              <span className="text-gray-900">Total:</span>
+              <div className="flex items-center gap-1 lg:gap-2">
+                <span className="text-gray-500 text-xs lg:text-sm">$</span>
+                <input
+                  type="number"
+                  value={invoiceData.total}
+                  onChange={(e) => updateInvoiceData("total", parseFloat(e.target.value) || 0)}
+                  className="w-16 lg:w-20 px-1 py-0.5 lg:px-2 lg:py-1 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white shadow-sm text-xs lg:text-sm font-semibold text-gray-900"
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1029,25 +1056,25 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
         </div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex flex-col lg:flex-row h-[calc(100vh-120px)]">
-        {/* Sidebar Edit Panel */}
-        {activeEditPanel && (
-          <>
-            {/* Desktop Sidebar */}
-            <div className="hidden lg:block bg-white border-r border-gray-200 w-96 flex flex-col h-full shadow-xl">
-              <div className="flex items-center justify-between p-5 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
-                  <div className="flex items-center gap-3">
-                  <h3 className="text-lg font-semibold text-gray-900">Edit {activeEditPanel.charAt(0).toUpperCase() + activeEditPanel.slice(1)}</h3>
+              {/* Main Content Area */}
+        <div className="flex flex-col lg:flex-row" style={{ height: 'calc(100vh - 120px)' }}>
+          {/* Sidebar Edit Panel */}
+          {activeEditPanel && (
+            <>
+              {/* Desktop Sidebar */}
+              <div className="hidden lg:block bg-white border-r border-gray-200 w-96 flex flex-col shadow-xl" style={{ height: 'calc(100vh - 120px)', maxHeight: 'calc(100vh - 120px)' }}>
+                <div className="flex items-center justify-between p-5 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 flex-shrink-0">
+                    <div className="flex items-center gap-3">
+                    <h3 className="text-lg font-semibold text-gray-900">Edit {activeEditPanel.charAt(0).toUpperCase() + activeEditPanel.slice(1)}</h3>
+                  </div>
+                  <button onClick={closeEditPanel} className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
+                    <X className="w-5 h-5 text-gray-600" />
+                  </button>
                 </div>
-                <button onClick={closeEditPanel} className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
-                  <X className="w-5 h-5 text-gray-600" />
-                </button>
+                <div className="flex-1 overflow-y-auto p-5 custom-scrollbar" style={{ height: 'calc(100vh - 200px)', minHeight: 0 }}>
+                  {panelContent[activeEditPanel]}
+                </div>
               </div>
-              <div className="flex-1 overflow-y-auto p-5 custom-scrollbar">
-                {panelContent[activeEditPanel]}
-              </div>
-            </div>
 
             {/* Mobile Sidebar - Bottom Sheet */}
             <div 
@@ -1058,18 +1085,18 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
                 WebkitBackdropFilter: 'blur(2px)'
               }}
             >
-              <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-xl max-h-[90vh] overflow-hidden shadow-2xl">
-                <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-base font-semibold text-gray-900">Edit {activeEditPanel.charAt(0).toUpperCase() + activeEditPanel.slice(1)}</h3>
-                  </div>
-                  <button onClick={closeEditPanel} className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors">
-                    <X className="w-4 h-4 text-gray-600" />
-                  </button>
-                </div>
-                <div className="overflow-y-auto p-3 custom-scrollbar max-h-[calc(90vh-120px)]">
-                  {panelContent[activeEditPanel]}
-                </div>
+                             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-xl max-h-[85vh] overflow-hidden shadow-2xl flex flex-col">
+                 <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 flex-shrink-0">
+                   <div className="flex items-center gap-2">
+                     <h3 className="text-base font-semibold text-gray-900">Edit {activeEditPanel.charAt(0).toUpperCase() + activeEditPanel.slice(1)}</h3>
+                   </div>
+                   <button onClick={closeEditPanel} className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors">
+                     <X className="w-4 h-4 text-gray-600" />
+                   </button>
+                 </div>
+                 <div className="flex-1 overflow-y-auto p-3 custom-scrollbar min-h-0">
+                   {panelContent[activeEditPanel]}
+                 </div>
                 {/* Mobile Save Button */}
                 <div className="border-t border-gray-200 p-3 bg-gray-50">
                   <div className="flex gap-2">
