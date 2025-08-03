@@ -207,7 +207,7 @@ function TemplatePreview({ template, onPreview }) {
             </div>
 
             <div className="text-center text-xs text-gray-600">
-              <div>Payment Method: Bank Transfer / PayPal</div>
+              <div></div>
             </div>
           </div>
         )
@@ -299,7 +299,7 @@ function TemplatePreview({ template, onPreview }) {
             </div>
 
             <div className="text-center text-xs text-gray-600">
-              <div>Currency: USD | Payment: Bank Transfer</div>
+              <div></div>
             </div>
           </div>
         )
@@ -389,7 +389,7 @@ function TemplatePreview({ template, onPreview }) {
             </div>
 
             <div className="text-center text-xs text-gray-600">
-              <div>Payment Schedule: 50% upfront, 50% on completion</div>
+              <div></div>
             </div>
           </div>
         )
@@ -502,7 +502,7 @@ function TemplatePreview({ template, onPreview }) {
             </div>
 
             <div className="text-center text-xs text-gray-600">
-              <div>Multi-Currency Support | Digital Verification QR</div>
+              <div></div>
             </div>
           </div>
         )
@@ -621,7 +621,7 @@ function TemplatePreview({ template, onPreview }) {
             </div>
 
             <div className="text-center text-xs text-gray-600">
-              <div>Includes: Source Files | Brand Guidelines | 6-Month Support</div>
+              <div></div>
             </div>
           </div>
         )
@@ -670,9 +670,12 @@ function TemplatePreview({ template, onPreview }) {
 
                   {/* Action Buttons */}
                   <div className="flex gap-3">
-          <button className="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded text-sm font-medium transition-colors duration-200">
+          <a 
+            href={`/editor?template=${template.id}`}
+            className="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded text-sm font-medium transition-colors duration-200 text-center"
+          >
                       Try Template
-                    </button>
+                    </a>
           <button 
             onClick={() => onPreview(template)}
             className="hidden md:block px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded text-sm font-medium transition-colors duration-200"
@@ -823,7 +826,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             </div>
 
             <div className="text-center text-sm text-gray-600">
-              <div>Payment Method: Bank Transfer / PayPal</div>
+              <div></div>
             </div>
           </div>
         )
@@ -915,7 +918,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             </div>
 
             <div className="text-center text-lg text-gray-600">
-              <div>Currency: USD | Payment: Bank Transfer</div>
+              <div></div>
             </div>
           </div>
         )
@@ -1005,7 +1008,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             </div>
 
             <div className="text-center text-lg text-gray-600">
-              <div>Payment Schedule: 50% upfront, 50% on completion</div>
+              <div></div>
             </div>
           </div>
         )
@@ -1118,7 +1121,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             </div>
 
             <div className="text-center text-lg text-gray-600">
-              <div>Multi-Currency Support | Digital Verification QR</div>
+              <div></div>
             </div>
           </div>
         )
@@ -1237,7 +1240,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             </div>
 
             <div className="text-center text-lg text-gray-600">
-              <div>Includes: Source Files | Brand Guidelines | 6-Month Support</div>
+              <div></div>
             </div>
           </div>
         )
@@ -1276,16 +1279,13 @@ function PreviewModal({ template, isOpen, onClose }) {
             <div className="text-sm text-gray-600">
               Ready to use this template?
             </div>
-            <button 
+            <a 
+              href={`/editor?template=${template.id}`}
               className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-              onClick={() => {
-                // Handle template selection
-                onClose()
-                // Add your template selection logic here
-              }}
+              onClick={() => onClose()}
             >
               Try This Template
-            </button>
+            </a>
           </div>
         </div>
       </div>
