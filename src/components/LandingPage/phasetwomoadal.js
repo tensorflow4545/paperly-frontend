@@ -112,20 +112,7 @@ export default function PhaseTwoModal({ isOpen, onClose }) {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Professional CTA Section */}
-        <div className="p-8 pt-6 bg-gradient-to-t from-gray-50/50 to-transparent">
-          <button
-            onClick={onClose}
-            className="w-full bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-500 hover:to-amber-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-yellow-200 group"
-          >
-            <span className="flex items-center justify-center space-x-2">
-              <span>Got it!</span>
-              <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-            </span>
-          </button>
-        </div>
+        </div>        
       </div>
     </div>
   )
