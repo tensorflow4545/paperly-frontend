@@ -80,7 +80,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <span className="relative inline-block px-3 py-1">
-                  <span className="relative z-10">Perfect for Freelancers.</span>
+                  <span className="relative z-10">No Login Required</span>
                   <motion.div 
                     className="absolute inset-0 bg-yellow-400 rounded-lg -rotate-1 transform"
                     initial={{ scaleX: 0, scaleY: 0 }}
