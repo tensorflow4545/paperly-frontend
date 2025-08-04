@@ -131,57 +131,371 @@ export default function BlankEditor() {
           return
         }
 
-        // Create a clone of the preview element to avoid modifying the original
-        const clonedElement = previewElement.cloneNode(true)
-        clonedElement.style.position = 'absolute'
-        clonedElement.style.left = '-9999px'
-        clonedElement.style.top = '0'
-        document.body.appendChild(clonedElement)
-
-        // Remove any problematic CSS that might cause issues
-        const styleSheets = document.styleSheets
-        for (let i = 0; i < styleSheets.length; i++) {
+        // Completely disable all external stylesheets to prevent oklab parsing
+        const originalStylesheets = []
+        for (let i = 0; i < document.styleSheets.length; i++) {
           try {
-            const rules = styleSheets[i].cssRules || styleSheets[i].rules
-            for (let j = 0; j < rules.length; j++) {
-              const rule = rules[j]
-              if (rule.style && rule.style.cssText.includes('oklch')) {
-                rule.style.cssText = rule.style.cssText.replace(/oklch\([^)]+\)/g, 'rgb(0, 0, 0)')
-              }
+            const stylesheet = document.styleSheets[i]
+            if (stylesheet.href || stylesheet.cssRules) {
+              originalStylesheets.push(stylesheet)
+              stylesheet.disabled = true
             }
           } catch (e) {
             // Ignore CORS errors
           }
         }
 
-        const canvas = await html2canvas(clonedElement, {
-          scale: 2,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: '#ffffff',
-          logging: false,
-          removeContainer: true
-        })
+        // Create a clone of the preview element
+        const clonedElement = previewElement.cloneNode(true)
+        clonedElement.style.position = 'absolute'
+        clonedElement.style.left = '-9999px'
+        clonedElement.style.top = '0'
+        clonedElement.style.width = '900px' // Adjusted width for better fitting
+        clonedElement.style.backgroundColor = '#ffffff'
+        document.body.appendChild(clonedElement)
 
-        // Remove the cloned element
-        document.body.removeChild(clonedElement)
+        // Create a comprehensive style override that preserves colors but fixes problematic functions
+        const styleOverride = document.createElement('style')
+        styleOverride.textContent = `
+          * {
+            font-family: Arial, sans-serif !important;
+            color: rgb(0, 0, 0) !important;
+            background-color: rgb(255, 255, 255) !important;
+            border-color: rgb(0, 0, 0) !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+          }
+          body {
+            padding: 20px !important;
+            line-height: 1.6 !important;
+            width: 100% !important;
+            max-width: none !important;
+          }
+          .invoice-container {
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            width: 100% !important;
+          }
+          .invoice-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: flex-start !important;
+            margin-bottom: 40px !important;
+            padding-bottom: 25px !important;
+            border-bottom: 2px solid rgb(0, 0, 0) !important;
+            width: 100% !important;
+          }
+          .business-info {
+            flex: 1 !important;
+            max-width: 45% !important;
+            padding-right: 20px !important;
+          }
+          .business-name {
+            font-size: 22px !important;
+            font-weight: bold !important;
+            margin-bottom: 12px !important;
+            color: rgb(0, 0, 0) !important;
+          }
+          .invoice-title {
+            text-align: right !important;
+            font-size: 26px !important;
+            font-weight: bold !important;
+            text-transform: uppercase !important;
+            color: rgb(245, 158, 11) !important;
+            margin-bottom: 12px !important;
+          }
+          .invoice-details {
+            text-align: right !important;
+            font-size: 13px !important;
+            color: rgb(75, 85, 99) !important;
+          }
+          .client-section {
+            margin-bottom: 35px !important;
+            width: 100% !important;
+          }
+          .section-title {
+            font-weight: bold !important;
+            margin-bottom: 12px !important;
+            font-size: 15px !important;
+            color: rgb(0, 0, 0) !important;
+          }
+          .items-table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            margin: 25px 0 !important;
+            table-layout: fixed !important;
+            font-size: 13px !important;
+          }
+          .items-table th,
+          .items-table td {
+            border: 1px solid rgb(229, 231, 235) !important;
+            padding: 10px !important;
+            text-align: left !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+          }
+          .items-table th {
+            background-color: rgb(249, 250, 251) !important;
+            font-weight: bold !important;
+            color: rgb(0, 0, 0) !important;
+          }
+          .totals {
+            text-align: right !important;
+            margin-top: 25px !important;
+            font-size: 15px !important;
+            width: 100% !important;
+          }
+          .total-row {
+            font-weight: bold !important;
+            font-size: 16px !important;
+            margin-top: 12px !important;
+            color: rgb(0, 0, 0) !important;
+          }
+          .notes-section {
+            margin-top: 35px !important;
+            padding-top: 25px !important;
+            border-top: 1px solid rgb(229, 231, 235) !important;
+            width: 100% !important;
+          }
+          .terms-section {
+            margin-top: 25px !important;
+            width: 100% !important;
+          }
+          .custom-element {
+            margin: 25px 0 !important;
+            padding: 15px !important;
+            border: 1px solid rgb(229, 231, 235) !important;
+            border-radius: 8px !important;
+            background-color: rgb(255, 255, 255) !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            font-size: 13px !important;
+          }
+          .custom-element h3 {
+            margin-bottom: 15px !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            color: rgb(0, 0, 0) !important;
+          }
+          .time-entry {
+            display: flex !important;
+            justify-content: space-between !important;
+            margin: 8px 0 !important;
+            padding: 8px 0 !important;
+            border-bottom: 1px solid rgb(243, 244, 246) !important;
+            font-size: 13px !important;
+            width: 100% !important;
+          }
+          .pricing-tier {
+            border: 1px solid rgb(229, 231, 235) !important;
+            border-radius: 8px !important;
+            padding: 15px !important;
+            margin: 12px 0 !important;
+            background-color: rgb(255, 255, 255) !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          .pricing-tier h4 {
+            font-weight: bold !important;
+            margin-bottom: 8px !important;
+            color: rgb(37, 99, 235) !important;
+            font-size: 14px !important;
+          }
+          .feature-list {
+            list-style: none !important;
+            padding-left: 0 !important;
+            margin: 0 !important;
+          }
+          .feature-list li {
+            margin: 4px 0 !important;
+            padding-left: 12px !important;
+            position: relative !important;
+            color: rgb(75, 85, 99) !important;
+            font-size: 12px !important;
+          }
+          .feature-list li:before {
+            content: "•" !important;
+            position: absolute !important;
+            left: 0 !important;
+            color: rgb(75, 85, 99) !important;
+          }
+          .contact-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 12px !important;
+            margin-top: 10px !important;
+            width: 100% !important;
+          }
+          .contact-item {
+            display: flex !important;
+            justify-content: space-between !important;
+            padding: 4px 0 !important;
+            font-size: 12px !important;
+            width: 100% !important;
+          }
+          .contact-item strong {
+            color: rgb(0, 0, 0) !important;
+          }
+          .signature-section {
+            margin-top: 35px !important;
+            text-align: center !important;
+            width: 100% !important;
+          }
+          .signature-box {
+            border-top: 1px solid rgb(0, 0, 0) !important;
+            width: 180px !important;
+            margin: 0 auto !important;
+            padding-top: 8px !important;
+            margin-top: 45px !important;
+            text-align: center !important;
+          }
+          .thank-you {
+            text-align: center !important;
+            margin-top: 30px !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            color: rgb(0, 0, 0) !important;
+            width: 100% !important;
+          }
+          .footer-text {
+            text-align: center !important;
+            margin-top: 15px !important;
+            font-size: 12px !important;
+            color: rgb(75, 85, 99) !important;
+            width: 100% !important;
+          }
+          .footer-link {
+            color: rgb(37, 99, 235) !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+          }
+          .footer-link:hover {
+            text-decoration: underline !important;
+          }
+          .bg-yellow-50 { background-color: rgb(255, 251, 235) !important; }
+          .bg-yellow-100 { background-color: rgb(254, 243, 199) !important; }
+          .bg-gray-50 { background-color: rgb(249, 250, 251) !important; }
+          .bg-gray-100 { background-color: rgb(243, 244, 246) !important; }
+          .text-gray-600 { color: rgb(75, 85, 99) !important; }
+          .text-gray-700 { color: rgb(55, 65, 81) !important; }
+          .text-gray-900 { color: rgb(17, 24, 39) !important; }
+          .border-gray-200 { border-color: rgb(229, 231, 235) !important; }
+          .border-yellow-200 { border-color: rgb(253, 230, 138) !important; }
+          .bg-white { background-color: rgb(255, 255, 255) !important; }
+          .text-black { color: rgb(0, 0, 0) !important; }
+          .text-white { color: rgb(255, 255, 255) !important; }
+          .bg-gray-700 { background-color: rgb(55, 65, 81) !important; }
+          .bg-gray-800 { background-color: rgb(31, 41, 55) !important; }
+          .text-blue-600 { color: rgb(37, 99, 235) !important; }
+          .text-yellow-500 { color: rgb(245, 158, 11) !important; }
+          .text-yellow-600 { color: rgb(217, 119, 6) !important; }
+          .bg-blue-50 { background-color: rgb(239, 246, 255) !important; }
+          .bg-blue-100 { background-color: rgb(219, 234, 254) !important; }
+          .border-blue-200 { border-color: rgb(191, 219, 254) !important; }
+          .hover\\:bg-gray-100:hover { background-color: rgb(243, 244, 246) !important; }
+          .hover\\:bg-yellow-50:hover { background-color: rgb(255, 251, 235) !important; }
+          .hover\\:bg-yellow-100:hover { background-color: rgb(254, 243, 199) !important; }
+        `
+        document.head.appendChild(styleOverride)
+        clonedElement.appendChild(styleOverride.cloneNode(true))
+
+        // Aggressively remove any inline styles that might contain problematic color functions
+        const removeProblematicStyles = (element) => {
+          if (element.style && element.style.cssText) {
+            element.style.cssText = element.style.cssText
+              .replace(/oklab\([^)]+\)/g, 'rgb(0, 0, 0)')
+              .replace(/oklch\([^)]+\)/g, 'rgb(0, 0, 0)')
+              .replace(/hsl\([^)]+\)/g, 'rgb(0, 0, 0)')
+              .replace(/hsla\([^)]+\)/g, 'rgb(0, 0, 0)')
+              .replace(/lab\([^)]+\)/g, 'rgb(0, 0, 0)')
+              .replace(/lch\([^)]+\)/g, 'rgb(0, 0, 0)')
+          }
+          Array.from(element.children).forEach(removeProblematicStyles)
+        }
+        removeProblematicStyles(clonedElement)
+
+        // Create a completely isolated container
+        const isolatedContainer = document.createElement('div')
+        isolatedContainer.style.position = 'absolute'
+        isolatedContainer.style.left = '-9999px'
+        isolatedContainer.style.top = '0'
+        isolatedContainer.style.width = '900px' // Match the new width
+        isolatedContainer.style.backgroundColor = '#ffffff'
+        isolatedContainer.innerHTML = clonedElement.innerHTML
+        document.body.appendChild(isolatedContainer)
+
+        // Add the style override to the isolated container
+        isolatedContainer.appendChild(styleOverride.cloneNode(true))
+
+        // Wait for styles to apply
+        await new Promise(resolve => setTimeout(resolve, 200))
+
+        let canvas
+        try {
+          canvas = await html2canvas(isolatedContainer, {
+            scale: 1.5, // Reduced scale to prevent cropping
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            removeContainer: true,
+            width: 900, // Match the new width
+            height: isolatedContainer.scrollHeight,
+            onclone: (clonedDoc) => {
+              // Ensure all styles are properly applied in the cloned document
+              const clonedStyle = styleOverride.cloneNode(true)
+              clonedDoc.head.appendChild(clonedStyle)
+              
+              // Also remove any problematic styles from the cloned document
+              const removeStyles = (element) => {
+                if (element.style && element.style.cssText) {
+                  element.style.cssText = element.style.cssText
+                    .replace(/oklab\([^)]+\)/g, 'rgb(0, 0, 0)')
+                    .replace(/oklch\([^)]+\)/g, 'rgb(0, 0, 0)')
+                    .replace(/hsl\([^)]+\)/g, 'rgb(0, 0, 0)')
+                    .replace(/hsla\([^)]+\)/g, 'rgb(0, 0, 0)')
+                    .replace(/lab\([^)]+\)/g, 'rgb(0, 0, 0)')
+                    .replace(/lch\([^)]+\)/g, 'rgb(0, 0, 0)')
+                }
+                Array.from(element.children).forEach(removeStyles)
+              }
+              removeStyles(clonedDoc.body)
+            }
+          })
+        } finally {
+          // Clean up
+          if (document.body.contains(clonedElement)) {
+            document.body.removeChild(clonedElement)
+          }
+          if (document.body.contains(isolatedContainer)) {
+            document.body.removeChild(isolatedContainer)
+          }
+          if (document.head.contains(styleOverride)) {
+            document.head.removeChild(styleOverride)
+          }
+          // Re-enable all disabled stylesheets
+          originalStylesheets.forEach(stylesheet => {
+            stylesheet.disabled = false
+          })
+        }
 
         const imgData = canvas.toDataURL('image/png')
         const pdf = new jsPDF('p', 'mm', 'a4')
-        const imgWidth = 210
+        const imgWidth = 190 // Reduced from 210 to add margins
         const pageHeight = 295
         const imgHeight = (canvas.height * imgWidth) / canvas.width
         let heightLeft = imgHeight
 
         let position = 0
 
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+        pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight) // Added 10mm margins
         heightLeft -= pageHeight
 
         while (heightLeft >= 0) {
           position = heightLeft - imgHeight
           pdf.addPage()
-          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+          pdf.addImage(imgData, 'PNG', 10, position + 10, imgWidth, imgHeight) // Added 10mm margins
           heightLeft -= pageHeight
         }
 
@@ -196,16 +510,16 @@ export default function BlankEditor() {
   // Drag and Drop handlers
   const handleDragOver = (e) => {
     e.preventDefault()
-    e.currentTarget.classList.add('border-blue-500', 'bg-blue-50')
+    e.currentTarget.classList.add('border-yellow-500', 'bg-yellow-50')
   }
 
   const handleDragLeave = (e) => {
-    e.currentTarget.classList.remove('border-blue-500', 'bg-blue-50')
+    e.currentTarget.classList.remove('border-yellow-500', 'bg-yellow-50')
   }
 
   const handleDrop = (e) => {
     e.preventDefault()
-    e.currentTarget.classList.remove('border-blue-500', 'bg-blue-50')
+    e.currentTarget.classList.remove('border-yellow-500', 'bg-yellow-50')
     
     try {
       const elementData = JSON.parse(e.dataTransfer.getData('application/json'))
@@ -347,28 +661,28 @@ export default function BlankEditor() {
           }]
         }))
         break
-      case 'logo-upload':
-        const input = document.createElement('input')
-        input.type = 'file'
-        input.accept = 'image/*'
-        input.onchange = (e) => {
-          const file = e.target.files[0]
-          if (file) {
-            const reader = new FileReader()
-            reader.onload = (e) => {
-              setInvoiceData(prev => ({
-                ...prev,
-                businessInfo: {
-                  ...prev.businessInfo,
-                  logo: e.target.result
-                }
-              }))
-            }
-            reader.readAsDataURL(file)
-          }
-        }
-        input.click()
-        break
+      // case 'logo-upload':
+      //   const input = document.createElement('input')
+      //   input.type = 'file'
+      //   input.accept = 'image/*'
+      //   input.onchange = (e) => {
+      //     const file = e.target.files[0]
+      //     if (file) {
+      //       const reader = new FileReader()
+      //       reader.onload = (e) => {
+      //         setInvoiceData(prev => ({
+      //           ...prev,
+      //           businessInfo: {
+      //             ...prev.businessInfo,
+      //             logo: e.target.result
+      //           }
+      //         }))
+      //       }
+      //       reader.readAsDataURL(file)
+      //     }
+      //   }
+      //   input.click()
+      //   break
       case 'company-header':
         // Check if company header already exists
         const existingCompanyHeader = invoiceData.customElements.find(el => el.type === 'company-header')
@@ -409,21 +723,21 @@ export default function BlankEditor() {
           }]
         }))
         break
-      case 'stamp-seal':
-        setInvoiceData(prev => ({
-          ...prev,
-          customElements: [...prev.customElements, {
-            id: Date.now(),
-            type: 'stamp-seal',
-            data: {
-              title: 'Official Stamp',
-              stampText: 'PAID',
-              stampType: 'circular',
-              status: 'PAID'
-            }
-          }]
-        }))
-        break
+      // case 'stamp-seal':
+      //   setInvoiceData(prev => ({
+      //     ...prev,
+      //     customElements: [...prev.customElements, {
+      //       id: Date.now(),
+      //       type: 'stamp-seal',
+      //       data: {
+      //         title: 'Official Stamp',
+      //         stampText: 'PAID',
+      //         stampType: 'circular',
+      //         status: 'PAID'
+      //       }
+      //     }]
+      //   }))
+      //   break
       case 'payment-terms':
         setInvoiceData(prev => ({
           ...prev,
@@ -643,14 +957,14 @@ export default function BlankEditor() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => router.back()}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-600"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </motion.button>
             <div>
-              <h1 className="text-xl font-semibold">Invoice Creator</h1>
+              <h1 className="text-xl font-semibold text-gray-900">Invoice Creator</h1>
               {isSaving && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -675,7 +989,7 @@ export default function BlankEditor() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleExport('PDF')}
-              className="bg-yellow-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-yellow-600 transition-colors"
+              className="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
               Export PDF
             </motion.button>
@@ -685,7 +999,7 @@ export default function BlankEditor() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowSidebar(!showSidebar)}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-600"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -747,6 +1061,11 @@ export default function BlankEditor() {
           </div>
         </div>
       </div>
+      <footer className="bg-white border-t border-gray-200 text-gray-600 text-sm py-4 px-6">
+        <div className="container mx-auto text-center">
+          Made with <span className="text-yellow-500">❤️</span> by <a href="https://paprly.in" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">paprly.in</a>
+        </div>
+      </footer>
     </div>
   )
 } 
