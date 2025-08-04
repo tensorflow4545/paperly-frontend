@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-      "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^16.5.0",
     "framer-motion": "^12.23.12",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.3",
@@ -18,7 +19,6 @@
     "next": "15.4.5",
     "next-sitemap": "^4.2.3",
     "react": "19.1.0",
-    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "19.1.0"
   },
   "devDependencies": {
