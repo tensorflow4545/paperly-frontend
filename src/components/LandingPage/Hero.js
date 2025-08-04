@@ -151,6 +151,7 @@ export default function LandingPage() {
                   borderColor: "#6B7280",
                 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => router.push('/template')}
               >
                 View Templates
               </motion.button>

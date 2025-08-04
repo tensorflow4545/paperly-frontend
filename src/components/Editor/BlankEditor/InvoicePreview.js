@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
+import { FileText } from 'lucide-react'
 
 export default function InvoicePreview({
   invoiceData,
@@ -28,7 +29,7 @@ export default function InvoicePreview({
               {element.data.tiers.map((tier, index) => (
                 <div key={index} className="border border-gray-200 rounded-lg p-4 text-center">
                   <h4 className="font-semibold text-gray-800 mb-2">{tier.name}</h4>
-                  <div className="text-2xl font-bold text-blue-600 mb-3">{formatCurrency(tier.price)}</div>
+                  <div className="text-2xl font-bold text-gray-800 mb-3">{formatCurrency(tier.price)}</div>
                   <ul className="text-sm text-gray-600 space-y-1">
                     {tier.features.map((feature, idx) => (
                       <li key={idx}>• {feature}</li>
@@ -78,7 +79,7 @@ export default function InvoicePreview({
                     <div className="font-medium text-gray-800">{discount.description}</div>
                     <div className="text-sm text-gray-600">{discount.type}</div>
                   </div>
-                  <div className="text-lg font-bold text-green-600">-{discount.value}%</div>
+                  <div className="text-lg font-bold text-gray-700">-{discount.value}%</div>
                 </div>
               ))}
             </div>
@@ -250,11 +251,15 @@ export default function InvoicePreview({
           animate={{ opacity: 1, scale: 1 }}
           className="text-center max-w-md"
         >
-          <div className="text-8xl mb-6">📄</div>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900">
+          <div className="flex justify-center mb-4">
+            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+              <FileText className="w-6 h-6 text-gray-500" />
+            </div>
+          </div>
+          <h2 className="text-lg font-semibold mb-2 text-gray-900">
             Invoice Preview
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-sm text-gray-600">
             Start adding content to see your invoice preview here
           </p>
         </motion.div>
@@ -414,7 +419,7 @@ export default function InvoicePreview({
           )}
           <div className="flex items-center justify-center space-x-1 text-gray-400 text-xs">
             <span>Made with</span>
-            <a href="https://paprly.in" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-medium">
+                          <a href="https://paprly.in" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 underline font-medium">
               paprly.in
             </a>
           </div>

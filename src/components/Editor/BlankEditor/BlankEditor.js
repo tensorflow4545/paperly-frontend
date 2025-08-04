@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import { Download } from 'lucide-react'
 import InvoiceEditor from './InvoiceEditor'
 import InvoicePreview from './InvoicePreview'
 import ElementsSidebar from './ElementsSidebar'
@@ -989,9 +990,10 @@ export default function BlankEditor() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleExport('PDF')}
-              className="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="bg-gray-700 hover:bg-gray-800 text-white p-2 rounded-lg font-medium transition-colors"
+              title="Export PDF"
             >
-              Export PDF
+              <Download className="w-5 h-5" />
             </motion.button>
 
             {/* Sidebar Toggle */}
@@ -1061,11 +1063,7 @@ export default function BlankEditor() {
           </div>
         </div>
       </div>
-      <footer className="bg-white border-t border-gray-200 text-gray-600 text-sm py-4 px-6">
-        <div className="container mx-auto text-center">
-          Made with <span className="text-yellow-500">❤️</span> by <a href="https://paprly.in" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">paprly.in</a>
-        </div>
-      </footer>
+ 
     </div>
   )
 } 

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
+import { FileText, Lightbulb, Plus, ArrowLeft } from 'lucide-react'
 
 export default function InvoiceEditor({
   invoiceData,
@@ -110,7 +111,7 @@ export default function InvoiceEditor({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onAddItemToCustomElement(element.id, 'pricing-tier')}
-                className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="w-full p-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
               >
                 + Add Pricing Tier
               </motion.button>
@@ -321,7 +322,7 @@ export default function InvoiceEditor({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onAddItemToCustomElement(element.id, 'tax-item')}
-                className="w-full p-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                className="w-full p-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
               >
                 + Add Tax Item
               </motion.button>
@@ -400,7 +401,7 @@ export default function InvoiceEditor({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onAddItemToCustomElement(element.id, 'installment')}
-                className="w-full p-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                className="w-full p-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
               >
                 + Add Installment
               </motion.button>
@@ -690,24 +691,30 @@ export default function InvoiceEditor({
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-md"
         >
-          <div className="text-6xl mb-6">📄</div>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center">
+              <FileText className="w-8 h-8 text-gray-600" />
+            </div>
+          </div>
+          <h2 className="text-xl font-semibold mb-3 text-gray-900">
             Start Creating Your Invoice
           </h2>
-          <p className="text-lg mb-8 text-gray-600">
+          <p className="text-sm mb-6 text-gray-600 leading-relaxed">
             Drag elements from the sidebar or use the form below to build your professional invoice
           </p>
-          <div className="space-y-4">
+          <div className="space-y-3">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={onAddItem}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="bg-gray-800 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-700 transition-colors text-sm flex items-center gap-2 mx-auto"
             >
+              <Plus className="w-4 h-4" />
               Add Your First Item
             </motion.button>
-            <div className="text-sm text-gray-500">
-              💡 Tip: Use the sidebar to drag and drop professional invoice elements
+            <div className="text-xs text-gray-500 flex items-center gap-2 justify-center">
+              <Lightbulb className="w-3 h-3 text-yellow-500" />
+              Tip: Use the sidebar to drag and drop professional invoice elements
             </div>
           </div>
         </motion.div>
@@ -947,9 +954,9 @@ export default function InvoiceEditor({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={onAddItem}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                className="bg-gray-800 text-white px-2 py-1 rounded-lg hover:bg-gray-700 transition-colors"
               >
-                + Add Item
+                + Item
               </motion.button>
             </div>
           </div>
