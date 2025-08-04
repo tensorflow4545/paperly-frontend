@@ -2,15 +2,16 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { FileText, Palette, Download, X, Clipboard, Briefcase, FileCheck, Users } from 'lucide-react'
 
 export default function Sidebar({ onClose, theme }) {
   const [activeTab, setActiveTab] = useState('sections')
 
   const tabs = [
-    { id: 'sections', label: 'Sections', icon: '📋' },
-    { id: 'styles', label: 'Styles', icon: '🎨' },
-    { id: 'templates', label: 'Templates', icon: '📄' },
-    { id: 'export', label: 'Export', icon: '📤' },
+    { id: 'sections', label: 'Sections', icon: Clipboard },
+    { id: 'styles', label: 'Styles', icon: Palette },
+    { id: 'templates', label: 'Templates', icon: FileText },
+    { id: 'export', label: 'Export', icon: Download },
   ]
 
   const sections = [
@@ -28,10 +29,10 @@ export default function Sidebar({ onClose, theme }) {
   ]
 
   const templates = [
-    { name: 'Blank', icon: '📄', description: 'Start from scratch' },
-    { name: 'Business Letter', icon: '💼', description: 'Professional letter template' },
-    { name: 'Project Proposal', icon: '📋', description: 'Detailed project outline' },
-    { name: 'Meeting Notes', icon: '📝', description: 'Structured meeting template' },
+    { name: 'Blank', icon: FileText, description: 'Start from scratch' },
+    { name: 'Business Letter', icon: Briefcase, description: 'Professional letter template' },
+    { name: 'Project Proposal', icon: Clipboard, description: 'Detailed project outline' },
+    { name: 'Meeting Notes', icon: FileCheck, description: 'Structured meeting template' },
   ]
 
   const handleSectionClick = (section) => {
@@ -83,7 +84,7 @@ export default function Sidebar({ onClose, theme }) {
               theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
             }`}
           >
-            ✕
+            <X className="w-4 h-4" />
           </motion.button>
         </div>
       </div>
@@ -105,7 +106,7 @@ export default function Sidebar({ onClose, theme }) {
             }`}
           >
             <div className="flex items-center space-x-2">
-              <span>{tab.icon}</span>
+              <tab.icon className="w-4 h-4" />
               <span>{tab.label}</span>
             </div>
           </button>
@@ -133,11 +134,11 @@ export default function Sidebar({ onClose, theme }) {
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <span className="text-lg">
-                    {section.type === 'text' && '📝'}
-                    {section.type === 'list' && '📋'}
-                    {section.type === 'table' && '📊'}
-                  </span>
+                  <div className="w-6 h-6 bg-gray-100 rounded flex items-center justify-center">
+                    {section.type === 'text' && <FileText className="w-3 h-3 text-gray-600" />}
+                    {section.type === 'list' && <Clipboard className="w-3 h-3 text-gray-600" />}
+                    {section.type === 'table' && <FileText className="w-3 h-3 text-gray-600" />}
+                  </div>
                   <span className="font-medium">{section.label}</span>
                 </div>
               </motion.button>
@@ -165,10 +166,10 @@ export default function Sidebar({ onClose, theme }) {
               >
                 <div className="flex items-center space-x-3">
                   <div className={`w-8 h-8 rounded flex items-center justify-center text-sm font-bold ${
-                    style.color === 'blue' ? 'bg-blue-500 text-white' :
+                    style.color === 'blue' ? 'bg-gray-600 text-white' :
                     style.color === 'gray' ? 'bg-gray-500 text-white' :
-                    style.color === 'green' ? 'bg-green-500 text-white' :
-                    'bg-purple-500 text-white'
+                                          style.color === 'green' ? 'bg-gray-500 text-white' :
+                                          'bg-gray-500 text-white'
                   }`}>
                     {style.preview}
                   </div>
@@ -198,7 +199,9 @@ export default function Sidebar({ onClose, theme }) {
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">{template.icon}</span>
+                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <template.icon className="w-4 h-4 text-gray-600" />
+                  </div>
                   <div className="text-left">
                     <div className="font-medium">{template.name}</div>
                     <div className={`text-xs ${
@@ -232,12 +235,12 @@ export default function Sidebar({ onClose, theme }) {
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <span className="text-lg">
-                    {format === 'PDF' && '📄'}
-                    {format === 'DOCX' && '📝'}
-                    {format === 'HTML' && '🌐'}
-                    {format === 'Markdown' && '📝'}
-                  </span>
+                  <div className="w-6 h-6 bg-gray-100 rounded flex items-center justify-center">
+                    {format === 'PDF' && <FileText className="w-3 h-3 text-gray-600" />}
+                    {format === 'DOCX' && <FileText className="w-3 h-3 text-gray-600" />}
+                    {format === 'HTML' && <FileText className="w-3 h-3 text-gray-600" />}
+                    {format === 'Markdown' && <FileText className="w-3 h-3 text-gray-600" />}
+                  </div>
                   <span className="font-medium">Export as {format}</span>
                 </div>
               </motion.button>
