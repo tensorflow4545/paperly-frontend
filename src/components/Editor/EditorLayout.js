@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowLeft, Save, FileText, User, Building2, ShoppingCart, CreditCard, X, Plus, Trash2, Eye, Download, Share, Mail } from "lucide-react"
+import { ArrowLeft, Save, FileText, User, Building2, ShoppingCart, CreditCard, X, Plus, Trash2, Eye, Download, Share, Mail, Check } from "lucide-react"
 import InlineEditableInvoice from "./inline-editable-invoice"
 
 export default function EditorLayout({ templateId, invoiceData, updateInvoiceData, updateItem, addItem, removeItem }) {
@@ -9,6 +9,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
   const [editingField, setEditingField] = useState(null)
   const [showShareModal, setShowShareModal] = useState(false)
   const [clientEmail, setClientEmail] = useState("")
+  const [senderName, setSenderName] = useState("")
   const [isSharing, setIsSharing] = useState(false)
   const [shareMessage, setShareMessage] = useState("")
 
@@ -147,6 +148,11 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
       setShareMessage("Please enter a valid email address")
       return
     }
+    
+    if (!senderName.trim()) {
+      setShareMessage("Please enter sender name")
+      return
+    }
 
     setIsSharing(true)
     setShareMessage("")
@@ -213,7 +219,8 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
       const requestData = {
         documentId: documentId,
         documentURL: pdfDataUrl,
-        clientEmail: clientEmail.trim()
+        clientEmail: clientEmail.trim(),
+        senderName: senderName.trim()
       }
 
       // Check if data URL is too large (over 5MB)
@@ -226,7 +233,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
         simplePdf.text(`Date: ${invoiceData.invoiceDate || 'Today'}`, 20, 40)
         simplePdf.text(`From: ${invoiceData.senderName || 'Your Name'}`, 20, 50)
         simplePdf.text(`To: ${invoiceData.recipientName || 'Client Name'}`, 20, 60)
-        simplePdf.text(`Total: $${invoiceData.total.toFixed(2)}`, 20, 70)
+        simplePdf.text(`Total: ${invoiceData.total.toFixed(2)}`, 20, 70)
         
         const simplePdfDataUrl = simplePdf.output('datauristring', { compress: true })
         requestData.documentURL = simplePdfDataUrl
@@ -246,6 +253,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
       if (response.ok) {
         setShareMessage("✓ Sent successfully!")
         setClientEmail("")
+        setSenderName("")
         // Don't close the modal immediately, let user see the success message
         setTimeout(() => {
           closeShareModal()
@@ -298,10 +306,18 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
               className="w-full px-3 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white text-sm"
             />
             
+            <input
+              type="text"
+              value={senderName}
+              onChange={(e) => setSenderName(e.target.value)}
+              placeholder="Enter sender name"
+              className="w-full px-3 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white text-sm"
+            />
+            
             <div className="flex gap-2">
               <button
                 onClick={shareInvoice}
-                disabled={isSharing || !clientEmail.trim()}
+                disabled={isSharing || !clientEmail.trim() || !senderName.trim()}
                 className="flex-1 px-3 py-2 bg-[#fefce8] text-black rounded-md font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#f7f3d0] flex items-center justify-center gap-1 text-sm"
               >
                 {isSharing ? (
@@ -311,7 +327,9 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                   </>
                 ) : shareMessage && shareMessage.includes("successfully") ? (
                   <>
-                    <span className="text-green-600">✓</span>
+                    <div className="w-4 h-4 bg-[#fefce8] rounded-full flex items-center justify-center">
+                      <Check className="w-2.5 h-2.5 text-black" />
+                    </div>
                     Sent!
                   </>
                 ) : (
@@ -372,9 +390,20 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 />
               </div>
               
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Sender Name</label>
+                <input
+                  type="text"
+                  value={senderName}
+                  onChange={(e) => setSenderName(e.target.value)}
+                  placeholder="Enter sender name"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white text-base"
+                />
+              </div>
+              
               <button
                 onClick={shareInvoice}
-                disabled={isSharing || !clientEmail.trim()}
+                disabled={isSharing || !clientEmail.trim() || !senderName.trim()}
                 className="w-full py-4 bg-[#fefce8] text-black rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#f7f3d0] flex items-center justify-center gap-2 text-base"
               >
                 {isSharing ? (
@@ -417,100 +446,621 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
       creativeagency: "CreativeAgency",
     }
 
-    return `
-      <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white;">
-        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
-          <h1 style="margin: 0; color: #000; font-size: 28px; font-weight: bold;">INVOICE</h1>
-          <p style="margin: 5px 0 0 0; color: #333; font-size: 16px;">${templateNames[templateId] || 'Professional Invoice'}</p>
-        </div>
-        
-        <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
-          <div style="flex: 1; margin-right: 20px;">
-            <h3 style="color: #000; margin-bottom: 10px; font-size: 16px; font-weight: bold;">From:</h3>
-            <p style="font-weight: bold; margin: 5px 0; color: #000;">${invoiceData.senderName || 'Your Name'}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.senderTitle || ''}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.senderEmail || ''}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.senderPhone || ''}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.senderAddress || ''}</p>
-          </div>
-          <div style="flex: 1;">
-            <h3 style="color: #000; margin-bottom: 10px; font-size: 16px; font-weight: bold;">To:</h3>
-            <p style="font-weight: bold; margin: 5px 0; color: #000;">${invoiceData.recipientName || 'Client Name'}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.recipientTitle || ''}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.recipientEmail || ''}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.recipientPhone || ''}</p>
-            <p style="margin: 5px 0; color: #333;">${invoiceData.recipientAddress || ''}</p>
-          </div>
-        </div>
-        
-        <div style="display: flex; justify-content: space-between; margin-bottom: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
-            <div>
-            <strong style="color: #000;">Invoice #:</strong><br>
-            <span style="color: #000;">${invoiceData.invoiceNumber || 'INV-001'}</span>
-          </div>
-          <div>
-            <strong style="color: #000;">Date:</strong><br>
-            <span style="color: #000;">${invoiceData.invoiceDate || 'Today'}</span>
-          </div>
-          <div>
-            <strong style="color: #000;">Due Date:</strong><br>
-            <span style="color: #000;">${invoiceData.dueDate || '30 days'}</span>
-          </div>
-        </div>
-        
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; border: 1px solid #dee2e6;">
-          <thead>
-            <tr style="background: #f8f9fa;">
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Description</th>
-              <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Quantity</th>
-              <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Rate</th>
-              <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${invoiceData.items.map(item => `
-              <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #dee2e6; color: #000;">${item.description || 'Service'}</td>
-                <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000;">${item.quantity}</td>
-                <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000;">$${item.rate}</td>
-                <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000; font-weight: bold;">$${item.amount.toFixed(2)}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-        
-        <div style="text-align: right; margin-top: 30px;">
-          <div style="margin-bottom: 10px;">
-            <span style="font-weight: bold; color: #000;">Subtotal:</span>
-            <span style="margin-left: 20px; font-weight: bold; color: #000;">$${invoiceData.subtotal.toFixed(2)}</span>
-          </div>
-          ${invoiceData.taxRate > 0 ? `
-            <div style="margin-bottom: 10px;">
-              <span style="font-weight: bold; color: #000;">Tax (${invoiceData.taxRate}%):</span>
-              <span style="margin-left: 20px; font-weight: bold; color: #000;">$${invoiceData.taxAmount.toFixed(2)}</span>
+    // Template-specific HTML generation
+    switch (templateId) {
+      case "quickbill":
+        return `
+          <div style="max-width: 523px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white; padding: 16px;">
+            <div style="text-align: center; margin-bottom: 16px;">
+              <h1 style="margin: 0; color: #000; font-size: 18px; font-weight: bold;">INVOICE</h1>
+              <p style="margin: 5px 0 0 0; color: #666; font-size: 12px;">QuickBill</p>
             </div>
-          ` : ''}
-          <div style="border-top: 2px solid #000; padding-top: 10px; font-size: 18px;">
-            <span style="font-weight: bold; color: #000;">Total:</span>
-            <span style="margin-left: 20px; font-weight: bold; color: #000;">$${invoiceData.total.toFixed(2)}</span>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">From:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.senderName || 'John Smith'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderTitle || 'Freelance Designer'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderEmail || 'demo@pay.com'}</p>
+              </div>
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">To:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.recipientName || 'Tech Startup Inc.'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientEmail || 'demo@pay.com'}</p>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; font-size: 12px;">
+              <div>
+                <strong style="color: #666;">Invoice #:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceNumber || 'QB-2024-001'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Date:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceDate || 'Dec 15, 2024'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Due:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.dueDate || 'Dec 30, 2024'}</span>
+              </div>
+            </div>
+            
+            <div style="background: #f9f9f9; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
+              <div style="font-weight: bold; color: #000; margin-bottom: 8px; font-size: 12px;">Service Description:</div>
+              <div style="color: #000; font-size: 14px;">${invoiceData.items[0]?.description || 'Website Design & Development'}</div>
+              <div style="color: #666; font-size: 12px; margin-top: 4px;">Complete responsive website with modern design</div>
+            </div>
+            
+            <div style="text-align: right;">
+              <div style="font-size: 18px; font-weight: bold; color: #000;">${(invoiceData.total || 1500).toFixed(2)}</div>
+              <div style="color: #666; font-size: 12px;">Total Amount</div>
+            </div>
           </div>
-        </div>
-        
-        ${invoiceData.notes ? `
-          <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
-            <h4 style="margin: 0 0 10px 0; color: #000;">Notes:</h4>
-            <p style="margin: 0; color: #333;">${invoiceData.notes}</p>
+        `
+
+      case "standardpro":
+        return `
+          <div style="max-width: 523px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white; padding: 16px;">
+            <div style="background: #fefce8; color: #000; padding: 12px; border-radius: 4px 4px 0 0; margin: -16px -16px 16px -16px;">
+              <div style="text-align: center;">
+                <h1 style="margin: 0; color: #000; font-size: 18px; font-weight: bold;">StandardPro</h1>
+                <p style="margin: 5px 0 0 0; color: #000; font-size: 12px;">Professional Invoice</p>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">From:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.senderName || 'Sarah Johnson'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderTitle || 'Marketing Consultant'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderPhone || '+1 (555) 123-4567'}</p>
+              </div>
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">To:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.recipientName || 'Acme Corporation'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientAddress || '123 Business St, NY 10001'}</p>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; font-size: 12px;">
+              <div>
+                <strong style="color: #666;">Invoice #:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceNumber || 'SP-2024-002'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Date:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceDate || 'Dec 20, 2024'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Due:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.dueDate || 'Jan 20, 2025'}</span>
+              </div>
+            </div>
+            
+            <div style="background: #eff6ff; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
+              <table style="width: 100%; font-size: 12px;">
+                <thead>
+                  <tr style="border-bottom: 1px solid #bfdbfe;">
+                    <th style="text-align: left; padding: 4px 0; font-weight: bold;">Service</th>
+                    <th style="text-align: left; padding: 4px 0; font-weight: bold;">Qty</th>
+                    <th style="text-align: left; padding: 4px 0; font-weight: bold;">Rate</th>
+                    <th style="text-align: right; padding: 4px 0; font-weight: bold;">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${invoiceData.items.map(item => `
+                    <tr>
+                      <td style="padding: 4px 0;">${item.description || 'Strategy Session'}</td>
+                      <td style="padding: 4px 0;">${item.quantity || '4 hours'}</td>
+                      <td style="padding: 4px 0;">${item.rate || 150}/hr</td>
+                      <td style="text-align: right; padding: 4px 0; font-weight: bold;">${(item.amount || 600).toFixed(2)}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+            
+            <div style="text-align: right; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Subtotal:</span>
+                <span style="font-weight: bold;">${(invoiceData.subtotal || 1400).toFixed(2)}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Tax (10%):</span>
+                <span style="font-weight: bold;">${(invoiceData.taxAmount || 140).toFixed(2)}</span>
+              </div>
+              <div style="border-top: 1px solid #000; padding-top: 4px;">
+                <div style="font-size: 18px; font-weight: bold; color: #2563eb;">${(invoiceData.total || 1540).toFixed(2)}</div>
+              </div>
+            </div>
           </div>
-        ` : ''}
-        
-        ${invoiceData.terms ? `
-          <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
-            <h4 style="margin: 0 0 10px 0; color: #000;">Terms & Conditions:</h4>
-            <p style="margin: 0; color: #333;">${invoiceData.terms}</p>
+        `
+
+      case "businessedge":
+        return `
+          <div style="max-width: 523px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white; padding: 16px;">
+            <div style="background: #1f2937; color: white; padding: 12px; border-radius: 4px 4px 0 0; margin: -16px -16px 16px -16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h1 style="margin: 0; color: white; font-size: 18px; font-weight: bold;">BusinessEdge</h1>
+                  <p style="margin: 5px 0 0 0; color: #d1d5db; font-size: 12px;">Professional Services</p>
+                </div>
+                <div style="width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <div style="color: #1f2937; font-weight: bold; font-size: 14px;">BE</div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">From:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.senderName || 'Digital Solutions LLC'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderTaxId || 'GST: 27ABCDE1234F1Z5'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderPhone || '+1 (555) 987-6543'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderAddress || 'San Francisco, CA'}</p>
+              </div>
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">To:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.recipientName || 'Global Enterprises Ltd.'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientTaxId || 'VAT: GB123456789'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientAddress || 'London, UK'}</p>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; font-size: 12px;">
+              <div>
+                <strong style="color: #666;">Invoice #:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceNumber || 'BE-2024-003'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Date:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceDate || 'Dec 25, 2024'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Terms:</strong><br>
+                <span style="color: #000; font-weight: bold;">Net 30</span>
+              </div>
+            </div>
+            
+            <div style="background: #f9fafb; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
+              <table style="width: 100%; font-size: 12px;">
+                <thead>
+                  <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <th style="text-align: left; padding: 4px 0; font-weight: bold;">Service</th>
+                    <th style="text-align: left; padding: 4px 0; font-weight: bold;">Description</th>
+                    <th style="text-align: right; padding: 4px 0; font-weight: bold;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${invoiceData.items.map(item => `
+                    <tr>
+                      <td style="padding: 4px 0; font-weight: bold;">${item.description || 'Web Development'}</td>
+                      <td style="padding: 4px 0;">${item.description || 'E-commerce platform with payment integration'}</td>
+                      <td style="text-align: right; padding: 4px 0; font-weight: bold;">${(item.amount || 3500).toFixed(2)}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+            
+            <div style="text-align: right; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Subtotal:</span>
+                <span style="font-weight: bold;">${(invoiceData.subtotal || 4300).toFixed(2)}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Tax (15%):</span>
+                <span style="font-weight: bold;">${(invoiceData.taxAmount || 645).toFixed(2)}</span>
+              </div>
+              <div style="border-top: 1px solid #000; padding-top: 4px;">
+                <div style="font-size: 18px; font-weight: bold; color: #000;">${(invoiceData.total || 4945).toFixed(2)}</div>
+              </div>
+            </div>
           </div>
-        ` : ''}
-      </div>
-    `
+        `
+
+      case "contractorplus":
+        return `
+          <div style="max-width: 523px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white; padding: 16px;">
+            <div style="background: #fefce8; color: #000; padding: 12px; border-radius: 4px 4px 0 0; margin: -16px -16px 16px -16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h1 style="margin: 0; color: #000; font-size: 18px; font-weight: bold;">ContractorPlus</h1>
+                  <p style="margin: 5px 0 0 0; color: #000; font-size: 12px;">Professional Contracting</p>
+                </div>
+                <div style="text-align: right;">
+                  <div style="color: #000; font-size: 12px;">Project: CRM System</div>
+                  <div style="color: #000; font-size: 12px;">Contract #${invoiceData.invoiceNumber || 'CP-2024-004'}</div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">Contractor:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.senderName || 'Alex Rodriguez'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderTitle || 'Senior Full-Stack Developer'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderPhone || '+1 (555) 456-7890'}</p>
+              </div>
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">Client:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.recipientName || 'TechCorp Solutions'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientAddress || 'San Francisco, CA'}</p>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; font-size: 12px;">
+              <div>
+                <strong style="color: #666;">Invoice #:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceNumber || 'CP-2024-004'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Period:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceDate || 'Dec 1-15, 2024'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Due:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.dueDate || 'Jan 15, 2025'}</span>
+              </div>
+            </div>
+            
+            <div style="background: #eff6ff; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
+              <div style="space-y: 3;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-weight: bold; font-size: 14px;">Milestone 1: Backend API</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">40 hours @ $75/hr</div>
+                  </div>
+                  <div style="font-weight: bold;">${(invoiceData.items[0]?.amount || 3000).toFixed(2)}</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-weight: bold; font-size: 14px;">Milestone 2: Frontend UI</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">25 hours @ $75/hr</div>
+                  </div>
+                  <div style="font-weight: bold;">${(invoiceData.items[1]?.amount || 1875).toFixed(2)}</div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="text-align: right; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Subtotal:</span>
+                <span style="font-weight: bold;">${(invoiceData.subtotal || 4875).toFixed(2)}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Retainer Fee:</span>
+                <span style="font-weight: bold;">${(invoiceData.taxAmount || 500).toFixed(2)}</span>
+              </div>
+              <div style="border-top: 1px solid #000; padding-top: 4px;">
+                <div style="font-size: 18px; font-weight: bold; color: #2563eb;">${(invoiceData.total || 5375).toFixed(2)}</div>
+              </div>
+            </div>
+          </div>
+        `
+
+      case "enterpriseinvoice":
+        return `
+          <div style="max-width: 523px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white; padding: 16px;">
+            <div style="background: #1f2937; color: white; padding: 12px; border-radius: 4px 4px 0 0; margin: -16px -16px 16px -16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h1 style="margin: 0; color: white; font-size: 18px; font-weight: bold;">EnterpriseInvoice</h1>
+                  <p style="margin: 5px 0 0 0; color: #d1d5db; font-size: 12px;">Multi-Department Billing</p>
+                </div>
+                <div style="text-align: right;">
+                  <div style="color: #d1d5db; font-size: 12px;">PO: ${invoiceData.invoiceNumber || 'EN-2024-001'}</div>
+                  <div style="color: #d1d5db; font-size: 12px;">Status: Approved</div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">From:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.senderName || 'Innovation Agency Ltd.'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderTaxId || 'Tax ID: 12-3456789'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderPhone || '+1 (555) 789-0123'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderAddress || 'New York, NY'}</p>
+              </div>
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">To:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.recipientName || 'Global Tech Solutions'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientTaxId || 'VAT: GB987654321'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientAddress || 'London, UK'}</p>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; font-size: 12px;">
+              <div>
+                <strong style="color: #666;">Invoice #:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceNumber || 'EI-2024-005'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Date:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceDate || 'Dec 30, 2024'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Currency:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.currency || 'USD'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Terms:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.paymentTerms || 'Net 45'}</span>
+              </div>
+            </div>
+            
+            <div style="background: #f9fafb; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
+              <div style="space-y: 4;">
+                <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 8px;">
+                  <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Design Department</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 12px;">UI/UX Design</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[0]?.amount || 2500).toFixed(2)}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px;">Brand Guidelines</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[1]?.amount || 800).toFixed(2)}</span>
+                  </div>
+                </div>
+                
+                <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 8px;">
+                  <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Development Department</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 12px;">Frontend Development</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[2]?.amount || 4200).toFixed(2)}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px;">Backend API</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[3]?.amount || 3800).toFixed(2)}</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">QA Department</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px;">Testing & Quality Assurance</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[4]?.amount || 1500).toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="text-align: right; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Subtotal:</span>
+                <span style="font-weight: bold;">${(invoiceData.subtotal || 12800).toFixed(2)}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Tax (20%):</span>
+                <span style="font-weight: bold;">${(invoiceData.taxAmount || 2560).toFixed(2)}</span>
+              </div>
+              <div style="border-top: 1px solid #000; padding-top: 4px;">
+                <div style="font-size: 18px; font-weight: bold; color: #000;">${(invoiceData.total || 15360).toFixed(2)}</div>
+              </div>
+            </div>
+          </div>
+        `
+
+      case "creativeagency":
+        return `
+          <div style="max-width: 523px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white; padding: 16px;">
+            <div style="background: #fefce8; color: #000; padding: 12px; border-radius: 4px 4px 0 0; margin: -16px -16px 16px -16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h1 style="margin: 0; color: #000; font-size: 18px; font-weight: bold;">CreativeAgency</h1>
+                  <p style="margin: 5px 0 0 0; color: #000; font-size: 12px;">Creative Services</p>
+                </div>
+                <div style="text-align: right;">
+                  <div style="color: #000; font-size: 12px;">Project: Brand Redesign</div>
+                  <div style="color: #000; font-size: 12px;">Phase: Final Delivery</div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">Agency:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.senderName || 'Design Studio Pro'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderTitle || 'Creative Director: Sarah Chen'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderEmail || 'demo@pay.com'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.senderPhone || '+1 (555) 234-5678'}</p>
+              </div>
+              <div>
+                <h3 style="color: #000; margin-bottom: 4px; font-size: 12px; font-weight: bold;">Client:</h3>
+                <p style="font-weight: bold; margin: 2px 0; color: #000; font-size: 14px;">${invoiceData.recipientName || 'Innovation Tech Co.'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientTitle || 'Marketing Director: Mike Johnson'}</p>
+                <p style="margin: 2px 0; color: #666; font-size: 12px;">${invoiceData.recipientEmail || 'demo@pay.com'}</p>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; font-size: 12px;">
+              <div>
+                <strong style="color: #666;">Invoice #:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceNumber || 'CA-2024-006'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Date:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.invoiceDate || 'Jan 5, 2025'}</span>
+              </div>
+              <div>
+                <strong style="color: #666;">Due:</strong><br>
+                <span style="color: #000; font-weight: bold;">${invoiceData.dueDate || 'Jan 20, 2025'}</span>
+              </div>
+            </div>
+            
+            <div style="background: #f8fafc; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
+              <div style="space-y: 4;">
+                <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 8px;">
+                  <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Phase 1: Discovery & Research</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 12px;">Brand Analysis & Competitor Research</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[0]?.amount || 2500).toFixed(2)}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px;">User Persona Development</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[1]?.amount || 1800).toFixed(2)}</span>
+                  </div>
+                </div>
+                
+                <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 8px;">
+                  <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Phase 2: Design & Iteration</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 12px;">Logo Design (3 concepts)</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[2]?.amount || 3200).toFixed(2)}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 12px;">Brand Guidelines & Style Guide</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[3]?.amount || 2800).toFixed(2)}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px;">Website Mockups (3 rounds)</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[4]?.amount || 4500).toFixed(2)}</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Phase 3: Final Deliverables</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 12px;">Final Logo Files (AI, EPS, PNG)</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[5]?.amount || 1200).toFixed(2)}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px;">Brand Asset Package</span>
+                    <span style="font-weight: bold; font-size: 12px;">${(invoiceData.items[6]?.amount || 1500).toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="text-align: right; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Subtotal:</span>
+                <span style="font-weight: bold;">${(invoiceData.subtotal || 17500).toFixed(2)}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Revision Credits (2):</span>
+                <span style="font-weight: bold;">${(invoiceData.taxAmount || 1000).toFixed(2)}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                <span>Tax (8.5%):</span>
+                <span style="font-weight: bold;">${(invoiceData.taxAmount || 1487.50).toFixed(2)}</span>
+              </div>
+                              <div style="border-top: 1px solid #000; padding-top: 4px;">
+                  <div style="font-size: 18px; font-weight: bold; color: #000;">${(invoiceData.total || 19987.50).toFixed(2)}</div>
+                </div>
+            </div>
+          </div>
+        `
+
+      default:
+        return `
+          <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif; color: #000; background: white;">
+            <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+              <h1 style="margin: 0; color: #000; font-size: 28px; font-weight: bold;">INVOICE</h1>
+              <p style="margin: 5px 0 0 0; color: #333; font-size: 16px;">${templateNames[templateId] || 'Professional Invoice'}</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+              <div style="flex: 1; margin-right: 20px;">
+                <h3 style="color: #000; margin-bottom: 10px; font-size: 16px; font-weight: bold;">From:</h3>
+                <p style="font-weight: bold; margin: 5px 0; color: #000;">${invoiceData.senderName || 'Your Name'}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.senderTitle || ''}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.senderEmail || ''}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.senderPhone || ''}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.senderAddress || ''}</p>
+              </div>
+              <div style="flex: 1;">
+                <h3 style="color: #000; margin-bottom: 10px; font-size: 16px; font-weight: bold;">To:</h3>
+                <p style="font-weight: bold; margin: 5px 0; color: #000;">${invoiceData.recipientName || 'Client Name'}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.recipientTitle || ''}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.recipientEmail || ''}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.recipientPhone || ''}</p>
+                <p style="margin: 5px 0; color: #333;">${invoiceData.recipientAddress || ''}</p>
+              </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+                <div>
+                <strong style="color: #000;">Invoice #:</strong><br>
+                <span style="color: #000;">${invoiceData.invoiceNumber || 'INV-001'}</span>
+              </div>
+              <div>
+                <strong style="color: #000;">Date:</strong><br>
+                <span style="color: #000;">${invoiceData.invoiceDate || 'Today'}</span>
+              </div>
+              <div>
+                <strong style="color: #000;">Due Date:</strong><br>
+                <span style="color: #000;">${invoiceData.dueDate || '30 days'}</span>
+              </div>
+            </div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; border: 1px solid #dee2e6;">
+              <thead>
+                <tr style="background: #f8f9fa;">
+                  <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Description</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Quantity</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Rate</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${invoiceData.items.map(item => `
+                  <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6; color: #000;">${item.description || 'Service'}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000;">${item.quantity}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000;">${item.rate}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000; font-weight: bold;">${item.amount.toFixed(2)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+            
+            <div style="text-align: right; margin-top: 30px;">
+              <div style="margin-bottom: 10px;">
+                <span style="font-weight: bold; color: #000;">Subtotal:</span>
+                <span style="margin-left: 20px; font-weight: bold; color: #000;">${invoiceData.subtotal.toFixed(2)}</span>
+              </div>
+              ${invoiceData.taxRate > 0 ? `
+                <div style="margin-bottom: 10px;">
+                  <span style="font-weight: bold; color: #000;">Tax (${invoiceData.taxRate}%):</span>
+                  <span style="margin-left: 20px; font-weight: bold; color: #000;">${invoiceData.taxAmount.toFixed(2)}</span>
+                </div>
+              ` : ''}
+              <div style="border-top: 2px solid #000; padding-top: 10px; font-size: 18px;">
+                <span style="font-weight: bold; color: #000;">Total:</span>
+                <span style="margin-left: 20px; font-weight: bold; color: #000;">${invoiceData.total.toFixed(2)}</span>
+              </div>
+            </div>
+            
+            ${invoiceData.notes ? `
+              <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+                <h4 style="margin: 0 0 10px 0; color: #000;">Notes:</h4>
+                <p style="margin: 0; color: #333;">${invoiceData.notes}</p>
+              </div>
+            ` : ''}
+            
+            ${invoiceData.terms ? `
+              <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+                <h4 style="margin: 0 0 10px 0; color: #000;">Terms & Conditions:</h4>
+                <p style="margin: 0; color: #333;">${invoiceData.terms}</p>
+              </div>
+            ` : ''}
+          </div>
+        `
+    }
   }
 
   const generateInvoiceText = () => {
@@ -537,11 +1087,11 @@ Date: ${invoiceData.invoiceDate || 'Today'}
 Due Date: ${invoiceData.dueDate || '30 days'}
 
 Items:
-${invoiceData.items.map(item => `${item.description || 'Service'} - Qty: ${item.quantity} - Rate: $${item.rate} - Amount: $${item.amount.toFixed(2)}`).join('\n')}
+${invoiceData.items.map(item => `${item.description || 'Service'} - Qty: ${item.quantity} - Rate: ${item.rate} - Amount: ${item.amount.toFixed(2)}`).join('\n')}
 
-Subtotal: $${invoiceData.subtotal.toFixed(2)}
-${invoiceData.taxRate > 0 ? `Tax (${invoiceData.taxRate}%): $${invoiceData.taxAmount.toFixed(2)}` : ''}
-Total: $${invoiceData.total.toFixed(2)}
+Subtotal: ${invoiceData.subtotal.toFixed(2)}
+${invoiceData.taxRate > 0 ? `Tax (${invoiceData.taxRate}%): ${invoiceData.taxAmount.toFixed(2)}` : ''}
+Total: ${invoiceData.total.toFixed(2)}
 
 ${invoiceData.notes ? `Notes: ${invoiceData.notes}` : ''}
 ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
@@ -636,7 +1186,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
                 value={invoiceData.senderEmail}
                 onChange={(e) => updateInvoiceData("senderEmail", e.target.value)}
                 className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white shadow-sm text-xs lg:text-base"
-                placeholder="your@email.com"
+                placeholder="demo@pay.com"
               />
             </div>
             <div>
@@ -703,7 +1253,7 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
                 value={invoiceData.recipientEmail}
                 onChange={(e) => updateInvoiceData("recipientEmail", e.target.value)}
                 className="w-full px-2 py-1.5 lg:px-4 lg:py-3 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white shadow-sm text-xs lg:text-base"
-                placeholder="client@email.com"
+                placeholder="demo@pay.com"
               />
             </div>
           </div>
@@ -1052,6 +1602,16 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
               <span className="hidden sm:inline">Payment</span>
               <span className="sm:hidden">Payment</span>
             </button>
+          </div>
+        </div>
+        
+        {/* Mobile Horizontal Slider Indicator */}
+        <div className="md:hidden flex justify-center pt-1 pb-2">
+          <div className="flex gap-1">
+            <div className="w-8 h-1 bg-gray-300 rounded-full"></div>
+            <div className="w-4 h-1 bg-gray-200 rounded-full"></div>
+            <div className="w-4 h-1 bg-gray-200 rounded-full"></div>
+            <div className="w-4 h-1 bg-gray-200 rounded-full"></div>
           </div>
         </div>
       </div>

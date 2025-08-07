@@ -87,12 +87,12 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">From:</div>
                 <div className="font-bold text-sm">John Smith</div>
                 <div className="text-gray-600 text-xs">Freelance Designer</div>
-                <div className="text-gray-600 text-xs">john@design.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-1 text-xs">To:</div>
                 <div className="font-bold text-sm">Tech Startup Inc.</div>
-                <div className="text-gray-600 text-xs">contact@techstartup.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
               </div>
             </div>
 
@@ -139,13 +139,13 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">From:</div>
                 <div className="font-bold text-sm">Sarah Johnson</div>
                 <div className="text-gray-600 text-xs">Marketing Consultant</div>
-                <div className="text-gray-600 text-xs">sarah@consulting.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 123-4567</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-1 text-xs">To:</div>
                 <div className="font-bold text-sm">Acme Corporation</div>
-                <div className="text-gray-600 text-xs">billing@acmecorp.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">123 Business St, NY 10001</div>
               </div>
             </div>
@@ -232,7 +232,7 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">From:</div>
                 <div className="font-bold text-sm">Digital Solutions LLC</div>
                 <div className="text-gray-600 text-xs">GST: 27ABCDE1234F1Z5</div>
-                <div className="text-gray-600 text-xs">info@dig.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 987-6543</div>
                 <div className="text-gray-600 text-xs">San Francisco, CA</div>
               </div>
@@ -240,7 +240,7 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">To:</div>
                 <div className="font-bold text-sm">Global Enterprises Ltd.</div>
                 <div className="text-gray-600 text-xs">VAT: GB123456789</div>
-                <div className="text-gray-600 text-xs">accounts@globalent.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">London, UK</div>
               </div>
             </div>
@@ -325,13 +325,13 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">Contractor:</div>
                 <div className="font-bold text-sm">Alex Rodriguez</div>
                 <div className="text-gray-600 text-xs">Senior Full-Stack Developer</div>
-                <div className="text-gray-600 text-xs">alex@devpro.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 456-7890</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-1 text-xs">Client:</div>
                 <div className="font-bold text-sm">TechCorp Solutions</div>
-                <div className="text-gray-600 text-xs">billing@techcorp.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">San Francisco, CA</div>
               </div>
             </div>
@@ -415,7 +415,7 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">From:</div>
                 <div className="font-bold text-sm">Innovation Agency Ltd.</div>
                 <div className="text-gray-600 text-xs">Tax ID: 12-3456789</div>
-                <div className="text-gray-600 text-xs">b@gmail.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 789-0123</div>
                 <div className="text-gray-600 text-xs">New York, NY</div>
               </div>
@@ -423,7 +423,7 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">To:</div>
                 <div className="font-bold text-sm">Global Tech Solutions</div>
                 <div className="text-gray-600 text-xs">VAT: GB987654321</div>
-                <div className="text-gray-600 text-xs">accounts@globaltech.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">London, UK</div>
               </div>
             </div>
@@ -528,14 +528,14 @@ function TemplatePreview({ template, onPreview }) {
                 <div className="font-semibold text-gray-700 mb-1 text-xs">Agency:</div>
                 <div className="font-bold text-sm">Design Studio Pro</div>
                 <div className="text-gray-600 text-xs">Creative Director: Sarah Chen</div>
-                <div className="text-gray-600 text-xs">b@gmail.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
                 <div className="text-gray-600 text-xs">+1 (555) 234-5678</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-1 text-xs">Client:</div>
                 <div className="font-bold text-sm">Innovation Tech Co.</div>
                 <div className="text-gray-600 text-xs">Marketing Director: Mike Johnson</div>
-                <div className="text-gray-600 text-xs">mike@innovationtech.com</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
               </div>
             </div>
 
@@ -706,12 +706,12 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-1 text-sm">From:</div>
                 <div className="font-bold text-lg">John Smith</div>
                 <div className="text-gray-600 text-sm">Freelance Designer</div>
-                <div className="text-gray-600 text-sm">john@design.com</div>
+                <div className="text-gray-600 text-sm">demo@pay.com</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-1 text-sm">To:</div>
                 <div className="font-bold text-lg">Tech Startup Inc.</div>
-                <div className="text-gray-600 text-sm">contact@techstartup.com</div>
+                <div className="text-gray-600 text-sm">demo@pay.com</div>
               </div>
             </div>
 
@@ -758,13 +758,13 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-1 text-sm">From:</div>
                 <div className="font-bold text-lg">Sarah Johnson</div>
                 <div className="text-gray-600 text-sm">Marketing Consultant</div>
-                <div className="text-gray-600 text-sm">sarah@consulting.com</div>
+                <div className="text-gray-600 text-sm">demo@pay.com</div>
                 <div className="text-gray-600 text-sm">+1 (555) 123-4567</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-1 text-sm">To:</div>
                 <div className="font-bold text-lg">Acme Corporation</div>
-                <div className="text-gray-600 text-sm">billing@acmecorp.com</div>
+                <div className="text-gray-600 text-sm">demo@pay.com</div>
                 <div className="text-gray-600 text-sm">123 Business St, NY 10001</div>
               </div>
             </div>
@@ -851,7 +851,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">From:</div>
                 <div className="font-bold text-2xl">Digital Solutions LLC</div>
                 <div className="text-gray-600 text-lg">GST: 27ABCDE1234F1Z5</div>
-                <div className="text-gray-600 text-lg">info@dig.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
                 <div className="text-gray-600 text-lg">+1 (555) 987-6543</div>
                 <div className="text-gray-600 text-lg">San Francisco, CA</div>
               </div>
@@ -859,7 +859,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">To:</div>
                 <div className="font-bold text-2xl">Global Enterprises Ltd.</div>
                 <div className="text-gray-600 text-lg">VAT: GB123456789</div>
-                <div className="text-gray-600 text-lg">accounts@globalent.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
                 <div className="text-gray-600 text-lg">London, UK</div>
               </div>
             </div>
@@ -944,13 +944,13 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">Contractor:</div>
                 <div className="font-bold text-2xl">Alex Rodriguez</div>
                 <div className="text-gray-600 text-lg">Senior Full-Stack Developer</div>
-                <div className="text-gray-600 text-lg">alex@devpro.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
                 <div className="text-gray-600 text-lg">+1 (555) 456-7890</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-3 text-lg">Client:</div>
                 <div className="font-bold text-2xl">TechCorp Solutions</div>
-                <div className="text-gray-600 text-lg">billing@techcorp.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
                 <div className="text-gray-600 text-lg">San Francisco, CA</div>
               </div>
             </div>
@@ -1034,7 +1034,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">From:</div>
                 <div className="font-bold text-2xl">Innovation Agency Ltd.</div>
                 <div className="text-gray-600 text-lg">Tax ID: 12-3456789</div>
-                <div className="text-gray-600 text-lg">b@gmail.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
                 <div className="text-gray-600 text-lg">+1 (555) 789-0123</div>
                 <div className="text-gray-600 text-lg">New York, NY</div>
               </div>
@@ -1042,7 +1042,7 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">To:</div>
                 <div className="font-bold text-2xl">Global Tech Solutions</div>
                 <div className="text-gray-600 text-lg">VAT: GB987654321</div>
-                <div className="text-gray-600 text-lg">accounts@globaltech.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
                 <div className="text-gray-600 text-lg">London, UK</div>
               </div>
             </div>
@@ -1147,14 +1147,14 @@ function PreviewModal({ template, isOpen, onClose }) {
                 <div className="font-semibold text-gray-700 mb-3 text-lg">Agency:</div>
                 <div className="font-bold text-2xl">Design Studio Pro</div>
                 <div className="text-gray-600 text-lg">Creative Director: Sarah Chen</div>
-                <div className="text-gray-600 text-lg">b@gmail.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
                 <div className="text-gray-600 text-lg">+1 (555) 234-5678</div>
               </div>
               <div>
                 <div className="font-semibold text-gray-700 mb-3 text-lg">Client:</div>
                 <div className="font-bold text-2xl">Innovation Tech Co.</div>
                 <div className="text-gray-600 text-lg">Marketing Director: Mike Johnson</div>
-                <div className="text-gray-600 text-lg">mike@innovationtech.com</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
               </div>
             </div>
 

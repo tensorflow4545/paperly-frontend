@@ -240,7 +240,7 @@ export default function CodePage() {
                                    <label className="block text-xs font-medium text-gray-700 mb-1">Client Email</label>
                                    <div className="h-5 sm:h-6 bg-gray-100 rounded border border-gray-200 px-2 flex items-center">
                                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                     <div className="ml-2 text-xs text-gray-600">client@example.com</div>
+                                     <div className="ml-2 text-xs text-gray-600">demo@pay.com</div>
                                    </div>
                                  </div>
                                  
