@@ -44,7 +44,7 @@ export default function Navbar() {
             <Link href="/contact" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Contact
             </Link>
-            <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            <Link href="/help" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Help
             </Link>
           </div>
