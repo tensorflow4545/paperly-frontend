@@ -82,7 +82,7 @@ export default function ContactPage() {
                </div>
                <h3 className="text-xl font-semibold text-gray-900 mb-3">Email Us</h3>
                <p className="text-gray-600 mb-4 leading-relaxed">
-                 Send us an email and we'll get back to you within 24 hours.
+                 Send us an email and we&apos;ll get back to you within 24 hours.
                </p>
                <a 
                  href="mailto:home@paprly.in"
