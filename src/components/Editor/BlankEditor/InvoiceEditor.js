@@ -753,7 +753,7 @@ export default function InvoiceEditor({
                 value={invoiceData.businessInfo.email}
                 onChange={(e) => updateInvoiceData('businessInfo', 'email', e.target.value)}
                 className="w-full p-3 rounded-lg border bg-white border-gray-300"
-                placeholder="business@email.com"
+                placeholder="demo@pay.com"
               />
             </div>
             <div className="col-span-2">
@@ -808,7 +808,7 @@ export default function InvoiceEditor({
                 value={invoiceData.clientInfo.email}
                 onChange={(e) => updateInvoiceData('clientInfo', 'email', e.target.value)}
                 className={`w-full p-3 rounded-lg border `}
-                placeholder="client@email.com"
+                placeholder="demo@pay.com"
               />
             </div>
             <div className="col-span-2">

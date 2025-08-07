@@ -773,7 +773,7 @@ export default function BlankEditor() {
               title: 'Payment Information',
               bankTransfer: 'Account #123456789',
               creditCards: 'Visa, MasterCard, American Express',
-              paypal: prev.businessInfo.email || 'business@email.com',
+              paypal: prev.businessInfo.email || 'demo@pay.com',
               checkPayable: prev.businessInfo.name || 'Your Company'
             }
           }]
@@ -788,7 +788,7 @@ export default function BlankEditor() {
             data: {
               title: 'Contact Information',
               phone: prev.businessInfo.phone || '+1 (555) 123-4567',
-              email: prev.businessInfo.email || 'business@email.com',
+              email: prev.businessInfo.email || 'demo@pay.com',
               address: prev.businessInfo.address || 'Business Address',
               website: prev.businessInfo.website || 'www.yourcompany.com'
             }
