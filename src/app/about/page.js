@@ -192,7 +192,7 @@ export default function AboutPage() {
                 Perfect for Freelancers & Clients
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                We're building the smartest, simplest way to handle work documents — all in one place.
+                We&apos;re building the smartest, simplest way to handle work documents — all in one place.
               </p>
             </div>
 
@@ -340,7 +340,7 @@ export default function AboutPage() {
               Ready to get started?
             </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Try it. Share it. Tell us what you'd love to see next!
+              Try it. Share it. Tell us what you&apos;d love to see next!
             </p>
             <motion.button 
               className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-800 text-white px-8 py-3 text-lg font-medium rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"

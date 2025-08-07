@@ -42,7 +42,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Let's Build Something{" "}
+              Let&apos;s Build Something{" "}
               <span className="text-yellow-500 bg-gradient-to-r from-yellow-400 to-yellow-500 bg-clip-text text-transparent">
                 Amazing Together
               </span>
@@ -55,7 +55,7 @@ export default function ContactPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               Have questions about Paperly? Want to share feedback? Looking to collaborate? 
-              We'd love to hear from you. Our team is here to help you succeed.
+              We&apos;d love to hear from you. Our team is here to help you succeed.
             </motion.p>
           </motion.div>
 
@@ -168,7 +168,7 @@ export default function ContactPage() {
                 Why Choose Paperly?
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                We're committed to making document creation simple, secure, and accessible for everyone.
+                We&apos;re committed to making document creation simple, secure, and accessible for everyone.
               </p>
             </div>
 
