@@ -110,7 +110,7 @@ export default function HelpPage() {
               Help & Support
             </h1>
             <h2 className="text-gray-600 text-base md:text-lg leading-relaxed">
-              Everything you need to know about using Paprly's free invoice generator. 
+              Everything you need to know about using Paprly&apos;s free invoice generator. 
               Get started in minutes and create professional invoices effortlessly.
             </h2>
           </div>
@@ -175,7 +175,7 @@ export default function HelpPage() {
                 <CheckCircle className="w-5 h-5 text-gray-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">Instant Sharing</h4>
-                  <p className="text-gray-600 text-sm">Share directly to client's email with one click</p>
+                  <p className="text-gray-600 text-sm">Share directly to client&apos;s email with one click</p>
                 </div>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function HelpPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Coming Soon</h2>
             <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              We're building a complete business document suite. All tools will be available at one stop, 
+              We&apos;re building a complete business document suite. All tools will be available at one stop, 
               completely free, designed for freelancers, small businesses, and fully developed startups.
             </p>
           </div>
@@ -220,7 +220,7 @@ export default function HelpPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How to Generate Invoice</h2>
             <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
               Creating professional invoices with Paprly is incredibly simple. Follow these easy steps 
-              and you'll have your invoice ready in minutes.
+              and you&apos;ll have your invoice ready in minutes.
             </p>
           </div>
 
@@ -266,7 +266,7 @@ export default function HelpPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">A Lot More Coming Soon</h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
-            We're constantly working to add new features and templates to make your business documentation 
+            We&apos;re constantly working to add new features and templates to make your business documentation 
             process even smoother. Stay tuned for exciting updates!
           </p>
           
@@ -295,8 +295,8 @@ export default function HelpPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Need Help or Have Suggestions?</h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
-            We're here to help! Whether you have questions, need support, or want to suggest new features, 
-            we'd love to hear from you. We listen to all queries and implement everything that's needed.
+            We&apos;re here to help! Whether you have questions, need support, or want to suggest new features, 
+            we&apos;d love to hear from you. We listen to all queries and implement everything that&apos;s needed.
           </p>
           
           <div className="bg-[#FEFCE8] rounded-lg p-6 md:p-8">
