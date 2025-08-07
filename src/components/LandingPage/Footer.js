@@ -20,7 +20,7 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-              <span className="text-xl font-semibold text-gray-900">Paperly</span>
+              <span className="text-xl font-semibold text-gray-900">Paprly</span>
             </div>
             <p className="text-gray-600 leading-relaxed">
               The simplest way to create professional invoices for your freelance business.
@@ -54,12 +54,12 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Support</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                   Contact
                 </Link>
               </li>

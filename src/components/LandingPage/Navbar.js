@@ -26,7 +26,7 @@ export default function Navbar() {
                 className="object-contain"
               />
             </div>
-            <span className="text-xl font-semibold text-gray-900">Paperly</span>
+            <span className="text-xl font-semibold text-gray-900">Paprly</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -37,6 +37,12 @@ export default function Navbar() {
           
             <Link href="/template" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Templates
+            </Link>
+            <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+              About
+            </Link>
+            <Link href="/contact" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+              Contact
             </Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Help
@@ -81,6 +87,20 @@ export default function Navbar() {
                 onClick={toggleMenu}
               >
                 Templates
+              </Link>
+              <Link
+                href="/about"
+                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                Contact
               </Link>
               <Link
                 href="#"

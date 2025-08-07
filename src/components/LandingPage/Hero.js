@@ -1,9 +1,16 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 import InvoicePreview from "./Recipt"
 
 export default function LandingPage() {
+  const router = useRouter()
+
+  const handleCreateInvoice = () => {
+    router.push('/blank-editor')
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* SVG Filter for rough paint effect */}
@@ -38,7 +45,7 @@ export default function LandingPage() {
               }}
             >
               <span className="text-yellow-500 text-lg">✨</span>
-              <span className="font-semibold">No Signup Required</span>
+              <span className="font-semibold">Free Invoice Generator</span>
             </motion.div>
 
             {/* Main heading */}
@@ -49,21 +56,21 @@ export default function LandingPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                Generate Free Invoice{" "}
+                Create Professional{" "}
                 <motion.span 
                   className="text-gray-800"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  Online
+                  Invoices
                 </motion.span>{" "}
-                in{" "}
+                for{" "}
                 <motion.span 
                   className="text-gray-700"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  Seconds.
+                  Your Clients.
                 </motion.span>
               </motion.h1>
               <motion.h2 
@@ -73,7 +80,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <span className="relative inline-block px-3 py-1">
-                  <span className="relative z-10">No Login Required.</span>
+                  <span className="relative z-10">No Login Required</span>
                   <motion.div 
                     className="absolute inset-0 bg-yellow-400 rounded-lg -rotate-1 transform"
                     initial={{ scaleX: 0, scaleY: 0 }}
@@ -105,8 +112,8 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Generate free invoices online instantly. Create professional invoices for freelancers, businesses, and consultants. 
-              No signup required. Free invoice generator with templates, GST compliance, and instant sharing.
+              Generate professional invoices instantly for your freelance work. Create custom invoices with your branding, 
+              add line items, and send to clients. No signup required, completely free.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -117,6 +124,7 @@ export default function LandingPage() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <motion.button 
+                onClick={handleCreateInvoice}
                 className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-800 text-white px-8 py-3 text-lg font-medium rounded-lg transition-colors duration-200"
                 whileHover={{ 
                   scale: 1.05,
@@ -124,7 +132,7 @@ export default function LandingPage() {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Create Invoice
+                Create Invoice Now
                 <motion.svg 
                   className="ml-2 w-5 h-5" 
                   fill="none" 
@@ -143,8 +151,9 @@ export default function LandingPage() {
                   borderColor: "#6B7280",
                 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => router.push('/template')}
               >
-                Learn More
+                View Templates
               </motion.button>
             </motion.div>
 
@@ -191,7 +200,7 @@ export default function LandingPage() {
                     transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
                   />
                 </motion.div>
-                <span className="text-gray-700 font-semibold">Free to Use</span>
+                <span className="text-gray-700 font-semibold">100% Free</span>
               </motion.div>
               
               <motion.div 
@@ -232,7 +241,7 @@ export default function LandingPage() {
                     transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY, delay: 0.8 }}
                   />
                 </motion.div>
-                <span className="text-gray-700 font-semibold">Works on Mobile</span>
+                <span className="text-gray-700 font-semibold">No Signup</span>
               </motion.div>
               
               <motion.div 
