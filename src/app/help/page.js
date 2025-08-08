@@ -13,6 +13,10 @@ export default function HelpPage() {
   const handleBackToHome = () => {
     router.push("/")
   }
+  
+  const handleGoToTemplates = () => {
+    router.push("/template")
+  }
 
   const features = [
     {
@@ -121,7 +125,10 @@ export default function HelpPage() {
             >
               Back to Home
             </button>
-            <button className="bg-gray-600 w-full sm:w-[156px] h-[45px] cursor-pointer hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-md transition-all duration-200">
+            <button 
+              onClick={handleGoToTemplates}
+              className="bg-gray-600 w-full sm:w-[156px] h-[45px] cursor-pointer hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-md transition-all duration-200"
+            >
               Generate Invoice
             </button>
           </div>
@@ -253,7 +260,7 @@ export default function HelpPage() {
                 Choose between a blank template or one of our built-in templates. 
                 Enter your details with super easy steps, and BOOM! Paprly manages everything on your behalf.
               </p>
-              <button className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-8 py-3 rounded-md transition-all duration-200">
+              <button onClick={handleGoToTemplates} className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-8 py-3 rounded-md transition-all duration-200">
                 Start Creating Invoice
               </button>
             </div>
