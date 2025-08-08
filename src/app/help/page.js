@@ -314,9 +314,8 @@ export default function HelpPage() {
             <p className="text-gray-600 mb-4">Email us at:</p>
             <a 
               href="mailto:home@paprly.in" 
-              className="inline-flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-md transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-transparent text-gray-800 hover:text-white hover:bg-gray-700  font-semibold px-4 py-2 rounded-md transition-all duration-200"
             >
-              <Mail className="w-4 h-4" />
               home@paprly.in
             </a>
             <p className="text-gray-600 text-sm mt-4">

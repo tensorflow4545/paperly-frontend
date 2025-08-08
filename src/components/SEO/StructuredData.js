@@ -78,7 +78,7 @@ export default function StructuredData() {
     "@type": "Organization",
     "name": "Paperly",
     "url": "https://paprly.in",
-    "logo": "https://paprly.in/logo.png",
+    "logo": "https://paprly.in/final_logo.png",
     "description": "Free online invoice generator for freelancers, businesses, and consultants",
     "sameAs": [
       "https://twitter.com/paperly",
