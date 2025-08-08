@@ -37,7 +37,7 @@ export default function HelpPage() {
     {
       icon: Mail,
       title: "One-Click Share",
-      description: "Share directly to your client's email with just one click"
+              description: "Share directly to your client&apos;s email with just one click"
     }
   ]
 
@@ -83,7 +83,7 @@ export default function HelpPage() {
     {
       number: "3",
       title: "Enter Client Information",
-      description: "Add your name, client's email, and service details"
+      description: "Add your name, client&apos;s email, and service details"
     },
     {
       number: "4",
@@ -98,7 +98,7 @@ export default function HelpPage() {
         <title>Help & Support | Paprly - Free Invoice Generator</title>
         <meta
           name="description"
-          content="Learn how to use Paprly's free invoice generator. Create professional invoices from scratch or templates. Mobile-friendly, one-click sharing, and completely free."
+          content="Learn how to use Paprly&apos;s free invoice generator. Create professional invoices from scratch or templates. Mobile-friendly, one-click sharing, and completely free."
         />
         <meta name="keywords" content="invoice generator help, free invoicing, invoice templates, mobile invoice creator, freelancer tools" />
         <link rel="canonical" href="https://paprly.in/help" />
