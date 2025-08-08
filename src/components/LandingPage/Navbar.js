@@ -19,11 +19,11 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 rounded-md flex items-center justify-center overflow-hidden">
               <Image 
-                src="/logo.png" 
+                src="/final_logo.png" 
                 alt="Paperly Logo" 
                 width={32} 
                 height={32}
-                className="object-contain"
+                className="object-contain rounded rounded-lg"
               />
             </div>
             <span className="text-xl font-semibold text-gray-900">Paprly</span>
