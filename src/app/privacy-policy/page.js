@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
     {
       icon: Eye,
       title: "No Tracking",
-      description: "We don't track your browsing or personal information"
+      description: "We don&apos;t track your browsing or personal information"
     },
     {
       icon: Lock,
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
       title: "Information We Don't Collect",
       items: [
         "Personal identification information (name, email, phone)",
-        "Payment information (we don't process payments)",
+        "Payment information (we don&apos;t process payments)",
         "Browsing history or search patterns",
         "Location data or device identifiers"
       ]
@@ -94,11 +94,11 @@ export default function PrivacyPolicyPage() {
     },
     {
       question: "Can I delete my data?",
-      answer: "Since we don't store your personal data permanently, there's nothing to delete. Your invoice data is processed temporarily and not retained after invoice generation."
+      answer: "Since we don&apos;t store your personal data permanently, there&apos;s nothing to delete. Your invoice data is processed temporarily and not retained after invoice generation."
     },
     {
       question: "Do you use cookies?",
-      answer: "We use minimal, essential cookies only for basic functionality like session management. We don't use tracking cookies or analytics that could identify you personally."
+      answer: "We use minimal, essential cookies only for basic functionality like session management. We don&apos;t use tracking cookies or analytics that could identify you personally."
     },
     {
       question: "Is my data encrypted?",
@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
         <title>Privacy Policy | Paprly - Free Invoice Generator</title>
         <meta
           name="description"
-          content="Learn about Paprly's privacy policy. We protect your data with industry-standard encryption, no tracking, and transparent practices. Your privacy is our priority."
+          content="Learn about Paprly&apos;s privacy policy. We protect your data with industry-standard encryption, no tracking, and transparent practices. Your privacy is our priority."
         />
         <meta name="keywords" content="privacy policy, data protection, invoice generator privacy, secure invoicing, GDPR compliant, no tracking" />
         <link rel="canonical" href="https://paprly.in/privacy-policy" />
@@ -159,7 +159,7 @@ export default function PrivacyPolicyPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Privacy Commitment</h2>
             <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              At Paprly, we believe privacy is a fundamental right. We've built our service with privacy 
+              At Paprly, we believe privacy is a fundamental right. We&apos;ve built our service with privacy 
               by design, ensuring your data is protected and never misused.
             </p>
           </div>
@@ -192,7 +192,7 @@ export default function PrivacyPolicyPage() {
                 <CheckCircle className="w-5 h-5 text-gray-600 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">No Tracking</h4>
-                  <p className="text-gray-600 text-sm">We don't track your browsing activity or personal behavior</p>
+                  <p className="text-gray-600 text-sm">We don&apos;t track your browsing activity or personal behavior</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -214,7 +214,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Data Collection & Usage</h2>
             <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
               We believe in complete transparency about what data we collect and how we use it. 
-              Here's everything you need to know.
+              Here&apos;s everything you need to know.
             </p>
           </div>
 
@@ -309,7 +309,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
             <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
               Common questions about our privacy practices and data handling. 
-              If you don't find your answer here, feel free to contact us.
+              If you don&apos;t find your answer here, feel free to contact us.
             </p>
           </div>
 
@@ -329,8 +329,8 @@ export default function PrivacyPolicyPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Questions About Privacy?</h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
-            We're committed to transparency and are here to answer any questions you have about 
-            our privacy practices. Don't hesitate to reach out.
+                         We&apos;re committed to transparency and are here to answer any questions you have about 
+             our privacy practices. Don&apos;t hesitate to reach out.
           </p>
           
           <div className="bg-[#FEFCE8] rounded-lg p-6 md:p-8">

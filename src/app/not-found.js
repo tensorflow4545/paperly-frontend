@@ -49,7 +49,7 @@ export default function NotFoundPage() {
         <title>404 - Page Not Found | Paprly - Free Invoice Generator</title>
         <meta
           name="description"
-          content="The page you're looking for doesn't exist. Navigate back to Paprly's free invoice generator and create professional invoices instantly."
+          content="The page you&apos;re looking for doesn&apos;t exist. Navigate back to Paprly&apos;s free invoice generator and create professional invoices instantly."
         />
         <meta name="keywords" content="404, page not found, invoice generator, free invoicing" />
         <link rel="canonical" href="https://paprly.in/404" />
@@ -67,10 +67,10 @@ export default function NotFoundPage() {
                 404 - Page Not Found
               </h1>
             </div>
-            <h2 className="text-gray-600 text-base md:text-lg leading-relaxed">
-              Oops! The page you're looking for doesn't exist. Don't worry, you can still create 
-              professional invoices with Paprly. Let's get you back on track.
-            </h2>
+                         <h2 className="text-gray-600 text-base md:text-lg leading-relaxed">
+               Oops! The page you&apos;re looking for doesn&apos;t exist. Don&apos;t worry, you can still create 
+               professional invoices with Paprly. Let&apos;s get you back on track.
+             </h2>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button 
@@ -94,10 +94,10 @@ export default function NotFoundPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Happened?</h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              The page you're looking for might have been moved, deleted, or you entered the wrong URL. 
-              No worries! Here are some helpful options to get you back on track.
-            </p>
+                         <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+               The page you&apos;re looking for might have been moved, deleted, or you entered the wrong URL. 
+               No worries! Here are some helpful options to get you back on track.
+             </p>
           </div>
 
           {/* Action Cards */}
@@ -185,11 +185,11 @@ export default function NotFoundPage() {
       {/* Help Section */}
       <div className="w-full bg-gray-50 py-8 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Still Can't Find What You're Looking For?</h2>
-          <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
-            If you're having trouble finding a specific page or feature, our help section 
-            has all the information you need to get started with Paprly.
-          </p>
+                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Still Can&apos;t Find What You&apos;re Looking For?</h2>
+                       <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
+               If you&apos;re having trouble finding a specific page or feature, our help section 
+               has all the information you need to get started with Paprly.
+             </p>
           
           <div className="bg-white rounded-lg p-6 md:p-8 shadow-sm border border-gray-200">
             <div className="flex items-center justify-center gap-3 mb-4">
