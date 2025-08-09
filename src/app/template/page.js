@@ -426,8 +426,8 @@ export default function CodePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-              <button className="bg-white w-full sm:w-auto h-[45px] sm:h-[60px] hover:bg-transparent hover:border-1 hover:border-white hover:rounded-md hover:text-white text-gray-700 cursor-pointer font-semibold px-6 py-1 rounded-md transition-all duration-200">Start With Blank Document</button>
-              <button className="bg-transparent border border-white hover:bg-white hover:text-gray-600 text-white cursor-pointer font-semibold px-6 py-1 rounded-md transition-all duration-200 w-full sm:w-auto h-[45px] sm:h-[60px]">Create a custom Template</button>
+              <button onClick={() => router.push('/help')} className="bg-white w-full sm:w-auto h-[45px] sm:h-[60px] hover:bg-transparent hover:border-1 hover:border-white hover:rounded-md hover:text-white text-gray-700 cursor-pointer font-semibold px-6 py-1 rounded-md transition-all duration-200">Need Help?</button>
+              <button onClick={() => router.push('/blank-editor')} className="bg-transparent border border-white hover:bg-white hover:text-gray-600 text-white cursor-pointer font-semibold px-6 py-1 rounded-md transition-all duration-200 w-full sm:w-auto h-[45px] sm:h-[60px]">Create a custom Template</button>
             </div>
           
           </div>

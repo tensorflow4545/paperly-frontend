@@ -75,7 +75,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="pt-8 border-t border-gray-200">
           <p className="text-center text-gray-600">
-            © 2024 Paprly. Made with <span className="text-red-500">❤️</span> for freelancers in India.
+            © 2024 Paprly. Made with <span className="text-red-500">❤️</span> by Team Paprly.
           </p>
         </div>
       </div>

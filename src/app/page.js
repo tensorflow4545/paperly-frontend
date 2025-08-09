@@ -17,7 +17,13 @@ export default function Home() {
   useEffect(() => {
     // Check if user came from another page or if it's a direct page load
     const referrer = document.referrer;
-    const isDirectAccess = !referrer || referrer.includes(window.location.origin);
+    const currentOrigin = window.location.origin;
+    
+    // Only show modal if:
+    // 1. No referrer (direct page load)
+    // 2. Referrer is from external site (not same origin)
+    // 3. User manually reloaded the page
+    const isDirectAccess = !referrer || !referrer.startsWith(currentOrigin);
     
     // Only show modal on direct page access (not when navigating from other pages)
     if (isDirectAccess) {
@@ -25,7 +31,7 @@ export default function Home() {
       const timer = setTimeout(() => {
         setShowModal(true);
         
-        // Auto close after 5 seconds
+        // Auto close after 15 seconds
         const closeTimer = setTimeout(() => {
           setShowModal(false);
         }, 15000);

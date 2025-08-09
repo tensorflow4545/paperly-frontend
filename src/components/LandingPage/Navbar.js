@@ -103,7 +103,7 @@ export default function Navbar() {
                 Contact
               </Link>
               <Link
-                href="#"
+                href="/help"
                 className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors duration-200"
                 onClick={toggleMenu}
               >
