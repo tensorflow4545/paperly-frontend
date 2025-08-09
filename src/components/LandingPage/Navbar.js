@@ -19,11 +19,11 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 rounded-md flex items-center justify-center overflow-hidden">
               <Image 
-                src="/logo.png" 
+                src="/final_logo.png" 
                 alt="Paperly Logo" 
                 width={32} 
                 height={32}
-                className="object-contain"
+                className="object-contain rounded rounded-lg"
               />
             </div>
             <span className="text-xl font-semibold text-gray-900">Paprly</span>
@@ -37,6 +37,9 @@ export default function Navbar() {
           
             <Link href="/template" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Templates
+            </Link>
+            <Link href="/contracts" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+              Contracts
             </Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               About
@@ -87,6 +90,13 @@ export default function Navbar() {
                 onClick={toggleMenu}
               >
                 Templates
+              </Link>
+              <Link
+                href="/contracts"
+                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                Contracts
               </Link>
               <Link
                 href="/about"

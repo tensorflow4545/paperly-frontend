@@ -30,10 +30,10 @@ export const metadata = {
     url: "https://paprly.in",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Generate Free Invoice Online - Paperly Professional Invoice Generator",
+        url: "/final_logo.png",
+        width: 512,
+        height: 512,
+        alt: "Paperly - Professional Invoice Generator Logo",
       },
     ],
   },
@@ -41,14 +41,14 @@ export const metadata = {
     card: "summary_large_image",
     title: "Generate Free Invoice Online | Paperly - Professional Invoice Generator",
     description: "Generate free invoices online instantly with Paperly. Create professional invoices for freelancers, businesses, and consultants. No signup required.",
-    images: ["/og-image.png"],
+    images: ["/final_logo.png"],
   },
   viewport: "width=device-width, initial-scale=1",
   themeColor: "#1F2937",
   manifest: "/manifest.json",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/final_logo.png",
+    apple: "/final_logo.png",
   },
   alternates: {
     canonical: "https://paprly.in",
