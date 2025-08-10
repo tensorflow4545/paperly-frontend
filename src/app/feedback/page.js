@@ -27,7 +27,7 @@ export default function FeedbackPage() {
           </h1>
           <p className="text-gray-700 text-base md:text-lg leading-relaxed max-w-2xl">
             Help us make Paprly better! Your suggestions and feedback drive our innovation. 
-            Tell us what you'd like to see, what works well, and what we can improve.
+            Tell us what you&apos;d like to see, what works well, and what we can improve.
           </p>
         </div>
       </div>

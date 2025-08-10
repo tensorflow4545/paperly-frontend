@@ -305,7 +305,7 @@ export default function TestimonialsDisplay() {
                 <div className="flex-1 px-4 sm:px-6 overflow-hidden">
                   <div className="h-full overflow-y-auto custom-scrollbar pr-1 sm:pr-2">
                     <p className="text-gray-700 leading-relaxed text-sm sm:text-sm">
-                      "{testimonial.feedback}"
+                      &quot;{testimonial.feedback}&quot;
                     </p>
                   </div>
                 </div>

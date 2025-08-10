@@ -22,7 +22,7 @@ export default function AboutPage() {
       setCurrentTextIndex((prev) => (prev + 1) % animatedTexts.length);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [animatedTexts.length]);
 
   return (
     <>
