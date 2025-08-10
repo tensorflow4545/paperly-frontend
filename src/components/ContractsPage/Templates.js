@@ -523,7 +523,7 @@ function PreviewModal({ template, isOpen, onClose }) {
               title="FREELANCE SERVICE AGREEMENT"
               subtitle={
                 <span>
-                  This Freelance Service Agreement ("Agreement") is made on <input type="date" className="px-2 py-1 border border-gray-200 rounded text-xs" /> between:
+                  This Freelance Service Agreement (&quot;Agreement&quot;) is made on <input type="date" className="px-2 py-1 border border-gray-200 rounded text-xs" /> between:
                 </span>
               }
             />
@@ -614,7 +614,7 @@ function PreviewModal({ template, isOpen, onClose }) {
               title="RETAINER AGREEMENT"
               subtitle={
                 <span>
-                  This Retainer Agreement ("Agreement") is made on <input type="date" className="px-2 py-1 border border-gray-200 rounded text-xs" /> between:
+                  This Retainer Agreement (&quot;Agreement&quot;) is made on <input type="date" className="px-2 py-1 border border-gray-200 rounded text-xs" /> between:
                 </span>
               }
             />
@@ -699,7 +699,7 @@ function PreviewModal({ template, isOpen, onClose }) {
               title="PROJECT-BASED CONTRACT"
               subtitle={
                 <span>
-                  This Project-Based Contract ("Agreement") is entered into on <input type="date" className="px-2 py-1 border border-gray-200 rounded text-xs" /> between:
+                  This Project-Based Contract (&quot;Agreement&quot;) is entered into on <input type="date" className="px-2 py-1 border border-gray-200 rounded text-xs" /> between:
                 </span>
               }
             />
