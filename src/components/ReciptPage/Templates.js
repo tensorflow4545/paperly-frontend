@@ -5,7 +5,7 @@ import { useState } from "react"
 const templates = [
   {
     id: "quickbill",
-    name: "QuickBill",
+    name: "Quick Bill",
     category: "Basic",
     description: "Clean, minimal invoice for quick tasks and one-time services. Perfect for early-stage freelancers or personal gigs.",
     features: ["Fast Generation", "Essential Fields", "Freelancer", "Quick Tasks"],
@@ -16,7 +16,7 @@ const templates = [
   },
   {
     id: "standardpro",
-    name: "StandardPro",
+    name: "Quantity - Rate",
     category: "Intermediate",
     description: "Well-structured invoice with itemized services and payment details. Ideal for part-time freelancers and small businesses.",
     features: ["Itemized Services", "Payment Methods", "Professional", "Small Business"],
@@ -27,7 +27,7 @@ const templates = [
   },
   {
     id: "businessedge",
-    name: "BusinessEdge",
+    name: "Descriptive invoice",
     category: "Advanced",
     description: "Professional and legally sound with tax details and company information. Perfect for tax-compliant freelancers.",
     features: ["Tax Compliant", "Company Details", "Legal Ready", "International"],
@@ -38,7 +38,7 @@ const templates = [
   },
   {
     id: "contractorplus",
-    name: "ContractorPlus",
+    name: "Milestone Based",
     category: "Pro Level",
     description: "Advanced billing with milestones, time tracking, and contract management. For professional consultants and developers.",
     features: ["Milestone Billing", "Time Tracking", "Contract Management", "Consultants"],
@@ -49,7 +49,7 @@ const templates = [
   },
   {
     id: "enterpriseinvoice",
-    name: "EnterpriseInvoice",
+    name: "Department Invoice",
     category: "Ultimate",
     description: "Enterprise-grade invoice with multi-department billing, multi-currency, and advanced compliance features.",
     features: ["Multi-Department", "Multi-Currency", "Enterprise Ready", "Audit Compliant"],
@@ -60,13 +60,46 @@ const templates = [
   },
   {
     id: "creativeagency",
-    name: "CreativeAgency",
+    name: "Phase Based Invoice",
     category: "Creative",
     description: "Specialized invoice for creative agencies with project phases, design iterations, and creative deliverables tracking.",
     features: ["Project Phases", "Design Iterations", "Creative Deliverables", "Client Feedback", "Asset Management", "Brand Guidelines"],
     backgroundColor: "bg-gray-50",
     preview: {
       type: "creativeagency",
+    },
+  },
+  {
+    id: "servicecontract",
+    name: "Service Contract Invoice",
+    category: "Professional",
+    description: "Legal and professional services invoice with contract integration, hourly tracking, and compliance sections.",
+    features: ["Service Agreements", "Time Tracking", "Legal Compliance", "Retainer Tracking", "Contract Terms", "Professional Services"],
+    backgroundColor: "bg-slate-50",
+    preview: {
+      type: "servicecontract",
+    },
+  },
+  {
+    id: "subscriptionbilling",
+    name: "Subscription Billing Invoice",
+    category: "SaaS",
+    description: "Modern subscription-based billing with recurring cycles, usage tracking, and proration calculations.",
+    features: ["Recurring Billing", "Usage Tracking", "Proration", "Auto-renewal", "Service Tiers", "Credit Applications"],
+    backgroundColor: "bg-teal-50",
+    preview: {
+      type: "subscriptionbilling",
+    },
+  },
+  {
+    id: "retailproduct",
+    name: "Retail & Product Invoice",
+    category: "E-commerce",
+    description: "Product-focused invoice with inventory tracking, shipping costs, and retail-specific features.",
+    features: ["Product Catalog", "SKU Numbers", "Quantity Discounts", "Shipping Costs", "Return Policy", "Multiple Payments"],
+    backgroundColor: "bg-orange-50",
+    preview: {
+      type: "retailproduct",
     },
   },
 ]
@@ -79,7 +112,7 @@ function TemplatePreview({ template, onPreview }) {
           <div className="bg-white max-w-[523px] p-4 text-xs shadow-sm rounded-lg">
             <div className="text-center mb-4">
               <div className="text-lg font-bold text-gray-800 mb-1">INVOICE</div>
-              <div className="text-gray-500 text-xs">QuickBill</div>
+              <div className="text-gray-500 text-xs">Quick Bill</div>
         </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
@@ -129,7 +162,7 @@ function TemplatePreview({ template, onPreview }) {
           <div className="bg-white max-w-[523px] p-4 text-xs shadow-sm rounded-lg">
             <div className="bg-[#fefce8] text-white p-3 rounded-t-lg -m-4 mb-4">
               <div className="text-center">
-                <div className="text-lg font-bold text-black">StandardPro</div>
+                <div className="text-lg font-bold text-black">Quantity - Rate</div>
                 <div className="text-black text-xs">Professional Invoice</div>
               </div>
             </div>
@@ -218,7 +251,7 @@ function TemplatePreview({ template, onPreview }) {
             <div className="bg-gray-800 text-white p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold">BusinessEdge</div>
+                  <div className="text-lg font-bold">Descriptive invoice</div>
                   <div className="text-gray-300 text-xs">Professional Services</div>
                 </div>
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
@@ -310,7 +343,7 @@ function TemplatePreview({ template, onPreview }) {
             <div className="bg-[#fefce8] text-white p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold text-black">ContractorPlus</div>
+                  <div className="text-lg font-bold text-black">Milestone Based</div>
                   <div className="text-black text-xs">Professional Contracting</div>
                 </div>
                 <div className="text-right">
@@ -400,7 +433,7 @@ function TemplatePreview({ template, onPreview }) {
             <div className="bg-gray-800 text-white p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold">EnterpriseInvoice</div>
+                  <div className="text-lg font-bold">Department Invoice</div>
                   <div className="text-gray-300 text-xs">Multi-Department Billing</div>
                 </div>
                 <div className="text-right">
@@ -513,7 +546,7 @@ function TemplatePreview({ template, onPreview }) {
             <div className="bg-[#fefce8] text-black p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold">CreativeAgency</div>
+                  <div className="text-lg font-bold">Phase Based Invoice</div>
                   <div className="text-black text-xs">Creative Services</div>
                 </div>
                 <div className="text-right">
@@ -626,6 +659,270 @@ function TemplatePreview({ template, onPreview }) {
           </div>
         )
 
+      case "servicecontract":
+        return (
+          <div className="bg-white max-w-[523px] p-4 text-xs shadow-sm rounded-lg">
+            <div className="bg-slate-800 text-white p-3 rounded-t-lg -m-4 mb-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-bold text-white">Service Contract Invoice</div>
+                  <div className="text-slate-300 text-xs">Legal & Professional Services</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-slate-300">Contract: SC-2024-001</div>
+                  <div className="text-xs text-slate-300">Status: Active</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Service Provider:</div>
+                <div className="font-bold text-sm">Legal Associates LLC</div>
+                <div className="text-gray-600 text-xs">Senior Partner: David Wilson</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
+                <div className="text-gray-600 text-xs">+1 (555) 321-9876</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Client:</div>
+                <div className="font-bold text-sm">Tech Startup Corp</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
+                <div className="text-gray-600 text-xs">123 Business Ave, NY 10001</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 mb-4 text-xs">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold">SC-2024-001</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Period:</div>
+                <div className="font-bold">Dec 1-31, 2024</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Due:</div>
+                <div className="font-bold">Jan 30, 2025</div>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-3 rounded mb-4">
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span className="font-semibold">Legal Consultation</span>
+                  <span>15 hrs @ $300/hr</span>
+                  <span className="font-semibold">$4,500.00</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="font-semibold">Contract Review</span>
+                  <span>8 hrs @ $350/hr</span>
+                  <span className="font-semibold">$2,800.00</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="font-semibold">Legal Documentation</span>
+                  <span>5 hrs @ $275/hr</span>
+                  <span className="font-semibold">$1,375.00</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right space-y-1">
+              <div className="flex justify-between text-xs">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$8,675.00</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Retainer Applied:</span>
+                <span className="font-semibold text-green-600">-$2,000.00</span>
+              </div>
+              <div className="border-t pt-1">
+                <div className="text-lg font-bold text-slate-800">$6,675.00</div>
+              </div>
+            </div>
+          </div>
+        )
+
+      case "subscriptionbilling":
+        return (
+          <div className="bg-white max-w-[523px] p-4 text-xs shadow-sm rounded-lg">
+            <div className="bg-teal-600 text-white p-3 rounded-t-lg -m-4 mb-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-bold text-white">Subscription Billing Invoice</div>
+                  <div className="text-teal-200 text-xs">SaaS & Recurring Services</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-teal-200">Plan: Professional</div>
+                  <div className="text-xs text-teal-200">Billing Period: Monthly</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Service Provider:</div>
+                <div className="font-bold text-sm">CloudTech Solutions</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
+                <div className="text-gray-600 text-xs">+1 (555) 867-5309</div>
+                <div className="text-gray-600 text-xs">San Francisco, CA</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Subscriber:</div>
+                <div className="font-bold text-sm">Digital Agency Inc.</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
+                <div className="text-gray-600 text-xs">Account ID: DA-5678</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 mb-4 text-xs">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold">SB-2024-002</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Period:</div>
+                <div className="font-bold">Jan 1-31, 2025</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Next Bill:</div>
+                <div className="font-bold">Feb 1, 2025</div>
+              </div>
+            </div>
+
+            <div className="bg-teal-50 p-3 rounded mb-4">
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span className="font-semibold">Professional Plan</span>
+                  <span>Monthly</span>
+                  <span className="font-semibold">$99.00</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="font-semibold">Additional Users (5)</span>
+                  <span>$15/user</span>
+                  <span className="font-semibold">$75.00</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="font-semibold">API Usage Overage</span>
+                  <span>2,500 calls</span>
+                  <span className="font-semibold">$25.00</span>
+                </div>
+                <div className="flex justify-between text-xs text-green-600">
+                  <span className="font-semibold">Annual Discount</span>
+                  <span>10% off</span>
+                  <span className="font-semibold">-$19.90</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right space-y-1">
+              <div className="flex justify-between text-xs">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$179.10</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Tax (8.5%):</span>
+                <span className="font-semibold">$15.22</span>
+              </div>
+              <div className="border-t pt-1">
+                <div className="text-lg font-bold text-teal-600">$194.32</div>
+              </div>
+            </div>
+          </div>
+        )
+
+      case "retailproduct":
+        return (
+          <div className="bg-white max-w-[523px] p-4 text-xs shadow-sm rounded-lg">
+            <div className="bg-orange-500 text-white p-3 rounded-t-lg -m-4 mb-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-bold text-white">Retail & Product Invoice</div>
+                  <div className="text-orange-200 text-xs">E-commerce & Product Sales</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-orange-200">Order: RP-2024-003</div>
+                  <div className="text-xs text-orange-200">Tracking: TRK123456789</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Store:</div>
+                <div className="font-bold text-sm">Premium Electronics</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
+                <div className="text-gray-600 text-xs">+1 (555) 234-5678</div>
+                <div className="text-gray-600 text-xs">123 Retail St, CA 90210</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Customer:</div>
+                <div className="font-bold text-sm">Sarah Johnson</div>
+                <div className="text-gray-600 text-xs">demo@pay.com</div>
+                <div className="text-gray-600 text-xs">456 Customer Ave, NY 10001</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 mb-4 text-xs">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold">RP-2024-003</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Date:</div>
+                <div className="font-bold">Jan 10, 2025</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Payment:</div>
+                <div className="font-bold">Credit Card</div>
+              </div>
+            </div>
+
+            <div className="bg-orange-50 p-3 rounded mb-4">
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span>
+                    <span className="font-semibold">Wireless Headphones</span>
+                    <div className="text-gray-500">SKU: WH-001 | Qty: 2</div>
+                  </span>
+                  <span className="font-semibold">$299.98</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span>
+                    <span className="font-semibold">Phone Case</span>
+                    <div className="text-gray-500">SKU: PC-045 | Qty: 1</div>
+                  </span>
+                  <span className="font-semibold">$24.99</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span>
+                    <span className="font-semibold">Screen Protector</span>
+                    <div className="text-gray-500">SKU: SP-032 | Qty: 1</div>
+                  </span>
+                  <span className="font-semibold">$12.99</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right space-y-1">
+              <div className="flex justify-between text-xs">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$337.96</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Shipping:</span>
+                <span className="font-semibold">$15.99</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Tax (8.25%):</span>
+                <span className="font-semibold">$27.88</span>
+              </div>
+              <div className="border-t pt-1">
+                <div className="text-lg font-bold text-orange-600">$381.83</div>
+              </div>
+            </div>
+          </div>
+        )
+
       default:
         return <div className="bg-white p-4 text-center text-gray-500">Template Preview</div>
     }
@@ -698,7 +995,7 @@ function PreviewModal({ template, isOpen, onClose }) {
           <div className="bg-white max-w-2xl mx-auto p-4 text-sm shadow-lg rounded-lg">
             <div className="text-center mb-4">
               <div className="text-2xl font-bold text-gray-800 mb-1">INVOICE</div>
-              <div className="text-gray-500 text-sm">QuickBill</div>
+              <div className="text-gray-500 text-sm">Quick Bill</div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
@@ -748,7 +1045,7 @@ function PreviewModal({ template, isOpen, onClose }) {
           <div className="bg-white max-w-2xl mx-auto p-4 text-sm shadow-lg rounded-lg">
             <div className="bg-[#fefce8] text-black p-3 rounded-t-lg -m-4 mb-4">
               <div className="text-center">
-                <div className="text-2xl font-bold">StandardPro</div>
+                <div className="text-2xl font-bold">Quantity - Rate</div>
                 <div className="text-black text-sm">Professional Invoice</div>
               </div>
             </div>
@@ -837,7 +1134,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             <div className="bg-gray-800 text-white p-6 rounded-t-lg -m-8 mb-8">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-4xl font-bold">BusinessEdge</div>
+                  <div className="text-4xl font-bold">Descriptive invoice</div>
                   <div className="text-gray-300 text-lg">Professional Services</div>
                 </div>
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
@@ -929,7 +1226,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             <div className="bg-[#fefce8] text-white p-6 rounded-t-lg -m-8 mb-8">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-4xl font-bold text-black">ContractorPlus</div>
+                  <div className="text-4xl font-bold text-black">Milestone Based</div>
                   <div className="text-black text-lg">Professional Contracting</div>
                 </div>
                 <div className="text-right">
@@ -1019,7 +1316,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             <div className="bg-gray-800 text-white p-6 rounded-t-lg -m-8 mb-8">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-4xl font-bold">EnterpriseInvoice</div>
+                  <div className="text-4xl font-bold">Department Invoice</div>
                   <div className="text-gray-300 text-lg">Multi-Department Billing</div>
                 </div>
                 <div className="text-right">
@@ -1132,7 +1429,7 @@ function PreviewModal({ template, isOpen, onClose }) {
             <div className="bg-[#fefce8] text-black p-6 rounded-t-lg -m-8 mb-8">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-4xl font-bold">CreativeAgency</div>
+                  <div className="text-4xl font-bold">Phase Based Invoice</div>
                   <div className="text-black text-lg">Creative Services</div>
                 </div>
                 <div className="text-right">
@@ -1241,6 +1538,320 @@ function PreviewModal({ template, isOpen, onClose }) {
 
             <div className="text-center text-lg text-gray-600">
               <div></div>
+            </div>
+          </div>
+        )
+
+      case "servicecontract":
+        return (
+          <div className="bg-white max-w-4xl mx-auto p-8 text-sm shadow-lg rounded-lg">
+            <div className="bg-slate-800 text-white p-6 rounded-t-lg -m-8 mb-8">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-4xl font-bold text-white">Service Contract Invoice</div>
+                  <div className="text-slate-300 text-lg">Legal & Professional Services</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg text-slate-300">Contract: SC-2024-001</div>
+                  <div className="text-lg text-slate-300">Status: Active</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <div className="font-semibold text-gray-700 mb-2 text-lg">Service Provider:</div>
+                <div className="font-bold text-2xl mb-2">Legal Associates LLC</div>
+                <div className="text-gray-600 text-lg">Senior Partner: David Wilson</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
+                <div className="text-gray-600 text-lg">+1 (555) 321-9876</div>
+                <div className="text-gray-600 text-lg">789 Legal Plaza, Boston, MA 02101</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-700 mb-2 text-lg">Client:</div>
+                <div className="font-bold text-2xl mb-2">Tech Startup Corp</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
+                <div className="text-gray-600 text-lg">123 Business Ave, NY 10001</div>
+                <div className="text-gray-600 text-lg">Tax ID: 98-7654321</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-6 mb-8 text-lg">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold text-xl">SC-2024-001</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Service Period:</div>
+                <div className="font-bold text-xl">Dec 1-31, 2024</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Due Date:</div>
+                <div className="font-bold text-xl">Jan 30, 2025</div>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-6 rounded-lg mb-8">
+              <div className="space-y-4">
+                <div className="flex justify-between text-lg border-b pb-2">
+                  <span className="font-semibold">Service Description</span>
+                  <span className="font-semibold">Hours</span>
+                  <span className="font-semibold">Rate</span>
+                  <span className="font-semibold">Amount</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Legal Consultation</span>
+                  <span>15 hrs</span>
+                  <span>$300/hr</span>
+                  <span className="font-semibold">$4,500.00</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Contract Review & Analysis</span>
+                  <span>8 hrs</span>
+                  <span>$350/hr</span>
+                  <span className="font-semibold">$2,800.00</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Legal Documentation</span>
+                  <span>5 hrs</span>
+                  <span>$275/hr</span>
+                  <span className="font-semibold">$1,375.00</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right space-y-2 mb-8">
+              <div className="flex justify-between text-lg">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$8,675.00</span>
+              </div>
+              <div className="flex justify-between text-lg">
+                <span>Retainer Applied:</span>
+                <span className="font-semibold text-green-600">-$2,000.00</span>
+              </div>
+              <div className="border-t-2 pt-2">
+                <div className="flex justify-between text-2xl font-bold">
+                  <span>Total Due:</span>
+                  <span className="text-slate-800">$6,675.00</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded text-sm text-gray-600">
+              <div className="font-semibold mb-2">Payment Terms:</div>
+              <div>Payment due within 30 days. Late payments subject to 1.5% monthly service charge.</div>
+            </div>
+          </div>
+        )
+
+      case "subscriptionbilling":
+        return (
+          <div className="bg-white max-w-4xl mx-auto p-8 text-sm shadow-lg rounded-lg">
+            <div className="bg-teal-600 text-white p-6 rounded-t-lg -m-8 mb-8">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-4xl font-bold text-white">Subscription Billing Invoice</div>
+                  <div className="text-teal-200 text-lg">SaaS & Recurring Services</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg text-teal-200">Plan: Professional</div>
+                  <div className="text-lg text-teal-200">Billing Period: Monthly</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <div className="font-semibold text-gray-700 mb-2 text-lg">Service Provider:</div>
+                <div className="font-bold text-2xl mb-2">CloudTech Solutions</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
+                <div className="text-gray-600 text-lg">+1 (555) 867-5309</div>
+                <div className="text-gray-600 text-lg">456 Tech Drive, San Francisco, CA 94105</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-700 mb-2 text-lg">Subscriber:</div>
+                <div className="font-bold text-2xl mb-2">Digital Agency Inc.</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
+                <div className="text-gray-600 text-lg">Account ID: DA-5678</div>
+                <div className="text-gray-600 text-lg">Subscription Start: Jan 1, 2024</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-6 mb-8 text-lg">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold text-xl">SB-2024-002</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Billing Period:</div>
+                <div className="font-bold text-xl">Jan 1-31, 2025</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Next Bill Date:</div>
+                <div className="font-bold text-xl">Feb 1, 2025</div>
+              </div>
+            </div>
+
+            <div className="bg-teal-50 p-6 rounded-lg mb-8">
+              <div className="space-y-4">
+                <div className="flex justify-between text-lg border-b pb-2">
+                  <span className="font-semibold">Service</span>
+                  <span className="font-semibold">Period</span>
+                  <span className="font-semibold">Amount</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Professional Plan</span>
+                  <span>Monthly</span>
+                  <span className="font-semibold">$99.00</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Additional Users (5)</span>
+                  <span>$15/user/month</span>
+                  <span className="font-semibold">$75.00</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">API Usage Overage</span>
+                  <span>2,500 additional calls</span>
+                  <span className="font-semibold">$25.00</span>
+                </div>
+                <div className="flex justify-between text-lg text-green-600">
+                  <span className="font-semibold">Annual Discount Applied</span>
+                  <span>10% off total</span>
+                  <span className="font-semibold">-$19.90</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right space-y-2 mb-8">
+              <div className="flex justify-between text-lg">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$179.10</span>
+              </div>
+              <div className="flex justify-between text-lg">
+                <span>Tax (8.5%):</span>
+                <span className="font-semibold">$15.22</span>
+              </div>
+              <div className="border-t-2 pt-2">
+                <div className="flex justify-between text-2xl font-bold">
+                  <span>Total:</span>
+                  <span className="text-teal-600">$194.32</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded text-sm text-gray-600">
+              <div className="font-semibold mb-2">Auto-Renewal Notice:</div>
+              <div>Your subscription will automatically renew on Feb 1, 2025. Cancel anytime before renewal date.</div>
+            </div>
+          </div>
+        )
+
+      case "retailproduct":
+        return (
+          <div className="bg-white max-w-4xl mx-auto p-8 text-sm shadow-lg rounded-lg">
+            <div className="bg-orange-500 text-white p-6 rounded-t-lg -m-8 mb-8">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-4xl font-bold text-white">Retail & Product Invoice</div>
+                  <div className="text-orange-200 text-lg">E-commerce & Product Sales</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg text-orange-200">Order: RP-2024-003</div>
+                  <div className="text-lg text-orange-200">Tracking: TRK123456789</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <div className="font-semibold text-gray-700 mb-2 text-lg">Store:</div>
+                <div className="font-bold text-2xl mb-2">Premium Electronics</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
+                <div className="text-gray-600 text-lg">+1 (555) 234-5678</div>
+                <div className="text-gray-600 text-lg">123 Retail Street, Los Angeles, CA 90210</div>
+                <div className="text-gray-600 text-lg">Business License: BL-12345</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-700 mb-2 text-lg">Customer:</div>
+                <div className="font-bold text-2xl mb-2">Sarah Johnson</div>
+                <div className="text-gray-600 text-lg">demo@pay.com</div>
+                <div className="text-gray-600 text-lg">456 Customer Avenue, New York, NY 10001</div>
+                <div className="text-gray-600 text-lg">Customer ID: CU-9876</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-6 mb-8 text-lg">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold text-xl">RP-2024-003</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Order Date:</div>
+                <div className="font-bold text-xl">Jan 10, 2025</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Payment Method:</div>
+                <div className="font-bold text-xl">Credit Card</div>
+              </div>
+            </div>
+
+            <div className="bg-orange-50 p-6 rounded-lg mb-8">
+              <div className="space-y-4">
+                <div className="flex justify-between text-lg border-b pb-2">
+                  <span className="font-semibold">Product</span>
+                  <span className="font-semibold">SKU</span>
+                  <span className="font-semibold">Qty</span>
+                  <span className="font-semibold">Price</span>
+                  <span className="font-semibold">Total</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Wireless Headphones</span>
+                  <span>WH-001</span>
+                  <span>2</span>
+                  <span>$149.99</span>
+                  <span className="font-semibold">$299.98</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Phone Case</span>
+                  <span>PC-045</span>
+                  <span>1</span>
+                  <span>$24.99</span>
+                  <span className="font-semibold">$24.99</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className="font-semibold">Screen Protector</span>
+                  <span>SP-032</span>
+                  <span>1</span>
+                  <span>$12.99</span>
+                  <span className="font-semibold">$12.99</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right space-y-2 mb-8">
+              <div className="flex justify-between text-lg">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$337.96</span>
+              </div>
+              <div className="flex justify-between text-lg">
+                <span>Shipping & Handling:</span>
+                <span className="font-semibold">$15.99</span>
+              </div>
+              <div className="flex justify-between text-lg">
+                <span>Tax (8.25%):</span>
+                <span className="font-semibold">$27.88</span>
+              </div>
+              <div className="border-t-2 pt-2">
+                <div className="flex justify-between text-2xl font-bold">
+                  <span>Total:</span>
+                  <span className="text-orange-600">$381.83</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded text-sm text-gray-600">
+              <div className="font-semibold mb-2">Return Policy:</div>
+              <div>30-day return policy. Items must be in original condition. Return shipping fees apply.</div>
             </div>
           </div>
         )

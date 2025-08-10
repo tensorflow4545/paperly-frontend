@@ -38,12 +38,15 @@ export default function Navbar() {
             <Link href="/template" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Templates
             </Link>
+            {/* <Link href="/contracts" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+              Contracts
+            </Link> */}
             <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               About
             </Link>
-            <Link href="/contact" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            {/* <Link href="/contact" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Contact
-            </Link>
+            </Link> */}
             <Link href="/help" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Help
             </Link>
@@ -88,6 +91,13 @@ export default function Navbar() {
               >
                 Templates
               </Link>
+              {/* <Link
+                href="/contracts"
+                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                Contracts
+              </Link> */}
               <Link
                 href="/about"
                 className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors duration-200"
@@ -109,6 +119,7 @@ export default function Navbar() {
               >
                 Help
               </Link>
+             
             </div>
           </div>
         )}
