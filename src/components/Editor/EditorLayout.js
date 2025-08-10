@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowLeft, Save, FileText, User, Building2, ShoppingCart, CreditCard, X, Plus, Trash2, Eye, Download, Share, Mail, Check } from "lucide-react"
+import { ArrowLeft, Save, FileText, User, Building2, ShoppingCart, CreditCard, X, Plus, Trash2, Download, Share, Mail, Check } from "lucide-react"
 import InlineEditableInvoice from "./inline-editable-invoice"
 
 export default function EditorLayout({ templateId, invoiceData, updateInvoiceData, updateItem, addItem, removeItem }) {
@@ -215,8 +215,8 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
       // Convert PDF to data URL with compression
       const pdfDataUrl = pdf.output('datauristring', { compress: true })
       
-      // Generate document ID
-      const documentId = `INV-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      // Use the actual invoice number from the invoice data, or generate one if empty
+      const documentId = invoiceData.invoiceNumber || `INV-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 
       // Prepare request data
       const requestData = {
@@ -548,7 +548,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
             <div style="background: #eff6ff; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
               <table style="width: 100%; font-size: 12px;">
                 <thead>
-                  <tr style="border-bottom: 1px solid #bfdbfe;">
+                  <tr style="border-bottom: 1px solid #bfdbfe; margin-top: 5px; margin-bottom: 5px;">
                     <th style="text-align: left; padding: 4px 0; font-weight: bold;">Service</th>
                     <th style="text-align: left; padding: 4px 0; font-weight: bold;">Qty</th>
                     <th style="text-align: left; padding: 4px 0; font-weight: bold;">Rate</th>
@@ -577,7 +577,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Tax (10%):</span>
                 <span style="font-weight: bold;">${(invoiceData.taxAmount || 140).toFixed(2)}</span>
               </div>
-              <div style="border-top: 1px solid #000; padding-top: 4px;">
+              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <div style="font-size: 18px; font-weight: bold; color: #2563eb;">${(invoiceData.total || 1540).toFixed(2)}</div>
               </div>
             </div>
@@ -635,7 +635,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
             <div style="background: #f9fafb; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
               <table style="width: 100%; font-size: 12px;">
                 <thead>
-                  <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <tr style="border-bottom: 1px solid #e5e7eb; margin-top: 5px; margin-bottom: 5px;">
                     <th style="text-align: left; padding: 4px 0; font-weight: bold;">Service</th>
                     <th style="text-align: left; padding: 4px 0; font-weight: bold;">Description</th>
                     <th style="text-align: right; padding: 4px 0; font-weight: bold;">Amount</th>
@@ -662,7 +662,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Tax (15%):</span>
                 <span style="font-weight: bold;">${(invoiceData.taxAmount || 645).toFixed(2)}</span>
               </div>
-              <div style="border-top: 1px solid #000; padding-top: 4px;">
+              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <div style="font-size: 18px; font-weight: bold; color: #000;">${(invoiceData.total || 4945).toFixed(2)}</div>
               </div>
             </div>
@@ -748,7 +748,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Retainer Fee:</span>
                 <span style="font-weight: bold;">${(invoiceData.taxAmount || 500).toFixed(2)}</span>
               </div>
-              <div style="border-top: 1px solid #000; padding-top: 4px;">
+              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <div style="font-size: 18px; font-weight: bold; color: #2563eb;">${(invoiceData.total || 5375).toFixed(2)}</div>
               </div>
             </div>
@@ -810,7 +810,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
             
             <div style="background: #f9fafb; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
               <div style="space-y: 4;">
-                <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 8px;">
+                <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 13px; margin-top: 5px;">
                   <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Design Department</div>
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <span style="font-size: 12px;">UI/UX Design</span>
@@ -822,7 +822,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                   </div>
                 </div>
                 
-                <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 8px;">
+                <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 13px; margin-top: 5px;">
                   <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Development Department</div>
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <span style="font-size: 12px;">Frontend Development</span>
@@ -853,7 +853,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Tax (20%):</span>
                 <span style="font-weight: bold;">${(invoiceData.taxAmount || 2560).toFixed(2)}</span>
               </div>
-              <div style="border-top: 1px solid #000; padding-top: 4px;">
+              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <div style="font-size: 18px; font-weight: bold; color: #000;">${(invoiceData.total || 15360).toFixed(2)}</div>
               </div>
             </div>
@@ -909,7 +909,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
             
             <div style="background: #f8fafc; padding: 12px; border-radius: 4px; margin-bottom: 16px;">
               <div style="space-y: 4;">
-                <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 8px;">
+                <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 13px; margin-top: 5px;">
                   <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Phase 1: Discovery & Research</div>
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <span style="font-size: 12px;">Brand Analysis & Competitor Research</span>
@@ -921,7 +921,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                   </div>
                 </div>
                 
-                <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 8px;">
+                <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 13px; margin-top: 5px;">
                   <div style="font-weight: bold; color: #000; margin-bottom: 4px; font-size: 12px;">Phase 2: Design & Iteration</div>
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <span style="font-size: 12px;">Logo Design (3 concepts)</span>
@@ -964,7 +964,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Tax (8.5%):</span>
                 <span style="font-weight: bold;">${(invoiceData.taxAmount || 1487.50).toFixed(2)}</span>
               </div>
-                              <div style="border-top: 1px solid #000; padding-top: 4px;">
+                              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                   <div style="font-size: 18px; font-weight: bold; color: #000;">${(invoiceData.total || 19987.50).toFixed(2)}</div>
                 </div>
             </div>
@@ -1041,7 +1041,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Retainer Applied:</span>
                 <span style="font-weight: bold; color: #16a34a;">-$${(invoiceData.taxAmount || 2000).toFixed(2)}</span>
               </div>
-              <div style="border-top: 1px solid #000; padding-top: 4px;">
+              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <div style="font-size: 18px; font-weight: bold; color: #1e293b;">$${(invoiceData.total || 6675).toFixed(2)}</div>
               </div>
             </div>
@@ -1131,7 +1131,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Tax (8.5%):</span>
                 <span style="font-weight: bold;">$${(invoiceData.taxAmount || 15.22).toFixed(2)}</span>
               </div>
-              <div style="border-top: 1px solid #000; padding-top: 4px;">
+              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <div style="font-size: 18px; font-weight: bold; color: #0d9488;">$${(invoiceData.total || 194.32).toFixed(2)}</div>
               </div>
             </div>
@@ -1214,7 +1214,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                 <span>Tax (8.25%):</span>
                 <span style="font-weight: bold;">$${((invoiceData.subtotal || 337.96) * 0.0825).toFixed(2)}</span>
               </div>
-              <div style="border-top: 1px solid #000; padding-top: 4px;">
+              <div style="border-top: 1px solid #000; padding-top: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <div style="font-size: 18px; font-weight: bold; color: #ea580c;">$${(invoiceData.total || 381.83).toFixed(2)}</div>
               </div>
             </div>
@@ -1266,19 +1266,19 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; border: 1px solid #dee2e6;">
               <thead>
                 <tr style="background: #f8f9fa;">
-                  <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Description</th>
-                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Quantity</th>
-                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Rate</th>
-                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold;">Amount</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold; margin-top: 5px; margin-bottom: 5px;">Description</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold; margin-top: 5px; margin-bottom: 5px;">Quantity</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold; margin-top: 5px; margin-bottom: 5px;">Rate</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6; color: #000; font-weight: bold; margin-top: 5px; margin-bottom: 5px;">Amount</th>
                 </tr>
               </thead>
               <tbody>
                 ${invoiceData.items.map(item => `
                   <tr>
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6; color: #000;">${item.description || 'Service'}</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000;">${item.quantity}</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000;">${item.rate}</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000; font-weight: bold;">${item.amount.toFixed(2)}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6; color: #000; margin-top: 5px; margin-bottom: 5px;">${item.description || 'Service'}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000; margin-top: 5px; margin-bottom: 5px;">${item.quantity}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000; margin-top: 5px; margin-bottom: 5px;">${item.rate}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #000; font-weight: bold; margin-top: 5px; margin-bottom: 5px;">${item.amount.toFixed(2)}</td>
                   </tr>
                 `).join('')}
               </tbody>
@@ -1295,7 +1295,7 @@ export default function EditorLayout({ templateId, invoiceData, updateInvoiceDat
                   <span style="margin-left: 20px; font-weight: bold; color: #000;">${invoiceData.taxAmount.toFixed(2)}</span>
                 </div>
               ` : ''}
-              <div style="border-top: 2px solid #000; padding-top: 10px; font-size: 18px;">
+              <div style="border-top: 2px solid #000; padding-top: 10px; font-size: 18px; margin-top: 5px; margin-bottom: 5px;">
                 <span style="font-weight: bold; color: #000;">Total:</span>
                 <span style="margin-left: 20px; font-weight: bold; color: #000;">${invoiceData.total.toFixed(2)}</span>
               </div>
@@ -1770,9 +1770,6 @@ ${invoiceData.terms ? `Terms: ${invoiceData.terms}` : ''}
             </div>
           </div>
           <div className="flex items-center gap-2 md:gap-3">
-            <button className="p-2 md:px-4 md:py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
-              <Eye className="w-4 h-4" />
-            </button>
             <button 
               onClick={downloadInvoice}
               className="p-2 md:px-4 md:py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"

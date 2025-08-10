@@ -630,21 +630,21 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
 
             <EditableSection section="items" className="bg-slate-50 p-3 rounded mb-4">
               <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="font-semibold">Legal Consultation</span>
-                  <span>15 hrs @ $300/hr</span>
-                  <span className="font-semibold">$4,500.00</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span className="font-semibold">Contract Review</span>
-                  <span>8 hrs @ $350/hr</span>
-                  <span className="font-semibold">$2,800.00</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span className="font-semibold">Legal Documentation</span>
-                  <span>5 hrs @ $275/hr</span>
-                  <span className="font-semibold">$1,375.00</span>
-                </div>
+                {invoiceData.items.length > 0 ? (
+                  invoiceData.items.map((item, index) => (
+                    <div key={item.id || index} className="flex justify-between text-xs">
+                      <span className="font-semibold">{item.description || "Legal Consultation"}</span>
+                      <span>{item.quantity || "15"} hrs @ ${item.rate || "300"}/hr</span>
+                      <span className="font-semibold">${(item.amount || 4500).toFixed(2)}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex justify-between text-xs">
+                    <span className="font-semibold">Legal Consultation</span>
+                    <span>15 hrs @ $300/hr</span>
+                    <span className="font-semibold">$4,500.00</span>
+                  </div>
+                )}
               </div>
             </EditableSection>
 
@@ -714,26 +714,21 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
 
             <EditableSection section="items" className="bg-teal-50 p-3 rounded mb-4">
               <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="font-semibold">Professional Plan</span>
-                  <span>Monthly</span>
-                  <span className="font-semibold">$99.00</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span className="font-semibold">Additional Users (5)</span>
-                  <span>$15/user</span>
-                  <span className="font-semibold">$75.00</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span className="font-semibold">API Usage Overage</span>
-                  <span>2,500 calls</span>
-                  <span className="font-semibold">$25.00</span>
-                </div>
-                <div className="flex justify-between text-xs text-green-600">
-                  <span className="font-semibold">Annual Discount</span>
-                  <span>10% off</span>
-                  <span className="font-semibold">-$19.90</span>
-                </div>
+                {invoiceData.items.length > 0 ? (
+                  invoiceData.items.map((item, index) => (
+                    <div key={item.id || index} className="flex justify-between text-xs">
+                      <span className="font-semibold">{item.description || "Professional Plan"}</span>
+                      <span>{item.quantity || "Monthly"}</span>
+                      <span className="font-semibold">${(item.amount || 99).toFixed(2)}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex justify-between text-xs">
+                    <span className="font-semibold">Professional Plan</span>
+                    <span>Monthly</span>
+                    <span className="font-semibold">$99.00</span>
+                  </div>
+                )}
               </div>
             </EditableSection>
 
@@ -803,27 +798,25 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
 
             <EditableSection section="items" className="bg-orange-50 p-3 rounded mb-4">
               <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span>
-                    <span className="font-semibold">Wireless Headphones</span>
-                    <div className="text-gray-500">SKU: WH-001 | Qty: 2</div>
-                  </span>
-                  <span className="font-semibold">$299.98</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span>
-                    <span className="font-semibold">Phone Case</span>
-                    <div className="text-gray-500">SKU: PC-045 | Qty: 1</div>
-                  </span>
-                  <span className="font-semibold">$24.99</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span>
-                    <span className="font-semibold">Screen Protector</span>
-                    <div className="text-gray-500">SKU: SP-032 | Qty: 1</div>
-                  </span>
-                  <span className="font-semibold">$12.99</span>
-                </div>
+                {invoiceData.items.length > 0 ? (
+                  invoiceData.items.map((item, index) => (
+                    <div key={item.id || index} className="flex justify-between text-xs">
+                      <span>
+                        <span className="font-semibold">{item.description || "Wireless Headphones"}</span>
+                        <div className="text-gray-500">SKU: {item.sku || "WH-001"} | Qty: {item.quantity || "2"}</div>
+                      </span>
+                      <span className="font-semibold">${(item.amount || 299.98).toFixed(2)}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex justify-between text-xs">
+                    <span>
+                      <span className="font-semibold">Wireless Headphones</span>
+                      <div className="text-gray-500">SKU: WH-001 | Qty: 2</div>
+                    </span>
+                    <span className="font-semibold">$299.98</span>
+                  </div>
+                )}
               </div>
             </EditableSection>
 

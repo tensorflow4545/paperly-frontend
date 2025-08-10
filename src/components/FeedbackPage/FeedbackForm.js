@@ -18,13 +18,7 @@ export default function FeedbackForm() {
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [errors, setErrors] = useState({})
 
-  const feedbackTypes = [
-    { id: "suggestion", label: "💡 Suggestion", description: "Ideas for new features or improvements" },
-    { id: "bug", label: "🐛 Bug Report", description: "Something isn't working as expected" },
-    { id: "praise", label: "❤️ Praise", description: "What you love about Paprly" },
-    { id: "question", label: "❓ Question", description: "Need help or have questions" },
-    { id: "other", label: "💬 Other", description: "General feedback or comments" }
-  ]
+ 
 
   const validateForm = () => {
     const newErrors = {}
