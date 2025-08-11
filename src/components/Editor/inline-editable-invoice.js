@@ -56,7 +56,7 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
           <div className="bg-white max-w-[523px] mx-auto p-4 text-xs shadow-sm rounded-lg">
             <EditableSection section="basic" className="text-center mb-4">
               <div className="text-lg font-bold text-gray-800 mb-1">INVOICE</div>
-              <div className="text-gray-500 text-xs">QuickBill</div>
+              <div className="text-gray-500 text-xs">Quick Bill</div>
             </EditableSection>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
@@ -107,7 +107,7 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
           <div className="bg-white max-w-[523px] mx-auto p-4 text-xs shadow-sm rounded-lg">
             <EditableSection section="basic" className="bg-[#fefce8] text-black p-3 rounded-t-lg -m-4 mb-4">
               <div className="text-center">
-                <div className="text-lg font-bold">StandardPro</div>
+                <div className="text-lg font-bold">Quantity - Rate</div>
                 <div className="text-black text-xs">Professional Invoice</div>
               </div>
             </EditableSection>
@@ -195,7 +195,7 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
             <EditableSection section="basic" className="bg-gray-800 text-white p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold">BusinessEdge</div>
+                  <div className="text-lg font-bold">Descriptive invoice</div>
                   <div className="text-gray-300 text-xs">Professional Services</div>
                 </div>
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
@@ -281,7 +281,7 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
             <EditableSection section="basic" className="bg-[#fefce8] text-black p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold text-black">ContractorPlus</div>
+                  <div className="text-lg font-bold text-black">Milestone Based</div>
                   <div className="text-black text-xs">Professional Contracting</div>
                 </div>
                 <div className="text-right">
@@ -368,7 +368,7 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
             <EditableSection section="basic" className="bg-gray-800 text-white p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold">EnterpriseInvoice</div>
+                  <div className="text-lg font-bold">Department Invoice</div>
                   <div className="text-gray-300 text-xs">Multi-Department Billing</div>
                 </div>
                 <div className="text-right">
@@ -474,7 +474,7 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
             <EditableSection section="basic" className="bg-[#fefce8] text-black p-3 rounded-t-lg -m-4 mb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <div className="text-lg font-bold text-black">CreativeAgency</div>
+                  <div className="text-lg font-bold text-black">Phase Based Invoice</div>
                   <div className="text-black text-xs">Creative Services</div>
                 </div>
                 <div className="text-right">
@@ -575,6 +575,266 @@ export default function InlineEditableInvoice({ templateId, invoiceData, onEditS
               </div>
               <div className="border-t pt-1">
                 <div className="text-lg font-bold text-black">${(invoiceData.total || 19987.50).toFixed(2)}</div>
+              </div>
+            </EditableSection>
+          </div>
+        )
+
+      case "servicecontract":
+        return (
+          <div className="bg-white max-w-[523px] mx-auto p-4 text-xs shadow-sm rounded-lg">
+            <EditableSection section="basic" className="bg-slate-800 text-white p-3 rounded-t-lg -m-4 mb-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-bold text-white">Service Contract Invoice</div>
+                  <div className="text-slate-300 text-xs">Legal & Professional Services</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-slate-300">Contract: SC-2024-001</div>
+                  <div className="text-xs text-slate-300">Status: Active</div>
+                </div>
+              </div>
+            </EditableSection>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <EditableSection section="sender" className="p-4">
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Service Provider:</div>
+                <div className="font-bold text-sm">{invoiceData.senderName || "Legal Associates LLC"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderTitle || "Senior Partner: David Wilson"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderEmail || "demo@pay.com"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderPhone || "+1 (555) 321-9876"}</div>
+              </EditableSection>
+
+              <EditableSection section="recipient" className="p-4">
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Client:</div>
+                <div className="font-bold text-sm">{invoiceData.recipientName || "Tech Startup Corp"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.recipientEmail || "demo@pay.com"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.recipientAddress || "123 Business Ave, NY 10001"}</div>
+              </EditableSection>
+            </div>
+
+            <EditableSection section="basic" className="grid grid-cols-3 gap-3 mb-4 text-xs">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold">{invoiceData.invoiceNumber || "SC-2024-001"}</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Period:</div>
+                <div className="font-bold">{invoiceData.invoiceDate || "Dec 1-31, 2024"}</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Due:</div>
+                <div className="font-bold">{invoiceData.dueDate || "Jan 30, 2025"}</div>
+              </div>
+            </EditableSection>
+
+            <EditableSection section="items" className="bg-slate-50 p-3 rounded mb-4">
+              <div className="space-y-2">
+                {invoiceData.items.length > 0 ? (
+                  invoiceData.items.map((item, index) => (
+                    <div key={item.id || index} className="flex justify-between text-xs">
+                      <span className="font-semibold">{item.description || "Legal Consultation"}</span>
+                      <span>{item.quantity || "15"} hrs @ ${item.rate || "300"}/hr</span>
+                      <span className="font-semibold">${(item.amount || 4500).toFixed(2)}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex justify-between text-xs">
+                    <span className="font-semibold">Legal Consultation</span>
+                    <span>15 hrs @ $300/hr</span>
+                    <span className="font-semibold">$4,500.00</span>
+                  </div>
+                )}
+              </div>
+            </EditableSection>
+
+            <EditableSection section="payment" className="text-right space-y-1">
+              <div className="flex justify-between text-xs">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$8,675.00</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Retainer Applied:</span>
+                <span className="font-semibold text-green-600">-$2,000.00</span>
+              </div>
+              <div className="border-t pt-1">
+                <div className="text-lg font-bold text-slate-800">${(invoiceData.total || 6675).toFixed(2)}</div>
+              </div>
+            </EditableSection>
+          </div>
+        )
+
+      case "subscriptionbilling":
+        return (
+          <div className="bg-white max-w-[523px] mx-auto p-4 text-xs shadow-sm rounded-lg">
+            <EditableSection section="basic" className="bg-teal-600 text-white p-3 rounded-t-lg -m-4 mb-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-bold text-white">Subscription Billing Invoice</div>
+                  <div className="text-teal-200 text-xs">SaaS & Recurring Services</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-teal-200">Plan: Professional</div>
+                  <div className="text-xs text-teal-200">Billing Period: Monthly</div>
+                </div>
+              </div>
+            </EditableSection>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <EditableSection section="sender" className="p-4">
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Service Provider:</div>
+                <div className="font-bold text-sm">{invoiceData.senderName || "CloudTech Solutions"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderEmail || "demo@pay.com"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderPhone || "+1 (555) 867-5309"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderAddress || "San Francisco, CA"}</div>
+              </EditableSection>
+
+              <EditableSection section="recipient" className="p-4">
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Subscriber:</div>
+                <div className="font-bold text-sm">{invoiceData.recipientName || "Digital Agency Inc."}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.recipientEmail || "demo@pay.com"}</div>
+                <div className="text-gray-600 text-xs">Account ID: {invoiceData.recipientTaxId || "DA-5678"}</div>
+              </EditableSection>
+            </div>
+
+            <EditableSection section="basic" className="grid grid-cols-3 gap-3 mb-4 text-xs">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold">{invoiceData.invoiceNumber || "SB-2024-002"}</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Period:</div>
+                <div className="font-bold">{invoiceData.invoiceDate || "Jan 1-31, 2025"}</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Next Bill:</div>
+                <div className="font-bold">{invoiceData.dueDate || "Feb 1, 2025"}</div>
+              </div>
+            </EditableSection>
+
+            <EditableSection section="items" className="bg-teal-50 p-3 rounded mb-4">
+              <div className="space-y-2">
+                {invoiceData.items.length > 0 ? (
+                  invoiceData.items.map((item, index) => (
+                    <div key={item.id || index} className="flex justify-between text-xs">
+                      <span className="font-semibold">{item.description || "Professional Plan"}</span>
+                      <span>{item.quantity || "Monthly"}</span>
+                      <span className="font-semibold">${(item.amount || 99).toFixed(2)}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex justify-between text-xs">
+                    <span className="font-semibold">Professional Plan</span>
+                    <span>Monthly</span>
+                    <span className="font-semibold">$99.00</span>
+                  </div>
+                )}
+              </div>
+            </EditableSection>
+
+            <EditableSection section="payment" className="text-right space-y-1">
+              <div className="flex justify-between text-xs">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$179.10</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Tax (8.5%):</span>
+                <span className="font-semibold">$15.22</span>
+              </div>
+              <div className="border-t pt-1">
+                <div className="text-lg font-bold text-teal-600">${(invoiceData.total || 194.32).toFixed(2)}</div>
+              </div>
+            </EditableSection>
+          </div>
+        )
+
+      case "retailproduct":
+        return (
+          <div className="bg-white max-w-[523px] mx-auto p-4 text-xs shadow-sm rounded-lg">
+            <EditableSection section="basic" className="bg-orange-500 text-white p-3 rounded-t-lg -m-4 mb-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-bold text-white">Retail & Product Invoice</div>
+                  <div className="text-orange-200 text-xs">E-commerce & Product Sales</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-orange-200">Order: RP-2024-003</div>
+                  <div className="text-xs text-orange-200">Tracking: TRK123456789</div>
+                </div>
+              </div>
+            </EditableSection>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <EditableSection section="sender" className="p-4">
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Store:</div>
+                <div className="font-bold text-sm">{invoiceData.senderName || "Premium Electronics"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderEmail || "demo@pay.com"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderPhone || "+1 (555) 234-5678"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.senderAddress || "123 Retail St, CA 90210"}</div>
+              </EditableSection>
+
+              <EditableSection section="recipient" className="p-4">
+                <div className="font-semibold text-gray-700 mb-1 text-xs">Customer:</div>
+                <div className="font-bold text-sm">{invoiceData.recipientName || "Sarah Johnson"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.recipientEmail || "demo@pay.com"}</div>
+                <div className="text-gray-600 text-xs">{invoiceData.recipientAddress || "456 Customer Ave, NY 10001"}</div>
+              </EditableSection>
+            </div>
+
+            <EditableSection section="basic" className="grid grid-cols-3 gap-3 mb-4 text-xs">
+              <div>
+                <div className="font-semibold text-gray-600">Invoice #:</div>
+                <div className="font-bold">{invoiceData.invoiceNumber || "RP-2024-003"}</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Date:</div>
+                <div className="font-bold">{invoiceData.invoiceDate || "Jan 10, 2025"}</div>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-600">Payment:</div>
+                <div className="font-bold">{invoiceData.paymentTerms || "Credit Card"}</div>
+              </div>
+            </EditableSection>
+
+            <EditableSection section="items" className="bg-orange-50 p-3 rounded mb-4">
+              <div className="space-y-2">
+                {invoiceData.items.length > 0 ? (
+                  invoiceData.items.map((item, index) => (
+                    <div key={item.id || index} className="flex justify-between text-xs">
+                      <span>
+                        <span className="font-semibold">{item.description || "Wireless Headphones"}</span>
+                        <div className="text-gray-500">SKU: {item.sku || "WH-001"} | Qty: {item.quantity || "2"}</div>
+                      </span>
+                      <span className="font-semibold">${(item.amount || 299.98).toFixed(2)}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex justify-between text-xs">
+                    <span>
+                      <span className="font-semibold">Wireless Headphones</span>
+                      <div className="text-gray-500">SKU: WH-001 | Qty: 2</div>
+                    </span>
+                    <span className="font-semibold">$299.98</span>
+                  </div>
+                )}
+              </div>
+            </EditableSection>
+
+            <EditableSection section="payment" className="text-right space-y-1">
+              <div className="flex justify-between text-xs">
+                <span>Subtotal:</span>
+                <span className="font-semibold">$337.96</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Shipping:</span>
+                <span className="font-semibold">$15.99</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span>Tax (8.25%):</span>
+                <span className="font-semibold">$27.88</span>
+              </div>
+              <div className="border-t pt-1">
+                <div className="text-lg font-bold text-orange-600">${(invoiceData.total || 381.83).toFixed(2)}</div>
               </div>
             </EditableSection>
           </div>

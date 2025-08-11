@@ -179,6 +179,71 @@ function EditorContent() {
         taxRate: 8.5,
         taxAmount: 1487.5,
         total: 19987.5
+      },
+      servicecontract: {
+        senderName: "Legal Associates LLC",
+        senderTitle: "Senior Partner: David Wilson",
+        senderEmail: "demo@pay.com",
+        senderPhone: "+1 (555) 321-9876",
+        senderAddress: "789 Legal Plaza, Boston, MA 02101",
+        senderTaxId: "TAX ID: 12-3456789",
+        recipientName: "Tech Startup Corp",
+        recipientEmail: "demo@pay.com",
+        recipientAddress: "123 Business Ave, NY 10001",
+        recipientTaxId: "TAX ID: 98-7654321",
+        invoiceNumber: "SC-2024-001",
+        items: [
+          { id: 1, description: "Legal Consultation", quantity: 15, rate: 300, amount: 4500 },
+          { id: 2, description: "Contract Review & Analysis", quantity: 8, rate: 350, amount: 2800 },
+          { id: 3, description: "Legal Documentation", quantity: 5, rate: 275, amount: 1375 }
+        ],
+        subtotal: 8675,
+        taxRate: 0,
+        taxAmount: 2000,
+        total: 6675
+      },
+      subscriptionbilling: {
+        senderName: "CloudTech Solutions",
+        senderEmail: "demo@pay.com",
+        senderPhone: "+1 (555) 867-5309",
+        senderAddress: "456 Tech Drive, San Francisco, CA 94105",
+        senderTaxId: "EIN: 45-6789012",
+        recipientName: "Digital Agency Inc.",
+        recipientEmail: "demo@pay.com",
+        recipientAddress: "789 Business St, Austin, TX 78701",
+        recipientTaxId: "DA-5678",
+        invoiceNumber: "SB-2024-002",
+        items: [
+          { id: 1, description: "Professional Plan", quantity: 1, rate: 99, amount: 99 },
+          { id: 2, description: "Additional Users (5)", quantity: 5, rate: 15, amount: 75 },
+          { id: 3, description: "API Usage Overage", quantity: 2500, rate: 0.01, amount: 25 },
+          { id: 4, description: "Annual Discount", quantity: 1, rate: -19.90, amount: -19.90 }
+        ],
+        subtotal: 179.10,
+        taxRate: 8.5,
+        taxAmount: 15.22,
+        total: 194.32
+      },
+      retailproduct: {
+        senderName: "Premium Electronics",
+        senderEmail: "demo@pay.com",
+        senderPhone: "+1 (555) 234-5678",
+        senderAddress: "123 Retail Street, Los Angeles, CA 90210",
+        senderTaxId: "Business License: BL-12345",
+        recipientName: "Sarah Johnson",
+        recipientEmail: "demo@pay.com",
+        recipientAddress: "456 Customer Avenue, New York, NY 10001",
+        recipientTaxId: "CU-9876",
+        invoiceNumber: "RP-2024-003",
+        items: [
+          { id: 1, description: "Wireless Headphones", quantity: 2, rate: 149.99, amount: 299.98 },
+          { id: 2, description: "Phone Case", quantity: 1, rate: 24.99, amount: 24.99 },
+          { id: 3, description: "Screen Protector", quantity: 1, rate: 12.99, amount: 12.99 }
+        ],
+        subtotal: 337.96,
+        taxRate: 8.25,
+        taxAmount: 27.88,
+        total: 381.83
       }
     }
     

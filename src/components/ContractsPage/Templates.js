@@ -819,7 +819,9 @@ function PreviewModal({ template, isOpen, onClose }) {
             </Section>
 
             <Section icon={Shield} title="1. Definition of Confidential Information">
-              <TextArea placeholder={'"Confidential Information" includes all non-public data, trade secrets, materials, and project details shared between the parties.'} rows={3} />
+
+              <TextArea placeholder={'&quot;Confidential Information&quot; includes all non-public data, trade secrets, materials, and project details shared between the parties.'} rows={3} />
+
             </Section>
 
             <Section icon={Shield} title="2. Obligations of Receiving Party" accent>
