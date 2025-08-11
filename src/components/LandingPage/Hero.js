@@ -12,7 +12,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* SVG Filter for rough paint effect */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <defs>
@@ -51,14 +51,14 @@ export default function LandingPage() {
             {/* Main heading */}
             <div className="space-y-4">
               <motion.h1 
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-gray-800 leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
                 Create Professional{" "}
                 <motion.span 
-                  className="text-gray-800"
+                  className="text-gray-700"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -66,7 +66,7 @@ export default function LandingPage() {
                 </motion.span>{" "}
                 for{" "}
                 <motion.span 
-                  className="text-gray-700"
+                  className="text-gray-600"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -74,7 +74,7 @@ export default function LandingPage() {
                 </motion.span>
               </motion.h1>
               <motion.h2 
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-700"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-600"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
