@@ -27,7 +27,7 @@ export default function TestimonialsPage() {
           </h1>
           <p className="text-gray-700 text-base md:text-lg leading-relaxed max-w-2xl">
             Real feedback from freelancers, businesses, and professionals who trust Paprly 
-            for their invoicing needs. See how we're making a difference in their workflow.
+            for their invoicing needs. See how we&apos;re making a difference in their workflow.
           </p>
         </div>
       </div>

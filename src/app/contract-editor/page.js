@@ -1,11 +1,12 @@
 "use client"
 import { useSearchParams, useRouter } from "next/navigation"
+import { Suspense } from "react"
 import Navbar from "@/components/LandingPage/Navbar"
 import Footer from "@/components/LandingPage/Footer"
 import ContractEditor from "@/components/ContractsEditor/ContractEditor"
 import Head from "next/head"
 
-export default function ContractEditorPage() {
+function ContractEditorContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const template = searchParams.get("template") || "freelance-service-agreement"
@@ -26,6 +27,21 @@ export default function ContractEditorPage() {
 
       <Footer />
     </>
+  )
+}
+
+export default function ContractEditorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading contract editor...</p>
+        </div>
+      </div>
+    }>
+      <ContractEditorContent />
+    </Suspense>
   )
 }
 
