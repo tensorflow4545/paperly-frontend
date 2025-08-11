@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/LandingPage/Navbar";
 import LandingPage from "@/components/LandingPage/Hero";
+import ContractFeatures from "@/components/LandingPage/ContractFeatures";
 import FeaturesSection from "@/components/LandingPage/Feature";
 import StepsSection from "@/components/LandingPage/Steps";
 import CTASection from "@/components/LandingPage/Started";
@@ -55,6 +56,7 @@ export default function Home() {
 
       <Navbar/>
       <LandingPage/>
+      <ContractFeatures/>
       <FeaturesSection/>
       <StepsSection/>
       <CTASection/>
