@@ -40,6 +40,9 @@ export default function ESignEditor({ initialFile = null }) {
   const [isDragging, setIsDragging] = useState(false)
   const [draggedSignature, setDraggedSignature] = useState(null)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+  const [isResizing, setIsResizing] = useState(false)
+  const [resizedSignature, setResizedSignature] = useState(null)
+  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 })
   const pdfCanvasRef = useRef(null)     // PDF content only
   const signatureCanvasRef = useRef(null) // Signatures only
   const containerRef = useRef(null)
@@ -247,8 +250,38 @@ export default function ESignEditor({ initialFile = null }) {
     })
   }
 
+  const handleResizeStart = (e, signature) => {
+    e.stopPropagation()
+    
+    // Only allow resizing on desktop
+    if (window.innerWidth < 768) return
+    
+    const isTouch = e.type === 'touchstart'
+    if (!isTouch && e.button !== 0) return
+    if (isTouch) e.preventDefault()
+    
+    const rect = pdfCanvasRef.current.getBoundingClientRect()
+    const scaleX = pdfCanvasRef.current.width / rect.width
+    const scaleY = pdfCanvasRef.current.height / rect.height
+    
+    const clientX = isTouch ? e.touches[0].clientX : e.clientX
+    const clientY = isTouch ? e.touches[0].clientY : e.clientY
+    
+    const mouseX = (clientX - rect.left) * scaleX
+    const mouseY = (clientY - rect.top) * scaleY
+    
+    setIsResizing(true)
+    setResizedSignature(signature.id)
+    setResizeStart({
+      x: mouseX,
+      y: mouseY,
+      width: signature.width,
+      height: signature.height
+    })
+  }
+
   const handleMouseMove = (e) => {
-    if (!isDragging || !draggedSignature || !pdfCanvasRef.current) return
+    if ((!isDragging && !isResizing) || (!draggedSignature && !resizedSignature) || !pdfCanvasRef.current) return
     
     // Throttle updates to prevent too many re-renders
     const now = Date.now()
@@ -269,26 +302,43 @@ export default function ESignEditor({ initialFile = null }) {
     const mouseX = (clientX - rect.left) * scaleX
     const mouseY = (clientY - rect.top) * scaleY
     
-    const newX = mouseX - dragOffset.x
-    const newY = mouseY - dragOffset.y
-    
-    setSignatures(signatures.map(sig => 
-      sig.id === draggedSignature 
-        ? { ...sig, x: newX, y: newY }
-        : sig
-    ))
+    if (isDragging && draggedSignature) {
+      const newX = mouseX - dragOffset.x
+      const newY = mouseY - dragOffset.y
+      
+      setSignatures(signatures.map(sig => 
+        sig.id === draggedSignature 
+          ? { ...sig, x: newX, y: newY }
+          : sig
+      ))
+    } else if (isResizing && resizedSignature) {
+      const deltaX = mouseX - resizeStart.x
+      const deltaY = mouseY - resizeStart.y
+      
+      const newWidth = Math.max(50, resizeStart.width + deltaX)
+      const newHeight = Math.max(30, resizeStart.height + deltaY)
+      
+      setSignatures(signatures.map(sig => 
+        sig.id === resizedSignature 
+          ? { ...sig, width: newWidth, height: newHeight }
+          : sig
+      ))
+    }
   }
 
   const handleMouseUp = () => {
     setIsDragging(false)
     setDraggedSignature(null)
     setDragOffset({ x: 0, y: 0 })
+    setIsResizing(false)
+    setResizedSignature(null)
+    setResizeStart({ x: 0, y: 0, width: 0, height: 0 })
     // Signatures will automatically re-render via useEffect
   }
 
   // Add global mouse and touch event listeners
   useEffect(() => {
-    if (isDragging) {
+    if (isDragging || isResizing) {
       document.addEventListener('mousemove', handleMouseMove)
       document.addEventListener('mouseup', handleMouseUp)
       document.addEventListener('touchmove', handleMouseMove, { passive: false })
@@ -301,7 +351,7 @@ export default function ESignEditor({ initialFile = null }) {
         document.removeEventListener('touchend', handleMouseUp)
       }
     }
-  }, [isDragging, draggedSignature, dragOffset, signatures])
+  }, [isDragging, isResizing, draggedSignature, resizedSignature, dragOffset, resizeStart, signatures])
 
   // Draw signatures on separate signature canvas
   const drawSignatures = async () => {
@@ -323,12 +373,13 @@ export default function ESignEditor({ initialFile = null }) {
       context.save()
       
       if (signature.type === 'text') {
-        // Draw text signature centered on click point
-        context.font = `${signature.fontSize || 24}px ${signature.fontFamily || 'cursive'}`
-        context.fillStyle = signature.color || '#000000'
-        context.textAlign = 'center'
-        context.textBaseline = 'middle'
-        context.fillText(signature.text, signature.x, signature.y)
+                  // Draw text signature centered on click point with dynamic font size
+          const fontSize = Math.min(signature.width / signature.text.length * 1.2, signature.height * 0.6)
+          context.font = `${fontSize}px ${signature.fontFamily || signature.font || 'cursive'}`
+          context.fillStyle = signature.color || '#000000'
+          context.textAlign = 'center'
+          context.textBaseline = 'middle'
+          context.fillText(signature.text, signature.x, signature.y)
       } else if (signature.type === 'drawing') {
         // Draw signature from drawing data (either dataUrl or paths)
         if (signature.dataUrl) {
@@ -434,8 +485,9 @@ export default function ESignEditor({ initialFile = null }) {
           const relativeX = (signature.x / canvasWidth) * pageWidth
           const relativeY = pageHeight - ((signature.y / canvasHeight) * pageHeight)
           
-          // Get text dimensions for centering
-          const fontSize = (signature.fontSize || 24) * (pageWidth / canvasWidth)
+          // Get text dimensions for centering with dynamic font size
+          const baseFontSize = Math.min(signature.width / signature.text.length * 1.2, signature.height * 0.6)
+          const fontSize = baseFontSize * (pageWidth / canvasWidth)
           const textWidth = signature.text.length * fontSize * 0.6 // Approximate text width
           
           // Add small offset correction for better positioning alignment
@@ -799,6 +851,7 @@ export default function ESignEditor({ initialFile = null }) {
                     }
                     
                     const isBeingDragged = draggedSignature === signature.id
+                    const isBeingResized = resizedSignature === signature.id
                     
                     return (
                       <div
@@ -807,36 +860,36 @@ export default function ESignEditor({ initialFile = null }) {
                         onTouchStart={(e) => handleMouseDown(e, signature)}
                         onDoubleClick={() => removeSignature(signature.id)}
                         className={`absolute transition-all duration-200 touch-manipulation ${
-                          isBeingDragged 
-                            ? 'border-2 border-blue-400 border-dashed shadow-lg bg-transparent' 
-                            : 'hover:border-2 hover:border-blue-300 hover:border-dashed border-2 border-transparent'
-                        } ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} flex items-center justify-center overflow-hidden`}
+                          isBeingDragged || isBeingResized
+                            ? 'border-2 border-yellow-400 border-dashed shadow-lg bg-transparent' 
+                            : 'hover:border-2 hover:border-yellow-300 hover:border-dashed border-2 border-transparent'
+                        } ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} flex items-center justify-center overflow-hidden group`}
                         style={{
                           left: `${displayX}px`,
                           top: `${displayY}px`,
                           width: `${displayWidth}px`,
                           height: `${displayHeight}px`,
-                          zIndex: isBeingDragged ? 1000 : 10,
+                          zIndex: (isBeingDragged || isBeingResized) ? 1000 : 10,
                           pointerEvents: currentSignature ? 'none' : 'auto',
                           backgroundColor: 'transparent'
                         }}
                         title="Drag to move, double-click to delete"
                       >
                         {/* Show actual signature content during drag */}
-                        {isBeingDragged && (
+                        {(isBeingDragged || isBeingResized) && (
                           <div className="w-full h-full flex items-center justify-center">
                             {signature.type === 'text' ? (
-                              <span 
-                                style={{
-                                  fontFamily: signature.fontFamily || 'cursive',
-                                  fontSize: `${Math.min(displayWidth / signature.text.length * 1.2, displayHeight * 0.6)}px`,
-                                  color: signature.color || '#000000',
-                                  whiteSpace: 'nowrap',
-                                  overflow: 'hidden',
-                                  textOverflow: 'ellipsis',
-                                  textShadow: '1px 1px 2px rgba(255,255,255,0.8), -1px -1px 2px rgba(255,255,255,0.8)'
-                                }}
-                              >
+                                                              <span 
+                                  style={{
+                                    fontFamily: signature.fontFamily || signature.font || 'cursive',
+                                    fontSize: `${Math.min(displayWidth / signature.text.length * 1.2, displayHeight * 0.6)}px`,
+                                    color: signature.color || '#000000',
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    textShadow: '1px 1px 2px rgba(255,255,255,0.8), -1px -1px 2px rgba(255,255,255,0.8)'
+                                  }}
+                                >
                                 {signature.text}
                               </span>
                             ) : signature.dataUrl ? (
@@ -853,6 +906,45 @@ export default function ESignEditor({ initialFile = null }) {
                             )}
                           </div>
                         )}
+
+                        {/* Desktop Resize Handles */}
+                        <div className="hidden md:block">
+                          {/* Bottom-right resize handle */}
+                          <div
+                            onMouseDown={(e) => handleResizeStart(e, signature)}
+                            onTouchStart={(e) => handleResizeStart(e, signature)}
+                            className="absolute bottom-0 right-0 w-4 h-4 bg-yellow-500 border border-yellow-600 rounded-bl cursor-se-resize opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                            style={{ zIndex: 1001 }}
+                            title="Drag to resize"
+                          />
+                          
+                          {/* Bottom-left resize handle */}
+                          <div
+                            onMouseDown={(e) => handleResizeStart(e, signature)}
+                            onTouchStart={(e) => handleResizeStart(e, signature)}
+                            className="absolute bottom-0 left-0 w-4 h-4 bg-yellow-500 border border-yellow-600 rounded-br cursor-sw-resize opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                            style={{ zIndex: 1001 }}
+                            title="Drag to resize"
+                          />
+                          
+                          {/* Top-right resize handle */}
+                          <div
+                            onMouseDown={(e) => handleResizeStart(e, signature)}
+                            onTouchStart={(e) => handleResizeStart(e, signature)}
+                            className="absolute top-0 right-0 w-4 h-4 bg-yellow-500 border border-yellow-600 rounded-tl cursor-ne-resize opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                            style={{ zIndex: 1001 }}
+                            title="Drag to resize"
+                          />
+                          
+                          {/* Top-left resize handle */}
+                          <div
+                            onMouseDown={(e) => handleResizeStart(e, signature)}
+                            onTouchStart={(e) => handleResizeStart(e, signature)}
+                            className="absolute top-0 left-0 w-4 h-4 bg-yellow-500 border border-yellow-600 rounded-tr cursor-nw-resize opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                            style={{ zIndex: 1001 }}
+                            title="Drag to resize"
+                          />
+                        </div>
                       </div>
                     )
                   })}
@@ -1042,11 +1134,11 @@ function SignatureElement({ signature, onRemove, containerOffset }) {
       <div className="w-full h-full flex items-center justify-center pointer-events-none select-none">
         {signature.type === 'text' ? (
           <span
-            style={{
-              color: signature.color,
-              fontFamily: signature.font === 'cursive' ? 'cursive' : signature.font,
-              fontSize: '18px',
-              fontWeight: signature.font === 'bold' ? 'bold' : 'normal',
+                          style={{
+                color: signature.color,
+                fontFamily: signature.fontFamily || signature.font || 'cursive',
+                fontSize: '18px',
+                fontWeight: signature.font === 'bold' ? 'bold' : 'normal',
               userSelect: 'none',
               WebkitUserSelect: 'none',
               MozUserSelect: 'none'
