@@ -60,6 +60,11 @@ export default function Footer() {
                     Help
                   </Link>
                 </li>
+                <li>
+                  <Link href="/e-sign" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    e-Sign Documents
+                  </Link>
+                </li>
               </ul>
             </div>
 
