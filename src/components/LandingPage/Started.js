@@ -13,7 +13,7 @@ export default function CTASection() {
     <section className="py-16 bg-gradient-to-br from-gray-100 to-gray-200 border-t border-gray-300">
       <div className="max-w-4xl mx-auto px-8 text-center">
         {/* Main Heading */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 mb-6 leading-tight">
           Ready to create your first professional invoice?
         </h2>
 
