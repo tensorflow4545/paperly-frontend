@@ -2,11 +2,11 @@
 
 export default function FeaturesSection() {
   return (
-    <section className="py-16 bg-[#FFF8E1]">
+    <section className="py-16 bg-[#e9f0ff]">
       <div className="max-w-6xl mx-auto px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 mb-4">
             Everything You Need to Invoice Like a Pro
           </h2>
           <p className="text-base sm:text-lg text-gray-600">Perfect for freelancers, consultants, and small businesses.</p>
@@ -21,7 +21,7 @@ export default function FeaturesSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Professional Templates</h3>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Professional Templates</h3>
             <p className="text-gray-600 leading-relaxed">
               Choose from sleek, customizable templates designed for freelancers and consultants.
             </p>
@@ -34,7 +34,7 @@ export default function FeaturesSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Easy Customization</h3>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Easy Customization</h3>
             <p className="text-gray-600 leading-relaxed">
               Add your logo, colors, and branding to make invoices uniquely yours.
             </p>
@@ -47,7 +47,7 @@ export default function FeaturesSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Instant Sharing</h3>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Instant Sharing</h3>
             <p className="text-gray-600 leading-relaxed">
               Send professional invoices to clients instantly via email or download as PDF.
             </p>
