@@ -141,11 +141,11 @@ export default function ContractEditor({ templateId, onBack }) {
   const headerSubtitle = useMemo(() => {
     switch (templateId) {
       case "freelance-service-agreement":
-        return 'This Freelance Service Agreement ("Agreement") is made on [Date] between:'
+        return 'This Freelance Service Agreement (&quot;Agreement&quot;) is made on [Date] between:'
       case "retainer-agreement":
-        return 'This Retainer Agreement ("Agreement") is made on [Date] between:'
+        return 'This Retainer Agreement (&quot;Agreement&quot;) is made on [Date] between:'
       case "project-based-contract":
-        return 'This Project-Based Contract ("Agreement") is entered into on [Date] between:'
+        return 'This Project-Based Contract (&quot;Agreement&quot;) is entered into on [Date] between:'
       case "nda-freelancer":
         return "This NDA is entered into on [Date] between:"
       default:
@@ -948,7 +948,7 @@ export default function ContractEditor({ templateId, onBack }) {
                   value={data.confidentiality}
                   onChange={(value) => updateField("confidentiality", value)}
                   placeholder={
-                    '"Confidential Information" includes all non-public data, trade secrets, materials, and project details shared between the parties.'
+                    '&quot;Confidential Information&quot; includes all non-public data, trade secrets, materials, and project details shared between the parties.'
                   }
                 />
               </Section>
