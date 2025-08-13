@@ -1,12 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-# Sitemap
+# Host
+Host: https://paprly.in
+
+# Sitemaps
 Sitemap: https://paprly.in/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
-
-# Disallow admin areas (if any)
-Disallow: /admin/
-Disallow: /api/
