@@ -61,7 +61,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/e-sign-editor" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                  <Link href="/e-sign" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                     e-Sign Documents
                   </Link>
                 </li>
