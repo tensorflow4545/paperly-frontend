@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import PageSEO from "@/components/SEO/PageSEO"
 
 export default function LoginPage() {
@@ -122,10 +123,12 @@ export default function LoginPage() {
           <div className="mb-8">
             {/* Chatbot GIF */}
             <div className="flex items-center justify-center mb-6">
-              <img 
+              <Image 
                 src="/Chat bot.gif" 
                 alt="AI Chatbot Assistant" 
-                className="w-[380px] h-[400px] rounded rounded-xl"
+                width={380}
+                height={400}
+                className="rounded rounded-xl"
               />
             </div>
           </div>
@@ -162,10 +165,12 @@ export default function LoginPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
-              <img 
+              <Image 
                 src="/final_logo.png" 
                 alt="Paprly Logo" 
-                className="w-12 h-12 rounded-lg mr-3"
+                width={48}
+                height={48}
+                className="rounded-lg mr-3"
               />
               <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
             </div>
@@ -299,7 +304,7 @@ export default function LoginPage() {
 
             {/* Sign Up Link */}
             <div className="text-center text-sm text-gray-500 mt-4">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <a
                 href="/signup"
                 className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors duration-200"
@@ -321,7 +326,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Login Successful!</h3>
-            <p className="text-gray-600 mb-6">Welcome back to Paprly! You've been successfully signed in.</p>
+            <p className="text-gray-600 mb-6">Welcome back to Paprly! You&apos;ve been successfully signed in.</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-full transition-colors duration-200"
