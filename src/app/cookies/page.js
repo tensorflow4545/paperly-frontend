@@ -249,7 +249,7 @@ export default function CookiesPolicy() {
       <footer className="bg-gray-50 border-t border-yellow-100 py-8">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-gray-600">
-            © 2024 Paprly. This Cookie Policy is part of our commitment to transparency and user privacy.
+            © 2025 Paprly. This Cookie Policy is part of our commitment to transparency and user privacy.
           </p>
         </div>
       </footer>
