@@ -2248,7 +2248,7 @@ export default function TemplatesPage() {
             </div>
             {searchQuery && (
               <div className="text-sm text-gray-500">
-                Search: "{searchQuery}"
+                Search: &quot;{searchQuery}&quot;
               </div>
             )}
           </div>
@@ -2269,7 +2269,7 @@ export default function TemplatesPage() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No templates found</h3>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              Try adjusting your search terms or category filter. You can search for templates using plain English like "freelancer invoice" or "business template".
+              Try adjusting your search terms or category filter. You can search for templates using plain English like &quot;freelancer invoice&quot; or &quot;business template&quot;.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {popularSearches.slice(0, 5).map((suggestion, index) => (
