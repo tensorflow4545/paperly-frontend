@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense, useCallback } from "react"
 import { useSearchParams } from "next/navigation"
 import EditorLayout from "@/components/Editor/EditorLayout"
+import PageSEO from "@/components/SEO/PageSEO"
 
 function EditorContent() {
   const searchParams = useSearchParams()
@@ -318,14 +319,17 @@ function EditorContent() {
   }
 
   return (
-    <EditorLayout
-      templateId={templateId}
-      invoiceData={invoiceData}
-      updateInvoiceData={updateInvoiceData}
-      updateItem={updateItem}
-      addItem={addItem}
-      removeItem={removeItem}
-    />
+    <>
+      <PageSEO pageName="editor" />
+      <EditorLayout
+        templateId={templateId}
+        invoiceData={invoiceData}
+        updateInvoiceData={updateInvoiceData}
+        updateItem={updateItem}
+        addItem={addItem}
+        removeItem={removeItem}
+      />
+    </>
   )
 }
 

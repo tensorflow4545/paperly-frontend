@@ -1,11 +1,11 @@
 "use client"
 
-import Head from "next/head"
 import React from "react"
 import { useRouter } from "next/navigation"
 import { FileText, Edit3, Download, Users, Calendar, DollarSign, CreditCard, Shield, BarChart3, Briefcase, Palette, Wrench, UserCheck, Mail, CheckCircle, ArrowRight, Smartphone, Monitor, Tablet } from 'lucide-react'
 import Navbar from "../../components/LandingPage/Navbar"
 import Footer from "../../components/LandingPage/Footer"
+import PageSEO from "@/components/SEO/PageSEO"
 
 export default function HelpPage() {
   const router = useRouter()
@@ -94,15 +94,7 @@ export default function HelpPage() {
 
   return (
     <>
-      <Head>
-        <title>Help & Support | Paprly - Free Invoice Generator</title>
-        <meta
-          name="description"
-          content="Learn how to use Paprly&apos;s free invoice generator. Create professional invoices from scratch or templates. Mobile-friendly, one-click sharing, and completely free."
-        />
-        <meta name="keywords" content="invoice generator help, free invoicing, invoice templates, mobile invoice creator, freelancer tools" />
-        <link rel="canonical" href="https://paprly.in/help" />
-      </Head>
+      <PageSEO pageName="help" />
 
       <Navbar />
 

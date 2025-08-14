@@ -10,6 +10,7 @@ import CTASection from "@/components/LandingPage/Started";
 import Footer from "@/components/LandingPage/Footer";
 import PhaseTwoModal from "@/components/LandingPage/phasetwomoadal";
 import Head from "next/head";
+import PageSEO from "@/components/SEO/PageSEO";
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -50,9 +51,10 @@ export default function Home() {
 
   return (
     <>
-   <Head>
-  <link rel="canonical" href="https://paprly.in/" />
-</Head>
+      <PageSEO pageName="home" />
+      <Head>
+        <link rel="canonical" href="https://paprly.in/" />
+      </Head>
 
       <Navbar/>
       <LandingPage/>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import PageSEO from "@/components/SEO/PageSEO"
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -183,7 +184,9 @@ export default function SignupPage() {
   ]
 
   return (
-    <div className="flex min-h-screen">
+    <>
+      <PageSEO pageName="signup" />
+      <div className="flex min-h-screen">
       {/* Left Side - Chatbot GIF */}
       <div className="hidden  md:flex w-1/2 bg-gradient-to-br from-yellow-50 to-yellow-100 relative overflow-hidden">
         <div className="relative ml-12 left-10 inset-0 bg-yellow-200/20"></div>
@@ -439,7 +442,7 @@ export default function SignupPage() {
             {/* Login Link */}
             <div className="text-center text-sm text-gray-500 mt-4">
               Already have an account?{" "}
-              <a href="/login" className="text-yellow-600 hover:text-yellow-700 font-medium">
+              <a href="/sign-in" className="text-yellow-600 hover:text-yellow-700 font-medium">
                 Log in
               </a>
             </div>
@@ -488,6 +491,7 @@ export default function SignupPage() {
            </div>
          </div>
        )}
-    </div>
+      </div>
+    </>
   )
 }
