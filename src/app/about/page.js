@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/LandingPage/Navbar";
 import Footer from "@/components/LandingPage/Footer";
+import PageSEO from "@/components/SEO/PageSEO";
 
 export default function AboutPage() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -26,6 +27,7 @@ export default function AboutPage() {
 
   return (
     <>
+      <PageSEO pageName="about" />
       <Navbar />
       
       {/* Main Content */}
