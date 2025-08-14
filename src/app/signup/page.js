@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -13,6 +13,26 @@ export default function SignupPage() {
   })
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false)
+  const [showErrorPopup, setShowErrorPopup] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [formErrors, setFormErrors] = useState({})
+
+  // Clear any cached form data on component mount
+  useEffect(() => {
+    // Force clear any cached form data
+    setForm({
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      organization: "",
+      remember: false,
+    })
+    setFormErrors({})
+    console.log('Form state cleared on mount')
+  }, [])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -20,37 +40,205 @@ export default function SignupPage() {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }))
+    // Clear error when user starts typing
+    if (formErrors[name]) {
+      setFormErrors(prev => ({ ...prev, [name]: "" }))
+    }
   }
 
   const handleOrganizationSelect = (value) => {
     setForm((prev) => ({ ...prev, organization: value }))
     setIsDropdownOpen(false)
+    if (formErrors.organization) {
+      setFormErrors(prev => ({ ...prev, organization: "" }))
+    }
   }
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const errors = {}
+    
+    // Name validation
+    if (!form.name.trim()) {
+      errors.name = "Name is required"
+    } else if (form.name.trim().length < 2) {
+      errors.name = "Name must be at least 2 characters"
+    }
+    
+    // Email validation
+    if (!form.email.trim()) {
+      errors.email = "Email is required"
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      errors.email = "Please enter a valid email"
+    }
+    
+    // Password validation
+    if (!form.password) {
+      errors.password = "Password is required"
+    } else if (form.password.length < 6) {
+      errors.password = "Password must be at least 6 characters"
+    }
+    
+    // Confirm password validation
+    if (!form.confirmPassword) {
+      errors.confirmPassword = "Please confirm your password"
+    } else if (form.password !== form.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match"
+    }
+    
+    // Organization validation
+    if (!form.organization) {
+      errors.organization = "Please select an organization type"
+    }
+    
+    setFormErrors(errors)
+    
+    // Log validation results
+    console.log('Form validation errors:', errors)
+    console.log('Form is valid:', Object.keys(errors).length === 0)
+    
+    return Object.keys(errors).length === 0
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Form submitted:", form)
+    
+    // Force clear any old cached data
+    const currentForm = { ...form }
+    console.log('Current form state before validation:', currentForm)
+    
+    // Double-check organization value
+    if (currentForm.organization && !organizationOptions.includes(currentForm.organization)) {
+      console.log('Invalid organization value detected, clearing form...')
+      setForm({
+        name: currentForm.name,
+        email: currentForm.email,
+        password: currentForm.password,
+        confirmPassword: currentForm.confirmPassword,
+        organization: "", // Clear invalid organization
+        remember: currentForm.remember,
+      })
+      setFormErrors(prev => ({ ...prev, organization: "Please select a valid organization type" }))
+      return
+    }
+    
+    if (!validateForm()) {
+      return
+    }
+    
+    setIsLoading(true)
+    
+    // Prepare the data to send
+    const userData = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      password: form.password,
+      OrganizationType: form.organization, // Changed to match backend API field name
+    }
+    
+    console.log('Form state:', form)
+    console.log('Sending data to API:', userData)
+    console.log('Organization value being sent:', form.organization)
+    
+    try {
+      const response = await fetch('https://paperly-backend-five.vercel.app/api/userRegistration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      })
+      
+      const data = await response.json()
+      console.log('API Response:', data)
+      
+      if (response.ok) {
+        setShowSuccessPopup(true)
+        // Reset form
+        setForm({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          organization: "",
+          remember: false,
+        })
+      } else {
+        setErrorMessage(data.message || "Registration failed. Please try again.")
+        setShowErrorPopup(true)
+      }
+    } catch (error) {
+      console.error('Registration error:', error)
+      setErrorMessage("Network error. Please check your connection and try again.")
+      setShowErrorPopup(true)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const organizationOptions = [
-    "Agencies & Small Teams",
-    "Grown startups & enterprises",
-    "Individuals / Early-stage solo founders",
+    "Freelancer",
+    "Business",
+    "Individual",
+    "Other",
   ]
 
   return (
     <div className="flex min-h-screen">
-      {/* Left Side */}
-      <div className="hidden md:flex w-1/2 bg-gray-100 relative overflow-hidden">
-    </div>
+      {/* Left Side - Chatbot GIF */}
+      <div className="hidden  md:flex w-1/2 bg-gradient-to-br from-yellow-50 to-yellow-100 relative overflow-hidden">
+        <div className="relative ml-12 left-10 inset-0 bg-yellow-200/20"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full px-12 text-center">
+          <div className="mb-8">
+            {/* Chatbot GIF */}
+            <div className="flex items-center justify-center mb-6">
+              <img 
+                src="/Chat bot.gif" 
+                alt="AI Chatbot Assistant" 
+                className="w-[380px] h-[400px] rounded rounded-xl "
+              />
+            </div>
+          </div>
+                     <div className="max-w-md">
+             <h2 className="text-2xl font-bold text-yellow-800 mb-4">
+               Welcome to Paprly Enterprise Suite
+             </h2>
+             <p className="text-lg text-yellow-700 leading-relaxed">
+               All your paperwork, organized in one place. From contracts and invoices to e-signatures 
+               and secure sharing — our intelligent automation makes managing documents faster, easier, 
+               and stress-free. Get started today and power your workflow with Paprly.
+             </p>
+            <div className="mt-8 flex items-center justify-center space-x-4 text-yellow-600">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                <span className="text-sm">Secure</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                <span className="text-sm">Simple</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                <span className="text-sm">Fast</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Right Side - Form */}
       <div className="w-full md:w-1/2 bg-white flex items-center justify-center px-8 py-12">
         <div className="w-full max-w-md">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome to Paprly</h1>
-            <p className="text-gray-500">Create Professional Invoices for Your Clients.</p>
+            <div className="flex items-center justify-center mb-4">
+              <img 
+                src="/final_logo.png" 
+                alt="Paprly Logo" 
+                className="w-12 h-12 rounded-lg mr-3"
+              />
+              <h1 className="text-3xl font-bold text-gray-900">Create Your Account</h1>
+            </div>
+                         <p className="text-gray-500">Join thousands of professionals who trust Paprly for their document management needs.</p>
           </div>
 
           {/* Form */}
@@ -64,8 +252,13 @@ export default function SignupPage() {
                 value={form.name}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
+                className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent placeholder:text-gray-400 transition-all duration-200 hover:bg-yellow-50 hover:border-yellow-300 ${
+                  formErrors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-300'
+                }`}
               />
+              {formErrors.name && (
+                <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>
+              )}
             </div>
 
             {/* Email Field */}
@@ -77,8 +270,13 @@ export default function SignupPage() {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Enter your email id"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
+                className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent placeholder:text-gray-400 transition-all duration-200 hover:bg-yellow-50 hover:border-yellow-300 ${
+                  formErrors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-300'
+                }`}
               />
+              {formErrors.email && (
+                <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
+              )}
             </div>
 
             {/* Password Field */}
@@ -90,21 +288,31 @@ export default function SignupPage() {
                 value={form.password}
                 onChange={handleChange}
                 placeholder="Create password"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
+                className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent placeholder:text-gray-400 transition-all duration-200 hover:bg-yellow-50 hover:border-yellow-300 ${
+                  formErrors.password ? 'border-red-300 focus:ring-red-500' : 'border-gray-300'
+                }`}
               />
+              {formErrors.password && (
+                <p className="text-red-500 text-xs mt-1">{formErrors.password}</p>
+              )}
             </div>
 
             {/* Confirm Password Field */}
             <div className="relative">
-              <label className="absolute -top-2.5 left-3 bg-white px-1 text-xs text-gray-500">Password</label>
+              <label className="absolute -top-2.5 left-3 bg-white px-1 text-xs text-gray-500">Confirm Password</label>
               <input
                 type="password"
                 name="confirmPassword"
                 value={form.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm password"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
+                className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent placeholder:text-gray-400 transition-all duration-200 hover:bg-yellow-50 hover:border-yellow-300 ${
+                  formErrors.confirmPassword ? 'border-red-300 focus:ring-red-500' : 'border-gray-300'
+                }`}
               />
+              {formErrors.confirmPassword && (
+                <p className="text-red-500 text-xs mt-1">{formErrors.confirmPassword}</p>
+              )}
             </div>
 
             {/* Organization Dropdown */}
@@ -113,7 +321,9 @@ export default function SignupPage() {
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-left flex items-center justify-between hover:bg-gray-100 transition-colors duration-200"
+                className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-left flex items-center justify-between transition-all duration-200 hover:bg-yellow-50 hover:border-yellow-300 ${
+                  formErrors.organization ? 'border-red-300 focus:ring-red-500' : 'border-gray-300'
+                }`}
               >
                 <span className={form.organization ? "text-gray-900" : "text-gray-400"}>
                   {form.organization || "Select Organization Type"}
@@ -141,12 +351,15 @@ export default function SignupPage() {
                     key={index}
                     type="button"
                     onClick={() => handleOrganizationSelect(option)}
-                    className="w-full px-4 py-3 text-left hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 text-gray-700 border-b border-gray-100 last:border-b-0 first:rounded-t-lg last:rounded-b-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                    className="w-full px-4 py-3 text-left hover:bg-yellow-50 hover:text-yellow-600 transition-all duration-200 text-gray-700 border-b border-gray-100 last:border-b-0 first:rounded-t-lg last:rounded-b-lg transform hover:scale-[1.02] active:scale-[0.98]"
                   >
                     {option}
                   </button>
                 ))}
               </div>
+              {formErrors.organization && (
+                <p className="text-red-500 text-xs mt-1">{formErrors.organization}</p>
+              )}
             </div>
 
             {/* Remember Toggle */}
@@ -162,7 +375,7 @@ export default function SignupPage() {
                 />
                 <div
                   className={`w-11 h-6 rounded-full transition-colors duration-200 relative ${
-                    form.remember ? "bg-blue-500" : "bg-gray-300"
+                    form.remember ? "bg-yellow-500" : "bg-gray-300"
                   }`}
                 >
                   <div
@@ -177,9 +390,17 @@ export default function SignupPage() {
             {/* Sign Up Button */}
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-full transition-colors duration-200"
+              disabled={isLoading}
+              className="w-full bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-300 text-white font-medium py-3 px-6 rounded-full transition-colors duration-200 flex items-center justify-center"
             >
-              Sign up
+              {isLoading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  Creating Account...
+                </>
+              ) : (
+                "Sign up"
+              )}
             </button>
 
             {/* OR Divider */}
@@ -218,13 +439,55 @@ export default function SignupPage() {
             {/* Login Link */}
             <div className="text-center text-sm text-gray-500 mt-4">
               Already have an account?{" "}
-              <a href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+              <a href="/login" className="text-yellow-600 hover:text-yellow-700 font-medium">
                 Log in
               </a>
             </div>
           </form>
         </div>
       </div>
+
+             {/* Success Popup */}
+       {showSuccessPopup && (
+         <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
+           <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-xl">
+             <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+               <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+               </svg>
+             </div>
+             <h3 className="text-xl font-bold text-gray-900 mb-2">Registration Successful!</h3>
+             <p className="text-gray-600 mb-6">Welcome to Paprly! Your account has been created successfully.</p>
+             <button
+               onClick={() => setShowSuccessPopup(false)}
+               className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-full transition-colors duration-200"
+             >
+               Get Started
+             </button>
+           </div>
+         </div>
+       )}
+
+             {/* Error Popup */}
+       {showErrorPopup && (
+         <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
+           <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-xl">
+             <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+               <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+               </svg>
+             </div>
+             <h3 className="text-xl font-bold text-gray-900 mb-2">Registration Failed</h3>
+             <p className="text-gray-600 mb-6">{errorMessage}</p>
+             <button
+               onClick={() => setShowErrorPopup(false)}
+               className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-full transition-colors duration-200"
+             >
+               Try Again
+             </button>
+           </div>
+         </div>
+       )}
     </div>
   )
 }
