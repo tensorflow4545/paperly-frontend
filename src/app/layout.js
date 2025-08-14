@@ -95,9 +95,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} ${satisfy.variable} ${greatVibes.variable} ${sacramento.variable} ${allura.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>
