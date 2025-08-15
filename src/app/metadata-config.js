@@ -104,6 +104,14 @@ export const pageMetadata = {
     ogTitle: "Feedback & Suggestions | Paperly - Help Us Improve",
     ogDescription: "Share your feedback and suggestions to help improve Paperly's document management platform.",
   },
+  "enterprise-profile": {
+    title: "Enterprise Profile Setup | Paprly Enterprise Suite - Professional Document Management",
+    description: "Complete your enterprise profile setup for Paprly Enterprise Suite. Configure company details, team preferences, and enterprise features for professional document management.",
+    keywords: "enterprise profile, paprly enterprise suite, company setup, business profile, enterprise document management, team preferences, company configuration",
+    canonical: "https://paprly.in/enterprise-profile",
+    ogTitle: "Enterprise Profile Setup | Paprly Enterprise Suite",
+    ogDescription: "Complete your enterprise profile setup for Paprly Enterprise Suite. Configure company details, team preferences, and enterprise features.",
+  },
 };
 
 // Function to get metadata for a specific page
