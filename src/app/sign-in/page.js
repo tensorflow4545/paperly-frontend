@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import PageSEO from "@/components/SEO/PageSEO"
+import { useAuth } from "@/hooks/useAuth"
 
 export default function LoginPage() {
+  const { login } = useAuth()
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -81,27 +83,39 @@ export default function LoginPage() {
     console.log('Sending data to API:', userData)
     
     try {
-      // TODO: Replace with actual login API endpoint
-      // const response = await fetch('https://paperly-backend-five.vercel.app/api/userLogin', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(userData),
-      // })
-      
-      // Simulate API call for now
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // For now, show success (replace with actual API response handling)
-      setShowSuccessPopup(true)
-      
-      // Reset form
-      setForm({
-        email: "",
-        password: "",
-        remember: false,
+      const response = await fetch('https://paperly-backend-five.vercel.app/api/userLogin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       })
+      
+      const data = await response.json()
+      console.log('API Response:', data)
+      
+      if (response.ok && data.success) {
+        // Login using auth hook
+        login(data.token, data.user, form.remember)
+        
+        setShowSuccessPopup(true)
+        
+        // Reset form
+        setForm({
+          email: "",
+          password: "",
+          remember: false,
+        })
+        
+        // Redirect to dashboard after successful login
+        setTimeout(() => {
+          window.location.href = '/enterprise-profile' 
+        }, 2000)
+        
+      } else {
+        setErrorMessage(data.message || "Login failed. Please check your credentials and try again.")
+        setShowErrorPopup(true)
+      }
       
     } catch (error) {
       console.error('Login error:', error)
@@ -326,7 +340,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Login Successful!</h3>
-            <p className="text-gray-600 mb-6">Welcome back to Paprly! You&apos;ve been successfully signed in.</p>
+            <p className="text-gray-600 mb-6">Welcome back to Paprly! You&apos;ve been successfully signed in. Redirecting to your workspace...</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-full transition-colors duration-200"
