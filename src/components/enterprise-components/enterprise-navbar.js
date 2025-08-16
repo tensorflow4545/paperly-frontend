@@ -31,11 +31,11 @@ const EnterpriseNavbar = () => {
 
       {/* Middle: Links */}
       <div className={`flex space-x-6 text-sm text-yellow-500 ${inter.className}`}>
-        <a href="#" className="hover:text-yellow-700">Solutions</a>
-        <a href="#" className="hover:text-yellow-700">Features</a>
-        <a href="#" className="hover:text-yellow-700">Pricing</a>
-        <a href="#" className="hover:text-yellow-700">About Us</a>
-        <a href="#" className="hover:text-yellow-700">Contact</a>
+        <a href="#" className="hover:text-yellow-700 font-bold">Solutions</a>
+        <a href="#" className="hover:text-yellow-700 font-bold">Features</a>
+        <a href="#" className="hover:text-yellow-700 font-bold">Pricing</a>
+        <a href="#" className="hover:text-yellow-700 font-bold">About Us</a>
+        <a href="#" className="hover:text-yellow-700 font-bold">Contact</a>
       </div>
 
       {/* Right: Auth buttons */}
