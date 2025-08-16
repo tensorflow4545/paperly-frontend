@@ -203,7 +203,7 @@ const EnterpriseHome = () => {
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
   <p className={`${openSans.className} text-gray-600 leading-relaxed`}>
-    Unlock deep insights from your data with Paprly&apos;s powerful analytics engine. 
+    Unlock deep insights from your data with Paprly&amp;apos;s powerful analytics engine. 
     Visualize key metrics, identify trends, and generate comprehensive reports with ease. Our AI-driven dashboards provide actionable intelligence, 
     empowering your leadership to make informed strategic decisions and optimize business performance across all levels of your organization.
   </p>
@@ -216,7 +216,7 @@ const EnterpriseHome = () => {
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
   <p className={`${openSans.className} text-gray-600 leading-relaxed`}>
-    Transform your operational efficiency with Paprly&apos;s intelligent workflow automation. Design, deploy, and manage complex business processes with minimal effort, eliminating manual bottlenecks and ensuring                  
+    Transform your operational efficiency with Paprly&amp;apos;s intelligent workflow automation. Design, deploy, and manage complex business processes with minimal effort, eliminating manual bottlenecks and ensuring                  
     consistent execution. From onboarding new employees 
     to processing customer requests, our automation engine initiatives while routine tasks are handled automatically. 
   </p>
@@ -249,9 +249,9 @@ const EnterpriseHome = () => {
               {/* Testimonial 1 */}
               <div className="bg-white p-8 rounded-lg shadow-sm">
                 <p className="text-gray-700 mb-6 leading-relaxed" style={{ fontFamily: "Lora, serif" }}>
-                  "Paprly transformed our operational efficiency. The seamless integration and powerful analytics
-                  capabilities have significantly boosted our productivity and decision-making speed. It's an
-                  indispensable tool for our enterprise."
+                  &quot;Paprly transformed our operational efficiency. The seamless integration and powerful analytics
+                  capabilities have significantly boosted our productivity and decision-making speed. It&amp;apos;s an
+                  indispensable tool for our enterprise.&quot;
                 </p>
                 <div className="flex items-center">
                   <Image
@@ -274,8 +274,8 @@ const EnterpriseHome = () => {
               {/* Testimonial 2 */}
               <div className="bg-white p-8 rounded-lg shadow-sm">
                 <p className="text-gray-700 mb-6 leading-relaxed" style={{ fontFamily: "Lora, serif" }}>
-                  "The level of security and scalability offered by Paprly is truly remarkable. We can confidently grow
-                  our business knowing our data is protected and our systems will always perform optimally."
+                  &quot;The level of security and scalability offered by Paprly is truly remarkable. We can confidently grow
+                  our business knowing our data is protected and our systems will always perform optimally.&quot;
                 </p>
                 <div className="flex items-center">
                   <Image
@@ -300,8 +300,8 @@ const EnterpriseHome = () => {
             <div className="flex justify-center">
               <div className="bg-white p-8 rounded-lg shadow-sm max-w-2xl">
                 <p className="text-gray-700 mb-6 leading-relaxed" style={{ fontFamily: "Lora, serif" }}>
-                  "Intelligent automation has never been this accessible. Paprly allowed us to streamline complex
-                  workflows, reducing errors and freeing up our team to focus on innovation. Highly recommend!"
+                  &quot;Intelligent automation has never been this accessible. Paprly allowed us to streamline complex
+                  workflows, reducing errors and freeing up our team to focus on innovation. Highly recommend!&quot;
                 </p>
                 <div className="flex items-center">
                   <Image
