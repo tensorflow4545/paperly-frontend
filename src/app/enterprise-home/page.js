@@ -25,15 +25,17 @@ const EnterpriseHome = () => {
     <div>
       <EnterpriseNavbar />  
 
-      <main className="min-h-screen bg-[rgba(178,146,0,0.31)]">
+      <main className="min-h-screen sm:px-[50px] bg-[rgba(178,146,0,0.31)]">
         <div className="container mx-auto px-6 py-16 lg:py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-8">
-              <h1 className={`${lora.className} text-white text-[48px] leading-[48px] font-bold`}>
+              <h1 className={`${lora.className} text-white text-[30px] sm:text-[48px] leading-[48px] font-bold`}>
                 REVOLUTIONIZE YOUR ENTERPRISE OPERATIONS
               </h1>
-              <p className="text-white text-lg lg:text-xl leading-relaxed opacity-90">
+              <div className="border-b-4 border-yellow-600 w-32 mt-2"></div>
+
+              <p className="text-white text-lg lg:text-xl leading-relaxed opacity-100">
                 Footy Enterprise Suite is the integrated platform designed to elevate productivity, streamline workflows,
                 and execute your business at scale.
               </p>
@@ -73,7 +75,7 @@ const EnterpriseHome = () => {
       {/* 2nd section */}
       <section className="bg-gray-50 py-16 lg:py-24">
         <div className="container mx-auto px-6">
-          <h2 className={`${lora.className} text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-16 `}>
+          <h2 className={`${lora.className} text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-16 `}>
             KEY BENEFITS OF PAPRLY ENTERPRISE
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
@@ -158,19 +160,21 @@ const EnterpriseHome = () => {
       </section>
 
       {/* Features That Empower Your Team section */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white py-16 lg:py-24 w-full">
         <div className="container mx-auto px-6">
-          <h2 className={`${merriweather.className} text-3xl lg:text-4xl font-extrabold text-yellow-600 text-center mb-16`}>
+          <h2 className={`${merriweather.className} text-xl sm:text-2xl lg:text-4xl font-extrabold text-yellow-600 text-center mb-16`}>
             FEATURES THAT EMPOWER YOUR TEAM
           </h2>
-          <div className="space-y-20 border-2 border-white rounded-xl p-12 md:p-16 bg-transparent">
-            <div className="grid lg:grid-cols-2 gap-12 items-center shadow-sm border border-gray-200 p-8 rounded-lg">
-             <div className="space-y-6">
-  <h3 className={`${merriweather.className} text-2xl lg:text-3xl font-bold text-gray-800`}>
+        </div>
+        <div className="px-0 sm:px-6">
+          <div className="space-y-20 border-2 border-white rounded-xl p-6 sm:p-12 md:p-16 bg-transparent mx-0 sm:mx-6">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
+             <div className="sm:space-y-6 w-full">
+  <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
     Unified Workspace for Collaboration
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
-  <p className={`${openSans.className} text-gray-600 leading-relaxed`}>
+  <p className={`${openSans.className} text-sm sm:text-base text-gray-600 leading-relaxed`}>
     Paprly Enterprise Suite brings all your projects, teams, and communication into a single, intuitive
     platform. Say goodbye to scattered information and embrace real-time collaboration that drives
     results. Our unified dashboard provides a holistic view of your operations, enabling seamless teamwork
@@ -183,39 +187,39 @@ const EnterpriseHome = () => {
                   alt="Unified Workspace Collaboration"
                   width={400}
                   height={256}
-                  className="rounded-lg"
+                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-none"
                 />
               </div>
             </div>
-            <div className="grid lg:grid-cols-2 gap-12 items-center shadow-sm border border-gray-200 p-8 rounded-lg">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
               <div className="flex justify-center lg:order-first">
                 <Image
                   src="/screen.png"
                   alt="Advanced Analytics Dashboard"
                   width={400}
                   height={256}
-                  className="rounded-lg"
+                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-none"
                 />
               </div>
              <div className="space-y-6">
-  <h3 className={`${merriweather.className} text-2xl lg:text-3xl font-bold text-gray-800`}>
+  <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
     Advanced Analytics & Reporting
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
-  <p className={`${openSans.className} text-gray-600 leading-relaxed`}>
+  <p className={`${openSans.className} text-sm sm:text-base text-gray-600 leading-relaxed`}>
     Unlock deep insights from your data with Paprly&amp;apos;s powerful analytics engine. 
     Visualize key metrics, identify trends, and generate comprehensive reports with ease. Our AI-driven dashboards provide actionable intelligence, 
     empowering your leadership to make informed strategic decisions and optimize business performance across all levels of your organization.
   </p>
 </div>
             </div>
-            <div className="grid lg:grid-cols-2 gap-12 items-center shadow-sm border border-gray-200 p-8 rounded-lg">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
               <div className="space-y-6">
-  <h3 className={`${merriweather.className} text-2xl lg:text-3xl font-bold text-gray-800`}>
+  <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
     Automated Workflows & Streamlined Processes
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
-  <p className={`${openSans.className} text-gray-600 leading-relaxed`}>
+  <p className={`${openSans.className} text-sm sm:text-base text-gray-600 leading-relaxed`}>
     Transform your operational efficiency with Paprly&amp;apos;s intelligent workflow automation. Design, deploy, and manage complex business processes with minimal effort, eliminating manual bottlenecks and ensuring                  
     consistent execution. From onboarding new employees 
     to processing customer requests, our automation engine initiatives while routine tasks are handled automatically. 
@@ -227,7 +231,7 @@ const EnterpriseHome = () => {
                   alt="Automated Workflows"
                   width={400}
                   height={256}
-                  className="rounded-lg"
+                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-none"
                 />
               </div>
             </div>
@@ -239,12 +243,12 @@ const EnterpriseHome = () => {
       <section className="bg-gray-50 py-12 lg:py-20 mb-16">
         <div className="container mx-auto px-6 ">
           <h2
-            className="text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-12"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-12"
             style={{ fontFamily: "Lora, serif" }}
           >
             WHAT OUR CLIENTS SAY
           </h2>
-          <div className="max-w-6xl mx-auto">
+          <div className="sm:max-w-6xl sm:mx-auto w-full">
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               {/* Testimonial 1 */}
               <div className="bg-white p-8 rounded-lg shadow-sm">
@@ -330,7 +334,7 @@ const EnterpriseHome = () => {
       <section className="bg-white py-12">
         <div className="container mx-auto px-6">
           <h2
-            className="text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-10"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-10"
             style={{ fontFamily: "Lora, serif" }}
           >
             TRUSTED BY INDUSTRY LEADERS
@@ -386,7 +390,7 @@ const EnterpriseHome = () => {
       <section className="bg-gray-50 py-12 lg:py-20">
         <div className="container mx-auto px-6">
           <h2
-            className="text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-12"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-12"
             style={{ fontFamily: "Lora, serif" }}
           >
             FLEXIBLE PLANS FOR EVERY ENTERPRISE
@@ -539,7 +543,7 @@ const EnterpriseHome = () => {
             className="px-8 py-3 text-white font-semibold rounded-md bg-[#b58900] hover:bg-[#996c00] transition-colors"
             style={{ fontFamily: "Open Sans, sans-serif" }}
           >
-            Schedule a Demo
+            Sign in Now!
           </Button>
         </div>
       </section>
