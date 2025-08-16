@@ -277,7 +277,7 @@ export default function TestimonialsDisplay() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4">
                           {currentTestimonials.map((testimonial) => (
-                <div key={testimonial._id} className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 h-64 sm:h-72 flex flex-col touch-manipulation">
+                <div key={testimonial._id} className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 aspect-square flex flex-col touch-manipulation">
                 {/* Header - Fixed */}
                 <div className="flex items-start justify-between p-4 pb-3 sm:p-6 sm:pb-4 flex-shrink-0">
                   <div className="flex items-center gap-2 sm:gap-3">
