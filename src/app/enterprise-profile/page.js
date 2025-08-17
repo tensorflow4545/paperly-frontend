@@ -3,15 +3,19 @@
 import { useState, useRef, useEffect } from "react"
 import PageSEO from "@/components/SEO/PageSEO"
 import { getAuthToken, getUserData, logout } from "@/utils/auth"
+import EnterpriseNavbar from "@/components/enterprise-components/enterprise-navbar"
+import { Inter, Outfit } from "next/font/google";
+import { Upload, ChevronDown, Info } from 'lucide-react'
+import Footer from "@/components/enterprise-components/enterprise-footer"
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+})
 
 export default function EnterpriseProfilePage() {
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  
-  const handleLogout = () => {
-    logout()
-  }
-  
   
   const [form, setForm] = useState({
     fullName: "",
@@ -46,7 +50,6 @@ export default function EnterpriseProfilePage() {
       const token = getAuthToken()
       const userData = getUserData()
       
-      
       if (token && userData) {
         setUser(userData)
         setIsAuthenticated(true)
@@ -63,7 +66,6 @@ export default function EnterpriseProfilePage() {
     const loadProfileData = async () => {
       if (user?.email) {
         try {
-          
           // Fetch existing profile data from API
           const response = await fetch(`https://paperly-backend-five.vercel.app/api/enterprise-profile?email=${encodeURIComponent(user.email)}`, {
             method: 'GET',
@@ -118,7 +120,6 @@ export default function EnterpriseProfilePage() {
               email: user.email || "" // Only set email from auth
             }))
           }
-           
         } catch (error) {
           console.error('Error loading profile data:', error)
           setHasExistingProfile(false)
@@ -143,56 +144,8 @@ export default function EnterpriseProfilePage() {
     } 
   }, [user])
 
-  // Show loading if user data is not yet loaded
-  if (!user && !isAuthenticated) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading user data...</p>
-        </div>
-      </div>
-    )
-  }
-
-  // Show loading while profile data is being fetched
-  if (isLoadingProfile) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading profile data...</p>
-        </div>
-      </div>
-    )
-  }
-
-  // If no user data after loading, redirect to login
-  if (!user) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <p className="mb-4 text-gray-600">No user data found. Please log in.</p>
-          <button 
-            onClick={() => window.location.href = '/sign-in'}
-            className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
-          >
-            Go to Login
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  // Helper function to map organization type to company type
-  const mapOrganizationTypeToCompanyType = (orgType) => {
-    const mapping = {
-      "Freelancer": "Solo Founder",
-      "Business": "Private Limited",
-      "Individual": "Proprietorship",
-      "Other": "Other"
-    }
-    return mapping[orgType] || ""
+  const handleLogout = () => {
+    logout()
   }
 
   const handleChange = (e) => {
@@ -270,7 +223,6 @@ export default function EnterpriseProfilePage() {
         defaultSignatureStyle: form.defaultSignatureStyle
       }
      
-      
       const response = await fetch('https://paperly-backend-five.vercel.app/api/enterprise-profile', {
         method: 'POST',
         headers: {
@@ -290,7 +242,6 @@ export default function EnterpriseProfilePage() {
         setErrorMessage(data.error || "Failed to save profile. Please try again.")
         setShowError(true)
       }
-      
     } catch (error) {
       console.error('Error saving profile:', error)
       setErrorMessage("Network error. Please check your connection and try again.")
@@ -354,195 +305,167 @@ export default function EnterpriseProfilePage() {
     "Classic Script"
   ]
 
+  // Show loading if user data is not yet loaded
+  if (!user && !isAuthenticated) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center">
+          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
+          <p className="mt-4 text-gray-600">Loading user data...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show loading while profile data is being fetched
+  if (isLoadingProfile) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center">
+          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
+          <p className="mt-4 text-gray-600">Loading profile data...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // If no user data after loading, redirect to login
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center">
+          <p className="mb-4 text-gray-600">No user data found. Please log in.</p>
+          <button 
+            onClick={() => window.location.href = '/sign-in'}
+            className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
+          >
+            Go to Login
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <>
       <PageSEO pageName="enterprise-profile" />
-      
-      {/* Premium Navbar */}
-      <nav className="sticky top-0 z-50 border-b shadow-lg bg-white/95 backdrop-blur-sm border-gray-200/50">
-        <div className="px-3 mx-auto max-w-7xl sm:px-6">
-          <div className="flex items-center justify-between h-12 sm:h-16">
-            {/* Logo and Brand */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="w-6 h-6 rounded-lg sm:w-8 sm:h-8">
-                <img 
-                  src="/enterprise_logo.png" 
-                  alt="Paprly Logo" 
-                  className="object-cover w-full h-full rounded-lg"
-                />
-              </div>
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <span className="text-lg font-bold text-gray-900 sm:text-xl">Paprly</span>
-                <span className="bg-gradient-to-r from-purple-600 to-violet-600 text-white text-xs px-2 sm:px-3 py-0.5 sm:py-1.5 rounded-full font-semibold tracking-wide shadow-sm">
-                  ENTERPRISE
-                </span>
-              </div>
-            </div>
-            
-            {/* Right Side - User Menu */}
-            <div className="flex items-center space-x-2 sm:space-x-6">
-              {/* Notifications - Hidden on mobile */}
-              <button className="hidden p-2 text-gray-500 transition-all duration-200 rounded-lg sm:block hover:text-purple-600 hover:bg-purple-50">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 17h5l-5 5v-5zM4.19 4.19A2 2 0 006 3h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2z" />
-                </svg>
-              </button>
-              
-              {/* User Profile */}
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="flex items-center justify-center w-6 h-6 rounded-full shadow-md sm:w-8 sm:h-8 bg-gradient-to-r from-purple-500 to-violet-500">
-                  <span className="text-xs font-semibold text-white sm:text-sm">
-                    {user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'U'}
-                  </span>
-                </div>
-                <div className="hidden md:block">
-                  <p className="text-sm font-semibold text-gray-900">{user?.name || 'User'}</p>
-                  <p className="text-xs font-medium text-gray-500">{user?.OrganizationType || 'Member'}</p>
-                </div>
-              </div>
-              
-              {/* Settings */}
-              <button className="text-gray-500 hover:text-purple-600 transition-all duration-200 p-1.5 sm:p-2 rounded-lg hover:bg-purple-50">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <EnterpriseNavbar />
 
       {/* Main Content Area */}
-      <div className="min-h-screen p-0 rounded-md bg-gradient-to-br from-gray-100 to-gray-200 sm:p-4 ">
-        
-        {/* Minimal Page Header */}
-        <div className="w-full px-4 sm:px-6 py-6 sm:py-8 border-b-[1px] border-purple-400 ">
-          <div className="flex flex-col items-start justify-between space-y-4 sm:flex-row sm:items-center sm:space-y-0">
-            <div className="text-left">
-              <h1 className="mb-2 text-2xl font-semibold text-gray-900 sm:text-3xl">
-                Enterprise Profile
-              </h1>
-              <p className="mb-1 text-sm text-gray-600 sm:text-base">
-                Welcome back, {user?.name || 'User'}! {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile'}
-              </p>
-              <p className="text-xs text-gray-500 sm:text-sm">
-                {hasExistingProfile ? 'Your profile data has been loaded from the database. Make changes and save.' : 'Create your enterprise profile to unlock advanced features'}
-              </p>
-            </div>
-            
-            <div className="flex flex-col items-stretch w-full space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4 sm:w-auto">
-              <button 
-                onClick={handleLogout}
-                className="px-4 py-3 text-sm font-medium text-gray-600 transition-colors border border-gray-300 rounded-lg sm:py-2 hover:text-gray-800 hover:border-gray-400 sm:text-base"
-              >
-                Log Out
-              </button>
-              <button className="px-6 py-3 text-sm font-medium text-white transition-all duration-200 bg-purple-500 border border-purple-300 rounded-lg sm:py-2 hover:bg-purple-500 hover:border-purple-400 sm:text-base">
-                Explore Paprly Studio
-              </button>
+      <div className="p-0 border-b-2 shadow-sm bg-gradient-to-br from-gray-100 to-gray-200 border-b-gray-300">
+        <div className="rounded-lg bg-gradient-to-br from-yellow-50 to-white">
+          <div className="px-8 py-6">
+            <div className="flex items-center justify-between max-w-7xl">
+              <div className="flex-1">
+                <h1 className={`${outfit.className} text-4xl text-gray-900 mb-2 font-bold`}>
+                  Welcome back, {user?.name || 'User'}!
+                </h1>
+                <p className="text-lg text-gray-600">
+                  {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile to unlock full Paprly features.'}
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-4 ml-8">
+                <button className="px-6 py-3 font-medium text-white transition-colors duration-200 bg-yellow-600 rounded-lg hover:bg-amber-700">
+                  Explore Paprly Studio
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="px-6 py-3 font-medium text-gray-800 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 hover:shadow-md"
+                >
+                  Logout
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Form Container & Basic Information */}
-        <div className="w-full px-0 py-8 border-b border-purple-400 sm:px-6 sm:py-12">
-          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
-            {/* Section Header */}
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900">Basic Information</h2>
-                <p className="text-sm text-gray-500">Your personal and company details</p>
+        <div className="min-h-screen p-8 bg-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+              {/* Header */}
+              <div className="mb-8 text-center">
+                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Basic Information</h1>
               </div>
-              {hasExistingProfile && (
-                <div className="flex items-center text-sm text-green-600">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  Profile Data Loaded
-                </div>
-              )}
-            </div>
 
-            {/* Form Fields */}
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {/* Full Name */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Full Name(Company or Personal)
-                  {user?.OrganizationType && (
-                    <span className="px-2 py-1 ml-2 text-xs text-purple-600 bg-purple-100 rounded-full">
-                      {user.OrganizationType}
-                    </span>
+              {/* Form Fields */}
+              <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
+                {/* Full Name */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={form.fullName}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                  />
+                  {formErrors.fullName && (
+                    <p className="mt-1 text-xs text-red-500">{formErrors.fullName}</p>
                   )}
-                </label>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={form.fullName}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="Enter your full name"
-                />
-                {formErrors.fullName && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.fullName}</p>
-                )}
-              </div>
+                </div>
 
-              {/* Email */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Email (Company or Personal)</label>
-                                  <input
+                {/* Email */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Email
+                  </label>
+                  <input
                     type="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
-                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                    disabled
                   />
+                </div>
               </div>
 
               {/* Company Name */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Company Name</label>
+              <div className="mb-8">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
+                  Company Name
+                </label>
                 <input
                   type="text"
                   name="companyName"
                   value={form.companyName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="Enter company name"
+                  className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
                 />
                 {formErrors.companyName && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.companyName}</p>
                 )}
               </div>
 
-              {/* Company Logo */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Company Logo</label>
-                <div
-                  onClick={() => fileInputRef.current?.click()}
-                  onDragOver={handleDragOver}
-                  onDrop={handleDrop}
-                  className="flex items-center justify-center w-full h-32 transition-colors duration-200 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:border-purple-400"
-                >
+              {/* Logo Upload Area */}
+              <div 
+                className="p-12 text-center border-2 border-dashed rounded-lg border-amber-400 bg-amber-50/30"
+                onClick={() => fileInputRef.current?.click()}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+              >
+                <div className="flex flex-col items-center">
+                  <Upload className="w-8 h-8 mb-4 text-amber-500" />
+                  <p className="mb-2 text-gray-600">
+                    Drag & drop your company logo here, or{' '}
+                    <button className="text-blue-600 underline hover:text-blue-700">
+                      browse
+                    </button>
+                  </p>
                   {form.companyLogo ? (
-                    <div className="text-center">
+                    <div className="w-16 h-16 mt-4 overflow-hidden rounded-full">
                       <img 
                         src={URL.createObjectURL(form.companyLogo)} 
                         alt="Company Logo" 
-                        className="object-cover w-16 h-16 mx-auto mb-2 rounded-lg"
+                        className="object-cover w-full h-full"
                       />
-                      <p className="text-sm text-gray-600">{form.companyLogo.name}</p>
                     </div>
                   ) : (
-                    <div className="text-center">
-                      <svg className="w-8 h-8 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                      </svg>
-                      <p className="text-sm text-gray-500">Drop logo here or click to upload</p>
-                    </div>
+                    <div className="w-16 h-16 mt-4 border-2 rounded-full border-amber-400"></div>
                   )}
                 </div>
                 <input
@@ -558,308 +481,293 @@ export default function EnterpriseProfilePage() {
         </div>
 
         {/* Business Details Section */}
-        <div className="w-full px-0 py-6 border-b border-purple-400 sm:px-6 sm:py-8">
-          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
-            {/* Section Header */}
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900">Business Details</h2>
-                <p className="text-sm text-gray-500">Company structure and legal information</p>
-              </div>
-              
-            </div>
-
-            {/* Form Fields */}
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {/* Company Type */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Company Type</label>
-                <select
-                  name="companyType"
-                  value={form.companyType}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  <option value="">Select company type</option>
-                  {companyTypes.map(type => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
-                {formErrors.companyType && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.companyType}</p>
-                )}
+        <div className="p-8 bg-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+              {/* Header */}
+              <div className="mb-8 text-center">
+                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Business Details</h1>
               </div>
 
-              {/* Industry */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Industry</label>
-                <select
-                  name="industry"
-                  value={form.industry}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  <option value="">Select industry</option>
-                  {industries.map(industry => (
-                    <option key={industry} value={industry}>{industry}</option>
-                  ))}
-                </select>
-                {formErrors.industry && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.industry}</p>
-                )}
+              {/* Form Fields */}
+              <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
+                {/* Company Type */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Company Type
+                  </label>
+                  <div className="relative">
+                    <select 
+                      name="companyType"
+                      value={form.companyType}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                    >
+                      <option value="">Select company type</option>
+                      {companyTypes.map(type => (
+                        <option key={type} value={type}>{type}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                  </div>
+                  {formErrors.companyType && (
+                    <p className="mt-1 text-xs text-red-500">{formErrors.companyType}</p>
+                  )}
+                </div>
+
+                {/* Industry */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Industry
+                  </label>
+                  <div className="relative">
+                    <select 
+                      name="industry"
+                      value={form.industry}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                    >
+                      <option value="">Select industry</option>
+                      {industries.map(industry => (
+                        <option key={industry} value={industry}>{industry}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                  </div>
+                  {formErrors.industry && (
+                    <p className="mt-1 text-xs text-red-500">{formErrors.industry}</p>
+                  )}
+                </div>
               </div>
 
-              {/* GST Number */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">GST Number (Optional)</label>
-                <input
-                  type="text"
-                  name="gstNumber"
-                  value={form.gstNumber}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="Enter GST number"
-                />
-              </div>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {/* GST Number */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    GST Number
+                  </label>
+                  <input
+                    type="text"
+                    name="gstNumber"
+                    value={form.gstNumber}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                  />
+                </div>
 
-              {/* Registered Address */}
-              <div className="md:col-span-2">
-                <label className="block mb-2 text-sm font-medium text-gray-700">Registered Address</label>
-                <textarea
-                  name="registeredAddress"
-                  value={form.registeredAddress}
-                  onChange={handleChange}
-                  rows="3"
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="Enter registered address"
-                />
-                {formErrors.registeredAddress && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.registeredAddress}</p>
-                )}
+                {/* Registered Address */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Registered Address
+                  </label>
+                  <input
+                    type="text"
+                    name="registeredAddress"
+                    value={form.registeredAddress}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                  />
+                  {formErrors.registeredAddress && (
+                    <p className="mt-1 text-xs text-red-500">{formErrors.registeredAddress}</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Team & Preferences Section */}
-        <div className="w-full px-0 py-6 sm:px-6 sm:py-8">
-          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
-            {/* Section Header */}
-            <div className="flex items-center mb-8">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900">Team & Preferences</h2>
-                <p className="text-sm text-gray-500">Default settings for your team workflow</p>
-              </div>
-            </div>
-
-            {/* Form Fields */}
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 sm:gap-6">
-              {/* Default Currency */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Default Currency</label>
-                <select
-                  name="defaultCurrency"
-                  value={form.defaultCurrency}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  <option value="">Select currency</option>
-                  {currencies.map(currency => (
-                    <option key={currency} value={currency}>{currency}</option>
-                  ))}
-                </select>
-                {formErrors.defaultCurrency && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.defaultCurrency}</p>
-                )}
+        <div className="p-8 bg-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+              {/* Header */}
+              <div className="mb-8 text-center">
+                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Team & Preferences</h1>
               </div>
 
-              {/* Default Payment Cycle */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Default Payment Cycle</label>
-                <select
-                  name="defaultPaymentCycle"
-                  value={form.defaultPaymentCycle}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  <option value="">Select payment cycle</option>
-                  {paymentCycles.map(cycle => (
-                    <option key={cycle} value={cycle}>{cycle}</option>
-                  ))}
-                </select>
-                {formErrors.defaultPaymentCycle && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.defaultPaymentCycle}</p>
-                )}
+              {/* Form Fields */}
+              <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
+                {/* Default Currency */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Default Currency
+                  </label>
+                  <div className="relative">
+                    <select 
+                      name="defaultCurrency"
+                      value={form.defaultCurrency}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                    >
+                      <option value="">Select currency</option>
+                      {currencies.map(currency => (
+                        <option key={currency} value={currency}>{currency}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                  </div>
+                  {formErrors.defaultCurrency && (
+                    <p className="mt-1 text-xs text-red-500">{formErrors.defaultCurrency}</p>
+                  )}
+                </div>
+
+                {/* Payment Cycle */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Payment Cycle
+                  </label>
+                  <div className="relative">
+                    <select 
+                      name="defaultPaymentCycle"
+                      value={form.defaultPaymentCycle}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                    >
+                      <option value="">Select payment cycle</option>
+                      {paymentCycles.map(cycle => (
+                        <option key={cycle} value={cycle}>{cycle}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                  </div>
+                  {formErrors.defaultPaymentCycle && (
+                    <p className="mt-1 text-xs text-red-500">{formErrors.defaultPaymentCycle}</p>
+                  )}
+                </div>
               </div>
 
-              {/* Preferred Language */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Preferred Language</label>
-                <select
-                  name="preferredLanguage"
-                  value={form.preferredLanguage}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  <option value="">Select language</option>
-                  {languages.map(language => (
-                    <option key={language} value={language}>{language}</option>
-                  ))}
-                </select>
-                {formErrors.preferredLanguage && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.preferredLanguage}</p>
-                )}
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {/* Preferred Language */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Preferred Language
+                  </label>
+                  <div className="relative">
+                    <select 
+                      name="preferredLanguage"
+                      value={form.preferredLanguage}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                    >
+                      <option value="">Select language</option>
+                      {languages.map(language => (
+                        <option key={language} value={language}>{language}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                  </div>
+                  {formErrors.preferredLanguage && (
+                    <p className="mt-1 text-xs text-red-500">{formErrors.preferredLanguage}</p>
+                  )}
+                </div>
+
+                {/* Empty column for layout */}
+                <div>
+                  {/* Empty space to maintain grid layout */}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Enterprise Suite Settings Section */}
-        <div className="w-full px-0 py-6 border-b border-purple-400 sm:px-6 sm:py-8">
-          <div className="p-4 border shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
-            {/* Section Header */}
-            <div className="flex items-center mb-8">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900">Enterprise Suite Settings</h2>
-                <p className="text-sm text-gray-500">Advanced features and configurations</p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              {/* Toggle Settings */}
-              <div className="space-y-4">
-                {/* Onboarding Kit Toggle */}
-                <div className="flex items-center justify-between p-4 border bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border-purple-100/50">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Enable One-Click Onboarding Kit</h4>
-                    <p className="text-sm text-gray-600">Automatically generate onboarding documents for new team members</p>
-                  </div>
-                  <label className="flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="enableOnboardingKit"
-                      checked={form.enableOnboardingKit}
-                      onChange={handleChange}
-                      className="sr-only"
-                    />
-                    <div className={`w-12 h-6 rounded-full transition-colors duration-200 relative ${
-                      form.enableOnboardingKit ? "bg-purple-600" : "bg-gray-300"
-                    }`}>
-                      <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200 ${
-                        form.enableOnboardingKit ? "left-6" : "left-0.5"
-                      }`} />
-                    </div>
-                  </label>
-                </div>
-
-                {/* Timestamp Proof Toggle */}
-                <div className="flex items-center justify-between p-4 border bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border-purple-100/50">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Enable Document Timestamp Proof</h4>
-                    <p className="text-sm text-gray-600">Add blockchain timestamping to all documents for legal compliance</p>
-                  </div>
-                  <label className="flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="enableTimestampProof"
-                      checked={form.enableTimestampProof}
-                      onChange={handleChange}
-                      className="sr-only"
-                    />
-                    <div className={`w-12 h-6 rounded-full transition-colors duration-200 relative ${
-                      form.enableTimestampProof ? "bg-purple-600" : "bg-gray-300"
-                    }`}>
-                      <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200 ${
-                        form.enableTimestampProof ? "left-6" : "left-0.5"
-                      }`} />
-                    </div>
-                  </label>
-                </div>
+        <div className="bg-gray-50 p-8 border-b-1 border-[#DEE1E6]">
+          <div className="max-w-4xl mx-auto">
+            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+              {/* Header */}
+              <div className="mb-8 text-center">
+                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Enterprise Suite Settings</h1>
               </div>
 
-              {/* Signature Style */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Default Signature Style</label>
-                <select
-                  name="defaultSignatureStyle"
-                  value={form.defaultSignatureStyle}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  <option value="">Select signature style</option>
-                  {signatureStyles.map(style => (
-                    <option key={style} value={style}>{style}</option>
-                  ))}
-                </select>
+              {/* Settings Items */}
+              <div className="space-y-8">
+                {/* Onboarding Kit */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <span className="text-base font-medium text-gray-700">Onboarding Kit</span>
+                  </div>
+                  <div className="relative">
+                    <button
+                      onClick={() => setForm(prev => ({...prev, enableOnboardingKit: !form.enableOnboardingKit}))}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+                        form.enableOnboardingKit ? 'bg-indigo-600' : 'bg-gray-200'
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          form.enableOnboardingKit ? 'translate-x-6' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Timestamp Proof */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <span className="text-base font-medium text-gray-700">Timestamp Proof</span>
+                    <Info className="w-4 h-4 ml-2 text-amber-500" />
+                  </div>
+                  <div className="relative">
+                    <button
+                      onClick={() => setForm(prev => ({...prev, enableTimestampProof: !form.enableTimestampProof}))}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+                        form.enableTimestampProof ? 'bg-indigo-600' : 'bg-gray-200'
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          form.enableTimestampProof ? 'translate-x-6' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Default Signature Style */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <span className="text-base font-medium text-gray-700">Default Signature Style</span>
+                  </div>
+                  <div className="relative">
+                    <select 
+                      name="defaultSignatureStyle"
+                      value={form.defaultSignatureStyle}
+                      onChange={handleChange}
+                      className="w-48 px-4 py-2 transition-colors bg-white border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    >
+                      <option value="">Select signature style</option>
+                      {signatureStyles.map(style => (
+                        <option key={style} value={style}>{style}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Action Buttons Section */}
-        <div className="w-full px-0 py-3 sm:px-6 sm:py-4">
-          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
-            {/* Action Buttons */}
-            <div className="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0">
-              <button
-                type="button"
-                className="px-6 py-3 text-sm font-medium text-gray-600 transition-colors border border-gray-300 rounded-lg sm:py-3 hover:text-gray-800 hover:border-gray-400 sm:text-base"
-              >
-                Cancel & Exit
-              </button>
-              
-              <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4 sm:w-auto">
-                <button
-                  onClick={handleSubmit}
-                  type="button"
-                  disabled={isLoading}
-                  className="px-8 py-3 text-sm font-semibold text-white transition-all duration-200 transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-md hover:scale-105 sm:text-base"
-                >
-                  {isLoading ? (
-                    <div className="flex items-center">
-                      <svg className="w-4 h-4 mr-3 -ml-1 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Saving...
-                    </div>
-                  ) : (
-                    "Save Profile"
-                  )}
-                </button>
-                <button
-                onClick={handleSubmit}
-                  type="submit"
-                  className="px-8 py-3 font-semibold text-white transition-all duration-200 transform rounded-lg shadow-lg bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black hover:shadow-md hover:scale-105"
-                >
-                  Proceed to Dashboard
-                </button>
-              </div>
-            </div>
-          </div>
+        {/* Action Buttons */}
+        <div className="w-full border-t border-[#DEE1E6] bg-white px-6 py-4 flex justify-end space-x-3">
+          <button className="px-4 py-2 border border-[#6B4DE6] text-[#6B4DE6] rounded-md hover:bg-[#f5f5f7]">
+            Cancel & Exit
+          </button>
+          <button 
+            onClick={handleSubmit}
+            disabled={isLoading}
+            className="px-4 py-2 bg-[#D4AF37] text-white rounded-md hover:bg-[#b8952f] disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? 'Saving...' : 'Save Profile'}
+          </button>
+          <button className="px-4 py-2 bg-[#6B4DE6] text-white rounded-md hover:bg-[#5638b8]">
+            Proceed to Dashboard
+          </button>
         </div>
-
-                  {/* Professional Footer */}
-          <footer className="mt-16 bg-white border-t border-gray-100 rounded-xl">
-            <div className="w-full px-0 py-8 sm:px-6">
-            <div className="flex flex-col items-center justify-between md:flex-row">
-              <div className="flex items-center mb-4 md:mb-0">
-                <img 
-                  src="/final_logo.png" 
-                  alt="Paprly Logo" 
-                  className="w-6 h-6 mr-2 rounded"
-                />
-                <span className="text-sm text-gray-600">© 2024 Paprly Enterprise Suite. All rights reserved.</span>
-              </div>
-              <div className="flex space-x-6 text-sm text-gray-600">
-                <a href="#" className="transition-colors hover:text-gray-900">Privacy Policy</a>
-                <a href="#" className="transition-colors hover:text-gray-900">Terms of Service</a>
-                <a href="#" className="transition-colors hover:text-gray-900">Support</a>
-              </div>
-            </div>
-          </div>
-        </footer>
       </div>
+      
+      <Footer />
 
       {/* Success Modal */}
       {showSuccess && (
