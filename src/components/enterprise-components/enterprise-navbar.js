@@ -46,21 +46,39 @@ const EnterpriseNavbar = () => {
   return (
     <nav className="relative flex items-center justify-between px-6 py-3 bg-white shadow-sm">
       {/* Left: Logo */}
-      <div className="flex items-center space-x-2">
-        <Image src="/starlogo.png" alt="Logo" className='ml-15' width={40} height={40} />
-        <span className={`absolute top-[19px] left-[120px] font-borel text-[25px] leading-[25px] font-bold mr-20 text-[#B29200] ${borel.className}`}>paprly</span>
-      </div>
-
+      <div className="md:col-span-1">
+                  <div className="flex flex-row items-center space-x-4 mb-4 ">
+                    <Image
+                      src="/final_logo.png"
+                      alt="Paprly Logo"
+                      width={40}
+                      height={40}
+                      className=" object-contain rounded-lg"
+                      loading="lazy"
+                    />
+                    <span className={`text-xl font-semibold text-gray-900 px-0 py-0`}>
+                      Paprly
+                    </span>
+                  </div>
+                  </div>
       {/* Desktop Navigation */}
-      <div className={`hidden md:flex space-x-6 text-md text-yellow-500 ${inter.className}`}>
-        <a href="#" className="hover:text-yellow-800">Solutions</a>
-        <a href="#" className="hover:text-yellow-800">Features</a>
-        <a href="#" className="hover:text-yellow-800">Pricing</a>
-        <a href="#" className="hover:text-yellow-800">About Us</a>
-        <a href="#" className="hover:text-yellow-800">Contact</a>
+      <div className={`hidden md:flex space-x-5 ml-auto mr-6 text-md text-yellow-500   ${inter.className}`}>
+        <a href="#" className="hover:text-yellow-800 ">Solutions</a>
+        <a href="#" className="hover:text-yellow-800 ">Features</a>
+        <a href="#" className="hover:text-yellow-800 ">Pricing</a>
+        <a href="#" className="hover:text-yellow-800 ">About Us</a>
+        <a href="#" className="hover:text-yellow-800 ">Contact</a>
       </div>
 
       {/* Desktop Auth buttons */}
+      <div className="hidden md:flex items-center space-x-4  justify-end">
+        <a
+          href="#"
+          className={`bg-yellow-700 text-white px-6 py-3 rounded hover:bg-yellow-800 text-sm font-semibold ${openSans.className}`}
+        >
+          Sign In
+        </a>
+        
       <div className="items-center hidden space-x-4 md:flex">
         {isAuthenticated ? (
           <div className="flex items-center space-x-4">
@@ -159,6 +177,13 @@ const EnterpriseNavbar = () => {
             
             {/* Mobile Auth Button */}
             <div className="pt-4">
+              <a
+                href="#"
+                className={`block w-full text-center bg-yellow-700 text-white px-6 py-3 rounded hover:bg-yellow-800 text-sm font-semibold ${openSans.className}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Sign In
+              </a>
               {isAuthenticated ? (
                 <>
                   <div className="flex items-center justify-center mb-3">
