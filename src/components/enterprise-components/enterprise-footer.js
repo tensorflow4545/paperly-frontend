@@ -30,16 +30,15 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="flex flex-row items-center space-x-4 mb-4 ">
               <Image
-                src="/final_logo.png"
+                src="/starlogo.png"
                 alt="Paprly Logo"
                 width={40}
                 height={40}
-                className="object-contain  rounded-lg"
-                loading="lazy"
+                className="mr-1 mb-3"
               />
-              <span className={`text-xl font-semibold text-gray-900 px-0 py-0`}>
-                Paprly
-              </span>
+              <h2 className={`text-2xl font-bold text-yellow-600 ${borel.className}`}>
+                logo
+              </h2>
             </div>
             <p className={`text-black-600 mb-6 leading-relaxed ${openSans.className}`}>
               Revolutionizing enterprise operations with intelligent, integrated solutions.
@@ -122,7 +121,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-gray-200 pt-8">
-          <p className={`text-center text-gray-600 text-sm ${openSans.className}`}>
+          <p className={`text-gray-600 text-sm ${openSans.className}`}>
             © 2024 Paprly. All rights reserved.
           </p>
         </div>
