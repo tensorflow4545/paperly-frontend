@@ -25,18 +25,19 @@ const EnterpriseHome = () => {
     <div>
       <EnterpriseNavbar />  
 
-      <main className=" px-4 sm:px-6 lg:px-16 py-32  bg-[rgba(178,146,0,0.31)]">
-        <div className="max-w-7xl mx-auto w-full ">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <main className="min-h-screen sm:px-[50px] bg-[rgba(178,146,0,0.31)]">
+        <div className="container mx-auto px-6 py-16 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="space-y-10">
+            <div className="space-y-8">
               <h1 className={`${lora.className} text-white text-[30px] sm:text-[48px] leading-[48px] font-bold`}>
-               ALL YOUR STARTUP DOCS & PAYMENTS IN ONE PLACE
+                REVOLUTIONIZE YOUR ENTERPRISE OPERATIONS
               </h1>
               <div className="border-b-4 border-yellow-600 w-32 mt-2"></div>
 
               <p className="text-white text-lg lg:text-xl leading-relaxed opacity-100">
-                Send contracts, collect signatures, track payments, and manage freelancers —  simple, ad-free, and built for solo founders & small teams
+                Footy Enterprise Suite is the integrated platform designed to elevate productivity, streamline workflows,
+                and execute your business at scale.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -55,10 +56,10 @@ const EnterpriseHome = () => {
               </div>
             </div>
             {/* Right Content - Image Only */}
-            <div className="flex justify-end items-center w-full h-[28rem] lg:h-[32rem]">
+            <div className="flex justify-end items-center w-full h-80 lg:h-96">
               <div className="relative w-full h-full">
                 <Image
-                  src="/selection1.png"
+                  src="/Selection.png"
                   alt="Dashboard"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -82,76 +83,76 @@ const EnterpriseHome = () => {
               <div className="flex justify-center mb-4">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
                   <Image
-                    src="/securityicon1.png"
+                    src="/securityicon.png"
                     alt="Seamless Integration Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-100"
+                    className="text-blue-600"
                   />
                 </div>
               </div>
               <h3 className={`${lora.className} text-xl font-bold text-gray-800`}>
-                Signed & Stored
+                Seamless Integration
               </h3>
               <p className={`${lora.className} text-gray-600 text-sm leading-relaxed`}>
-                Create all needed on-boarding documents in few clicks send get signed in minutes.
+                Connect Paprly with your existing tools effortlessly for a unified workflow.
               </p>
             </div>
             <div className="border border-gray-100 bg-white p-6 text-center rounded-md shadow-sm space-y-4">
               <div className="flex justify-center mb-4">
                 <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center">
                   <Image
-                    src="/tickicon1.png"
+                    src="/tickicon.png"
                     alt="Enhanced Security Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-600"
+                    className="text-yellow-600"
                   />
                 </div>
               </div>
               <h3 className={`${lora.className} text-xl font-bold text-gray-800`}>
-                Payments & Receipts
+                Enhanced Security
               </h3>
               <p className={`${lora.className} text-gray-600 text-sm leading-relaxed`}>
-                Pay your employees or freelancers, track receipts easily.
+                Protect your sensitive data with enterprise-grade encryption and compliance features.
               </p>
             </div>
             <div className="border border-gray-100 bg-white p-6 text-center shadow-sm rounded-md space-y-4">
               <div className="flex justify-center mb-4">
                 <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center">
                   <Image
-                    src="/scaleicon1.png"
+                    src="/scaleicon.png"
                     alt="Scalable Performance Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-600"
+                    className="text-yellow-600"
                   />
                 </div>
               </div>
               <h3 className={`${lora.className} text-xl font-bold text-gray-800`}>
-                Small Reminders
+                Scalable Performance
               </h3>
               <p className={`${lora.className} text-gray-600 text-sm leading-relaxed`}>
-               Never miss renewals or deadlines. Renew contract, revise documents all safe all aaaat one place.
+                Paprly scales with your business growth, ensuring consistent speed and reliability.
               </p>
             </div>
             <div className="border border-gray-100 bg-white p-6 text-center shadow-sm rounded-md space-y-4">
               <div className="flex justify-center mb-4">
                 <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center">
                   <Image
-                    src="/atomicon1.png"
+                    src="/atomicon.png"
                     alt="Intelligent Automation Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-600"
+                    className="text-yellow-600"
                   />
                 </div>
               </div>
               <h3 className={`${lora.className} text-xl font-bold text-gray-800`}>
-                AI Support, Ad-Free.
+                Intelligent Automation
               </h3>
               <p className={`${lora.className} text-gray-600 text-sm leading-relaxed`}>
-                Always available, no distractions. Fully automated with AI.
+                Automate complex tasks and workflows to boost productivity and reduce manual errors.
               </p>
             </div>
           </div>
@@ -170,16 +171,19 @@ const EnterpriseHome = () => {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
              <div className="sm:space-y-6 w-full">
   <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
-    1. One Place for Docs & Deals
+    Unified Workspace for Collaboration
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
   <p className={`${openSans.className} text-sm sm:text-base text-gray-600 leading-relaxed`}>
-    Paprly Enterprise Suite brings all your agreements, contracts, and receipts into one clear dashboard. Forget scattered files — manage everything in real time and keep your work organized.
+    Paprly Enterprise Suite brings all your projects, teams, and communication into a single, intuitive
+    platform. Say goodbye to scattered information and embrace real-time collaboration that drives
+    results. Our unified dashboard provides a holistic view of your operations, enabling seamless teamwork
+    and faster decision-making across departments.
   </p>
 </div>
               <div className="flex justify-center">
                 <Image
-                  src="/collaborate1.png"
+                  src="/collaborate.png"
                   alt="Unified Workspace Collaboration"
                   width={400}
                   height={256}
@@ -199,22 +203,26 @@ const EnterpriseHome = () => {
               </div>
              <div className="space-y-6">
   <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
-    2. Clear Insights & Tracking
+    Advanced Analytics & Reporting
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
   <p className={`${openSans.className} text-sm sm:text-base text-gray-600 leading-relaxed`}>
-    Know what’s signed, what’s pending, and what’s due — instantly. Paprly keeps you updated with simple reports and reminders, so you stay in control without messy spreadsheets.
+    Unlock deep insights from your data with Paprly&amp;apos;s powerful analytics engine. 
+    Visualize key metrics, identify trends, and generate comprehensive reports with ease. Our AI-driven dashboards provide actionable intelligence, 
+    empowering your leadership to make informed strategic decisions and optimize business performance across all levels of your organization.
   </p>
 </div>
             </div>
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
               <div className="space-y-6">
   <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
-    3. Automation That Saves Time
+    Automated Workflows & Streamlined Processes
   </h3>
   <div className="border-b-4 border-yellow-600 w-16 mt-2"></div>
   <p className={`${openSans.className} text-sm sm:text-base text-gray-600 leading-relaxed`}>
-    Send agreements, collect signatures, and generate receipts automatically. Paprly handles the repetitive stuff, so you can focus on building your business, not chasing paperwork.
+    Transform your operational efficiency with Paprly&amp;apos;s intelligent workflow automation. Design, deploy, and manage complex business processes with minimal effort, eliminating manual bottlenecks and ensuring                  
+    consistent execution. From onboarding new employees 
+    to processing customer requests, our automation engine initiatives while routine tasks are handled automatically. 
   </p>
 </div>
               <div className="flex justify-center">
@@ -380,135 +388,137 @@ const EnterpriseHome = () => {
 
       {/* Pricing Section */}
       <section className="bg-gray-50 py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
+        <div className="container mx-auto px-6">
           <h2
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-12"
             style={{ fontFamily: "Lora, serif" }}
           >
             FLEXIBLE PLANS FOR EVERY ENTERPRISE
           </h2>
-          <div className="grid md:grid-cols-3 gap-8 md:gap-10">
-            <div className="bg-yellow-50 p-8 rounded-lg shadow-sm">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="bg-white p-8 rounded-lg shadow-sm">
               <h3 className="text-2xl font-bold text-gray-800 mb-2" style={{ fontFamily: "Lora, serif" }}>
-                Solo & Small Team Plan
+                Standard Plan
               </h3>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-gray-800" style={{ fontFamily: "Lora, serif" }}>
-                   ₹ 399
+                  $299
                 </span>
                 <span className="text-gray-600" style={{ fontFamily: "Lora, serif" }}>
                   /month
                 </span>
               </div>
               <ul className="space-y-3 mb-8" style={{ fontFamily: "Open Sans, sans-serif" }}>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>Quick Hire:</strong>Create & send On-boarding docs</span>
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Core Collaboration Tools
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>Doc Tracking::</strong>Track all signed documents</span>
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Basic Analytics Dashboard
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>AI Doc Builder:</strong> Auto-generate all on-boarding documents instantly</span>
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Standard Security Protocols
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>100% Ad Free</strong></span>
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  50 User Licenses
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>Payments & Invoices:</strong> Pay, Send, track, and manage in one place</span>
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Standard Support (Email)
                 </li>
               </ul>
               <Button
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
+                className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3"
                 style={{ fontFamily: "Open Sans, sans-serif" }}
               >
                 Get Started
               </Button>
             </div>
-            <div className="bg-blue-50 p-8 rounded-lg shadow-sm">
+            <div className="bg-white p-8 rounded-lg shadow-sm">
               <h3 className="text-2xl font-bold text-gray-800 mb-2" style={{ fontFamily: "Lora, serif" }}>
                 Professional Plan
               </h3>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-gray-800" style={{ fontFamily: "Lora, serif" }}>
-                  Coming Soon
+                  $799
+                </span>
+                <span className="text-gray-600" style={{ fontFamily: "Lora, serif" }}>
+                  /month
                 </span>
               </div>
               <ul className="space-y-3 mb-8" style={{ fontFamily: "Open Sans, sans-serif" }}>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Advanced Collaboration Suite
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Customizable Analytics Dashboards
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Enhanced Security & Compliance
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  200 User Licenses
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Priority Support (24/7)
                 </li>
               </ul>
               <Button
-                className=" w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
+                className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3"
                 style={{ fontFamily: "Open Sans, sans-serif" }}
               >
                 Get Started
               </Button>
             </div>
-            <div className="bg-purple-50 p-8 rounded-lg shadow-sm">
+            <div className="bg-white p-8 rounded-lg shadow-sm">
               <h3 className="text-2xl font-bold text-gray-800 mb-2" style={{ fontFamily: "Lora, serif" }}>
-                Company Pro Plan
+                Enterprise Plan
               </h3>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-gray-800" style={{ fontFamily: "Lora, serif" }}>
-                  Coming Soon
+                  Custom
                 </span>
                 <br />
+                <span className="text-2xl font-bold text-gray-800" style={{ fontFamily: "Lora, serif" }}>
+                  Pricing
+                </span>
               </div>
               <ul className="space-y-3 mb-8" style={{ fontFamily: "Open Sans, sans-serif" }}>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                   Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Full Enterprise Suite Access
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Advanced AI-Driven Insights
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Dedicated Security & Audits
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                   Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Unlimited User Licenses
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                 Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Premium On-Site Support
                 </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
+                <li className="flex items-center text-gray-600">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Custom Integrations
                 </li>
               </ul>
               <Button
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
+                className="w-full bg-yellow-700 hover:bg-yellow-800 text-white font-semibold py-3"
                 style={{ fontFamily: "Open Sans, sans-serif" }}
               >
                 Get Started
@@ -533,7 +543,7 @@ const EnterpriseHome = () => {
             className="px-8 py-3 text-white font-semibold rounded-md bg-[#b58900] hover:bg-[#996c00] transition-colors"
             style={{ fontFamily: "Open Sans, sans-serif" }}
           >
-            Schedule a Demo
+            Sign in Now!
           </Button>
         </div>
       </section>
