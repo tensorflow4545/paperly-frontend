@@ -1,21 +1,14 @@
 "use client"
 
-import Head from "next/head"
 import Navbar from "@/components/LandingPage/Navbar"
 import Footer from "@/components/LandingPage/Footer"
 import FeedbackForm from "@/components/FeedbackPage/FeedbackForm"
+import PageSEO from "@/components/SEO/PageSEO"
 
 export default function FeedbackPage() {
   return (
     <>
-      <Head>
-        <title>Feedback | Paprly</title>
-        <meta
-          name="description"
-          content="Share your feedback with Paprly. Help us improve our invoice templates and tools with your suggestions and ideas."
-        />
-        <link rel="canonical" href="https://paprly.in/feedback" />
-      </Head>
+      <PageSEO pageName="feedback" />
 
       <Navbar />
       

@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/LandingPage/Navbar";
 import Footer from "@/components/LandingPage/Footer";
+import PageSEO from "@/components/SEO/PageSEO";
 
 export default function ContactPage() {
   return (
     <>
+      <PageSEO pageName="contact" />
       <Navbar />
       
       {/* Main Content */}

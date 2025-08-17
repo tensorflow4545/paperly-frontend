@@ -6,7 +6,7 @@ import { FileText, Edit3, Download, Upload, Pen, Shield, Clock, Users, CheckCirc
 import Navbar from "@/components/LandingPage/Navbar"
 import Footer from "@/components/LandingPage/Footer"
 import ESignEditor from "@/components/ESignEditor/ESignEditor"
-import Head from "next/head"
+import PageSEO from "@/components/SEO/PageSEO"
 
 function ESignContent() {
   const router = useRouter()
@@ -76,60 +76,7 @@ function ESignContent() {
 
   return (
     <>
-      <Head>
-        <title>Sign PDF Online Free - Digital Signature Tool | Paprly</title>
-        <meta name="description" content="Free online document sign tool. Sign PDF online instantly without signup. Professional digital signature tool for contracts, agreements, and business documents." />
-        <meta name="keywords" content="sign PDF online, free e-sign tool, online document sign, digital signature tool, sign documents without signup, electronic signature, PDF signing" />
-        <link rel="canonical" href="https://paprly.in/e-sign" />
-        
-        {/* Open Graph Tags */}
-        <meta property="og:title" content="Sign PDF Online Free - Digital Signature Tool | Paprly" />
-        <meta property="og:description" content="Free online document sign tool. Sign PDF online instantly without signup. Professional digital signature tool for contracts and agreements." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://paprly.in/e-sign" />
-        <meta property="og:image" content="https://paprly.in/og-e-sign.png" />
-        <meta property="og:site_name" content="Paprly" />
-        
-        {/* Twitter Card Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sign PDF Online Free - Digital Signature Tool | Paprly" />
-        <meta name="twitter:description" content="Free online document sign tool. Sign PDF online instantly without signup." />
-        <meta name="twitter:image" content="https://paprly.in/twitter-e-sign.png" />
-        
-        {/* Schema.org JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "Paprly E-Sign",
-              "description": "Free online PDF signing tool for digital signatures and document signing",
-              "url": "https://paprly.in/e-sign",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Web Browser",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "featureList": [
-                "Upload PDF documents",
-                "Add text signatures",
-                "Draw custom signatures", 
-                "Download signed documents",
-                "No registration required",
-                "Secure document processing"
-              ],
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "ratingCount": "1250"
-              }
-            })
-          }}
-        />
-      </Head>
+      <PageSEO pageName="e-sign" />
 
       <Navbar />
 

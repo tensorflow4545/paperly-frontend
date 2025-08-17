@@ -93,14 +93,15 @@ export const viewport = {
   themeColor: "#1F2937",
 };
 
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} ${satisfy.variable} ${greatVibes.variable} ${sacramento.variable} ${allura.variable} antialiased`}
-      >
-        {children}
+      <body className="bg-white text-gray-900">
+        <div className=" mx-auto px-4 mx-w-[1]">{children}</div>
       </body>
     </html>
   );
 }
+
+  
+

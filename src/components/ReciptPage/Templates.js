@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
+import { Search, Mic, Filter, X, Sparkles, TrendingUp, Clock, Zap } from "lucide-react"
 
 const templates = [
   {
@@ -13,6 +14,14 @@ const templates = [
     preview: {
       type: "quickbill",
     },
+    keywords: {
+      primary: ["quick", "bill", "fast", "simple", "basic", "minimal"],
+      secondary: ["freelancer", "one-time", "personal", "gig", "task"],
+      semantic: ["urgent", "immediate", "casual", "informal", "simple"],
+      categories: ["basic", "freelancer", "personal"],
+      features: ["fast generation", "essential fields", "quick tasks"],
+      useCases: ["side hustle", "personal projects", "quick jobs", "small tasks"]
+    }
   },
   {
     id: "standardpro",
@@ -24,6 +33,14 @@ const templates = [
     preview: {
       type: "standardpro",
     },
+    keywords: {
+      primary: ["quantity", "rate", "itemized", "professional", "standard"],
+      secondary: ["freelancer", "small business", "part-time", "services"],
+      semantic: ["detailed", "structured", "organized", "comprehensive"],
+      categories: ["intermediate", "professional", "business"],
+      features: ["itemized services", "payment methods", "professional"],
+      useCases: ["consulting", "professional services", "small business", "freelancing"]
+    }
   },
   {
     id: "businessedge",
@@ -35,6 +52,14 @@ const templates = [
     preview: {
       type: "businessedge",
     },
+    keywords: {
+      primary: ["descriptive", "tax", "legal", "professional", "advanced"],
+      secondary: ["tax compliant", "company details", "legal ready", "international"],
+      semantic: ["comprehensive", "detailed", "formal", "official"],
+      categories: ["advanced", "professional", "legal"],
+      features: ["tax compliant", "company details", "legal ready", "international"],
+      useCases: ["business", "tax filing", "legal compliance", "international business"]
+    }
   },
   {
     id: "contractorplus",
@@ -46,6 +71,14 @@ const templates = [
     preview: {
       type: "contractorplus",
     },
+    keywords: {
+      primary: ["milestone", "contractor", "time tracking", "pro", "advanced"],
+      secondary: ["milestone billing", "contract management", "consultants", "developers"],
+      semantic: ["project based", "phase based", "professional", "complex"],
+      categories: ["pro level", "contractor", "consultant"],
+      features: ["milestone billing", "time tracking", "contract management"],
+      useCases: ["software development", "consulting", "project management", "contracting"]
+    }
   },
   {
     id: "enterpriseinvoice",
@@ -57,6 +90,14 @@ const templates = [
     preview: {
       type: "enterpriseinvoice",
     },
+    keywords: {
+      primary: ["department", "enterprise", "multi", "ultimate", "corporate"],
+      secondary: ["multi-department", "multi-currency", "enterprise ready", "audit compliant"],
+      semantic: ["large scale", "corporate", "enterprise", "complex"],
+      categories: ["ultimate", "enterprise", "corporate"],
+      features: ["multi-department", "multi-currency", "enterprise ready", "audit compliant"],
+      useCases: ["large companies", "enterprise", "corporate", "multi-national"]
+    }
   },
   {
     id: "creativeagency",
@@ -68,6 +109,14 @@ const templates = [
     preview: {
       type: "creativeagency",
     },
+    keywords: {
+      primary: ["phase", "creative", "agency", "design", "project"],
+      secondary: ["project phases", "design iterations", "creative deliverables", "client feedback"],
+      semantic: ["creative", "design", "agency", "iterative"],
+      categories: ["creative", "agency", "design"],
+      features: ["project phases", "design iterations", "creative deliverables", "client feedback"],
+      useCases: ["design agencies", "creative work", "branding", "marketing"]
+    }
   },
   {
     id: "servicecontract",
@@ -79,6 +128,14 @@ const templates = [
     preview: {
       type: "servicecontract",
     },
+    keywords: {
+      primary: ["service", "contract", "legal", "professional", "hourly"],
+      secondary: ["service agreements", "time tracking", "legal compliance", "retainer"],
+      semantic: ["legal", "professional", "contractual", "formal"],
+      categories: ["professional", "legal", "service"],
+      features: ["service agreements", "time tracking", "legal compliance", "retainer tracking"],
+      useCases: ["legal services", "consulting", "professional services", "contract work"]
+    }
   },
   {
     id: "subscriptionbilling",
@@ -90,6 +147,14 @@ const templates = [
     preview: {
       type: "subscriptionbilling",
     },
+    keywords: {
+      primary: ["subscription", "billing", "saas", "recurring", "monthly"],
+      secondary: ["recurring billing", "usage tracking", "proration", "auto-renewal"],
+      semantic: ["recurring", "monthly", "subscription", "ongoing"],
+      categories: ["saas", "subscription", "recurring"],
+      features: ["recurring billing", "usage tracking", "proration", "auto-renewal"],
+      useCases: ["software as a service", "subscription services", "monthly billing", "recurring payments"]
+    }
   },
   {
     id: "retailproduct",
@@ -101,8 +166,67 @@ const templates = [
     preview: {
       type: "retailproduct",
     },
+    keywords: {
+      primary: ["retail", "product", "ecommerce", "inventory", "shipping"],
+      secondary: ["product catalog", "sku numbers", "quantity discounts", "shipping costs"],
+      semantic: ["retail", "ecommerce", "product", "inventory"],
+      categories: ["e-commerce", "retail", "product"],
+      features: ["product catalog", "sku numbers", "quantity discounts", "shipping costs"],
+      useCases: ["online store", "retail business", "product sales", "ecommerce"]
+    }
   },
 ]
+
+// Search functionality
+const searchTemplates = (query, templates) => {
+  if (!query.trim()) return templates
+  
+  const searchTerm = query.toLowerCase().trim()
+  const words = searchTerm.split(' ').filter(word => word.length > 0)
+  
+  return templates.filter(template => {
+    const allKeywords = [
+      ...template.keywords.primary,
+      ...template.keywords.secondary,
+      ...template.keywords.semantic,
+      ...template.keywords.categories,
+      ...template.keywords.features,
+      ...template.keywords.useCases,
+      template.name.toLowerCase(),
+      template.category.toLowerCase(),
+      template.description.toLowerCase()
+    ]
+    
+    // Exact match gets highest priority
+    if (template.name.toLowerCase().includes(searchTerm) || 
+        template.category.toLowerCase().includes(searchTerm)) {
+      return true
+    }
+    
+    // Check if all search words are found in keywords
+    const allWordsFound = words.every(word => 
+      allKeywords.some(keyword => keyword.toLowerCase().includes(word))
+    )
+    
+    if (allWordsFound) return true
+    
+    // Partial matches
+    const partialMatches = words.some(word => 
+      allKeywords.some(keyword => keyword.toLowerCase().includes(word))
+    )
+    
+    return partialMatches
+  })
+}
+
+// Popular search suggestions
+const popularSearches = [
+  "freelancer", "business", "quick", "professional", "creative", 
+  "legal", "subscription", "retail", "enterprise", "simple"
+]
+
+// Category filters
+const categories = ["All", "Basic", "Intermediate", "Advanced", "Pro Level", "Ultimate", "Creative", "Professional", "SaaS", "E-commerce"]
 
 function TemplatePreview({ template, onPreview }) {
   const renderPreview = () => {
@@ -983,6 +1107,134 @@ function TemplatePreview({ template, onPreview }) {
                 </div>
               </div>
             )
+}
+
+// AI Search Bar Component
+function AISearchBar({ searchQuery, setSearchQuery, selectedCategory, setSelectedCategory, showSuggestions, setShowSuggestions }) {
+  const [searchHistory] = useState([
+    "freelancer invoice", "business template", "quick bill", "professional services"
+  ])
+
+  // Auto-close suggestions when user stops typing
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setShowSuggestions(false)
+      return
+    }
+
+    const timer = setTimeout(() => {
+      setShowSuggestions(false)
+    }, 1000) // Close after 2 seconds of no typing
+
+    return () => clearTimeout(timer)
+  }, [searchQuery, setShowSuggestions])
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery(suggestion)
+    setShowSuggestions(false)
+  }
+
+  const handleCategoryFilter = (category) => {
+    setSelectedCategory(category === "All" ? "" : category)
+  }
+
+  return (
+    <div className="relative mb-8">
+      {/* Main Search Container */}
+      <div className="relative">
+        {/* Glassmorphism Background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/80 to-blue-50/80 backdrop-blur-sm rounded-2xl border border-yellow-200/50 shadow-sm"></div>
+        
+        {/* Search Input Container */}
+        <div className="relative p-6">
+          <div className="flex items-center space-x-4">
+                        {/* Search Input */}
+            <div className="flex-1 relative">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    setShowSuggestions(true)
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  placeholder="Search templates in plain English... (e.g., 'freelancer invoice for quick jobs')"
+                  className="w-full pl-12 pr-4 py-4 bg-white/70 backdrop-blur-sm border border-yellow-200/50 rounded-xl text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300 text-lg"
+                />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              </div>
+              
+              {/* Search Suggestions */}
+              {showSuggestions && searchQuery && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white/90 backdrop-blur-sm border border-yellow-200/50 rounded-xl shadow-xl z-10 max-h-64 overflow-y-auto">
+                  <div className="p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <TrendingUp className="w-4 h-4 text-yellow-600" />
+                      <span className="text-sm font-medium text-gray-700">Popular Searches</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {popularSearches.slice(0, 6).map((suggestion, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleSuggestionClick(suggestion)}
+                          className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm hover:bg-yellow-200 transition-colors duration-200"
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                    
+                    <div className="flex items-center gap-2 mb-3">
+                      <Clock className="w-4 h-4 text-blue-600" />
+                      <span className="text-sm font-medium text-gray-700">Recent Searches</span>
+                    </div>
+                    <div className="space-y-2">
+                      {searchHistory.map((item, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleSuggestionClick(item)}
+                          className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-yellow-50 rounded-lg transition-colors duration-200 flex items-center gap-2"
+                        >
+                          <Search className="w-4 h-4 text-gray-400" />
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          
+          {/* Category Filters */}
+          <div className="mt-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Filter className="w-4 h-4 text-gray-600" />
+              <span className="text-sm font-medium text-gray-700">Filter by Category</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryFilter(category)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    selectedCategory === (category === "All" ? "" : category)
+                      ? 'bg-gray-400 text-white shadow-sm transform scale-105'
+                      : 'bg-white/70 text-gray-700 hover:bg-yellow-100 hover:text-yellow-700 border border-yellow-200/50'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  )
 }
 
 function PreviewModal({ template, isOpen, onClose }) {
@@ -1906,6 +2158,9 @@ function PreviewModal({ template, isOpen, onClose }) {
 
 export default function TemplatesPage() {
   const [previewModal, setPreviewModal] = useState({ isOpen: false, template: null })
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("")
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   const handlePreview = (template) => {
     setPreviewModal({ isOpen: true, template })
@@ -1914,6 +2169,35 @@ export default function TemplatesPage() {
   const closePreview = () => {
     setPreviewModal({ isOpen: false, template: null })
   }
+
+  // Filter templates based on search and category
+  const filteredTemplates = useMemo(() => {
+    let filtered = templates
+
+    // Apply category filter
+    if (selectedCategory) {
+      filtered = filtered.filter(template => template.category === selectedCategory)
+    }
+
+    // Apply search filter
+    if (searchQuery.trim()) {
+      filtered = searchTemplates(searchQuery, filtered)
+    }
+
+    return filtered
+  }, [searchQuery, selectedCategory])
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.search-container')) {
+        setShowSuggestions(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -1927,12 +2211,79 @@ export default function TemplatesPage() {
           </p>
         </div>
 
-        {/* Templates Grid */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
-          {templates.map((template) => (
-            <TemplatePreview key={template.id} template={template} onPreview={handlePreview} />
-          ))}
+        {/* AI Search Bar */}
+        <div className="search-container">
+          <AISearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            showSuggestions={showSuggestions}
+            setShowSuggestions={setShowSuggestions}
+          />
         </div>
+
+        {/* Search Results Info */}
+        {searchQuery || selectedCategory ? (
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Zap className="w-5 h-5 text-yellow-600" />
+                <span className="text-lg font-medium text-gray-900">
+                  {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
+                </span>
+              </div>
+              {(searchQuery || selectedCategory) && (
+                <button
+                  onClick={() => {
+                    setSearchQuery("")
+                    setSelectedCategory("")
+                  }}
+                  className="flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200"
+                >
+                  <X className="w-4 h-4" />
+                  Clear filters
+                </button>
+              )}
+            </div>
+            {searchQuery && (
+              <div className="text-sm text-gray-500">
+                Search: &quot;{searchQuery}&quot;
+              </div>
+            )}
+          </div>
+        ) : null}
+
+        {/* Templates Grid */}
+        {filteredTemplates.length > 0 ? (
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+            {filteredTemplates.map((template) => (
+              <TemplatePreview key={template.id} template={template} onPreview={handlePreview} />
+            ))}
+          </div>
+        ) : (
+          /* No Results State */
+          <div className="text-center py-16">
+            <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search className="w-12 h-12 text-yellow-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No templates found</h3>
+            <p className="text-gray-600 mb-6 max-w-md mx-auto">
+              Try adjusting your search terms or category filter. You can search for templates using plain English like &quot;freelancer invoice&quot; or &quot;business template&quot;.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {popularSearches.slice(0, 5).map((suggestion, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSearchQuery(suggestion)}
+                  className="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-lg text-sm hover:bg-yellow-200 transition-colors duration-200"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Preview Modal */}

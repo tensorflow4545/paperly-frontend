@@ -20,35 +20,35 @@ export default function SignatureModal({ isOpen, onClose, onSignatureSelect }) {
     { 
       id: 'dancing', 
       name: 'Modern Script', 
-      family: 'var(--font-dancing-script), cursive',
+      family: 'Dancing Script, cursive',
       preview: 'John Doe',
       description: 'Contemporary flowing style'
     },
     { 
       id: 'satisfy', 
       name: 'Casual Script', 
-      family: 'var(--font-satisfy), cursive',
+      family: 'Satisfy, cursive',
       preview: 'John Doe',
       description: 'Relaxed handwritten feel'
     },
     { 
       id: 'great-vibes', 
       name: 'Artistic Script', 
-      family: 'var(--font-great-vibes), cursive',
+      family: 'Great Vibes, cursive',
       preview: 'John Doe',
       description: 'Artistic flowing signature'
     },
     { 
       id: 'sacramento', 
       name: 'Formal Script', 
-      family: 'var(--font-sacramento), cursive',
+      family: 'Sacramento, cursive',
       preview: 'John Doe',
       description: 'Professional elegant style'
     },
     { 
       id: 'allura', 
       name: 'Bold Script', 
-      family: 'var(--font-allura), cursive',
+      family: 'Allura, cursive',
       preview: 'John Doe',
       description: 'Bold and confident'
     }
@@ -69,10 +69,14 @@ export default function SignatureModal({ isOpen, onClose, onSignatureSelect }) {
       return
     }
 
+    // Get the selected font object to access the family
+    const selectedFontObj = signatureFonts.find(f => f.id === selectedFont)
+
     const signature = {
       type: 'text',
       text: signatureText.trim(),
       font: selectedFont,
+      fontFamily: selectedFontObj?.family || 'cursive', // Store the actual font family
       color: selectedColor,
       timestamp: Date.now()
     }

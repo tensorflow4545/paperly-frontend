@@ -1,5 +1,4 @@
 "use client"
-import Head from "next/head"
 import React from "react"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
@@ -7,6 +6,7 @@ import { FileText, Edit3, Download, Users, Calendar, DollarSign, CreditCard, Shi
 import Navbar from "../../components/LandingPage/Navbar"
 import Footer from "../../components/LandingPage/Footer"
 import TemplatesPage from "@/components/ReciptPage/Templates"
+import PageSEO from "@/components/SEO/PageSEO"
 
 
 
@@ -49,16 +49,8 @@ export default function CodePage() {
 
   return (
     <>
+      <PageSEO pageName="template" />
       <Navbar />
-      <>
-      <Head>
-        <title>Invoice Template | Paprly</title>
-        <meta
-          name="description"
-          content="Download professional invoice templates for free from Paprly. Simple, clean, and customizable for freelancers and businesses."
-        />
-        <link rel="canonical" href="https://paprly.in/template" />
-      </Head>
 
         {/* Hero section */}
         <div className="w-full min-h-[300px] md:h-[362px] bg-[#FEFCE8] items-center justify-center flex px-4">
@@ -433,14 +425,6 @@ export default function CodePage() {
           </div>
 
         </div>
-
-
-
-
-      </>
-
-
-
 
       <Footer />
     </>

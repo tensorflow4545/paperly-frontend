@@ -86,7 +86,14 @@ export default function Footer() {
                    <Link href="/privacy-policy" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                      Privacy Policy
                    </Link>
+                   
                  </li>
+                  <li>
+                    <Link href="/cookies" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                     Cookies
+                   </Link>
+                  </li>
+
                </ul>
              </div>
 
