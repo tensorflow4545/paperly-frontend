@@ -355,28 +355,28 @@ export default function EnterpriseProfilePage() {
       <div className="p-0 border-b-2 shadow-sm bg-gradient-to-br from-gray-100 to-gray-200 border-b-gray-300">
          <div className="rounded-lg bg-gradient-to-br from-yellow-50 to-white">
     <div className="px-4 py-6 sm:px-8">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center max-w-7xl sm:gap-0">
-        <div className="flex-1">
-          <h1 className={`${outfit.className} text-3xl sm:text-4xl text-gray-900 mb-2 font-bold`}>
-            Welcome back, {user?.name || 'User'}!
-          </h1>
-          <p className="text-base text-gray-600 sm:text-lg">
-            {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile to unlock full Paprly features.'}
-          </p>
-        </div>
-        
-        <div className="flex flex-col items-stretch w-full gap-3 sm:flex-row sm:items-center sm:w-auto sm:gap-4 sm:ml-8">
-          <button className="px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-yellow-600 rounded-lg sm:px-6 sm:py-3 sm:text-base hover:bg-amber-700">
-            Explore Paprly Studio
-          </button>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 text-sm font-medium text-gray-800 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm sm:px-6 sm:py-3 sm:text-base hover:bg-gray-50 hover:shadow-md"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center max-w-7xl mx-auto sm:gap-0">
+         <div className="flex-1">
+           <h1 className={`${outfit.className} text-2xl sm:text-4xl text-gray-900 mb-2 font-bold`}>
+             Welcome back, {user?.name || 'User'}!
+           </h1>
+           <p className="text-base text-gray-600 sm:text-lg">
+             {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile to unlock full Paprly features.'}
+           </p>
+         </div>
+         
+         <div className="flex flex-col items-stretch w-full gap-3 sm:flex-row sm:items-center sm:w-auto sm:gap-5 sm:justify-end">
+           <button className="px-3 py-2.5 sm:py-2 text-sm sm:text-xs font-medium text-white transition-colors duration-200 bg-yellow-600 rounded-sm sm:px-4 sm:py-2 sm:text-sm hover:bg-amber-700">
+             Explore Paprly Studio
+           </button>
+           <button
+             onClick={handleLogout}
+             className="px-3 py-2.5 sm:py-2 text-sm sm:text-xs font-medium text-gray-800 transition-all duration-200 bg-white border border-gray-200 rounded-sm shadow-sm sm:px-4 sm:py-2 sm:text-sm hover:bg-gray-50 hover:shadow-md"
+           >
+             Logout
+           </button>
+         </div>
+       </div>
     </div>
   </div>
 
@@ -673,7 +673,7 @@ export default function EnterpriseProfilePage() {
 </div>
 
         {/* Enterprise Suite Settings Section */}
-    <div className="bg-gray-50 p-4 sm:p-8 border-b-1 border-[#DEE1E6]">
+    <div className="bg-gray-50 p-4 sm:p-8">
   <div className="w-full max-w-4xl mx-auto">
     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8">
       {/* Header */}
@@ -752,10 +752,8 @@ export default function EnterpriseProfilePage() {
 </div>
 
         {/* Action Buttons */}
-        <div className="w-full border-t border-[#DEE1E6] bg-white px-6 py-4 flex justify-end space-x-3">
-          <button className="px-4 py-2 border border-[#6B4DE6] text-[#6B4DE6] rounded-md hover:bg-[#f5f5f7]">
-            Cancel & Exit
-          </button>
+        <div className="w-full bg-white px-6 py-4 flex justify-end space-x-3">
+         
           <button 
             onClick={handleSubmit}
             disabled={isLoading}
