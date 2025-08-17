@@ -34,31 +34,56 @@ export default function Sidebar({ activeNavItem, onNavItemClick, sidebarOpen, se
             </svg>
           </button>
 
-          <nav className="space-y-1 mt-8 lg:mt-0">
-            <button
-              onClick={() => onNavItemClick("workspace")}
-              className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
-                activeNavItem === "workspace" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
-              }`}
-            >
-              {activeNavItem === "workspace" && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
-              )}
-              <svg
-                className={`w-5 h-5 ${activeNavItem === "workspace" ? "text-[#D4AF37]" : "text-gray-500"}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                />
-              </svg>
-              <span className="text-sm font-medium">Workspace</span>
-            </button>
+                     <nav className="space-y-1 mt-8 lg:mt-0">
+             <button
+               onClick={() => onNavItemClick("home")}
+               className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
+                 activeNavItem === "home" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
+               }`}
+             >
+               {activeNavItem === "home" && (
+                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
+               )}
+               <svg
+                 className={`w-5 h-5 ${activeNavItem === "home" ? "text-[#D4AF37]" : "text-gray-500"}`}
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24"
+               >
+                 <path
+                   strokeLinecap="round"
+                   strokeLinejoin="round"
+                   strokeWidth={2}
+                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                 />
+               </svg>
+               <span className="text-sm font-medium">Home</span>
+             </button>
+
+             <button
+               onClick={() => onNavItemClick("workspace")}
+               className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
+                 activeNavItem === "workspace" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
+               }`}
+             >
+               {activeNavItem === "workspace" && (
+                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
+               )}
+               <svg
+                 className={`w-5 h-5 ${activeNavItem === "workspace" ? "text-[#D4AF37]" : "text-gray-500"}`}
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24"
+               >
+                 <path
+                   strokeLinecap="round"
+                   strokeLinejoin="round"
+                   strokeWidth={2}
+                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                 />
+               </svg>
+               <span className="text-sm font-medium">Workspace</span>
+             </button>
 
             <button
               onClick={() => onNavItemClick("dashboard")}
