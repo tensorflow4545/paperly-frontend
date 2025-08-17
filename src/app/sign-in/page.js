@@ -4,6 +4,14 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import PageSEO from "@/components/SEO/PageSEO"
 import { useAuth } from "@/hooks/useAuth"
+import { Borel } from "next/font/google"
+
+const borel = Borel({
+  subsets: ["latin"],
+  weight: "400",
+})
+
+
 
 export default function LoginPage() {
   const { login } = useAuth()
@@ -12,6 +20,8 @@ export default function LoginPage() {
     password: "",
     remember: false,
   })
+
+  
 
   const [isLoading, setIsLoading] = useState(false)
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
@@ -131,9 +141,9 @@ export default function LoginPage() {
       <PageSEO pageName="sign-in" />
       <div className="flex min-h-screen">
       {/* Left Side - Chatbot GIF */}
-      <div className="hidden md:flex w-1/2 bg-gradient-to-br from-yellow-50 to-yellow-100 relative overflow-hidden">
-        <div className="relative ml-12 left-10 inset-0 bg-yellow-200/20"></div>
-        <div className="relative z-10 flex flex-col items-center justify-start h-full px-12 text-center pt-12">
+      <div className="relative hidden w-1/2 overflow-hidden md:flex bg-gradient-to-br from-yellow-50 to-yellow-100">
+        <div className="relative inset-0 ml-12 left-10 bg-yellow-200/20"></div>
+        <div className="relative z-10 flex flex-col items-center justify-start h-full px-12 pt-12 text-center">
           <div className="mb-8">
             {/* Chatbot GIF */}
             <div className="flex items-center justify-center mb-6">
@@ -147,25 +157,25 @@ export default function LoginPage() {
             </div>
           </div>
           <div className="max-w-md">
-            <h2 className="text-2xl font-bold text-yellow-800 mb-4">
+            <h2 className="mb-4 text-2xl font-bold text-yellow-800">
               Welcome back to Paprly
             </h2>
-            <p className="text-lg text-yellow-700 leading-relaxed">
+            <p className="text-lg leading-relaxed text-yellow-700">
               Access your professional workspace. Manage contracts, invoices, and documents 
               with our intelligent automation. Your secure, organized document management 
               solution awaits.
             </p>
-            <div className="mt-8 flex items-center justify-center space-x-4 text-yellow-600">
+            <div className="flex items-center justify-center mt-8 space-x-4 text-yellow-600">
               <div className="flex items-center">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                <div className="w-2 h-2 mr-2 bg-yellow-500 rounded-full"></div>
                 <span className="text-sm">Secure</span>
               </div>
               <div className="flex items-center">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                <div className="w-2 h-2 mr-2 bg-yellow-500 rounded-full"></div>
                 <span className="text-sm">Simple</span>
               </div>
               <div className="flex items-center">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                <div className="w-2 h-2 mr-2 bg-yellow-500 rounded-full"></div>
                 <span className="text-sm">Fast</span>
               </div>
             </div>
@@ -174,19 +184,23 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full md:w-1/2 bg-white flex items-start justify-center px-8 py-12">
+      <div className="flex items-start justify-center w-full px-8 py-12 bg-white md:w-1/2">
         <div className="w-full max-w-md">
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="mb-8 text-center">
             <div className="flex items-center justify-center mb-4">
               <Image 
                 src="/final_logo.png" 
                 alt="Paprly Logo" 
                 width={48}
                 height={48}
-                className="rounded-lg mr-3"
+                className="mr-3 rounded-lg"
               />
-              <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
+<h1
+  className={`text-3xl mt-5 font-bold text-[#B29200] font-borel ${borel.className}`}
+>
+  Welcome Back
+</h1>
             </div>
             <p className="text-gray-500">
               Sign in to your Paprly account and continue managing your documents.
@@ -211,7 +225,7 @@ export default function LoginPage() {
                 }`}
               />
               {formErrors.email && (
-                <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
+                <p className="mt-1 text-xs text-red-500">{formErrors.email}</p>
               )}
             </div>
 
@@ -231,14 +245,14 @@ export default function LoginPage() {
                 }`}
               />
               {formErrors.password && (
-                <p className="text-red-500 text-xs mt-1">{formErrors.password}</p>
+                <p className="mt-1 text-xs text-red-500">{formErrors.password}</p>
               )}
             </div>
 
             {/* Forgot Password + Remember */}
             <div>
-              <div className="flex justify-between items-center">
-                <a href="/forgot-password" className="text-sm text-yellow-600 hover:text-yellow-700 font-medium transition-colors duration-200">
+              <div className="flex items-center justify-between">
+                <a href="/forgot-password" className="text-sm font-medium text-yellow-600 transition-colors duration-200 hover:text-yellow-700">
                   Forgot password?
                 </a>
               </div>
@@ -271,11 +285,11 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-300 text-white font-medium py-3 px-6 rounded-full transition-colors duration-200 flex items-center justify-center"
+              className="flex items-center justify-center w-full px-6 py-3 font-medium text-white transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600 disabled:bg-yellow-300"
             >
               {isLoading ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  <div className="w-4 h-4 mr-2 border-2 border-white rounded-full border-t-transparent animate-spin"></div>
                   Signing In...
                 </>
               ) : (
@@ -286,14 +300,14 @@ export default function LoginPage() {
             {/* OR Divider */}
             <div className="flex items-center my-4">
               <hr className="flex-1 border-gray-300" />
-              <span className="mx-4 text-gray-400 text-sm">OR</span>
+              <span className="mx-4 text-sm text-gray-400">OR</span>
               <hr className="flex-1 border-gray-300" />
             </div>
 
             {/* Google Button */}
             <button
               type="button"
-              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-full flex items-center justify-center gap-3 transition-colors duration-200"
+              className="flex items-center justify-center w-full gap-3 px-6 py-3 font-medium text-gray-700 transition-colors duration-200 bg-gray-100 rounded-full hover:bg-gray-200"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -317,11 +331,11 @@ export default function LoginPage() {
             </button>
 
             {/* Sign Up Link */}
-            <div className="text-center text-sm text-gray-500 mt-4">
+            <div className="mt-4 text-sm text-center text-gray-500">
               Don&apos;t have an account?{" "}
               <a
                 href="/signup"
-                className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors duration-200"
+                className="font-medium text-yellow-600 transition-colors duration-200 hover:text-yellow-700"
               >
                 Sign up
               </a>
@@ -332,18 +346,18 @@ export default function LoginPage() {
 
       {/* Success Popup */}
       {showSuccessPopup && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
-          <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-xl">
-            <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
+          <div className="w-full max-w-md p-8 text-center bg-white rounded-lg shadow-xl">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-yellow-100 rounded-full">
               <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Login Successful!</h3>
-            <p className="text-gray-600 mb-6">Welcome back to Paprly! You&apos;ve been successfully signed in. Redirecting to your workspace...</p>
+            <h3 className="mb-2 text-xl font-bold text-gray-900">Login Successful!</h3>
+            <p className="mb-6 text-gray-600">Welcome back to Paprly! You&apos;ve been successfully signed in. Redirecting to your workspace...</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-full transition-colors duration-200"
+              className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600"
             >
               Continue
             </button>
@@ -353,18 +367,18 @@ export default function LoginPage() {
 
       {/* Error Popup */}
       {showErrorPopup && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
-          <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-xl">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
+          <div className="w-full max-w-md p-8 text-center bg-white rounded-lg shadow-xl">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full">
               <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Login Failed</h3>
-            <p className="text-gray-600 mb-6">{errorMessage}</p>
+            <h3 className="mb-2 text-xl font-bold text-gray-900">Login Failed</h3>
+            <p className="mb-6 text-gray-600">{errorMessage}</p>
             <button
               onClick={() => setShowErrorPopup(false)}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-full transition-colors duration-200"
+              className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600"
             >
               Try Again
             </button>

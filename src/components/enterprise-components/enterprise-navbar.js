@@ -1,10 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import Image from "next/image"
-import { Borel, Inter, Open_Sans } from "next/font/google"
+import { Borel, Inter } from "next/font/google"
 import { getAuthToken, getUserData, logout } from "@/utils/auth"
 import { useRouter } from "next/navigation"
-import { FiLogOut } from "react-icons/fi"
+import { FiLogOut } from "react-icons/fi" // Import logout icon
 
 const borel = Borel({
   subsets: ["latin"],
@@ -12,11 +12,6 @@ const borel = Borel({
 })
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: "400",
-})
-
-const openSans = Open_Sans({
   subsets: ["latin"],
   weight: "400",
 })
@@ -30,6 +25,7 @@ const EnterpriseNavbar = () => {
   useEffect(() => {
     const token = getAuthToken()
     const userData = getUserData()
+    
     if (token && userData) {
       setUser(userData)
       setIsAuthenticated(true)
@@ -50,22 +46,23 @@ const EnterpriseNavbar = () => {
   return (
     <nav className="relative flex items-center justify-between px-6 py-3 bg-white shadow-sm">
       {/* Left: Logo */}
-      <div className="md:col-span-1">
-        <div className="flex flex-row items-center space-x-4 mb-4">
-          <Image
-            src="/final_logo.png"
-            alt="Paprly Logo"
-            width={40}
-            height={40}
-            className="object-contain rounded-lg"
-            loading="lazy"
-          />
-          <span className="text-xl font-semibold text-gray-900">Paprly</span>
-        </div>
-      </div>
+     <div className="flex items-center space-x-3">
+  <Image
+    src="/final_logo.png"
+    alt="Logo"
+    width={40}
+    height={40}
+    className="ml-4 rounded-md"
+  />
+  <span
+  className={`relative top-1 font-borel text-[25px] leading-[25px] font-bold text-[#B29200] ${borel.className}`}
+>
+  paprly
+</span>
+</div>
 
       {/* Desktop Navigation */}
-      <div className={`hidden md:flex space-x-5 ml-auto mr-6 text-md text-yellow-500 ${inter.className}`}>
+      <div className={`hidden md:flex space-x-6 text-md text-yellow-500 ${inter.className}`}>
         <a href="#" className="hover:text-yellow-800">Solutions</a>
         <a href="#" className="hover:text-yellow-800">Features</a>
         <a href="#" className="hover:text-yellow-800">Pricing</a>
@@ -74,7 +71,7 @@ const EnterpriseNavbar = () => {
       </div>
 
       {/* Desktop Auth buttons */}
-      <div className="hidden md:flex items-center space-x-4 justify-end">
+      <div className="items-center hidden space-x-4 md:flex">
         {isAuthenticated ? (
           <div className="flex items-center space-x-4">
             {/* Logout icon button */}
@@ -85,7 +82,7 @@ const EnterpriseNavbar = () => {
             >
               <FiLogOut className="w-5 h-5" />
             </button>
-            {/* Profile icon */}
+            {/* Profile icon only */}
             <div className="flex items-center justify-center w-8 h-8 bg-yellow-100 rounded-full">
               <span className="text-sm font-medium text-yellow-700">
                 {user?.name?.charAt(0).toUpperCase() || 'U'}
@@ -95,7 +92,7 @@ const EnterpriseNavbar = () => {
         ) : (
           <a
             href="/sign-in"
-            className={`bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-800 text-sm font-semibold ${openSans.className}`}
+            className={`bg-yellow-700 text-white px-4 py-1 rounded hover:bg-yellow-800 text-sm font-semibold`}
           >
             Sign In
           </a>
@@ -133,19 +130,44 @@ const EnterpriseNavbar = () => {
           <div className="px-6 py-4 space-y-4">
             {/* Mobile Navigation Links */}
             <div className={`space-y-3 text-sm text-yellow-500 ${inter.className}`}>
-              {["Solutions", "Features", "Pricing", "About Us", "Contact"].map((link, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link}
-                </a>
-              ))}
+              <a 
+                href="#" 
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Solutions
+              </a>
+              <a 
+                href="#" 
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Features
+              </a>
+              <a 
+                href="#" 
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Pricing
+              </a>
+              <a 
+                href="#" 
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About Us
+              </a>
+              <a 
+                href="#" 
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </a>
             </div>
-
-            {/* Mobile Auth Section */}
+            
+            {/* Mobile Auth Button */}
             <div className="pt-4">
               {isAuthenticated ? (
                 <>
@@ -170,7 +192,7 @@ const EnterpriseNavbar = () => {
               ) : (
                 <a
                   href="/sign-in"
-                  className={`block w-full text-center bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-800 text-sm font-semibold ${openSans.className}`}
+                  className={`block w-full text-center bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-800 text-sm font-semibold`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Sign In
