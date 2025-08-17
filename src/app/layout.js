@@ -97,7 +97,7 @@ export default function Layout({ children }) {
   return (
     <html lang="en">
       <body className="bg-white text-gray-900">
-        <div className=" mx-auto px-4 mx-w-[1]">{children}</div>
+        <div className=" mx-auto mx-w-[1]">{children}</div>
       </body>
     </html>
   );

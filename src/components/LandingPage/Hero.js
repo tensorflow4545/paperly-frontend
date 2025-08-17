@@ -2,13 +2,35 @@
 
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 import InvoicePreview from "./Recipt"
+import EnterpriseSuite from "./EnterpriseSuite"
 
 export default function LandingPage() {
   const router = useRouter()
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  
+  const documentTypes = ["Invoices", "Contracts", "E-sign", "NDA", "Proposals", "Agreements"]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true)
+      setTimeout(() => {
+        setCurrentTextIndex((prevIndex) => (prevIndex + 1) % documentTypes.length)
+        setIsAnimating(false)
+      }, 600) // Wait for slide animation to complete
+    }, 2600) // 2 seconds display + 0.6 seconds animation
+
+    return () => clearInterval(interval)
+  }, [documentTypes.length])
 
   const handleCreateInvoice = () => {
     router.push('/blank-editor')
+  }
+
+  const handlemainpage=()=>{
+    router.push('/enterprise-home')
   }
 
   return (
@@ -29,6 +51,7 @@ export default function LandingPage() {
           <div className="space-y-8">
             {/* Badge */}
             <motion.div 
+            onClick={handlemainpage}
               className="inline-flex items-center gap-2 bg-white text-gray-800 px-6 py-3 rounded-2xl text-sm font-medium border-2 border-gray-200 shadow-sm"
               animate={{
                 y: [0, -3, 0],
@@ -45,36 +68,48 @@ export default function LandingPage() {
               }}
             >
               <span className="text-yellow-500 text-lg">✨</span>
-              <span className="font-semibold">Free Invoice Generator</span>
+              <span className="font-semibold">Explore Paprly Enterprise Suite</span>
             </motion.div>
 
             {/* Main heading */}
             <div className="space-y-4">
-              <motion.h1 
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-gray-800 leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                Create Professional{" "}
-                <motion.span 
-                  className="text-gray-700"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  Invoices
-                </motion.span>{" "}
-                for{" "}
-                <motion.span 
-                  className="text-gray-600"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  Your Clients.
-                </motion.span>
-              </motion.h1>
+                             <motion.h1 
+                 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-gray-800 leading-tight"
+                 initial={{ opacity: 0, y: 20 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.8 }}
+               >
+                                   <div className="flex flex-col">
+                    <span className="whitespace-nowrap">Create Professional</span>
+                    <motion.span 
+                      className="text-gray-700 relative inline-block w-full"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="overflow-hidden h-[1.2em] w-full">
+                        <motion.div
+                          key={currentTextIndex}
+                          initial={{ y: 50, opacity: 0 }}
+                          animate={{ 
+                            y: isAnimating ? -50 : 0, 
+                            opacity: isAnimating ? 0 : 1 
+                          }}
+                          transition={{ 
+                            type: "spring", 
+                            stiffness: 100, 
+                            damping: 20,
+                            duration: 0.6 
+                          }}
+                          className="block h-[1.2em] flex items-center w-full"
+                        >
+                          {documentTypes[currentTextIndex]}
+                        </motion.div>
+                      </div>
+                    </motion.span>
+                  </div>
+               </motion.h1>
               <motion.h2 
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-600"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl sm:mt-2 font-semibold text-gray-600"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -316,6 +351,9 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </div>
+      
+      {/* Enterprise Suite Section */}
+      <EnterpriseSuite />
     </div>
   )
 }

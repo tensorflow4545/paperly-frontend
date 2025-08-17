@@ -353,407 +353,407 @@ export default function EnterpriseProfilePage() {
 
       {/* Main Content Area */}
       <div className="p-0 border-b-2 shadow-sm bg-gradient-to-br from-gray-100 to-gray-200 border-b-gray-300">
-        <div className="rounded-lg bg-gradient-to-br from-yellow-50 to-white">
-          <div className="px-8 py-6">
-            <div className="flex items-center justify-between max-w-7xl">
-              <div className="flex-1">
-                <h1 className={`${outfit.className} text-4xl text-gray-900 mb-2 font-bold`}>
-                  Welcome back, {user?.name || 'User'}!
-                </h1>
-                <p className="text-lg text-gray-600">
-                  {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile to unlock full Paprly features.'}
-                </p>
-              </div>
-              
-              <div className="flex items-center gap-4 ml-8">
-                <button className="px-6 py-3 font-medium text-white transition-colors duration-200 bg-yellow-600 rounded-lg hover:bg-amber-700">
-                  Explore Paprly Studio
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="px-6 py-3 font-medium text-gray-800 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 hover:shadow-md"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+         <div className="rounded-lg bg-gradient-to-br from-yellow-50 to-white">
+    <div className="px-4 py-6 sm:px-8">
+             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center max-w-7xl mx-auto sm:gap-0">
+         <div className="flex-1">
+           <h1 className={`${outfit.className} text-2xl sm:text-4xl text-gray-900 mb-2 font-bold`}>
+             Welcome back, {user?.name || 'User'}!
+           </h1>
+           <p className="text-base text-gray-600 sm:text-lg">
+             {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile to unlock full Paprly features.'}
+           </p>
+         </div>
+         
+         <div className="flex flex-col items-stretch w-full gap-3 sm:flex-row sm:items-center sm:w-auto sm:gap-5 sm:justify-end">
+           <button className="px-3 py-2.5 sm:py-2 text-sm sm:text-xs font-medium text-white transition-colors duration-200 bg-yellow-600 rounded-sm sm:px-4 sm:py-2 sm:text-sm hover:bg-amber-700">
+             Explore Paprly Studio
+           </button>
+           <button
+             onClick={handleLogout}
+             className="px-3 py-2.5 sm:py-2 text-sm sm:text-xs font-medium text-gray-800 transition-all duration-200 bg-white border border-gray-200 rounded-sm shadow-sm sm:px-4 sm:py-2 sm:text-sm hover:bg-gray-50 hover:shadow-md"
+           >
+             Logout
+           </button>
+         </div>
+       </div>
+    </div>
+  </div>
 
         {/* Form Container & Basic Information */}
-        <div className="min-h-screen p-8 bg-gray-50">
-          <div className="max-w-4xl mx-auto">
-            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
-              {/* Header */}
-              <div className="mb-8 text-center">
-                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Basic Information</h1>
-              </div>
+       <div className="p-4 sm:p-8 bg-gray-50">
+  <div className="w-full max-w-4xl mx-auto">
+    <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8">
+      {/* Header */}
+      <div className="mb-6 text-center sm:mb-8">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#B29200] mb-1">Basic Information</h1>
+      </div>
 
-              {/* Form Fields */}
-              <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
-                {/* Full Name */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={form.fullName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                  />
-                  {formErrors.fullName && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.fullName}</p>
-                  )}
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                    disabled
-                  />
-                </div>
-              </div>
-
-              {/* Company Name */}
-              <div className="mb-8">
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Company Name
-                </label>
-                <input
-                  type="text"
-                  name="companyName"
-                  value={form.companyName}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                />
-                {formErrors.companyName && (
-                  <p className="mt-1 text-xs text-red-500">{formErrors.companyName}</p>
-                )}
-              </div>
-
-              {/* Logo Upload Area */}
-              <div 
-                className="p-12 text-center border-2 border-dashed rounded-lg border-amber-400 bg-amber-50/30"
-                onClick={() => fileInputRef.current?.click()}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-              >
-                <div className="flex flex-col items-center">
-                  <Upload className="w-8 h-8 mb-4 text-amber-500" />
-                  <p className="mb-2 text-gray-600">
-                    Drag & drop your company logo here, or{' '}
-                    <button className="text-blue-600 underline hover:text-blue-700">
-                      browse
-                    </button>
-                  </p>
-                  {form.companyLogo ? (
-                    <div className="w-16 h-16 mt-4 overflow-hidden rounded-full">
-                      <img 
-                        src={URL.createObjectURL(form.companyLogo)} 
-                        alt="Company Logo" 
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-16 h-16 mt-4 border-2 rounded-full border-amber-400"></div>
-                  )}
-                </div>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-              </div>
-            </div>
-          </div>
+      {/* Form Fields */}
+      <div className="grid grid-cols-1 gap-4 mb-6 sm:gap-6 sm:mb-8 md:grid-cols-2">
+        {/* Full Name */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Full Name
+          </label>
+          <input
+            type="text"
+            name="fullName"
+            value={form.fullName}
+            onChange={handleChange}
+            className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+          />
+          {formErrors.fullName && (
+            <p className="mt-1 text-xs text-red-500">{formErrors.fullName}</p>
+          )}
         </div>
+
+        {/* Email */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+            disabled
+          />
+        </div>
+      </div>
+
+      {/* Company Name */}
+      <div className="mb-6 sm:mb-8">
+        <label className="block mb-2 text-sm font-medium text-gray-700">
+          Company Name
+        </label>
+        <input
+          type="text"
+          name="companyName"
+          value={form.companyName}
+          onChange={handleChange}
+          className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+        />
+        {formErrors.companyName && (
+          <p className="mt-1 text-xs text-red-500">{formErrors.companyName}</p>
+        )}
+      </div>
+
+      {/* Logo Upload Area */}
+      <div 
+        className="p-8 text-center border-2 border-dashed rounded-lg sm:p-12 border-amber-400 bg-amber-50/30"
+        onClick={() => fileInputRef.current?.click()}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      >
+        <div className="flex flex-col items-center">
+          <Upload className="w-6 h-6 mb-3 sm:w-8 sm:h-8 sm:mb-4 text-amber-500" />
+          <p className="mb-2 text-sm text-gray-600 sm:text-base">
+            Drag & drop your company logo here, or{' '}
+            <button className="text-blue-600 underline hover:text-blue-700">
+              browse
+            </button>
+          </p>
+          {form.companyLogo ? (
+            <div className="w-12 h-12 mt-3 overflow-hidden rounded-full sm:w-16 sm:h-16 sm:mt-4">
+              <img 
+                src={URL.createObjectURL(form.companyLogo)} 
+                alt="Company Logo" 
+                className="object-cover w-full h-full"
+              />
+            </div>
+          ) : (
+            <div className="w-12 h-12 mt-3 border-2 rounded-full sm:w-16 sm:h-16 sm:mt-4 border-amber-400"></div>
+          )}
+        </div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleFileUpload}
+          className="hidden"
+        />
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* Business Details Section */}
-        <div className="p-8 bg-gray-50">
-          <div className="max-w-4xl mx-auto">
-            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
-              {/* Header */}
-              <div className="mb-8 text-center">
-                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Business Details</h1>
-              </div>
+     <div className="p-4 sm:p-8 bg-gray-50">
+  <div className="w-full max-w-4xl mx-auto">
+    <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8">
+      {/* Header */}
+      <div className="mb-6 text-center sm:mb-8">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#B29200] mb-1">Business Details</h1>
+      </div>
 
-              {/* Form Fields */}
-              <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
-                {/* Company Type */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Company Type
-                  </label>
-                  <div className="relative">
-                    <select 
-                      name="companyType"
-                      value={form.companyType}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                    >
-                      <option value="">Select company type</option>
-                      {companyTypes.map(type => (
-                        <option key={type} value={type}>{type}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
-                  </div>
-                  {formErrors.companyType && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.companyType}</p>
-                  )}
-                </div>
-
-                {/* Industry */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Industry
-                  </label>
-                  <div className="relative">
-                    <select 
-                      name="industry"
-                      value={form.industry}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                    >
-                      <option value="">Select industry</option>
-                      {industries.map(industry => (
-                        <option key={industry} value={industry}>{industry}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
-                  </div>
-                  {formErrors.industry && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.industry}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {/* GST Number */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    GST Number
-                  </label>
-                  <input
-                    type="text"
-                    name="gstNumber"
-                    value={form.gstNumber}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                  />
-                </div>
-
-                {/* Registered Address */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Registered Address
-                  </label>
-                  <input
-                    type="text"
-                    name="registeredAddress"
-                    value={form.registeredAddress}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                  />
-                  {formErrors.registeredAddress && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.registeredAddress}</p>
-                  )}
-                </div>
-              </div>
-            </div>
+      {/* Form Fields - First Row */}
+      <div className="grid grid-cols-1 gap-4 mb-6 sm:gap-6 sm:mb-8 md:grid-cols-2">
+        {/* Company Type */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Company Type
+          </label>
+          <div className="relative">
+            <select 
+              name="companyType"
+              value={form.companyType}
+              onChange={handleChange}
+              className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+            >
+              <option value="">Select company type</option>
+              {companyTypes.map(type => (
+                <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
           </div>
+          {formErrors.companyType && (
+            <p className="mt-1 text-xs text-red-500">{formErrors.companyType}</p>
+          )}
         </div>
+
+        {/* Industry */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Industry
+          </label>
+          <div className="relative">
+            <select 
+              name="industry"
+              value={form.industry}
+              onChange={handleChange}
+              className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+            >
+              <option value="">Select industry</option>
+              {industries.map(industry => (
+                <option key={industry} value={industry}>{industry}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+          </div>
+          {formErrors.industry && (
+            <p className="mt-1 text-xs text-red-500">{formErrors.industry}</p>
+          )}
+        </div>
+      </div>
+
+      {/* Form Fields - Second Row */}
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+        {/* GST Number */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            GST Number
+          </label>
+          <input
+            type="text"
+            name="gstNumber"
+            value={form.gstNumber}
+            onChange={handleChange}
+            className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+          />
+        </div>
+
+        {/* Registered Address */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Registered Address
+          </label>
+          <input
+            type="text"
+            name="registeredAddress"
+            value={form.registeredAddress}
+            onChange={handleChange}
+            className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+          />
+          {formErrors.registeredAddress && (
+            <p className="mt-1 text-xs text-red-500">{formErrors.registeredAddress}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* Team & Preferences Section */}
-        <div className="p-8 bg-gray-50">
-          <div className="max-w-4xl mx-auto">
-            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
-              {/* Header */}
-              <div className="mb-8 text-center">
-                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Team & Preferences</h1>
-              </div>
+     <div className="p-4 sm:p-8 bg-gray-50">
+  <div className="w-full max-w-4xl mx-auto">
+    <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8">
+      {/* Header */}
+      <div className="mb-6 text-center sm:mb-8">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#B29200] mb-1">Team & Preferences</h1>
+      </div>
 
-              {/* Form Fields */}
-              <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
-                {/* Default Currency */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Default Currency
-                  </label>
-                  <div className="relative">
-                    <select 
-                      name="defaultCurrency"
-                      value={form.defaultCurrency}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                    >
-                      <option value="">Select currency</option>
-                      {currencies.map(currency => (
-                        <option key={currency} value={currency}>{currency}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
-                  </div>
-                  {formErrors.defaultCurrency && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.defaultCurrency}</p>
-                  )}
-                </div>
-
-                {/* Payment Cycle */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Payment Cycle
-                  </label>
-                  <div className="relative">
-                    <select 
-                      name="defaultPaymentCycle"
-                      value={form.defaultPaymentCycle}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                    >
-                      <option value="">Select payment cycle</option>
-                      {paymentCycles.map(cycle => (
-                        <option key={cycle} value={cycle}>{cycle}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
-                  </div>
-                  {formErrors.defaultPaymentCycle && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.defaultPaymentCycle}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {/* Preferred Language */}
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Preferred Language
-                  </label>
-                  <div className="relative">
-                    <select 
-                      name="preferredLanguage"
-                      value={form.preferredLanguage}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
-                    >
-                      <option value="">Select language</option>
-                      {languages.map(language => (
-                        <option key={language} value={language}>{language}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
-                  </div>
-                  {formErrors.preferredLanguage && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.preferredLanguage}</p>
-                  )}
-                </div>
-
-                {/* Empty column for layout */}
-                <div>
-                  {/* Empty space to maintain grid layout */}
-                </div>
-              </div>
-            </div>
+      {/* Form Fields - First Row */}
+      <div className="grid grid-cols-1 gap-4 mb-6 sm:gap-6 sm:mb-8 md:grid-cols-2">
+        {/* Default Currency */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Default Currency
+          </label>
+          <div className="relative">
+            <select 
+              name="defaultCurrency"
+              value={form.defaultCurrency}
+              onChange={handleChange}
+              className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+            >
+              <option value="">Select currency</option>
+              {currencies.map(currency => (
+                <option key={currency} value={currency}>{currency}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
           </div>
+          {formErrors.defaultCurrency && (
+            <p className="mt-1 text-xs text-red-500">{formErrors.defaultCurrency}</p>
+          )}
         </div>
+
+        {/* Payment Cycle */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Payment Cycle
+          </label>
+          <div className="relative">
+            <select 
+              name="defaultPaymentCycle"
+              value={form.defaultPaymentCycle}
+              onChange={handleChange}
+              className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+            >
+              <option value="">Select payment cycle</option>
+              {paymentCycles.map(cycle => (
+                <option key={cycle} value={cycle}>{cycle}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+          </div>
+          {formErrors.defaultPaymentCycle && (
+            <p className="mt-1 text-xs text-red-500">{formErrors.defaultPaymentCycle}</p>
+          )}
+        </div>
+      </div>
+
+      {/* Form Fields - Second Row */}
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+        {/* Preferred Language */}
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Preferred Language
+          </label>
+          <div className="relative">
+            <select 
+              name="preferredLanguage"
+              value={form.preferredLanguage}
+              onChange={handleChange}
+              className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+            >
+              <option value="">Select language</option>
+              {languages.map(language => (
+                <option key={language} value={language}>{language}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+          </div>
+          {formErrors.preferredLanguage && (
+            <p className="mt-1 text-xs text-red-500">{formErrors.preferredLanguage}</p>
+          )}
+        </div>
+
+        {/* Empty column for layout - now properly responsive */}
+        <div className="hidden md:block">
+          {/* Empty space to maintain grid layout on desktop only */}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* Enterprise Suite Settings Section */}
-        <div className="bg-gray-50 p-8 border-b-1 border-[#DEE1E6]">
-          <div className="max-w-4xl mx-auto">
-            <div className="p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
-              {/* Header */}
-              <div className="mb-8 text-center">
-                <h1 className="text-2xl font-semibold text-[#B29200] mb-1">Enterprise Suite Settings</h1>
-              </div>
+    <div className="bg-gray-50 p-4 sm:p-8">
+  <div className="w-full max-w-4xl mx-auto">
+    <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8">
+      {/* Header */}
+      <div className="mb-6 text-center sm:mb-8">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#B29200] mb-1">Enterprise Suite Settings</h1>
+      </div>
 
-              {/* Settings Items */}
-              <div className="space-y-8">
-                {/* Onboarding Kit */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <span className="text-base font-medium text-gray-700">Onboarding Kit</span>
-                  </div>
-                  <div className="relative">
-                    <button
-                      onClick={() => setForm(prev => ({...prev, enableOnboardingKit: !form.enableOnboardingKit}))}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-                        form.enableOnboardingKit ? 'bg-indigo-600' : 'bg-gray-200'
-                      }`}
-                    >
-                      <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          form.enableOnboardingKit ? 'translate-x-6' : 'translate-x-1'
-                        }`}
-                      />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Timestamp Proof */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <span className="text-base font-medium text-gray-700">Timestamp Proof</span>
-                    <Info className="w-4 h-4 ml-2 text-amber-500" />
-                  </div>
-                  <div className="relative">
-                    <button
-                      onClick={() => setForm(prev => ({...prev, enableTimestampProof: !form.enableTimestampProof}))}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-                        form.enableTimestampProof ? 'bg-indigo-600' : 'bg-gray-200'
-                      }`}
-                    >
-                      <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          form.enableTimestampProof ? 'translate-x-6' : 'translate-x-1'
-                        }`}
-                      />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Default Signature Style */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <span className="text-base font-medium text-gray-700">Default Signature Style</span>
-                  </div>
-                  <div className="relative">
-                    <select 
-                      name="defaultSignatureStyle"
-                      value={form.defaultSignatureStyle}
-                      onChange={handleChange}
-                      className="w-48 px-4 py-2 transition-colors bg-white border border-gray-300 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                    >
-                      <option value="">Select signature style</option>
-                      {signatureStyles.map(style => (
-                        <option key={style} value={style}>{style}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
-                  </div>
-                </div>
-              </div>
-            </div>
+      {/* Settings Items */}
+      <div className="space-y-6 sm:space-y-8">
+        {/* Onboarding Kit */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <span className="text-sm font-medium text-gray-700 sm:text-base">Onboarding Kit</span>
+          </div>
+          <div className="relative">
+            <button
+              onClick={() => setForm(prev => ({...prev, enableOnboardingKit: !form.enableOnboardingKit}))}
+              className={`relative inline-flex h-5 sm:h-6 w-10 sm:w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+                form.enableOnboardingKit ? 'bg-indigo-600' : 'bg-gray-200'
+              }`}
+            >
+              <span
+                className={`inline-block h-3 sm:h-4 w-3 sm:w-4 transform rounded-full bg-white transition-transform ${
+                  form.enableOnboardingKit ? 'translate-x-5 sm:translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
           </div>
         </div>
 
+        {/* Timestamp Proof */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <span className="text-sm font-medium text-gray-700 sm:text-base">Timestamp Proof</span>
+            <Info className="w-3 h-3 ml-1 sm:w-4 sm:h-4 sm:ml-2 text-amber-500" />
+          </div>
+          <div className="relative">
+            <button
+              onClick={() => setForm(prev => ({...prev, enableTimestampProof: !form.enableTimestampProof}))}
+              className={`relative inline-flex h-5 sm:h-6 w-10 sm:w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+                form.enableTimestampProof ? 'bg-indigo-600' : 'bg-gray-200'
+              }`}
+            >
+              <span
+                className={`inline-block h-3 sm:h-4 w-3 sm:w-4 transform rounded-full bg-white transition-transform ${
+                  form.enableTimestampProof ? 'translate-x-5 sm:translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+
+        {/* Default Signature Style */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <span className="text-sm font-medium text-gray-700 sm:text-base">Default Signature Style</span>
+          </div>
+          <div className="relative">
+            <select 
+              name="defaultSignatureStyle"
+              value={form.defaultSignatureStyle}
+              onChange={handleChange}
+              className="px-3 py-1 transition-colors bg-white border border-gray-300 rounded-lg outline-none appearance-none w-36 sm:w-48 sm:px-4 sm:py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            >
+              <option value="">Select signature style</option>
+              {signatureStyles.map(style => (
+                <option key={style} value={style}>{style}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute w-3 h-3 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-4 sm:h-4 right-2 sm:right-3 top-1/2" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
         {/* Action Buttons */}
-        <div className="w-full border-t border-[#DEE1E6] bg-white px-6 py-4 flex justify-end space-x-3">
-          <button className="px-4 py-2 border border-[#6B4DE6] text-[#6B4DE6] rounded-md hover:bg-[#f5f5f7]">
-            Cancel & Exit
-          </button>
+        <div className="w-full bg-white px-6 py-4 flex justify-end space-x-3">
+         
           <button 
             onClick={handleSubmit}
             disabled={isLoading}

@@ -25,15 +25,15 @@ const EnterpriseHome = () => {
     <div>
       <EnterpriseNavbar />  
 
-      <main className=" px-4 sm:px-6 lg:px-16 py-32  bg-[rgba(178,146,0,0.31)]">
+             <main className=" px-4 sm:px-6 lg:px-16 py-16 lg:py-32  bg-[rgba(178,146,0,0.31)]">
         <div className="max-w-7xl mx-auto w-full ">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
-            <div className="space-y-10">
+            <div className="space-y-4 sm:space-y-10">
               <h1 className={`${lora.className} text-white text-[30px] sm:text-[48px] leading-[48px] font-bold`}>
                ALL YOUR STARTUP DOCS & PAYMENTS IN ONE PLACE
               </h1>
-              <div className="border-b-4 border-yellow-600 w-32 mt-2"></div>
+              <div className="border-b-4 border-yellow-600 w-32 sm:mt-2"></div>
 
               <p className="text-white text-lg lg:text-xl leading-relaxed opacity-100">
                 Send contracts, collect signatures, track payments, and manage freelancers —  simple, ad-free, and built for solo founders & small teams
@@ -54,25 +54,25 @@ const EnterpriseHome = () => {
                 </Button>
               </div>
             </div>
-            {/* Right Content - Image Only */}
-            <div className="flex justify-end items-center w-full h-[28rem] lg:h-[32rem]">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/selection1.png"
-                  alt="Dashboard"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </div>
+                         {/* Right Content - Image Only */}
+                           <div className="hidden lg:flex justify-end items-center w-full h-[24rem]">
+               <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-white/20">
+                 <Image
+                   src="/selection1.png"
+                   alt="Dashboard"
+                   fill
+                   sizes="(max-width: 1024px) 100vw, 50vw"
+                   className="object-cover rounded-3xl"
+                   priority
+                 />
+               </div>
+             </div>
           </div>
         </div>
       </main>
 
       {/* 2nd section */}
-      <section className="bg-gray-50 py-16 lg:py-24">
+      <section className="bg-gray-50 py-16 lg:py-24 md:px-20">
         <div className="container mx-auto px-6">
           <h2 className={`${lora.className} text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-16 `}>
             KEY BENEFITS OF PAPRLY ENTERPRISE
@@ -86,7 +86,7 @@ const EnterpriseHome = () => {
                     alt="Seamless Integration Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-100"
+                    className="w-full h-full object-cover text-yellow-100  rounded-full"
                   />
                 </div>
               </div>
@@ -105,7 +105,7 @@ const EnterpriseHome = () => {
                     alt="Enhanced Security Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-600"
+                    className="w-full h-full object-cover text-yellow-600 bg-transparent rounded-full"
                   />
                 </div>
               </div>
@@ -124,7 +124,7 @@ const EnterpriseHome = () => {
                     alt="Scalable Performance Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-600"
+                    className="w-full h-full object-cover text-yellow-600  rounded-full"
                   />
                 </div>
               </div>
@@ -143,7 +143,7 @@ const EnterpriseHome = () => {
                     alt="Intelligent Automation Icon"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover text-yellow-600"
+                    className="w-full h-full object-cover text-yellow-600  rounded-full"
                   />
                 </div>
               </div>
@@ -159,16 +159,16 @@ const EnterpriseHome = () => {
       </section>
 
       {/* Features That Empower Your Team section */}
-      <section className="bg-white py-16 lg:py-24 w-full">
+      <section className="bg-white py-16 lg:py-24 sm:px-20">
         <div className="container mx-auto px-6">
           <h2 className={`${merriweather.className} text-xl sm:text-2xl lg:text-4xl font-extrabold text-yellow-600 text-center mb-16`}>
             FEATURES THAT EMPOWER YOUR TEAM
           </h2>
         </div>
-        <div className="px-0 sm:px-6">
-          <div className="space-y-20 border-2 border-white rounded-xl p-6 sm:p-12 md:p-16 bg-transparent mx-0 sm:mx-6">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
-             <div className="sm:space-y-6 w-full">
+        <div className="container mx-auto px-6">
+          <div className="space-y-20">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 lg:p-12 rounded-lg bg-white">
+             <div className="space-y-6">
   <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
     1. One Place for Docs & Deals
   </h3>
@@ -181,20 +181,20 @@ const EnterpriseHome = () => {
                 <Image
                   src="/collaborate1.png"
                   alt="Unified Workspace Collaboration"
-                  width={400}
-                  height={256}
-                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-none"
+                  width={300}
+                  height={220}
+                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:w-[300px] lg:h-[220px] object-contain"
                 />
               </div>
             </div>
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 lg:p-12 rounded-lg bg-white">
               <div className="flex justify-center lg:order-first">
                 <Image
                   src="/screen.png"
                   alt="Advanced Analytics Dashboard"
-                  width={400}
-                  height={256}
-                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-none"
+                  width={300}
+                  height={220}
+                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:w-[300px] lg:h-[220px] object-contain"
                 />
               </div>
              <div className="space-y-6">
@@ -207,7 +207,7 @@ const EnterpriseHome = () => {
   </p>
 </div>
             </div>
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 rounded-lg w-full mx-0">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center shadow-sm border border-gray-200 p-6 sm:p-8 lg:p-12 rounded-lg bg-white">
               <div className="space-y-6">
   <h3 className={`${merriweather.className} text-lg sm:text-xl lg:text-3xl font-bold text-gray-800`}>
     3. Automation That Saves Time
@@ -221,9 +221,9 @@ const EnterpriseHome = () => {
                 <Image
                   src="/network.png"
                   alt="Automated Workflows"
-                  width={400}
-                  height={256}
-                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-none"
+                  width={300}
+                  height={220}
+                  className="rounded-lg w-full max-w-sm sm:max-w-md lg:w-[300px] lg:h-[220px] object-contain"
                 />
               </div>
             </div>
@@ -231,7 +231,7 @@ const EnterpriseHome = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section
       <section className="bg-gray-50 py-12 lg:py-20 mb-16">
         <div className="container mx-auto px-6 ">
           <h2
@@ -243,7 +243,7 @@ const EnterpriseHome = () => {
           <div className="sm:max-w-6xl sm:mx-auto w-full">
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               {/* Testimonial 1 */}
-              <div className="bg-white p-8 rounded-lg shadow-sm">
+              {/* <div className="bg-white p-8 rounded-lg shadow-sm">
                 <p className="text-gray-700 mb-6 leading-relaxed" style={{ fontFamily: "Lora, serif" }}>
                   &quot;Paprly transformed our operational efficiency. The seamless integration and powerful analytics
                   capabilities have significantly boosted our productivity and decision-making speed. It&amp;apos;s an
@@ -266,9 +266,9 @@ const EnterpriseHome = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* Testimonial 2 */}
-              <div className="bg-white p-8 rounded-lg shadow-sm">
+              {/* <div className="bg-white p-8 rounded-lg shadow-sm">
                 <p className="text-gray-700 mb-6 leading-relaxed" style={{ fontFamily: "Lora, serif" }}>
                   &quot;The level of security and scalability offered by Paprly is truly remarkable. We can confidently grow
                   our business knowing our data is protected and our systems will always perform optimally.&quot;
@@ -291,9 +291,9 @@ const EnterpriseHome = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* Testimonial 3 - Centered */}
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <div className="bg-white p-8 rounded-lg shadow-sm max-w-2xl">
                 <p className="text-gray-700 mb-6 leading-relaxed" style={{ fontFamily: "Lora, serif" }}>
                   &quot;Intelligent automation has never been this accessible. Paprly allowed us to streamline complex
@@ -319,11 +319,11 @@ const EnterpriseHome = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </div> */}
+      {/* </section>  */}
 
       {/* Trusted By Section */}
-      <section className="bg-white py-12">
+      {/* <section className="bg-white py-12">
         <div className="container mx-auto px-6">
           <h2
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-10"
@@ -376,18 +376,18 @@ const EnterpriseHome = () => {
             />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Pricing Section */}
       <section className="bg-gray-50 py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-0">
           <h2
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-600 text-center mb-12"
             style={{ fontFamily: "Lora, serif" }}
           >
             FLEXIBLE PLANS FOR EVERY ENTERPRISE
           </h2>
-          <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             <div className="bg-yellow-50 p-8 rounded-lg shadow-sm">
               <h3 className="text-2xl font-bold text-gray-800 mb-2" style={{ fontFamily: "Lora, serif" }}>
                 Solo & Small Team Plan
@@ -401,26 +401,46 @@ const EnterpriseHome = () => {
                 </span>
               </div>
               <ul className="space-y-3 mb-8" style={{ fontFamily: "Open Sans, sans-serif" }}>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>Quick Hire:</strong>Create & send On-boarding docs</span>
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>Doc Tracking::</strong>Track all signed documents</span>
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>AI Doc Builder:</strong> Auto-generate all on-boarding documents instantly</span>
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>100% Ad Free</strong></span>
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  <span><strong>Payments & Invoices:</strong> Pay, Send, track, and manage in one place</span>
-                </li>
+                                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5">
+                     <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                     </svg>
+                   </div>
+                   <span><strong>Quick Hire:</strong>Create & send On-boarding docs</span>
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5">
+                     <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                     </svg>
+                   </div>
+                   <span><strong>Doc Tracking::</strong>Track all signed documents</span>
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5">
+                     <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                     </svg>
+                   </div>
+                   <span><strong>AI Doc Builder:</strong> Auto-generate all on-boarding documents instantly</span>
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5">
+                     <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                     </svg>
+                   </div>
+                   <span><strong>100% Ad Free</strong></span>
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5">
+                     <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                     </svg>
+                   </div>
+                   <span><strong>Payments & Invoices:</strong> Pay, Send, track, and manage in one place</span>
+                 </li>
               </ul>
               <Button
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
@@ -439,33 +459,45 @@ const EnterpriseHome = () => {
                 </span>
               </div>
               <ul className="space-y-3 mb-8" style={{ fontFamily: "Open Sans, sans-serif" }}>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-              </ul>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                   Coming Soon
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                   Coming Soon
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                   Coming Soon
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                   Coming Soon
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                   Coming Soon
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                   Coming Soon
+                 </li>
+               </ul>
               <Button
-                className=" w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
+                className=" w-full sm:mt-15 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
                 style={{ fontFamily: "Open Sans, sans-serif" }}
               >
                 Get Started
@@ -482,33 +514,45 @@ const EnterpriseHome = () => {
                 <br />
               </div>
               <ul className="space-y-3 mb-8" style={{ fontFamily: "Open Sans, sans-serif" }}>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                    Coming Soon
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
                    Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                  Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
                    Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
-                 Coming Soon
-                </li>
-                <li className="flex items-start text-gray-700">
-                  <span className="text-purple-500 mr-3 mt-1">✓</span>
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                    Coming Soon
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
                   Coming Soon
-                </li>
-              </ul>
+                 </li>
+                 <li className="flex items-start text-gray-700">
+                   <div className="mr-3 mt-1 w-5 h-5 flex items-center justify-center">
+                     <span className="text-yellow-500 text-xl font-bold">✓</span>
+                   </div>
+                   Coming Soon
+                 </li>
+               </ul>
               <Button
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
+                className="w-full sm:mt-15 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded transition-colors duration-300"
                 style={{ fontFamily: "Open Sans, sans-serif" }}
               >
                 Get Started
