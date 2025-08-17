@@ -1,10 +1,10 @@
-// components/EnterpriseNavbar.js
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from "next/image"
-import { Borel } from "next/font/google"
-import { Inter } from "next/font/google"
-import { Open_Sans } from "next/font/google"
+import { Borel, Inter } from "next/font/google"
+import { getAuthToken, getUserData, logout } from "@/utils/auth"
+import { useRouter } from "next/navigation"
+import { FiLogOut } from "react-icons/fi" // Import logout icon
 
 const borel = Borel({
   subsets: ["latin"],
@@ -16,20 +16,35 @@ const inter = Inter({
   weight: "400",
 })
 
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: "400",
-})
-
 const EnterpriseNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [user, setUser] = useState(null)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    const token = getAuthToken()
+    const userData = getUserData()
+    
+    if (token && userData) {
+      setUser(userData)
+      setIsAuthenticated(true)
+    }
+  }, [])
+
+  const handleLogout = () => {
+    logout()
+    setIsAuthenticated(false)
+    setUser(null)
+    router.push('/sign-in')
+  }
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
   return (
-    <nav className="flex justify-between items-center px-6 py-3 bg-white shadow-sm relative">
+    <nav className="relative flex items-center justify-between px-6 py-3 bg-white shadow-sm">
       {/* Left: Logo */}
       <div className="md:col-span-1">
                   <div className="flex flex-row items-center space-x-4 mb-4 ">
@@ -64,6 +79,32 @@ const EnterpriseNavbar = () => {
           Sign In
         </a>
         
+      <div className="items-center hidden space-x-4 md:flex">
+        {isAuthenticated ? (
+          <div className="flex items-center space-x-4">
+            {/* Logout icon button */}
+            <button
+              onClick={handleLogout}
+              className="p-2 text-gray-600 transition-colors rounded-full hover:text-yellow-600 hover:bg-gray-100"
+              title="Logout"
+            >
+              <FiLogOut className="w-5 h-5" />
+            </button>
+            {/* Profile icon only */}
+            <div className="flex items-center justify-center w-8 h-8 bg-yellow-100 rounded-full">
+              <span className="text-sm font-medium text-yellow-700">
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
+              </span>
+            </div>
+          </div>
+        ) : (
+          <a
+            href="/sign-in"
+            className={`bg-yellow-700 text-white px-4 py-1 rounded hover:bg-yellow-800 text-sm font-semibold`}
+          >
+            Sign In
+          </a>
+        )}
       </div>
 
       {/* Mobile Hamburger Menu Button */}
@@ -74,7 +115,7 @@ const EnterpriseNavbar = () => {
           aria-label="Toggle mobile menu"
         >
           <svg
-            className="h-6 w-6"
+            className="w-6 h-6"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -93,41 +134,41 @@ const EnterpriseNavbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 md:hidden z-50">
+        <div className="absolute left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg top-full md:hidden">
           <div className="px-6 py-4 space-y-4">
             {/* Mobile Navigation Links */}
             <div className={`space-y-3 text-sm text-yellow-500 ${inter.className}`}>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Solutions
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Pricing
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 About Us
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
@@ -143,6 +184,35 @@ const EnterpriseNavbar = () => {
               >
                 Sign In
               </a>
+              {isAuthenticated ? (
+                <>
+                  <div className="flex items-center justify-center mb-3">
+                    <div className="flex items-center justify-center w-10 h-10 bg-yellow-100 rounded-full">
+                      <span className="text-lg font-medium text-yellow-700">
+                        {user?.name?.charAt(0).toUpperCase() || 'U'}
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      handleLogout()
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className="flex items-center justify-center w-full px-4 py-2 text-center text-gray-700 rounded hover:bg-gray-100"
+                  >
+                    <FiLogOut className="w-5 h-5 mr-2" />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <a
+                  href="/sign-in"
+                  className={`block w-full text-center bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-800 text-sm font-semibold`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Sign In
+                </a>
+              )}
             </div>
           </div>
         </div>
