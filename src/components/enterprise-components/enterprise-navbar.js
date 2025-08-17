@@ -29,8 +29,7 @@ const EnterpriseNavbar = () => {
   }
 
   return (
-    <nav className="flex justify-between items-center px-6 py-3 bg-white shadow-sm relative">
-      {/* Left: Logo */}
+    <nav className="relative flex items-center justify-between px-6 py-3 bg-white shadow-sm">
       <div className="flex items-center space-x-2">
         <Image src="/starlogo.png" alt="Logo" className='ml-15' width={40} height={40} />
         <span className={`absolute top-[19px] left-[120px] font-borel text-[25px] leading-[25px] font-bold mr-20 text-[#B29200] ${borel.className}`}>paprly</span>
@@ -46,7 +45,7 @@ const EnterpriseNavbar = () => {
       </div>
 
       {/* Desktop Auth buttons */}
-      <div className="hidden md:flex items-center space-x-4">
+      <div className="items-center hidden space-x-4 md:flex">
         <a
           href="#"
           className={`bg-yellow-700 text-white px-4 py-1 rounded hover:bg-yellow-800 text-sm font-semibold ${openSans.className}`}
@@ -63,7 +62,7 @@ const EnterpriseNavbar = () => {
           aria-label="Toggle mobile menu"
         >
           <svg
-            className="h-6 w-6"
+            className="w-6 h-6"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -82,41 +81,41 @@ const EnterpriseNavbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 md:hidden z-50">
+        <div className="absolute left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg top-full md:hidden">
           <div className="px-6 py-4 space-y-4">
             {/* Mobile Navigation Links */}
             <div className={`space-y-3 text-sm text-yellow-500 ${inter.className}`}>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Solutions
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Pricing
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 About Us
               </a>
               <a 
                 href="#" 
-                className="block hover:text-yellow-700 font-semibold py-2 border-b border-gray-100"
+                className="block py-2 font-semibold border-b border-gray-100 hover:text-yellow-700"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact

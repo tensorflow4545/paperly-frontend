@@ -146,9 +146,9 @@ export default function EnterpriseProfilePage() {
   // Show loading if user data is not yet loaded
   if (!user && !isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
           <p className="mt-4 text-gray-600">Loading user data...</p>
         </div>
       </div>
@@ -158,9 +158,9 @@ export default function EnterpriseProfilePage() {
   // Show loading while profile data is being fetched
   if (isLoadingProfile) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
           <p className="mt-4 text-gray-600">Loading profile data...</p>
         </div>
       </div>
@@ -170,12 +170,12 @@ export default function EnterpriseProfilePage() {
   // If no user data after loading, redirect to login
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
-          <p className="text-gray-600 mb-4">No user data found. Please log in.</p>
+          <p className="mb-4 text-gray-600">No user data found. Please log in.</p>
           <button 
             onClick={() => window.location.href = '/sign-in'}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg"
+            className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
           >
             Go to Login
           </button>
@@ -359,20 +359,20 @@ export default function EnterpriseProfilePage() {
       <PageSEO pageName="enterprise-profile" />
       
       {/* Premium Navbar */}
-      <nav className="bg-white/95 backdrop-blur-sm border-b border-gray-200/50 shadow-lg sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6">
-          <div className="flex justify-between items-center h-12 sm:h-16">
+      <nav className="sticky top-0 z-50 border-b shadow-lg bg-white/95 backdrop-blur-sm border-gray-200/50">
+        <div className="px-3 mx-auto max-w-7xl sm:px-6">
+          <div className="flex items-center justify-between h-12 sm:h-16">
             {/* Logo and Brand */}
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg">
+              <div className="w-6 h-6 rounded-lg sm:w-8 sm:h-8">
                 <img 
                   src="/enterprise_logo.png" 
                   alt="Paprly Logo" 
-                  className="w-full h-full rounded-lg object-cover"
+                  className="object-cover w-full h-full rounded-lg"
                 />
               </div>
               <div className="flex items-center space-x-1 sm:space-x-2">
-                <span className="text-lg sm:text-xl font-bold text-gray-900">Paprly</span>
+                <span className="text-lg font-bold text-gray-900 sm:text-xl">Paprly</span>
                 <span className="bg-gradient-to-r from-purple-600 to-violet-600 text-white text-xs px-2 sm:px-3 py-0.5 sm:py-1.5 rounded-full font-semibold tracking-wide shadow-sm">
                   ENTERPRISE
                 </span>
@@ -382,7 +382,7 @@ export default function EnterpriseProfilePage() {
             {/* Right Side - User Menu */}
             <div className="flex items-center space-x-2 sm:space-x-6">
               {/* Notifications - Hidden on mobile */}
-              <button className="hidden sm:block text-gray-500 hover:text-purple-600 transition-all duration-200 p-2 rounded-lg hover:bg-purple-50">
+              <button className="hidden p-2 text-gray-500 transition-all duration-200 rounded-lg sm:block hover:text-purple-600 hover:bg-purple-50">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 17h5l-5 5v-5zM4.19 4.19A2 2 0 006 3h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2z" />
                 </svg>
@@ -390,14 +390,14 @@ export default function EnterpriseProfilePage() {
               
               {/* User Profile */}
               <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center shadow-md">
-                  <span className="text-white text-xs sm:text-sm font-semibold">
+                <div className="flex items-center justify-center w-6 h-6 rounded-full shadow-md sm:w-8 sm:h-8 bg-gradient-to-r from-purple-500 to-violet-500">
+                  <span className="text-xs font-semibold text-white sm:text-sm">
                     {user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'U'}
                   </span>
                 </div>
                 <div className="hidden md:block">
                   <p className="text-sm font-semibold text-gray-900">{user?.name || 'User'}</p>
-                  <p className="text-xs text-gray-500 font-medium">{user?.OrganizationType || 'Member'}</p>
+                  <p className="text-xs font-medium text-gray-500">{user?.OrganizationType || 'Member'}</p>
                 </div>
               </div>
               
@@ -414,31 +414,31 @@ export default function EnterpriseProfilePage() {
       </nav>
 
       {/* Main Content Area */}
-      <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-0 sm:p-4 rounded-md ">
+      <div className="min-h-screen p-0 rounded-md bg-gradient-to-br from-gray-100 to-gray-200 sm:p-4 ">
         
         {/* Minimal Page Header */}
         <div className="w-full px-4 sm:px-6 py-6 sm:py-8 border-b-[1px] border-purple-400 ">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+          <div className="flex flex-col items-start justify-between space-y-4 sm:flex-row sm:items-center sm:space-y-0">
             <div className="text-left">
-              <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">
+              <h1 className="mb-2 text-2xl font-semibold text-gray-900 sm:text-3xl">
                 Enterprise Profile
               </h1>
-              <p className="text-sm sm:text-base text-gray-600 mb-1">
+              <p className="mb-1 text-sm text-gray-600 sm:text-base">
                 Welcome back, {user?.name || 'User'}! {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile'}
               </p>
-              <p className="text-xs sm:text-sm text-gray-500">
+              <p className="text-xs text-gray-500 sm:text-sm">
                 {hasExistingProfile ? 'Your profile data has been loaded from the database. Make changes and save.' : 'Create your enterprise profile to unlock advanced features'}
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+            <div className="flex flex-col items-stretch w-full space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4 sm:w-auto">
               <button 
                 onClick={handleLogout}
-                className="px-4 py-3 sm:py-2 text-gray-600 hover:text-gray-800 font-medium transition-colors border border-gray-300 rounded-lg hover:border-gray-400 text-sm sm:text-base"
+                className="px-4 py-3 text-sm font-medium text-gray-600 transition-colors border border-gray-300 rounded-lg sm:py-2 hover:text-gray-800 hover:border-gray-400 sm:text-base"
               >
                 Log Out
               </button>
-              <button className="px-6 py-3 sm:py-2 bg-purple-500 hover:bg-purple-500 text-white rounded-lg font-medium transition-all duration-200 border border-purple-300 hover:border-purple-400 text-sm sm:text-base">
+              <button className="px-6 py-3 text-sm font-medium text-white transition-all duration-200 bg-purple-500 border border-purple-300 rounded-lg sm:py-2 hover:bg-purple-500 hover:border-purple-400 sm:text-base">
                 Explore Paprly Studio
               </button>
             </div>
@@ -446,8 +446,8 @@ export default function EnterpriseProfilePage() {
         </div>
 
         {/* Form Container & Basic Information */}
-        <div className="w-full px-0 sm:px-6 py-8 sm:py-12 border-b border-purple-400">
-          <div className="bg-white/80 backdrop-blur-sm rounded-none sm:rounded-xl border border-white/20 shadow-md p-4 sm:p-8">
+        <div className="w-full px-0 py-8 border-b border-purple-400 sm:px-6 sm:py-12">
+          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
             {/* Section Header */}
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -455,7 +455,7 @@ export default function EnterpriseProfilePage() {
                 <p className="text-sm text-gray-500">Your personal and company details</p>
               </div>
               {hasExistingProfile && (
-                <div className="flex items-center text-green-600 text-sm">
+                <div className="flex items-center text-sm text-green-600">
                   <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                   </svg>
@@ -465,13 +465,13 @@ export default function EnterpriseProfilePage() {
             </div>
 
             {/* Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {/* Full Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   Full Name(Company or Personal)
                   {user?.OrganizationType && (
-                    <span className="ml-2 text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
+                    <span className="px-2 py-1 ml-2 text-xs text-purple-600 bg-purple-100 rounded-full">
                       {user.OrganizationType}
                     </span>
                   )}
@@ -481,64 +481,64 @@ export default function EnterpriseProfilePage() {
                   name="fullName"
                   value={form.fullName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="Enter your full name"
                 />
                 {formErrors.fullName && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.fullName}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.fullName}</p>
                 )}
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email (Company or Personal)</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Email (Company or Personal)</label>
                                   <input
                     type="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                    className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
                     placeholder="Enter your email"
                   />
               </div>
 
               {/* Company Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Company Name</label>
                 <input
                   type="text"
                   name="companyName"
                   value={form.companyName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="Enter company name"
                 />
                 {formErrors.companyName && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.companyName}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.companyName}</p>
                 )}
               </div>
 
               {/* Company Logo */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Company Logo</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Company Logo</label>
                 <div
                   onClick={() => fileInputRef.current?.click()}
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
-                  className="w-full h-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-purple-400 transition-colors duration-200"
+                  className="flex items-center justify-center w-full h-32 transition-colors duration-200 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:border-purple-400"
                 >
                   {form.companyLogo ? (
                     <div className="text-center">
                       <img 
                         src={URL.createObjectURL(form.companyLogo)} 
                         alt="Company Logo" 
-                        className="w-16 h-16 mx-auto mb-2 rounded-lg object-cover"
+                        className="object-cover w-16 h-16 mx-auto mb-2 rounded-lg"
                       />
                       <p className="text-sm text-gray-600">{form.companyLogo.name}</p>
                     </div>
                   ) : (
                     <div className="text-center">
-                      <svg className="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-8 h-8 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
                       <p className="text-sm text-gray-500">Drop logo here or click to upload</p>
@@ -558,8 +558,8 @@ export default function EnterpriseProfilePage() {
         </div>
 
         {/* Business Details Section */}
-        <div className="w-full px-0 sm:px-6 py-6 sm:py-8 border-b border-purple-400">
-          <div className="bg-white/80 backdrop-blur-sm rounded-none sm:rounded-xl border border-white/20 shadow-md p-4 sm:p-8">
+        <div className="w-full px-0 py-6 border-b border-purple-400 sm:px-6 sm:py-8">
+          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
             {/* Section Header */}
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -570,15 +570,15 @@ export default function EnterpriseProfilePage() {
             </div>
 
             {/* Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {/* Company Type */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Company Type</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Company Type</label>
                 <select
                   name="companyType"
                   value={form.companyType}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select company type</option>
                   {companyTypes.map(type => (
@@ -586,18 +586,18 @@ export default function EnterpriseProfilePage() {
                   ))}
                 </select>
                 {formErrors.companyType && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.companyType}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.companyType}</p>
                 )}
               </div>
 
               {/* Industry */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Industry</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Industry</label>
                 <select
                   name="industry"
                   value={form.industry}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select industry</option>
                   {industries.map(industry => (
@@ -605,36 +605,36 @@ export default function EnterpriseProfilePage() {
                   ))}
                 </select>
                 {formErrors.industry && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.industry}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.industry}</p>
                 )}
               </div>
 
               {/* GST Number */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">GST Number (Optional)</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">GST Number (Optional)</label>
                 <input
                   type="text"
                   name="gstNumber"
                   value={form.gstNumber}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="Enter GST number"
                 />
               </div>
 
               {/* Registered Address */}
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Registered Address</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Registered Address</label>
                 <textarea
                   name="registeredAddress"
                   value={form.registeredAddress}
                   onChange={handleChange}
                   rows="3"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="Enter registered address"
                 />
                 {formErrors.registeredAddress && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.registeredAddress}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.registeredAddress}</p>
                 )}
               </div>
             </div>
@@ -642,8 +642,8 @@ export default function EnterpriseProfilePage() {
         </div>
 
         {/* Team & Preferences Section */}
-        <div className="w-full px-0 sm:px-6 py-6 sm:py-8">
-          <div className="bg-white/80 backdrop-blur-sm rounded-none sm:rounded-xl border border-white/20 shadow-md p-4 sm:p-8">
+        <div className="w-full px-0 py-6 sm:px-6 sm:py-8">
+          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
             {/* Section Header */}
             <div className="flex items-center mb-8">
               <div>
@@ -653,15 +653,15 @@ export default function EnterpriseProfilePage() {
             </div>
 
             {/* Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 sm:gap-6">
               {/* Default Currency */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Default Currency</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Default Currency</label>
                 <select
                   name="defaultCurrency"
                   value={form.defaultCurrency}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select currency</option>
                   {currencies.map(currency => (
@@ -669,18 +669,18 @@ export default function EnterpriseProfilePage() {
                   ))}
                 </select>
                 {formErrors.defaultCurrency && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.defaultCurrency}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.defaultCurrency}</p>
                 )}
               </div>
 
               {/* Default Payment Cycle */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Default Payment Cycle</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Default Payment Cycle</label>
                 <select
                   name="defaultPaymentCycle"
                   value={form.defaultPaymentCycle}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select payment cycle</option>
                   {paymentCycles.map(cycle => (
@@ -688,18 +688,18 @@ export default function EnterpriseProfilePage() {
                   ))}
                 </select>
                 {formErrors.defaultPaymentCycle && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.defaultPaymentCycle}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.defaultPaymentCycle}</p>
                 )}
               </div>
 
               {/* Preferred Language */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Language</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Preferred Language</label>
                 <select
                   name="preferredLanguage"
                   value={form.preferredLanguage}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select language</option>
                   {languages.map(language => (
@@ -707,7 +707,7 @@ export default function EnterpriseProfilePage() {
                   ))}
                 </select>
                 {formErrors.preferredLanguage && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.preferredLanguage}</p>
+                  <p className="mt-1 text-xs text-red-500">{formErrors.preferredLanguage}</p>
                 )}
               </div>
             </div>
@@ -715,8 +715,8 @@ export default function EnterpriseProfilePage() {
         </div>
 
         {/* Enterprise Suite Settings Section */}
-        <div className="w-full px-0 sm:px-6 py-6 sm:py-8 border-b border-purple-400">
-          <div className="bg-white/80 backdrop-blur-sm sm:rounded-xl border border-white/20 shadow-md p-4 sm:p-8">
+        <div className="w-full px-0 py-6 border-b border-purple-400 sm:px-6 sm:py-8">
+          <div className="p-4 border shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
             {/* Section Header */}
             <div className="flex items-center mb-8">
               <div>
@@ -725,12 +725,11 @@ export default function EnterpriseProfilePage() {
               </div>
             </div>
 
-            {/* Form Fields */}
             <div className="space-y-6">
               {/* Toggle Settings */}
               <div className="space-y-4">
                 {/* Onboarding Kit Toggle */}
-                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border border-purple-100/50">
+                <div className="flex items-center justify-between p-4 border bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border-purple-100/50">
                   <div>
                     <h4 className="font-semibold text-gray-900">Enable One-Click Onboarding Kit</h4>
                     <p className="text-sm text-gray-600">Automatically generate onboarding documents for new team members</p>
@@ -754,7 +753,7 @@ export default function EnterpriseProfilePage() {
                 </div>
 
                 {/* Timestamp Proof Toggle */}
-                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border border-purple-100/50">
+                <div className="flex items-center justify-between p-4 border bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border-purple-100/50">
                   <div>
                     <h4 className="font-semibold text-gray-900">Enable Document Timestamp Proof</h4>
                     <p className="text-sm text-gray-600">Add blockchain timestamping to all documents for legal compliance</p>
@@ -780,12 +779,12 @@ export default function EnterpriseProfilePage() {
 
               {/* Signature Style */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Default Signature Style</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Default Signature Style</label>
                 <select
                   name="defaultSignatureStyle"
                   value={form.defaultSignatureStyle}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 transition-all duration-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select signature style</option>
                   {signatureStyles.map(style => (
@@ -798,27 +797,27 @@ export default function EnterpriseProfilePage() {
         </div>
 
         {/* Action Buttons Section */}
-        <div className="w-full px-0 sm:px-6 py-3 sm:py-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-none sm:rounded-xl border border-white/20 shadow-md p-4 sm:p-8">
+        <div className="w-full px-0 py-3 sm:px-6 sm:py-4">
+          <div className="p-4 border rounded-none shadow-md bg-white/80 backdrop-blur-sm sm:rounded-xl border-white/20 sm:p-8">
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+            <div className="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0">
               <button
                 type="button"
-                className="px-6 py-3 sm:py-3 text-gray-600 hover:text-gray-800 font-medium transition-colors border border-gray-300 rounded-lg hover:border-gray-400 text-sm sm:text-base"
+                className="px-6 py-3 text-sm font-medium text-gray-600 transition-colors border border-gray-300 rounded-lg sm:py-3 hover:text-gray-800 hover:border-gray-400 sm:text-base"
               >
                 Cancel & Exit
               </button>
               
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+              <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4 sm:w-auto">
                 <button
                   onClick={handleSubmit}
                   type="button"
                   disabled={isLoading}
-                  className="px-8 py-3 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-md transform hover:scale-105 text-sm sm:text-base"
+                  className="px-8 py-3 text-sm font-semibold text-white transition-all duration-200 transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-md hover:scale-105 sm:text-base"
                 >
                   {isLoading ? (
                     <div className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 mr-3 -ml-1 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
@@ -831,7 +830,7 @@ export default function EnterpriseProfilePage() {
                 <button
                 onClick={handleSubmit}
                   type="submit"
-                  className="px-8 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-md transform hover:scale-105"
+                  className="px-8 py-3 font-semibold text-white transition-all duration-200 transform rounded-lg shadow-lg bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black hover:shadow-md hover:scale-105"
                 >
                   Proceed to Dashboard
                 </button>
@@ -841,21 +840,21 @@ export default function EnterpriseProfilePage() {
         </div>
 
                   {/* Professional Footer */}
-          <footer className="bg-white border-t border-gray-100 mt-16 rounded-xl">
-            <div className="w-full px-0 sm:px-6 py-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
+          <footer className="mt-16 bg-white border-t border-gray-100 rounded-xl">
+            <div className="w-full px-0 py-8 sm:px-6">
+            <div className="flex flex-col items-center justify-between md:flex-row">
               <div className="flex items-center mb-4 md:mb-0">
                 <img 
                   src="/final_logo.png" 
                   alt="Paprly Logo" 
-                  className="w-6 h-6 rounded mr-2"
+                  className="w-6 h-6 mr-2 rounded"
                 />
                 <span className="text-sm text-gray-600">© 2024 Paprly Enterprise Suite. All rights reserved.</span>
               </div>
               <div className="flex space-x-6 text-sm text-gray-600">
-                <a href="#" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-gray-900 transition-colors">Terms of Service</a>
-                <a href="#" className="hover:text-gray-900 transition-colors">Support</a>
+                <a href="#" className="transition-colors hover:text-gray-900">Privacy Policy</a>
+                <a href="#" className="transition-colors hover:text-gray-900">Terms of Service</a>
+                <a href="#" className="transition-colors hover:text-gray-900">Support</a>
               </div>
             </div>
           </div>
@@ -864,17 +863,17 @@ export default function EnterpriseProfilePage() {
 
       {/* Success Modal */}
       {showSuccess && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
-          <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-md">
-            <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
+          <div className="w-full max-w-md p-8 text-center bg-white rounded-lg shadow-md">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
+            <h3 className="mb-2 text-xl font-bold text-gray-900">
               {isNewProfile ? 'Profile Created Successfully!' : 'Profile Updated Successfully!'}
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="mb-6 text-gray-600">
               {isNewProfile 
                 ? 'Your enterprise profile has been created and saved.' 
                 : 'Your enterprise profile has been updated and saved.'
@@ -882,7 +881,7 @@ export default function EnterpriseProfilePage() {
             </p>
             <button
               onClick={() => setShowSuccess(false)}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
+              className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-purple-600 rounded-lg hover:bg-purple-700"
             >
               Continue
             </button>
@@ -892,18 +891,18 @@ export default function EnterpriseProfilePage() {
 
       {/* Error Modal */}
       {showError && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
-          <div className="bg-white rounded-lg p-8 max-w-md w-full text-center shadow-md">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
+          <div className="w-full max-w-md p-8 text-center bg-white rounded-lg shadow-md">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full">
               <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Profile Save Failed</h3>
-            <p className="text-gray-600 mb-6">{errorMessage}</p>
+            <h3 className="mb-2 text-xl font-bold text-gray-900">Profile Save Failed</h3>
+            <p className="mb-6 text-gray-600">{errorMessage}</p>
             <button
               onClick={() => setShowError(false)}
-              className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
+              className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-red-600 rounded-lg hover:bg-red-700"
             >
               Try Again
             </button>
