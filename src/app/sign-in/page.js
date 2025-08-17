@@ -28,6 +28,7 @@ export default function LoginPage() {
   const [showErrorPopup, setShowErrorPopup] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const [formErrors, setFormErrors] = useState({})
+  const [redirectMessage, setRedirectMessage] = useState("")
 
   // Clear any cached form data on component mount
   useEffect(() => {
@@ -108,19 +109,86 @@ export default function LoginPage() {
         // Login using auth hook
         login(data.token, data.user, form.remember)
         
-        setShowSuccessPopup(true)
-        
-        // Reset form
-        setForm({
-          email: "",
-          password: "",
-          remember: false,
-        })
-        
-        // Redirect to dashboard after successful login
-        setTimeout(() => {
-          window.location.href = '/enterprise-profile' 
-        }, 2000)
+        // Check if user has completed profile before redirecting
+        try {
+          const profileResponse = await fetch(`https://paperly-backend-five.vercel.app/api/enterprise-profile?email=${encodeURIComponent(form.email.trim())}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          
+          if (profileResponse.ok) {
+            const profileData = await profileResponse.json()
+            
+            // Check if profile exists and has required fields
+            const hasCompleteProfile = profileData.profile && 
+              profileData.profile.fullName && 
+              profileData.profile.companyName && 
+              profileData.profile.companyType && 
+              profileData.profile.industry && 
+              profileData.profile.registeredAddress && 
+              profileData.profile.defaultCurrency && 
+              profileData.profile.defaultPaymentCycle && 
+              profileData.profile.preferredLanguage
+            
+            // Set appropriate redirect message
+            if (hasCompleteProfile) {
+              setRedirectMessage("Welcome back to Paprly! You've been successfully signed in. Redirecting to your workspace...")
+            } else {
+              setRedirectMessage("Welcome to Paprly! Please complete your profile to get started. Redirecting to profile setup...")
+            }
+            
+            setShowSuccessPopup(true)
+            
+            // Reset form
+            setForm({
+              email: "",
+              password: "",
+              remember: false,
+            })
+            
+            // Redirect based on profile completion
+            setTimeout(() => {
+              if (hasCompleteProfile) {
+                window.location.href = '/home'
+              } else {
+                window.location.href = '/enterprise-profile'
+              }
+            }, 2000)
+          } else {
+            // If profile check fails, redirect to profile completion
+            setRedirectMessage("Welcome to Paprly! Please complete your profile to get started. Redirecting to profile setup...")
+            setShowSuccessPopup(true)
+            
+            // Reset form
+            setForm({
+              email: "",
+              password: "",
+              remember: false,
+            })
+            
+            setTimeout(() => {
+              window.location.href = '/enterprise-profile'
+            }, 2000)
+          }
+        } catch (profileError) {
+          console.error('Error checking profile:', profileError)
+          // If profile check fails, redirect to profile completion
+          setRedirectMessage("Welcome to Paprly! Please complete your profile to get started. Redirecting to profile setup...")
+          setShowSuccessPopup(true)
+          
+          // Reset form
+          setForm({
+            email: "",
+            password: "",
+            remember: false,
+          })
+          
+          setTimeout(() => {
+            window.location.href = '/enterprise-profile'
+          }, 2000)
+        }
         
       } else {
         setErrorMessage(data.message || "Login failed. Please check your credentials and try again.")
@@ -354,7 +422,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <h3 className="mb-2 text-xl font-bold text-gray-900">Login Successful!</h3>
-            <p className="mb-6 text-gray-600">Welcome back to Paprly! You&apos;ve been successfully signed in. Redirecting to your workspace...</p>
+            <p className="mb-6 text-gray-600">{redirectMessage}</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600"
