@@ -52,7 +52,7 @@ export default function PrivacyPolicyPage() {
       ]
     },
     {
-      title: "Information We Don't Collect",
+      title: "Information We Don&apos;t Collect",
       items: [
         "Personal identification information (name, email, phone)",
         "Payment information (we don&apos;t process payments)",

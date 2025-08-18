@@ -14,9 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Calendar, ExternalLink } from "lucide-react";
-import EnterpriseNavbar from "@/components/enterprise-components/enterprise-navbar";
-import Sidebar from "@/components/enterprise-components/sidebar";
-import Footer from "@/components/enterprise-components/enterprise-footer";
 
 export default function QuickHirePage() {
   const [employmentType, setEmploymentType] = useState("employee");
@@ -38,39 +35,32 @@ export default function QuickHirePage() {
   });
 
   return (
-    <>
-      <EnterpriseNavbar />
-
-      {/* Main Page Layout */}
-      <div className="flex min-h-screen bg-gray-50">
-        <Sidebar />
-
-        {/* Main Content */}
-        <div className="flex-1 p-8 space-y-6">
-          {/* Header Banner */}
-          <div className="p-6 border bg-[#fff3bb]/65 border-yellow-200 rounded-lg">
-            <div className="flex items-start justify-between">
-              <div>
-                <h1 className="mb-2 text-2xl font-bold text-gray-900">
-                  Quick Hire By paprly
-                </h1>
-                <p className="text-sm text-gray-600">
-                  Let&apos;s add a new candidate to your team. Generate all needed
-                  documents in just few click.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <Button className="text-white bg-neutral-950 hover:bg-gray-900">
-                  Back to Home
-                </Button>
-                <Button className="text-white bg-yellow-600 hover:bg-yellow-700">
-                  Write with AI
-                </Button>
-              </div>
+    <div className="w-full bg-[linear-gradient(180deg,#FDF9EDFF_0%,#F5E6A8FF_100%)] flex-1 lg:ml-0">
+      {/* Header */}
+      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 pt-16 lg:pt-12">
+        <div className="w-full p-4 sm:p-6 lg:p-10 rounded-[10px] bg-[#FFF3BBB0]">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 lg:mb-6">
+            <div className="flex-1">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+                Quick Hire By paprly
+              </h1>
+              <p className="text-sm sm:text-base text-gray-700">
+                Let&apos;s add a new candidate to your team. Generate all needed
+                documents in just few clicks.
+              </p>
+            </div>
+            <div className="mt-4 sm:mt-0 sm:ml-6">
+              <Button className="text-white bg-yellow-600 hover:bg-yellow-700">
+                Write with AI
+              </Button>
             </div>
           </div>
+        </div>
+      </div>
 
+      {/* Main Content */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="w-full space-y-4 sm:space-y-6">
           {/* Employment Type */}
           <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
             <h2 className="mb-4 text-lg font-semibold text-gray-900">
@@ -101,7 +91,7 @@ export default function QuickHirePage() {
             <h2 className="mb-4 text-lg font-semibold text-gray-900">
               Basic Information
             </h2>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <Label
                   htmlFor="fullName"
@@ -181,7 +171,7 @@ export default function QuickHirePage() {
             <h2 className="mb-4 text-lg font-semibold text-gray-900">
               Contact & Payment Details
             </h2>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <Label
                   htmlFor="address"
@@ -260,11 +250,11 @@ export default function QuickHirePage() {
           </div>
 
           {/* Documents Needed */}
-          <div className="p-6 ml-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+          <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
             <h2 className="mb-4 text-lg font-semibold text-gray-900">
               Documents Needed
             </h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="offerLetter"
@@ -323,7 +313,7 @@ export default function QuickHirePage() {
           </div>
 
           {/* Bottom Section */}
-          <div className="flex items-center justify-between p-6 ml-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+          <div className="flex items-center justify-between p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-10 h-10 font-medium text-white bg-blue-600 rounded-full">
                 AG
@@ -347,8 +337,6 @@ export default function QuickHirePage() {
           </div>
         </div>
       </div>
-
-      <Footer />
-    </>
+    </div>
   );
 }

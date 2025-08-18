@@ -1,8 +1,34 @@
 "use client"
 
+import { useState } from "react"
 import { logout } from "@/utils/auth"
+import { ChevronDown, ChevronRight } from "lucide-react"
 
-export default function Sidebar({ activeNavItem, onNavItemClick, sidebarOpen, setSidebarOpen, user, profileData }) {
+export default function Sidebar({ 
+  activeNavItem, 
+  onNavItemClick, 
+  sidebarOpen, 
+  setSidebarOpen, 
+  user, 
+  profileData,
+  onWorkspaceItemSelect,
+  activeWorkspaceItem
+}) {
+  const [workspaceExpanded, setWorkspaceExpanded] = useState(true)
+
+  const handleWorkspaceClick = () => {
+    setWorkspaceExpanded(!workspaceExpanded)
+    if (!workspaceExpanded) {
+      onNavItemClick("workspace")
+    }
+  }
+
+  const handleWorkspaceItemClick = (item) => {
+    if (onWorkspaceItemSelect) {
+      onWorkspaceItemSelect(item)
+    }
+  }
+
   return (
     <>
       {/* Mobile Sidebar Overlay */}
@@ -62,30 +88,82 @@ export default function Sidebar({ activeNavItem, onNavItemClick, sidebarOpen, se
                <span className="text-sm font-medium">Home</span>
              </button>
 
-             <button
-               onClick={() => onNavItemClick("workspace")}
-               className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
-                 activeNavItem === "workspace" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
-               }`}
-             >
-               {activeNavItem === "workspace" && (
-                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
-               )}
-               <svg
-                 className={`w-5 h-5 ${activeNavItem === "workspace" ? "text-[#D4AF37]" : "text-gray-500"}`}
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
+             {/* Workspace with Dropdown */}
+             <div className="space-y-1">
+               <button
+                 onClick={handleWorkspaceClick}
+                 className={`flex items-center justify-between gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
+                   activeNavItem === "workspace" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
+                 }`}
                >
-                 <path
-                   strokeLinecap="round"
-                   strokeLinejoin="round"
-                   strokeWidth={2}
-                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                 />
-               </svg>
-               <span className="text-sm font-medium">Workspace</span>
-             </button>
+                 <div className="flex items-center gap-3">
+                   {activeNavItem === "workspace" && (
+                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
+                   )}
+                   <svg
+                     className={`w-5 h-5 ${activeNavItem === "workspace" ? "text-[#D4AF37]" : "text-gray-500"}`}
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24"
+                   >
+                     <path
+                       strokeLinecap="round"
+                       strokeLinejoin="round"
+                       strokeWidth={2}
+                       d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                     />
+                   </svg>
+                   <span className="text-sm font-medium">Workspace</span>
+                 </div>
+                 {workspaceExpanded ? (
+                   <ChevronDown className="w-4 h-4 text-gray-500" />
+                 ) : (
+                   <ChevronRight className="w-4 h-4 text-gray-500" />
+                 )}
+               </button>
+
+               {/* Workspace Dropdown Items */}
+               {workspaceExpanded && (
+                 <div className="ml-6 space-y-1">
+                   <button
+                     onClick={() => handleWorkspaceItemClick("quick-hire")}
+                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
+                       activeWorkspaceItem === "quick-hire" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
+                     }`}
+                   >
+                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
+                     <span>Quick Hire</span>
+                   </button>
+                   <button
+                     onClick={() => handleWorkspaceItemClick("payments")}
+                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
+                       activeWorkspaceItem === "payments" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
+                     }`}
+                   >
+                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
+                     <span>Payments</span>
+                   </button>
+                   <button
+                     onClick={() => handleWorkspaceItemClick("drafts")}
+                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
+                       activeWorkspaceItem === "drafts" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
+                     }`}
+                   >
+                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
+                     <span>Drafts</span>
+                   </button>
+                   <button
+                     onClick={() => handleWorkspaceItemClick("track")}
+                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
+                       activeWorkspaceItem === "track" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
+                     }`}
+                   >
+                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
+                     <span>Track</span>
+                   </button>
+                 </div>
+               )}
+             </div>
 
             <button
               onClick={() => onNavItemClick("dashboard")}
@@ -113,10 +191,7 @@ export default function Sidebar({ activeNavItem, onNavItemClick, sidebarOpen, se
             </button>
 
             <button
-              onClick={() => {
-                onNavItemClick("edit-profile")
-                window.location.href = '/enterprise-profile'
-              }}
+              onClick={() => onNavItemClick("edit-profile")}
               className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
                 activeNavItem === "edit-profile"
                   ? "text-[#D4AF37] bg-white relative"
@@ -143,10 +218,7 @@ export default function Sidebar({ activeNavItem, onNavItemClick, sidebarOpen, se
             </button>
 
             <button
-              onClick={() => {
-                onNavItemClick("logout")
-                logout()
-              }}
+              onClick={() => onNavItemClick("logout")}
               className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
                 activeNavItem === "logout" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
               }`}
