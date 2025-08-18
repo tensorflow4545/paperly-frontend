@@ -55,7 +55,7 @@ export default function QuickHirePage() {
                   Quick Hire By paprly
                 </h1>
                 <p className="text-sm text-gray-600">
-                  Let's add a new candidate to your team. Generate all needed
+                  Let&apos;s add a new candidate to your team. Generate all needed
                   documents in just few click.
                 </p>
               </div>
