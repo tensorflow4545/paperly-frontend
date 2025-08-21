@@ -141,6 +141,11 @@ export default function LoginPage() {
             
             setShowSuccessPopup(true)
             
+            // Auto-hide toast after 7 seconds
+            setTimeout(() => {
+              setShowSuccessPopup(false)
+            }, 7000)
+            
             // Reset form
             setForm({
               email: "",
@@ -155,7 +160,7 @@ export default function LoginPage() {
               } else {
                 window.location.href = '/enterprise-profile'
               }
-            }, 2000)
+            }, 3000)
           } else {
             // If profile check fails, redirect to profile completion
             setRedirectMessage("Welcome to Paprly! Please complete your profile to get started. Redirecting to profile setup...")
@@ -412,22 +417,21 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Success Popup */}
+      {/* Success Toast */}
       {showSuccessPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
-          <div className="w-full max-w-md p-8 text-center bg-white rounded-lg shadow-xl">
-            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-yellow-100 rounded-full">
-              <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-            </div>
-            <h3 className="mb-2 text-xl font-bold text-gray-900">Login Successful!</h3>
-            <p className="mb-6 text-gray-600">{redirectMessage}</p>
+        <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
+          <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-lg shadow-lg max-w-sm">
+            <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <p className="text-green-800 font-medium">Login successful! Redirecting...</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600"
+              className="ml-auto p-1 text-green-600 hover:text-green-800 hover:bg-green-100 rounded-full transition-colors"
             >
-              Continue
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
             </button>
           </div>
         </div>
