@@ -47,7 +47,7 @@ export default function TermsOfServicePage() {
       items: [
         "Paprly provides online document creation and management services",
         "Services include invoice generation, contract creation, and e-signing",
-        "All services are provided 'as is' without warranties",
+        "All services are provided &apos;as is&apos; without warranties",
         "We reserve the right to modify or discontinue services"
       ]
     },
@@ -101,8 +101,8 @@ export default function TermsOfServicePage() {
       answer: "Yes, we may update these terms periodically. Continued use of services constitutes acceptance of updated terms."
     },
     {
-      question: "What if I don't agree with the terms?",
-      answer: "If you don't agree with these terms, please do not use our services. You can contact us with any questions or concerns."
+      question: "What if I don&apos;t agree with the terms?",
+      answer: "If you don&apos;t agree with these terms, please do not use our services. You can contact us with any questions or concerns."
     },
     {
       question: "How do I report violations?",
@@ -114,7 +114,7 @@ export default function TermsOfServicePage() {
     <>
       <Head>
         <title>Terms of Service | Paperly - Legal Terms & Conditions</title>
-        <meta name="description" content="Read Paperly's terms of service to understand the legal terms and conditions for using our document management platform." />
+        <meta name="description" content="Read Paperly&apos;s terms of service to understand the legal terms and conditions for using our document management platform." />
         <meta name="keywords" content="terms of service, legal terms, conditions, user agreement, paperly terms, document management terms" />
         <link rel="canonical" href="https://paprly.in/terms" />
       </Head>
@@ -133,7 +133,7 @@ export default function TermsOfServicePage() {
             </div>
             <p className="text-xl text-gray-700">Effective Date: 08/08/2025</p>
             <p className="text-lg text-gray-600 mt-4 max-w-3xl">
-              These terms govern your use of Paprly's document management platform. By using our services, 
+              These terms govern your use of Paperly&apos;s document management platform. By using our services, 
               you agree to these terms and conditions.
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function TermsOfServicePage() {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Questions About Our Terms?</h2>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
                 If you have any questions about these terms or need clarification on any point, 
-                please don't hesitate to contact us. We're here to help.
+                please don&apos;t hesitate to contact us. We&apos;re here to help.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
