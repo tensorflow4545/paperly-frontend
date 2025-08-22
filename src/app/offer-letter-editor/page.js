@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import OfferLetterEditor from "@/components/OfferLetterEditor/OfferLetterEditor";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, FileText } from "lucide-react";
 
-export default function OfferLetterEditorPage() {
+function OfferLetterEditorContent() {
   const [offerLetterData, setOfferLetterData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -130,5 +130,20 @@ export default function OfferLetterEditorPage() {
         onSave={handleSave}
       />
     </div>
+  );
+}
+
+export default function OfferLetterEditorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    }>
+      <OfferLetterEditorContent />
+    </Suspense>
   );
 }

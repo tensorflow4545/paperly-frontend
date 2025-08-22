@@ -68,51 +68,54 @@ export default function Footer() {
               </ul>
             </div>
 
-                         {/* Support Links */}
-             <div>
-               <h3 className="text-lg font-semibold text-gray-900 mb-4">Support</h3>
-               <ul className="space-y-3">
-                 <li>
-                   <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                     About
-                   </Link>
-                 </li>
-                 <li>
-                   <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                     Contact
-                   </Link>
-                 </li>
-                 <li>
-                   <Link href="/privacy-policy" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                     Privacy Policy
-                   </Link>
-                   
-                 </li>
-                  <li>
-                    <Link href="/cookies" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                     Cookies
-                   </Link>
-                  </li>
+            {/* Support Links */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Support</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy-policy" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/cookies" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    Cookies
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-               </ul>
-             </div>
-
-             {/* Suggestion Links */}
-             <div>
-               <h3 className="text-lg font-semibold text-gray-900 mb-4">Suggestion</h3>
-               <ul className="space-y-3">
-                 <li>
-                   <Link href="/testimonials" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                     Testimonials
-                   </Link>
-                 </li>
-                 <li>
-                   <Link href="/feedback" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                     Feedback
-                   </Link>
-                 </li>
-               </ul>
-             </div>
+            {/* Suggestion Links */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Suggestion</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/testimonials" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    Testimonials
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/feedback" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                    Feedback
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Copyright */}

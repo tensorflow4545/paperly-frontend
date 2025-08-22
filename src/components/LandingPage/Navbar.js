@@ -39,9 +39,9 @@ export default function Navbar() {
               Templates
             </Link>
 
-            {/* <Link href="/contracts" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            <Link href="/contracts" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               Contracts
-            </Link> */}
+            </Link>
 
             <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
               About

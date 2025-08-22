@@ -404,6 +404,27 @@ export default function CodePage() {
 
         </div>
 
+        {/* Legal Disclaimer */}
+        <div className="w-full bg-gray-50 py-8 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg p-6 border border-gray-200">
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Shield className="w-3 h-3 text-yellow-600" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-2">Legal Disclaimer</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Templates provided are for general use only. Users are responsible for ensuring compliance with local tax laws, 
+                    business regulations, and legal requirements. Paprly is not liable for any legal or financial consequences arising 
+                    from the use of these templates. For legal advice, please consult with a qualified professional.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* bottom section */}
 
         {/* main div */}
