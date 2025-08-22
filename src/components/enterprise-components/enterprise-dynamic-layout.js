@@ -7,6 +7,7 @@ import Sidebar from "@/components/enterprise-components/sidebar"
 import Footer from "@/components/enterprise-components/enterprise-footer"
 import EnterpriseWorkspace from "@/components/enterprise-components/enterprise-workspace"
 import EnterpriseEditProfile from "@/components/enterprise-components/enterprise-editprofile"
+import MyEmployeesFreelancers from "@/components/enterprise-components/workspace_myemployee_freelancer"
 
 // Home Dashboard Component
 const HomeDashboard = ({ user, profileData }) => {
@@ -495,7 +496,9 @@ export default function EnterpriseDynamicLayout() {
     if (activeNavItem === "workspace") {
       switch (activeWorkspaceItem) {
         case "quick-hire":
-          return <EnterpriseWorkspace />
+          return <EnterpriseWorkspace user={user} profileData={profileData} />
+        case "my-employees":
+          return <MyEmployeesFreelancers />
         case "payments":
           return <WorkspacePayments />
         case "drafts":
@@ -503,7 +506,7 @@ export default function EnterpriseDynamicLayout() {
         case "track":
           return <WorkspaceTrack />
         default:
-          return <EnterpriseWorkspace />
+          return <EnterpriseWorkspace user={user} profileData={profileData} />
       }
     }
 

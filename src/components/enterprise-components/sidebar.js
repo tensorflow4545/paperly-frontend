@@ -135,6 +135,15 @@ export default function Sidebar({
                      <span>Quick Hire</span>
                    </button>
                    <button
+                     onClick={() => handleWorkspaceItemClick("my-employees")}
+                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
+                       activeWorkspaceItem === "my-employees" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
+                     }`}
+                   >
+                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
+                     <span>My Employees/Freelancers</span>
+                   </button>
+                   <button
                      onClick={() => handleWorkspaceItemClick("payments")}
                      className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
                        activeWorkspaceItem === "payments" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"

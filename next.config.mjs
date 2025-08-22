@@ -3,6 +3,10 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
+  // Exclude pages directory from build
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  // Disable telemetry and experimental features that might cause trace issues
+ 
   // Handle hybrid routing
   webpack: (config, { isServer }) => {
     if (!isServer) {

@@ -96,6 +96,18 @@ export const viewport = {
 export default function Layout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* AdSense verification script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4918938808225819"
+          crossOrigin="anonymous"
+        />
+        {/* Optional: Google site verification meta tag */}
+        <meta
+          name="google-adsense-account" content="ca-pub-4918938808225819"
+        />
+      </head>
       <body className="bg-white text-gray-900">
         <div className=" mx-auto mx-w-[1]">{children}</div>
       </body>

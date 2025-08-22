@@ -71,10 +71,10 @@ const EnterpriseNavbar = () => {
       </div>
 
       {/* Desktop Auth buttons */}
-      <div className="items-center hidden space-x-4 md:flex">
-        {isAuthenticated ? (
+      {/* <div className="items-center hidden space-x-4 md:flex"> */}
+        {/* {isAuthenticated ? (
           <div className="flex items-center space-x-4">
-            {/* Logout icon button */}
+           
             <button
               onClick={handleLogout}
               className="p-2 text-gray-600 transition-colors rounded-full hover:text-yellow-600 hover:bg-gray-100"
@@ -82,7 +82,6 @@ const EnterpriseNavbar = () => {
             >
               <FiLogOut className="w-5 h-5" />
             </button>
-            {/* Profile icon only */}
             <div className="flex items-center justify-center w-8 h-8 bg-yellow-100 rounded-full">
               <span className="text-sm font-medium text-yellow-700">
                 {user?.name?.charAt(0).toUpperCase() || 'U'}
@@ -97,9 +96,8 @@ const EnterpriseNavbar = () => {
             Sign In
           </a>
         )}
-      </div>
+      </div> */}
 
-      {/* Mobile Hamburger Menu Button */}
       <div className="md:hidden">
         <button
           onClick={toggleMobileMenu}
@@ -168,7 +166,7 @@ const EnterpriseNavbar = () => {
             </div>
             
             {/* Mobile Auth Button */}
-            <div className="pt-4">
+            {/* <div className="pt-4">
               {isAuthenticated ? (
                 <>
                   <div className="flex items-center justify-center mb-3">
@@ -198,7 +196,7 @@ const EnterpriseNavbar = () => {
                   Sign In
                 </a>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       )}

@@ -88,6 +88,14 @@ export const pageMetadata = {
     ogTitle: "Privacy Policy | Paperly - Data Protection & Security",
     ogDescription: "Read Paperly's privacy policy to understand how we protect your data and ensure security in our document management platform.",
   },
+  terms: {
+    title: "Terms of Service | Paperly - Legal Terms & Conditions",
+    description: "Read Paperly's terms of service to understand the legal terms and conditions for using our document management platform. Learn about user rights and responsibilities.",
+    keywords: "terms of service, legal terms, conditions, user agreement, paperly terms, document management terms, legal conditions, user rights",
+    canonical: "https://paprly.in/terms",
+    ogTitle: "Terms of Service | Paperly - Legal Terms & Conditions",
+    ogDescription: "Read Paperly's terms of service to understand the legal terms and conditions for using our document management platform.",
+  },
   testimonials: {
     title: "Customer Testimonials | Paperly - User Reviews & Success Stories",
     description: "Read customer testimonials and success stories from Paperly users. See how freelancers and businesses benefit from our document management platform.",

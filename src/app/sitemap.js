@@ -34,12 +34,12 @@ export default function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/e-sign`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
+    // {
+    //   url: `${baseUrl}/e-sign`,
+    //   lastModified: new Date(),
+    //   changeFrequency: 'weekly',
+    //   priority: 0.9,
+    // },
     {
       url: `${baseUrl}/blank-editor`,
       lastModified: new Date(),

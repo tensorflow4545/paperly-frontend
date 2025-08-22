@@ -16,34 +16,34 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    // Check if user came from another page or if it's a direct page load
-    const referrer = document.referrer;
-    const currentOrigin = window.location.origin;
+  // useEffect(() => {
+  //   // Check if user came from another page or if it's a direct page load
+  //   const referrer = document.referrer;
+  //   const currentOrigin = window.location.origin;
     
-    // Only show modal if:
-    // 1. No referrer (direct page load)
-    // 2. Referrer is from external site (not same origin)
-    // 3. User manually reloaded the page
-    const isDirectAccess = !referrer || !referrer.startsWith(currentOrigin);
+  //   // Only show modal if:
+  //   // 1. No referrer (direct page load)
+  //   // 2. Referrer is from external site (not same origin)
+  //   // 3. User manually reloaded the page
+  //   const isDirectAccess = !referrer || !referrer.startsWith(currentOrigin);
     
-    // Only show modal on direct page access (not when navigating from other pages)
-    if (isDirectAccess) {
-      // Small delay to ensure page is fully loaded
-      const timer = setTimeout(() => {
-        setShowModal(true);
+  //   // Only show modal on direct page access (not when navigating from other pages)
+  //   if (isDirectAccess) {
+  //     // Small delay to ensure page is fully loaded
+  //     const timer = setTimeout(() => {
+  //       setShowModal(true);
         
-        // Auto close after 15 seconds
-        const closeTimer = setTimeout(() => {
-          setShowModal(false);
-        }, 15000);
+  //       // Auto close after 15 seconds
+  //       const closeTimer = setTimeout(() => {
+  //         setShowModal(false);
+  //       }, 15000);
         
-        return () => clearTimeout(closeTimer);
-      }, 1000);
+  //       return () => clearTimeout(closeTimer);
+  //     }, 1000);
       
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, []);
 
   const handleCloseModal = () => {
     setShowModal(false);
