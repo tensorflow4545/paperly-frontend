@@ -23,18 +23,18 @@ const openSans = Open_Sans({
 
 export default function Footer() {
   return (
-    <footer className="bg-white py-16 px-6">
+    <footer className="px-6 py-16 bg-white">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 gap-8 mb-12 md:grid-cols-4">
           {/* Logo and Description */}
           <div className="md:col-span-1">
-            <div className="flex flex-row items-center space-x-4 mb-4 ">
+            <div className="flex flex-row items-center mb-4 space-x-4 ">
               <Image
                 src="/final_logo.png"
                 alt="Paprly Logo"
                 width={40}
                 height={40}
-                className="object-contain  rounded-lg"
+                className="object-contain rounded-lg"
                 loading="lazy"
               />
               <span className={`text-xl font-semibold text-gray-900 px-0 py-0`}>
@@ -47,16 +47,16 @@ export default function Footer() {
 
             {/* Social Media Icons */}
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">
+              <a href="#" className="text-gray-600 transition-colors hover:text-gray-800">
                 <FaFacebookF className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">
+              <a href="#" className="text-gray-600 transition-colors hover:text-gray-800">
                 <FaTwitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">
+              <a href="#" className="text-gray-600 transition-colors hover:text-gray-800">
                 <FaLinkedinIn className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">
+              <a href="#" className="text-gray-600 transition-colors hover:text-gray-800">
                 <FaInstagram className="w-5 h-5" />
               </a>
             </div>
@@ -68,60 +68,80 @@ export default function Footer() {
               Product
             </h3>
             <ul className="space-y-3">
-              {["Features", "Pricing", "Integrations", "Solutions"].map((item, i) => (
-                <li key={i}>
-                  <a
-                    href="#"
-                    className={`text-gray-600 hover:text-gray-800 transition-colors ${openSans.className}`}
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+  {["Features", "Pricing", "Solutions"].map((item, i) => (
+    <li key={i}>
+      <a
+        href={
+  item === "Solutions"
+    ? "#benefits"
+    : item === "Pricing"
+    ? "#pricing"
+    : item === "Features"
+    ? "#features"
+    : "#"
+}
+
+        className={`text-gray-600 hover:text-gray-800 transition-colors ${openSans.className}`}
+      >
+        {item}
+      </a>
+    </li>
+  ))}
+</ul>
           </div>
 
           {/* Resources Column */}
-          <div>
-            <h3 className={`text-lg font-semibold text-gray-900 mb-4 ${lora.className}`}>
-              Resources
-            </h3>
-            <ul className="space-y-3">
-              {["Blog", "Case Studies", "Webinars", "Support"].map((item, i) => (
-                <li key={i}>
-                  <a
-                    href="#"
-                    className={`text-gray-600 hover:text-gray-800 transition-colors ${openSans.className}`}
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+         <div>
+  <h3 className={`text-lg font-semibold text-gray-900 mb-4 ${lora.className}`}>
+    Support
+  </h3>
+  <ul className="space-y-3">
+    {[
+      { name: "About", href: "/about" },
+      { name: "Contact", href: "/contact" },
+      { name: "Privacy Policy", href: "/privacy-policy" },
+      { name: "Terms of Service", href: "/terms" }, 
+      { name: "Cookies", href: "/cookies" },
+    ].map((link, i) => (
+      <li key={i}>
+        <a
+          href={link.href}
+          className={`text-gray-600 hover:text-gray-800 transition-colors ${openSans.className}`}
+        >
+          {link.name}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
           {/* Company Column */}
           <div>
-            <h3 className={`text-lg font-semibold text-gray-900 mb-4 ${lora.className}`}>
-              Company
-            </h3>
-            <ul className="space-y-3">
-              {["About Us", "Careers", "Contact", "Partners"].map((item, i) => (
-                <li key={i}>
-                  <a
-                    href="#"
-                    className={`text-gray-600 hover:text-gray-800 transition-colors ${openSans.className}`}
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+  <h3 className={`text-lg font-semibold text-gray-900 mb-4 ${lora.className}`}>
+    Suggestion
+  </h3>
+  <ul className="space-y-3">
+    {[
+      { name: "Testimonials", href: "/testimonials" },
+      { name: "Feedback", href: "/feedback" },
+    ].map((link, i) => (
+      <li key={i}>
+        <a
+          href={link.href}
+          className={`text-gray-600 hover:text-gray-800 transition-colors ${openSans.className}`}
+        >
+          {link.name}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-200 pt-8">
+        <div className="pt-8 border-t border-gray-200">
           <p className={`text-center text-gray-600 text-sm ${openSans.className}`}>
             © 2024 Paprly. All rights reserved.
           </p>

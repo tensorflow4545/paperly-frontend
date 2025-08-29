@@ -62,24 +62,12 @@ const EnterpriseNavbar = () => {
       </div>
 
       {/* Desktop Navigation */}
-      <div
-        className={`hidden md:flex space-x-6 text-md text-yellow-500 ${inter.className}`}
-      >
-        <a href="#" className="hover:text-yellow-800">
-          Solutions
-        </a>
-        <a href="#" className="hover:text-yellow-800">
-          Features
-        </a>
-        <a href="#" className="hover:text-yellow-800">
-          Pricing
-        </a>
-        <a href="#" className="hover:text-yellow-800">
-          About Us
-        </a>
-        <a href="#" className="hover:text-yellow-800">
-          Contact
-        </a>
+      <div className={`hidden md:flex space-x-6 text-md text-yellow-500 ${inter.className}`}>
+        <a href="#benefits" className="hover:text-yellow-800">Solutions</a>
+        <a href="#features" className="hover:text-yellow-800">Features</a>
+        <a href="#pricing" className="hover:text-yellow-800">Pricing</a>
+        <a href="/about" className="hover:text-yellow-800">About Us</a>
+        <a href="/contact" className="hover:text-yellow-800">Contact</a>
       </div>
 
       {/* Desktop Auth buttons */}
@@ -179,7 +167,7 @@ const EnterpriseNavbar = () => {
             </div>
 
             {/* Mobile Auth Button */}
-            {/* <div className="pt-4">
+            <div className="pt-4">
               {isAuthenticated ? (
                 <>
                   <div className="flex items-center justify-center mb-3">
@@ -209,7 +197,7 @@ const EnterpriseNavbar = () => {
                   Sign In
                 </a>
               )}
-            </div> */}
+            </div>
           </div>
         </div>
       )}
