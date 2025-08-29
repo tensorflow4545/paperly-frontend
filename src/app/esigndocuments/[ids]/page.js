@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 
 export default function SharedDocumentsPage() {
   const params = useParams();

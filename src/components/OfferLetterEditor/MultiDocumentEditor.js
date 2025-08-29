@@ -45,7 +45,7 @@ import {
   Share2,
   Send
 } from "lucide-react";
-import jsPDF from 'jspdf';
+import jsPDF from "jspdf";
 import { getAuthToken } from '@/utils/auth';
 
 export default function MultiDocumentEditor({ allDocumentsData, onClose, onSave, employeeId }) {
