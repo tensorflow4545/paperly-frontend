@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { getAuthToken, getUserData, logout } from "@/utils/auth"
 import { Inter, Outfit } from "next/font/google";
-import { Upload, ChevronDown, Info } from 'lucide-react'
+import { Upload, ChevronDown, Info } from "lucide-react"
 
 const outfit = Outfit({
   subsets: ["latin"],
