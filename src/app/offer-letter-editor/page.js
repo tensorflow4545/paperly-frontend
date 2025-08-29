@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import OfferLetterEditor from "@/components/OfferLetterEditor/OfferLetterEditor";
+import MultiDocumentEditor from "@/components/OfferLetterEditor/MultiDocumentEditor";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, FileText } from "lucide-react";
 
@@ -23,7 +23,7 @@ function OfferLetterEditorContent() {
       
       try {
         // Try to get data from localStorage first (if coming from modal)
-        const storedData = localStorage.getItem('offerLetterData');
+        const storedData = localStorage.getItem('allDocumentsData');
         console.log('Stored data from localStorage:', storedData);
         
         if (storedData) {
@@ -33,7 +33,7 @@ function OfferLetterEditorContent() {
             setOfferLetterData(parsedData);
             dataLoadedRef.current = true;
             // Clean up localStorage immediately
-            localStorage.removeItem('offerLetterData');
+            localStorage.removeItem('allDocumentsData');
             setIsLoading(false);
             return;
           } catch (parseError) {
@@ -122,12 +122,17 @@ function OfferLetterEditorContent() {
     );
   }
 
+  // Debug: Log the offer letter data to see if employeeId is present
+  console.log("Offer letter data:", offerLetterData);
+  console.log("Employee ID from offer letter data:", offerLetterData?.employeeId);
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <OfferLetterEditor
-        offerLetterData={offerLetterData}
+      <MultiDocumentEditor
+        allDocumentsData={offerLetterData}
         onClose={handleClose}
         onSave={handleSave}
+        employeeId={offerLetterData?.employeeId}
       />
     </div>
   );

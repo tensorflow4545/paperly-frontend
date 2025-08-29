@@ -22,9 +22,10 @@ export default function SuccessModal({ offerLetterData, onClose, onView, onEdit 
 
   const handleProceedToPreview = () => {
     setIsNavigating(true);
-    // Store data in localStorage for the editor page
-    console.log('Storing offer letter data in localStorage:', offerLetterData);
-    localStorage.setItem('offerLetterData', JSON.stringify(offerLetterData));
+    // Store all documents data in localStorage for the editor page
+    console.log('Storing all documents data in localStorage:', offerLetterData);
+    console.log('Employee ID in offerLetterData:', offerLetterData?.employeeId);
+    localStorage.setItem('allDocumentsData', JSON.stringify(offerLetterData));
     router.push('/offer-letter-editor');
   };
 
@@ -33,8 +34,15 @@ export default function SuccessModal({ offerLetterData, onClose, onView, onEdit 
   }
 
   // Extract employee and company details from the API response
-  const employeeDetails = offerLetterData?.data?.employeeDetails || {};
-  const companyDetails = offerLetterData?.data?.companyDetails || {};
+  const employeeDetails = offerLetterData?.offerLetter?.data?.employeeDetails || {};
+  const companyDetails = offerLetterData?.offerLetter?.data?.companyDetails || {};
+
+  // Get list of generated documents
+  const generatedDocuments = [];
+  if (offerLetterData?.offerLetter) generatedDocuments.push('Offer Letter');
+  if (offerLetterData?.salaryLetter) generatedDocuments.push('Salary/CTC Letter');
+  if (offerLetterData?.onboardingLetter) generatedDocuments.push('Onboarding Letter');
+  if (offerLetterData?.nda) generatedDocuments.push('NDA');
 
   return (
     <div 
@@ -58,8 +66,16 @@ export default function SuccessModal({ offerLetterData, onClose, onView, onEdit 
               Documents Created Successfully
             </CardTitle>
             <p className="text-gray-600 text-lg">
-              Your offer letter has been generated and is ready for review and customization.
+              {generatedDocuments.length} document{generatedDocuments.length !== 1 ? 's' : ''} have been generated and are ready for review and customization.
             </p>
+            <div className="mt-4 flex flex-wrap gap-2 justify-center">
+              {generatedDocuments.map((doc, index) => (
+                <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                  <CheckCircle className="w-4 h-4 mr-1" />
+                  {doc}
+                </span>
+              ))}
+            </div>
           </CardHeader>
 
           <CardContent className="space-y-8 px-8">
@@ -142,10 +158,10 @@ export default function SuccessModal({ offerLetterData, onClose, onView, onEdit 
             <div className="text-center pt-6 border-t border-gray-200">
               <div className="mb-6">
                 <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                  Ready to Review Your Document?
+                  Ready to Review Your Documents?
                 </h4>
                 <p className="text-gray-600">
-                  Proceed to the editor to review, customize, and finalize your offer letter.
+                  Proceed to the editor to review, customize, and finalize all your generated documents.
                 </p>
               </div>
               
