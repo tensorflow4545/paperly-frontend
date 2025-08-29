@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useRouter } from "next/navigation"
-import { FileText, Edit3, Download, Users, Calendar, DollarSign, CreditCard, Shield, BarChart3, Briefcase, Palette, Wrench, UserCheck, Mail, CheckCircle, ArrowRight, Smartphone, Monitor, Tablet } from 'lucide-react'
+import { FileText, Edit3, Download, Users, Calendar, DollarSign, CreditCard, Shield, BarChart3, Briefcase, Palette, Wrench, UserCheck, Mail, CheckCircle, ArrowRight, Smartphone, Monitor, Tablet } from "lucide-react"
 import Navbar from "../../components/LandingPage/Navbar"
 import Footer from "../../components/LandingPage/Footer"
 import PageSEO from "@/components/SEO/PageSEO"

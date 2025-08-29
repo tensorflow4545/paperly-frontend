@@ -1,5 +1,5 @@
 import EnterpriseNavbar from "@/components/enterprise-components/enterprise-navbar";
-import React from 'react'
+import React from "react"
 import { Button } from "@/components/ui/button";
 import { Lora, Open_Sans, Merriweather } from "next/font/google";
 import Image from "next/image";

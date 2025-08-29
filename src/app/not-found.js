@@ -3,7 +3,7 @@
 import Head from "next/head"
 import React from "react"
 import { useRouter } from "next/navigation"
-import { Home, ArrowLeft, FileText, Search, AlertCircle } from 'lucide-react'
+import { Home, ArrowLeft, FileText, Search, AlertCircle } from "lucide-react"
 import Navbar from "../components/LandingPage/Navbar"
 import Footer from "../components/LandingPage/Footer"
 

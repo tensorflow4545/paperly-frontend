@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Monitor, Smartphone, Home, FileText } from 'lucide-react'
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { Monitor, Smartphone, Home, FileText } from "lucide-react"
 import BlankEditor from '@/components/Editor/BlankEditor/BlankEditor'
 import Navbar from '@/components/LandingPage/Navbar'
 import Footer from '@/components/LandingPage/Footer'
