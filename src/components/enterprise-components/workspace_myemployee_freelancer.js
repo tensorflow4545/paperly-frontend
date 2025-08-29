@@ -30,7 +30,9 @@ import {
   CheckCircle,
   Clock,
   FileText,
-  Send
+  Send,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { getAuthToken } from "@/utils/auth";
 
@@ -44,6 +46,10 @@ export default function MyEmployeesFreelancers() {
   const [filterEmployeeType, setFilterEmployeeType] = useState("all");
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
 
   // Fetch employee data on component mount
   useEffect(() => {
@@ -73,8 +79,80 @@ export default function MyEmployeesFreelancers() {
       );
     }
 
+    // Sort by creation date (most recent first) - using _id as proxy for creation time
+    // MongoDB ObjectIds contain timestamp, so sorting by _id gives us chronological order
+    filtered.sort((a, b) => {
+      // If _id exists, use it for sorting (newer IDs come first)
+      if (a._id && b._id) {
+        return b._id.localeCompare(a._id);
+      }
+      // Fallback to joining date if _id is not available
+      if (a.joiningDate && b.joiningDate) {
+        return new Date(b.joiningDate) - new Date(a.joiningDate);
+      }
+      // If neither exists, maintain original order
+      return 0;
+    });
+
     setFilteredEmployees(filtered);
+    // Reset to first page when filters change
+    setCurrentPage(1);
   }, [employees, searchTerm, filterType, filterEmployeeType]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentEmployees = filteredEmployees.slice(startIndex, endIndex);
+
+  // Pagination handlers
+  const goToPage = (page) => {
+    setCurrentPage(page);
+  };
+
+  const goToPreviousPage = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  };
+
+  // Generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push('...');
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push('...');
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1);
+        pages.push('...');
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push('...');
+        pages.push(totalPages);
+      }
+    }
+    
+    return pages;
+  };
 
   const fetchEmployees = async () => {
     setIsLoading(true);
@@ -394,7 +472,7 @@ export default function MyEmployeesFreelancers() {
               </div>
             ) : (
               <div className="divide-y divide-gray-200">
-                {filteredEmployees.map((employee) => (
+                {currentEmployees.map((employee) => (
                   <div key={employee._id} className="p-6 hover:bg-gray-50 transition-colors">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-4">
@@ -519,6 +597,38 @@ export default function MyEmployeesFreelancers() {
               </div>
             )}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center space-x-2 mt-6">
+              <Button
+                variant="outline"
+                onClick={goToPreviousPage}
+                disabled={currentPage === 1}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              {getPageNumbers().map((page, index) => (
+                <Button
+                  key={index}
+                  variant={page === currentPage ? "default" : "outline"}
+                  onClick={() => typeof page === 'number' && goToPage(page)}
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  {page}
+                </Button>
+              ))}
+              <Button
+                variant="outline"
+                onClick={goToNextPage}
+                disabled={currentPage === totalPages}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -644,7 +754,7 @@ export default function MyEmployeesFreelancers() {
                       <Label className="text-sm font-medium text-gray-600">Email Address</Label>
                       <p className="text-gray-900">{selectedEmployee.emailAddress || "Not specified"}</p>
                     </div>
-                                                             <div>
+                    <div>
                       <Label className="text-sm font-medium text-gray-600">Role/Position</Label>
                       <p className="text-gray-900">
                         {selectedEmployee.role || selectedEmployee.position || selectedEmployee.jobTitle || selectedEmployee.designation || "Not specified"}
@@ -696,22 +806,7 @@ export default function MyEmployeesFreelancers() {
                 </div>
               </div>
 
-              {/* Documents */}
-              {selectedEmployee.documents && (
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Required Documents</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {Object.entries(selectedEmployee.documents).map(([doc, required]) => (
-                      <div key={doc} className="flex items-center space-x-2">
-                        <div className={`w-2 h-2 rounded-full ${required ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-                        <span className="text-gray-700 capitalize">
-                          {doc.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              
             </div>
             <div className="p-6 border-t border-gray-200 flex justify-end space-x-3">
               <Button
