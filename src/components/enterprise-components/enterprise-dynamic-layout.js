@@ -606,7 +606,7 @@ const WorkspaceDrafts = () => {
                   <span className="text-2xl">📄</span>
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">No drafts found</h3>
-                <p className="text-gray-600">You haven't created any draft documents yet.</p>
+                <p className="text-gray-600">You have not created any draft documents yet.</p>
               </div>
             </div>
           ) : (
