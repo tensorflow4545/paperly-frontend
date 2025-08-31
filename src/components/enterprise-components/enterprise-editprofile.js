@@ -457,7 +457,7 @@ export default function EnterpriseProfilePage() {
   }
 
   return (
-    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+    <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
       {/* Header */}
       <div className="px-4 lg:px-6 py-4">
         <div className="max-w-6xl mx-auto">

@@ -32,7 +32,7 @@ import MyEmployeesFreelancers from "@/components/enterprise-components/workspace
 // Home Dashboard Component
 const HomeDashboard = ({ user, profileData, setActiveNavItem, setActiveWorkspaceItem }) => {
   return (
-    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+    <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
       {/* Header */}
       <div className="px-6 lg:px-8 py-8">
         <div className="max-w-7xl mx-auto">
@@ -52,14 +52,14 @@ const HomeDashboard = ({ user, profileData, setActiveNavItem, setActiveWorkspace
                   setActiveNavItem("workspace");
                   setActiveWorkspaceItem("quick-hire");
                 }}
-                className="px-4 py-2 bg-yellow-700 text-white text-sm rounded-lg hover:bg-yellow-800 transition-colors flex items-center gap-2"
+                className="px-4 py-2 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 transition-colors flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Quick Hire
               </button>
               <button 
                 onClick={() => setActiveNavItem("dashboard")}
-                className="px-4 py-2 bg-white text-gray-700 text-sm rounded-lg hover:bg-yellow-50 transition-colors border border-yellow-200 flex items-center gap-2"
+                className="px-4 py-2 bg-white text-gray-700 text-sm rounded-lg hover:bg-[#fefce8] transition-colors border border-yellow-200 flex items-center gap-2"
               >
                 <TrendingUp className="w-4 h-4" />
                 Dashboard
@@ -118,40 +118,40 @@ const HomeDashboard = ({ user, profileData, setActiveNavItem, setActiveWorkspace
                         <Building className="w-3 h-3 text-yellow-500" />
                         Company Name
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="bg-[#fefce8] rounded-md p-3 border border-yellow-200">
                         <p className="text-sm text-gray-900">{profileData?.companyName || 'Not specified'}</p>
                       </div>
               </div>
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                                            <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <Briefcase className="w-3 h-3 text-yellow-500" />
                         Company Type
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="bg-[#fefce8] rounded-md p-3 border border-yellow-200">
                         <p className="text-sm text-gray-900">{profileData?.companyType || 'Not specified'}</p>
-                </div>
+                      </div>
               </div>
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                                            <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <TrendingUp className="w-3 h-3 text-yellow-500" />
                         Industry
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="bg-[#fefce8] rounded-md p-3 border border-yellow-200">
                         <p className="text-sm text-gray-900">{profileData?.industry || 'Not specified'}</p>
-            </div>
+                      </div>
                     </div>
             </div>
 
                   <div className="space-y-3">
-                    <div>
+                                        <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <Shield className="w-3 h-3 text-yellow-500" />
                         GST Number
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="bg-[#fefce8] rounded-md p-3 border border-yellow-200">
                         <p className="text-sm text-gray-900">{profileData?.gstNumber || 'Not specified'}</p>
-                </div>
-              </div>
+                      </div>
+                    </div>
               <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-yellow-500" />
@@ -290,7 +290,7 @@ const HomeDashboard = ({ user, profileData, setActiveNavItem, setActiveWorkspace
                       <LogOut className="w-3 h-3" />
                       Logout
                     </button>
-                  </div>
+              </div>
             </div>
           </div>
 
@@ -888,18 +888,18 @@ export default function EnterpriseDynamicLayout() {
   // Show loading if user data is not yet loaded
   if (!user && !isAuthenticated && isLoading) {
     return (
-      <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+      <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
         <div className="px-6 lg:px-8 py-8">
           <div className="max-w-7xl mx-auto">
             {/* Header Skeleton */}
             <div className="flex items-center justify-between mb-8">
               <div className="space-y-2">
-                <div className="h-8 bg-yellow-200 rounded-lg animate-pulse w-64"></div>
-                <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-48"></div>
+                <div className="h-8 bg-yellow-100 rounded-lg animate-pulse w-64"></div>
+                <div className="h-4 bg-yellow-100 rounded-lg animate-pulse w-48"></div>
               </div>
               <div className="flex gap-3">
-                <div className="h-10 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
-                <div className="h-10 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+                <div className="h-10 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
+                <div className="h-10 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
               </div>
             </div>
           </div>
@@ -911,8 +911,8 @@ export default function EnterpriseDynamicLayout() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
-                  <div className="h-8 bg-yellow-200 rounded-lg animate-pulse w-16 mb-2"></div>
-                  <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+                  <div className="h-8 bg-yellow-100 rounded-lg animate-pulse w-16 mb-2"></div>
+                  <div className="h-4 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
                 </div>
               ))}
             </div>
@@ -927,12 +927,12 @@ export default function EnterpriseDynamicLayout() {
               <div className="lg:col-span-2 space-y-6">
                 {[1, 2].map((i) => (
                   <div key={i} className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200">
-                    <div className="h-6 bg-yellow-200 rounded-lg animate-pulse w-48 mb-4"></div>
+                    <div className="h-6 bg-yellow-100 rounded-lg animate-pulse w-48 mb-4"></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {[1, 2, 3, 4, 5, 6].map((j) => (
                         <div key={j} className="space-y-2">
-                          <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
-                          <div className="h-12 bg-yellow-200 rounded-lg animate-pulse"></div>
+                          <div className="h-3 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
+                          <div className="h-12 bg-yellow-100 rounded-lg animate-pulse"></div>
                         </div>
                       ))}
                     </div>
@@ -944,10 +944,10 @@ export default function EnterpriseDynamicLayout() {
               <div className="space-y-4">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
-                    <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-32 mb-3"></div>
+                    <div className="h-4 bg-yellow-100 rounded-lg animate-pulse w-32 mb-3"></div>
                     <div className="space-y-2">
                       {[1, 2, 3, 4].map((j) => (
-                        <div key={j} className="h-3 bg-yellow-200 rounded-lg animate-pulse"></div>
+                        <div key={j} className="h-3 bg-yellow-100 rounded-lg animate-pulse"></div>
                       ))}
                     </div>
                   </div>

@@ -64,7 +64,7 @@ export default function Sidebar({
       {/* Mobile Menu Button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="fixed top-4 left-4 z-50 p-3 transition-all duration-200 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl shadow-sm lg:hidden hover:shadow-sm hover:scale-105 border border-yellow-200"
+        className="fixed top-4 left-4 z-50 p-3 transition-all duration-200 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl shadow-sm lg:hidden hover:shadow-sm hover:scale-105 border border-yellow-200"
       >
         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -74,7 +74,7 @@ export default function Sidebar({
       {/* Sidebar */}
       <div
         className={`
-          fixed lg:static inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-yellow-50 to-white border-r border-yellow-200 flex flex-col
+          fixed lg:static inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-[#fefce8] to-white border-r border-yellow-200 flex flex-col
           transform transition-all duration-300 ease-out lg:transform-none
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
           shadow-sm lg:shadow-none
