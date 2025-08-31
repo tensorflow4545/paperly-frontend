@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { getAuthToken, getUserData, logout } from "@/utils/auth"
 import { Inter, Outfit } from "next/font/google";
-import { Upload, ChevronDown, Info } from "lucide-react"
+import { Upload, ChevronDown, Info, User, Building, Settings, Save, ArrowRight } from "lucide-react"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -99,65 +99,57 @@ export default function EnterpriseProfilePage() {
               // Keep form empty for new profile
               setForm(prev => ({
                 ...prev,
-                email: user.email || "" // Only set email from auth
+                email: user.email || ""
               }))
             }
-          } else if (response.status === 404) {
-            setHasExistingProfile(false)
-            // Keep form empty for new profile, only set email
-            setForm(prev => ({
-              ...prev,
-              email: user.email || "" // Only set email from auth
-            }))
           } else {
-            console.error('Error fetching profile:', response.status, response.statusText)
             setHasExistingProfile(false)
-            // On error, only set email from auth
+            // Keep form empty for new profile
             setForm(prev => ({
               ...prev,
-              email: user.email || "" // Only set email from auth
+              email: user.email || ""
             }))
           }
         } catch (error) {
           console.error('Error loading profile data:', error)
           setHasExistingProfile(false)
-          // On error, only set email from auth
+          // Keep form empty for new profile
           setForm(prev => ({
             ...prev,
-            email: user.email || "" // Only set email from auth
+            email: user.email || ""
           }))
         } finally {
           setIsLoadingProfile(false)
         }
-      } else if (user === null) {
-        // User data is loaded but no user found
-        setIsLoadingProfile(false)
-      } else {
-        setIsLoadingProfile(false)
       }
     }
     
-    if (user !== undefined) {
       loadProfileData()
-    } 
   }, [user])
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { name, value } = e.target
     setForm(prev => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]: value
     }))
     
+    // Clear error when user starts typing
     if (formErrors[name]) {
-      setFormErrors(prev => ({ ...prev, [name]: "" }))
+      setFormErrors(prev => ({
+        ...prev,
+        [name]: ""
+      }))
     }
   }
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0]
     if (file) {
-      setForm(prev => ({ ...prev, companyLogo: file }))
+      setForm(prev => ({
+        ...prev,
+        companyLogo: file
+      }))
     }
   }
 
@@ -169,21 +161,47 @@ export default function EnterpriseProfilePage() {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
     if (file && file.type.startsWith('image/')) {
-      setForm(prev => ({ ...prev, companyLogo: file }))
+      setForm(prev => ({
+        ...prev,
+        companyLogo: file
+      }))
     }
   }
 
   const validateForm = () => {
     const errors = {}
     
-    if (!form.fullName.trim()) errors.fullName = "Full name is required"
-    if (!form.companyName.trim()) errors.companyName = "Company name is required"
-    if (!form.companyType) errors.companyType = "Company type is required"
-    if (!form.industry) errors.industry = "Industry is required"
-    if (!form.registeredAddress.trim()) errors.registeredAddress = "Registered address is required"
-    if (!form.defaultCurrency) errors.defaultCurrency = "Default currency is required"
-    if (!form.defaultPaymentCycle) errors.defaultPaymentCycle = "Default payment cycle is required"
-    if (!form.preferredLanguage) errors.preferredLanguage = "Preferred language is required"
+    if (!form.fullName.trim()) {
+      errors.fullName = "Full name is required"
+    }
+    
+    if (!form.companyName.trim()) {
+      errors.companyName = "Company name is required"
+    }
+    
+    if (!form.companyType) {
+      errors.companyType = "Company type is required"
+    }
+    
+    if (!form.industry) {
+      errors.industry = "Industry is required"
+    }
+    
+    if (!form.registeredAddress.trim()) {
+      errors.registeredAddress = "Registered address is required"
+    }
+    
+    if (!form.defaultCurrency) {
+      errors.defaultCurrency = "Default currency is required"
+    }
+    
+    if (!form.defaultPaymentCycle) {
+      errors.defaultPaymentCycle = "Payment cycle is required"
+    }
+    
+    if (!form.preferredLanguage) {
+      errors.preferredLanguage = "Preferred language is required"
+    }
     
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -304,8 +322,8 @@ export default function EnterpriseProfilePage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading user data...</p>
+          <div className="w-6 h-6 border-3 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
+          <p className="mt-3 text-sm text-gray-600">Loading user data...</p>
         </div>
       </div>
     )
@@ -316,8 +334,8 @@ export default function EnterpriseProfilePage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading profile data...</p>
+          <div className="w-6 h-6 border-3 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
+          <p className="mt-3 text-sm text-gray-600">Loading profile data...</p>
         </div>
       </div>
     )
@@ -328,10 +346,10 @@ export default function EnterpriseProfilePage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
-          <p className="mb-4 text-gray-600">No user data found. Please log in.</p>
+          <p className="mb-3 text-sm text-gray-600">No user data found. Please log in.</p>
           <button 
             onClick={() => window.location.href = '/sign-in'}
-            className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
+            className="px-3 py-2 text-sm text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors"
           >
             Go to Login
           </button>
@@ -341,39 +359,45 @@ export default function EnterpriseProfilePage() {
   }
 
   return (
-    <div className="w-full bg-[linear-gradient(180deg,#FDF9EDFF_0%,#F5E6A8FF_100%)] flex-1 lg:ml-0">
+    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
       {/* Header */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 pt-16 lg:pt-12">
-        <div className="w-full p-4 sm:p-6 lg:p-10 rounded-[10px] bg-[#FFF3BBB0]">
-          <h1 className={`${outfit.className} text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2`}>
-          Company&apos;s Profile Page
+      <div className="px-4 lg:px-6 py-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-xl font-bold text-gray-900 mb-1 flex items-center gap-2">
+                <User className="w-5 h-5 text-yellow-600" />
+                Company Profile
           </h1>
-                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 lg:mb-6">
-             <div className="flex-1">
-               <p className="text-sm sm:text-base text-gray-700">
-                 {hasExistingProfile ? 'Update or edit your company profile' : 'Complete your company profile to unlock full Paprly features.'}
+              <p className="text-sm text-gray-600">
+                {hasExistingProfile ? 'Update your company profile' : 'Complete your company profile to unlock full features'}
                </p>
              </div>
-             <div className="mt-4 sm:mt-0 sm:ml-6">
-               <button className="px-4 py-3 text-sm font-medium text-white transition-colors duration-200 bg-yellow-600 rounded-md sm:px-6 sm:py-3  sm:text-base hover:bg-amber-700">
-                 Explore Paprly Studio
-               </button>
+            <div className="flex items-center gap-2 text-xs text-gray-500">
+              <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+              <span>Powered by Paprly</span>
              </div>
            </div>
         </div>
       </div>
 
       {/* Form Content */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="w-full space-y-4 sm:space-y-6">
+      <div className="px-4 lg:px-6 pb-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Main Form */}
+            <div className="lg:col-span-2 space-y-4">
           {/* Basic Information */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-[#B29200] mb-4 sm:mb-6">Basic Information</h2>
+              <div className="bg-white rounded-xl p-5 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <User className="w-4 h-4 text-yellow-600" />
+                  Basic Information
+                </h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {/* Full Name */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Full Name
                 </label>
                 <input
@@ -381,7 +405,8 @@ export default function EnterpriseProfilePage() {
                   name="fullName"
                   value={form.fullName}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                      className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
+                      placeholder="Enter full name"
                 />
                 {formErrors.fullName && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.fullName}</p>
@@ -390,7 +415,7 @@ export default function EnterpriseProfilePage() {
 
               {/* Email */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Email
                 </label>
                 <input
@@ -398,15 +423,15 @@ export default function EnterpriseProfilePage() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                      className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
                   disabled
                 />
               </div>
             </div>
 
             {/* Company Name */}
-            <div className="mb-6 sm:mb-8">
-              <label className="block mb-2 text-sm font-medium text-gray-700">
+                <div className="mb-4">
+                  <label className="block mb-1.5 text-xs font-medium text-gray-600">
                 Company Name
               </label>
               <input
@@ -414,7 +439,8 @@ export default function EnterpriseProfilePage() {
                 name="companyName"
                 value={form.companyName}
                 onChange={handleChange}
-                className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                    className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
+                    placeholder="Enter company name"
               />
               {formErrors.companyName && (
                 <p className="mt-1 text-xs text-red-500">{formErrors.companyName}</p>
@@ -423,21 +449,19 @@ export default function EnterpriseProfilePage() {
 
             {/* Logo Upload Area */}
             <div 
-              className="p-8 text-center border-2 border-dashed rounded-lg sm:p-12 border-amber-400 bg-amber-50/30"
+                  className="p-4 text-center border-2 border-dashed rounded-lg border-yellow-300 bg-yellow-50/50 hover:bg-yellow-100/50 transition-colors cursor-pointer"
               onClick={() => fileInputRef.current?.click()}
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
               <div className="flex flex-col items-center">
-                <Upload className="w-6 h-6 mb-3 sm:w-8 sm:h-8 sm:mb-4 text-amber-500" />
-                <p className="mb-2 text-sm text-gray-600 sm:text-base">
+                    <Upload className="w-5 h-5 mb-2 text-yellow-600" />
+                    <p className="text-xs text-gray-600 mb-2">
                   Drag & drop your company logo here, or{' '}
-                  <button className="text-blue-600 underline hover:text-blue-700">
-                    browse
-                  </button>
+                      <span className="text-yellow-600 underline">browse</span>
                 </p>
                 {form.companyLogo ? (
-                  <div className="w-12 h-12 mt-3 overflow-hidden rounded-full sm:w-16 sm:h-16 sm:mt-4">
+                      <div className="w-10 h-10 overflow-hidden rounded-lg">
                     <img 
                       src={URL.createObjectURL(form.companyLogo)} 
                       alt="Company Logo" 
@@ -445,7 +469,7 @@ export default function EnterpriseProfilePage() {
                     />
                   </div>
                 ) : (
-                  <div className="w-12 h-12 mt-3 border-2 rounded-full sm:w-16 sm:h-16 sm:mt-4 border-amber-400"></div>
+                      <div className="w-10 h-10 border-2 rounded-lg border-yellow-300"></div>
                 )}
               </div>
               <input
@@ -459,14 +483,17 @@ export default function EnterpriseProfilePage() {
           </div>
 
           {/* Business Details Section */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-[#B29200] mb-4 sm:mb-6">Business Details</h2>
+              <div className="bg-white rounded-xl p-5 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Building className="w-4 h-4 text-yellow-600" />
+                  Business Details
+                </h2>
 
             {/* Form Fields - First Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {/* Company Type */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Company Type
                 </label>
                 <div className="relative">
@@ -474,14 +501,14 @@ export default function EnterpriseProfilePage() {
                     name="companyType"
                     value={form.companyType}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                        className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
                   >
                     <option value="">Select company type</option>
                     {companyTypes.map(type => (
                       <option key={type} value={type}>{type}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+                      <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
                 </div>
                 {formErrors.companyType && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.companyType}</p>
@@ -490,7 +517,7 @@ export default function EnterpriseProfilePage() {
 
               {/* Industry */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Industry
                 </label>
                 <div className="relative">
@@ -498,14 +525,14 @@ export default function EnterpriseProfilePage() {
                     name="industry"
                     value={form.industry}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                        className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
                   >
                     <option value="">Select industry</option>
                     {industries.map(industry => (
                       <option key={industry} value={industry}>{industry}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+                      <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
                 </div>
                 {formErrors.industry && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.industry}</p>
@@ -514,10 +541,10 @@ export default function EnterpriseProfilePage() {
             </div>
 
             {/* Form Fields - Second Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* GST Number */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   GST Number
                 </label>
                 <input
@@ -525,13 +552,14 @@ export default function EnterpriseProfilePage() {
                   name="gstNumber"
                   value={form.gstNumber}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                      className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
+                      placeholder="Enter GST number"
                 />
               </div>
 
               {/* Registered Address */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Registered Address
                 </label>
                 <input
@@ -539,7 +567,8 @@ export default function EnterpriseProfilePage() {
                   name="registeredAddress"
                   value={form.registeredAddress}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                      className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
+                      placeholder="Enter registered address"
                 />
                 {formErrors.registeredAddress && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.registeredAddress}</p>
@@ -549,14 +578,17 @@ export default function EnterpriseProfilePage() {
           </div>
 
           {/* Team & Preferences Section */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-[#B29200] mb-4 sm:mb-6">Team & Preferences</h2>
+              <div className="bg-white rounded-xl p-5 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Settings className="w-4 h-4 text-yellow-600" />
+                  Team & Preferences
+                </h2>
 
             {/* Form Fields - First Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {/* Default Currency */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Default Currency
                 </label>
                 <div className="relative">
@@ -564,14 +596,14 @@ export default function EnterpriseProfilePage() {
                     name="defaultCurrency"
                     value={form.defaultCurrency}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                        className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
                   >
                     <option value="">Select currency</option>
                     {currencies.map(currency => (
                       <option key={currency} value={currency}>{currency}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+                      <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
                 </div>
                 {formErrors.defaultCurrency && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.defaultCurrency}</p>
@@ -580,7 +612,7 @@ export default function EnterpriseProfilePage() {
 
               {/* Payment Cycle */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Payment Cycle
                 </label>
                 <div className="relative">
@@ -588,14 +620,14 @@ export default function EnterpriseProfilePage() {
                     name="defaultPaymentCycle"
                     value={form.defaultPaymentCycle}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                        className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
                   >
                     <option value="">Select payment cycle</option>
                     {paymentCycles.map(cycle => (
                       <option key={cycle} value={cycle}>{cycle}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+                      <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
                 </div>
                 {formErrors.defaultPaymentCycle && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.defaultPaymentCycle}</p>
@@ -604,10 +636,10 @@ export default function EnterpriseProfilePage() {
             </div>
 
             {/* Form Fields - Second Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Preferred Language */}
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-1.5 text-xs font-medium text-gray-600">
                   Preferred Language
                 </label>
                 <div className="relative">
@@ -615,48 +647,51 @@ export default function EnterpriseProfilePage() {
                     name="preferredLanguage"
                     value={form.preferredLanguage}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-lg outline-none appearance-none sm:px-4 sm:py-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-gray-50"
+                        className="w-full px-3 py-2 text-sm transition-colors border border-yellow-200 rounded-lg outline-none appearance-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-yellow-50"
                   >
                     <option value="">Select language</option>
                     {languages.map(language => (
                       <option key={language} value={language}>{language}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-5 sm:h-5 right-3 top-1/2" />
+                      <ChevronDown className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none right-3 top-1/2" />
                 </div>
                 {formErrors.preferredLanguage && (
                   <p className="mt-1 text-xs text-red-500">{formErrors.preferredLanguage}</p>
                 )}
               </div>
 
-              {/* Empty column for layout - now properly responsive */}
-              <div className="hidden lg:block">
-                {/* Empty space to maintain grid layout on desktop only */}
+                  {/* Empty column for layout */}
+                  <div className="hidden md:block">
+                    {/* Empty space to maintain grid layout */}
               </div>
             </div>
           </div>
 
           {/* Enterprise Suite Settings Section */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-[#B29200] mb-4 sm:mb-6">Enterprise Suite Settings</h2>
+              <div className="bg-white rounded-xl p-5 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Settings className="w-4 h-4 text-yellow-600" />
+                  Enterprise Suite Settings
+                </h2>
 
             {/* Settings Items */}
-            <div className="space-y-6 sm:space-y-8">
+                <div className="space-y-4">
               {/* Onboarding Kit */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-700 sm:text-base">Onboarding Kit</span>
+                      <span className="text-sm font-medium text-gray-700">Onboarding Kit</span>
                 </div>
                 <div className="relative">
                   <button
                     onClick={() => setForm(prev => ({...prev, enableOnboardingKit: !form.enableOnboardingKit}))}
-                    className={`relative inline-flex h-5 sm:h-6 w-10 sm:w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-                      form.enableOnboardingKit ? 'bg-indigo-600' : 'bg-gray-200'
+                        className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 ${
+                          form.enableOnboardingKit ? 'bg-yellow-500' : 'bg-gray-200'
                     }`}
                   >
                     <span
-                      className={`inline-block h-3 sm:h-4 w-3 sm:w-4 transform rounded-full bg-white transition-transform ${
-                        form.enableOnboardingKit ? 'translate-x-5 sm:translate-x-6' : 'translate-x-1'
+                          className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                            form.enableOnboardingKit ? 'translate-x-4' : 'translate-x-1'
                       }`}
                     />
                   </button>
@@ -666,19 +701,19 @@ export default function EnterpriseProfilePage() {
               {/* Timestamp Proof */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-700 sm:text-base">Timestamp Proof</span>
-                  <Info className="w-3 h-3 ml-1 sm:w-4 sm:h-4 sm:ml-2 text-amber-500" />
+                      <span className="text-sm font-medium text-gray-700">Timestamp Proof</span>
+                      <Info className="w-3 h-3 ml-1 text-yellow-500" />
                 </div>
                 <div className="relative">
                   <button
                     onClick={() => setForm(prev => ({...prev, enableTimestampProof: !form.enableTimestampProof}))}
-                    className={`relative inline-flex h-5 sm:h-6 w-10 sm:w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-                      form.enableTimestampProof ? 'bg-indigo-600' : 'bg-gray-200'
+                        className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 ${
+                          form.enableTimestampProof ? 'bg-yellow-500' : 'bg-gray-200'
                     }`}
                   >
                     <span
-                      className={`inline-block h-3 sm:h-4 w-3 sm:w-4 transform rounded-full bg-white transition-transform ${
-                        form.enableTimestampProof ? 'translate-x-5 sm:translate-x-6' : 'translate-x-1'
+                          className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                            form.enableTimestampProof ? 'translate-x-4' : 'translate-x-1'
                       }`}
                     />
                   </button>
@@ -688,39 +723,109 @@ export default function EnterpriseProfilePage() {
               {/* Default Signature Style */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-700 sm:text-base">Default Signature Style</span>
+                      <span className="text-sm font-medium text-gray-700">Default Signature Style</span>
                 </div>
                 <div className="relative">
                   <select 
                     name="defaultSignatureStyle"
                     value={form.defaultSignatureStyle}
                     onChange={handleChange}
-                    className="px-3 py-1 transition-colors bg-white border border-gray-300 rounded-lg outline-none appearance-none w-36 sm:w-48 sm:px-4 sm:py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        className="px-3 py-1.5 text-sm transition-colors bg-white border border-yellow-200 rounded-lg outline-none appearance-none w-32 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
                   >
-                    <option value="">Select signature style</option>
+                        <option value="">Select style</option>
                     {signatureStyles.map(style => (
                       <option key={style} value={style}>{style}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute w-3 h-3 text-gray-400 transform -translate-y-1/2 pointer-events-none sm:w-4 sm:h-4 right-2 sm:right-3 top-1/2" />
+                      <ChevronDown className="absolute w-3 h-3 text-gray-400 transform -translate-y-1/2 pointer-events-none right-2 top-1/2" />
                 </div>
               </div>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="w-full bg-white px-6 py-4 flex justify-end space-x-3">
-           
+              <div className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-yellow-200">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                    <span className="text-sm font-medium text-white">
+                      {/* Assuming profileData is available from the API response or state */}
+                      {/* For now, using user.name or a placeholder */}
+                      {/* {profileData?.fullName?.charAt(0).toUpperCase() || user?.name?.charAt(0).toUpperCase() || "U"} */}
+                      {user?.name?.charAt(0).toUpperCase() || "U"}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {user?.name || "User"}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {/* Assuming profileData is available from the API response or state */}
+                      {/* For now, using profileData.companyName or a placeholder */}
+                      {/* {profileData?.companyName || "Enterprise Account"} */}
+                      Enterprise Account
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
             <button 
               onClick={handleSubmit}
               disabled={isLoading}
-              className="px-4 py-2 bg-[#D4AF37] text-white rounded-md hover:bg-[#b8952f] disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-white bg-gradient-to-r from-yellow-600 to-yellow-700 rounded-lg hover:from-yellow-700 hover:to-yellow-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
             >
+                    <Save className="w-4 h-4" />
               {isLoading ? 'Saving...' : 'Save Profile'}
             </button>
-            <button className="px-4 py-2 bg-[#6B4DE6] text-white rounded-md hover:bg-[#5638b8]">
-              Proceed to Dashboard
+                  <button className="flex items-center gap-2 px-3 py-2 text-sm text-white bg-gradient-to-r from-gray-600 to-gray-700 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all duration-200 shadow-sm hover:shadow-md">
+                    <ArrowRight className="w-4 h-4" />
+                    Dashboard
             </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-4">
+              {/* Quick Tips */}
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Info className="w-4 h-4 text-yellow-600" />
+                  Quick Tips
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2"></div>
+                    <p className="text-xs text-gray-600">All fields marked with * are required</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2"></div>
+                    <p className="text-xs text-gray-600">Upload a high-quality company logo</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2"></div>
+                    <p className="text-xs text-gray-600">Settings can be changed later</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Profile Status */}
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Profile Status</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-600">Basic Info</span>
+                    <div className={`w-2 h-2 rounded-full ${form.fullName && form.companyName ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-600">Business Details</span>
+                    <div className={`w-2 h-2 rounded-full ${form.companyType && form.industry ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-600">Preferences</span>
+                    <div className={`w-2 h-2 rounded-full ${form.defaultCurrency && form.defaultPaymentCycle ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -728,24 +833,24 @@ export default function EnterpriseProfilePage() {
       {/* Success Modal */}
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
-          <div className="w-full max-w-md p-8 text-center bg-white rounded-lg shadow-md">
-            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-full max-w-sm p-6 text-center bg-white rounded-xl shadow-lg">
+            <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-green-500 rounded-full">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h3 className="mb-2 text-xl font-bold text-gray-900">
-              {isNewProfile ? 'Profile Created Successfully!' : 'Profile Updated Successfully!'}
+            <h3 className="mb-2 text-lg font-semibold text-gray-900">
+              {isNewProfile ? 'Profile Created!' : 'Profile Updated!'}
             </h3>
-            <p className="mb-6 text-gray-600">
+            <p className="mb-4 text-sm text-gray-600">
               {isNewProfile 
-                ? 'Your enterprise profile has been created and saved.' 
-                : 'Your enterprise profile has been updated and saved.'
+                ? 'Your enterprise profile has been created successfully.' 
+                : 'Your enterprise profile has been updated successfully.'
               }
             </p>
             <button
               onClick={() => setShowSuccess(false)}
-              className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-purple-600 rounded-lg hover:bg-purple-700"
+              className="px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-yellow-600 rounded-lg hover:bg-yellow-700"
             >
               Continue
             </button>
@@ -756,17 +861,17 @@ export default function EnterpriseProfilePage() {
       {/* Error Modal */}
       {showError && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
-          <div className="w-full max-w-md p-8 text-center bg-white rounded-lg shadow-md">
-            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full">
-              <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-full max-w-sm p-6 text-center bg-white rounded-xl shadow-lg">
+            <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
+              <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </div>
-            <h3 className="mb-2 text-xl font-bold text-gray-900">Profile Save Failed</h3>
-            <p className="mb-6 text-gray-600">{errorMessage}</p>
+            <h3 className="mb-2 text-lg font-semibold text-gray-900">Profile Save Failed</h3>
+            <p className="mb-4 text-sm text-gray-600">{errorMessage}</p>
             <button
               onClick={() => setShowError(false)}
-              className="px-6 py-2 font-medium text-white transition-colors duration-200 bg-red-600 rounded-lg hover:bg-red-700"
+              className="px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600 rounded-lg hover:bg-red-700"
             >
               Try Again
             </button>

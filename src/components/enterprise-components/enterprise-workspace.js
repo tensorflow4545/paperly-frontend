@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Calendar, ExternalLink, X, CheckCircle } from "lucide-react";
+import { Calendar, ExternalLink, X, CheckCircle, User, Mail, Briefcase, MapPin, CreditCard, IndianRupee, FileText, Shield, TrendingUp, Users, Play } from "lucide-react";
 import { getAuthToken } from "@/utils/auth";
 import SuccessModal from "@/components/OfferLetterEditor/SuccessModal";
 
@@ -25,6 +25,7 @@ export default function QuickHirePage({ user, profileData }) {
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [offerLetterData, setOfferLetterData] = useState(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
   const [formData, setFormData] = useState({
     fullName: "",
     emailAddress: "",
@@ -42,11 +43,21 @@ export default function QuickHirePage({ user, profileData }) {
     Onboarding_Letter: false,
   });
 
+  const loadingSteps = [
+    "Validating employee details...",
+    "Generating offer letter...",
+    "Creating additional documents...",
+    "Preparing document package...",
+    "Finalizing and saving...",
+    "Getting editor ready..."
+  ];
+
   // Function to handle form submission
   const handleGenerate = async () => {
     setIsLoading(true);
     setError("");
     setShowToast(false);
+    setLoadingStep(0);
 
     try {
       // Get authentication token
@@ -78,6 +89,17 @@ export default function QuickHirePage({ user, profileData }) {
       if (isNaN(salary) || salary <= 0) {
         throw new Error("Salary must be a valid positive number");
       }
+
+      // Simulate loading steps
+      const simulateLoading = async () => {
+        for (let i = 0; i < loadingSteps.length; i++) {
+          setLoadingStep(i);
+          await new Promise(resolve => setTimeout(resolve, 800));
+        }
+      };
+
+      // Start loading simulation
+      simulateLoading();
 
       // Prepare the employee data for both APIs
       const employeeData = {
@@ -357,6 +379,7 @@ export default function QuickHirePage({ user, profileData }) {
       }, 7000);
     } finally {
       setIsLoading(false);
+      setLoadingStep(0);
     }
   };
 
@@ -399,7 +422,7 @@ export default function QuickHirePage({ user, profileData }) {
   };
 
   return (
-    <div className="w-full bg-[linear-gradient(180deg,#FDF9EDFF_0%,#F5E6A8FF_100%)] flex-1 lg:ml-0 relative">
+    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
       {/* Success Modal */}
       {showSuccessModal && offerLetterData && (
         <SuccessModal
@@ -407,312 +430,459 @@ export default function QuickHirePage({ user, profileData }) {
           onClose={handleCloseSuccessModal}
         />
       )}
+
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 max-w-lg w-full">
+            {/* Header */}
+            <div className="px-6 py-4 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900">Generating Documents</h3>
+                  <p className="text-sm text-gray-500">Please wait while we process your request</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Section */}
+            <div className="px-6 py-4">
+              {/* Progress Bar */}
+              <div className="mb-4">
+                <div className="flex justify-between text-xs text-gray-500 mb-2">
+                  <span>Progress</span>
+                  <span>{Math.round(((loadingStep + 1) / loadingSteps.length) * 100)}%</span>
+                </div>
+                <div className="w-full bg-gray-100 rounded-full h-1.5">
+                  <div 
+                    className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-1.5 rounded-full transition-all duration-500 ease-out"
+                    style={{ width: `${((loadingStep + 1) / loadingSteps.length) * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+              
+              {/* Steps */}
+              <div className="space-y-2">
+                {loadingSteps.map((step, index) => (
+                  <div 
+                    key={index}
+                    className={`flex items-center gap-3 p-2 rounded-lg transition-all duration-200 ${
+                      index <= loadingStep 
+                        ? index < loadingStep 
+                          ? 'bg-green-50 border border-green-100' 
+                          : 'bg-yellow-50 border border-yellow-100'
+                        : 'bg-gray-50'
+                    }`}
+                  >
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold ${
+                      index < loadingStep 
+                        ? 'bg-green-500 text-white' 
+                        : index === loadingStep 
+                        ? 'bg-yellow-500 text-white animate-pulse' 
+                        : 'bg-gray-200 text-gray-500'
+                    }`}>
+                      {index < loadingStep ? (
+                        <CheckCircle className="w-3 h-3" />
+                      ) : (
+                        index + 1
+                      )}
+                    </div>
+                    <span className={`text-sm font-medium ${
+                      index <= loadingStep 
+                        ? index < loadingStep 
+                          ? 'text-green-700' 
+                          : 'text-yellow-700'
+                        : 'text-gray-500'
+                    }`}>
+                      {step}
+                    </span>
+                    {index < loadingStep && (
+                      <CheckCircle className="w-4 h-4 text-green-500 ml-auto" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-3 bg-gray-50 rounded-b-2xl">
+              <div className="flex items-center justify-between text-xs text-gray-500">
+                <span>Powered by Paprly</span>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"></div>
+                  <span>Processing...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 pt-16 lg:pt-12">
-        <div className="w-full p-4 sm:p-6 lg:p-10 rounded-[10px] bg-[#FFF3BBB0]">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 lg:mb-6">
-            <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
-                Quick Hire By paprly
+      <div className="px-4 lg:px-6 py-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">
+                Quick Hire
               </h1>
-              <p className="text-sm sm:text-base text-gray-700">
-                Let&apos;s add a new candidate to your team. Generate all needed
-                documents in just few clicks.
+              <p className="text-gray-600 text-sm">
+                Add a new team member and generate all required documents
               </p>
             </div>
-            <div className="mt-4 sm:mt-0 sm:ml-6">
-              <Button className="text-white bg-yellow-600 hover:bg-yellow-700">
-                Write with AI
-              </Button>
+            <div className="flex items-center gap-2 text-xs text-gray-500">
+              <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+              <span>Powered by Paprly</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="w-full space-y-4 sm:space-y-6">
-          {/* Employment Type */}
-          <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">
-              Employment Type
-            </h2>
-            <RadioGroup
-              value={employmentType}
-              onValueChange={setEmploymentType}
-              className="flex gap-6"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="Employee" id="employee" />
-                <Label htmlFor="employee" className="text-gray-700">
-                  Employee
-                </Label>
+      <div className="px-4 lg:px-6 pb-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            {/* Main Form */}
+            <div className="lg:col-span-3 space-y-4">
+              {/* Employment Type */}
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Users className="w-4 h-4 text-yellow-600" />
+                  Employment Type
+                </h2>
+                <RadioGroup
+                  value={employmentType}
+                  onValueChange={setEmploymentType}
+                  className="flex gap-6"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Employee" id="employee" />
+                    <Label htmlFor="employee" className="text-sm text-gray-700">
+                      Employee
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Freelancer" id="freelancer" />
+                    <Label htmlFor="freelancer" className="text-sm text-gray-700">
+                      Freelancer
+                    </Label>
+                  </div>
+                </RadioGroup>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="Freelancer" id="freelancer" />
-                <Label htmlFor="freelancer" className="text-gray-700">
-                  Freelancer
-                </Label>
-              </div>
-            </RadioGroup>
-          </div>
 
-          {/* Basic Information */}
-          <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">
-              Basic Information
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div>
-                <Label
-                  htmlFor="fullName"
-                  className="block mb-2 text-sm font-medium text-gray-700 "
-                >
-                  Full Name
-                </Label>
-                <Input
-                  id="fullName"
-                  value={formData.fullName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, fullName: e.target.value })
-                  }
-                  className=" bg-gray-50"
-                />
-              </div>
-              <div>
-                <Label
-                  htmlFor="emailAddress"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
-                  Email Address
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="emailAddress"
-                    value={formData.emailAddress}
-                    onChange={(e) =>
-                      setFormData({ ...formData, emailAddress: e.target.value })
-                    }
-                    className="pr-8 border-gray-200 bg-gray-50"
-                  />
-                  <ExternalLink className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 right-2 top-1/2" />
+              {/* Basic Information */}
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <User className="w-4 h-4 text-yellow-600" />
+                  Basic Information
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <Label htmlFor="fullName" className="block mb-2 text-xs font-medium text-gray-600">
+                      Full Name
+                    </Label>
+                    <div className="relative group">
+                      <Input
+                        id="fullName"
+                        value={formData.fullName}
+                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                        className="bg-yellow-50 border-yellow-200 text-sm group-hover:border-yellow-300 transition-colors"
+                        placeholder="Enter full name"
+                      />
+                      <User className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="emailAddress" className="block mb-2 text-xs font-medium text-gray-600">
+                      Email Address
+                    </Label>
+                    <div className="relative group">
+                      <Input
+                        id="emailAddress"
+                        value={formData.emailAddress}
+                        onChange={(e) => setFormData({ ...formData, emailAddress: e.target.value })}
+                        className="bg-yellow-50 border-yellow-200 text-sm pr-10 group-hover:border-yellow-300 transition-colors"
+                        placeholder="Enter email address"
+                      />
+                      <Mail className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="role" className="block mb-2 text-xs font-medium text-gray-600">
+                      Role
+                    </Label>
+                    <div className="relative group">
+                      <Input
+                        id="role"
+                        value={formData.role}
+                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                        className="bg-yellow-50 border-yellow-200 text-sm group-hover:border-yellow-300 transition-colors"
+                        placeholder="Enter job role"
+                      />
+                      <Briefcase className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="joiningDate" className="block mb-2 text-xs font-medium text-gray-600">
+                      Joining Date
+                    </Label>
+                    <div className="relative group">
+                      <Input
+                        id="joiningDate"
+                        type="date"
+                        value={formData.joiningDate}
+                        onChange={(e) => setFormData({ ...formData, joiningDate: e.target.value })}
+                        className="bg-yellow-50 border-yellow-200 text-sm pr-10 group-hover:border-yellow-300 transition-colors"
+                      />
+                      <Calendar className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div>
-                <Label
-                  htmlFor="role"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
-                  Role
-                </Label>
-                <Input
-                  id="role"
-                  value={formData.role}
-                  onChange={(e) =>
-                    setFormData({ ...formData, role: e.target.value })
-                  }
-                  className="border-gray-200 bg-gray-50"
-                />
+
+              {/* Contact & Payment Details */}
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-yellow-600" />
+                  Contact & Payment Details
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <Label htmlFor="address" className="block mb-2 text-xs font-medium text-gray-600">
+                      Address
+                    </Label>
+                    <div className="relative group">
+                      <Input
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                        className="bg-yellow-50 border-yellow-200 text-sm group-hover:border-yellow-300 transition-colors"
+                        placeholder="Enter address"
+                      />
+                      <MapPin className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="paymentMethod" className="block mb-2 text-xs font-medium text-gray-600">
+                      Payment Method
+                    </Label>
+                    <Select
+                      value={formData.paymentMethod}
+                      onValueChange={(value) => setFormData({ ...formData, paymentMethod: value })}
+                    >
+                      <SelectTrigger className="bg-yellow-50 border-yellow-200 text-sm hover:border-yellow-300 transition-colors">
+                        <SelectValue placeholder="Select payment method" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="bank-transfer">Bank Transfer</SelectItem>
+                        <SelectItem value="UPI">UPI</SelectItem>
+                        <SelectItem value="check">Check</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="tenure" className="block mb-2 text-xs font-medium text-gray-600">
+                      Tenure
+                    </Label>
+                    <Input
+                      id="tenure"
+                      value={formData.tenure}
+                      onChange={(e) => setFormData({ ...formData, tenure: e.target.value })}
+                      className="bg-yellow-50 border-yellow-200 text-sm hover:border-yellow-300 transition-colors"
+                      placeholder="e.g., 1 year, 6 months"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="salary" className="block mb-2 text-xs font-medium text-gray-600">
+                      Salary (Monthly)
+                    </Label>
+                    <div className="relative group">
+                      <Input
+                        id="salary"
+                        value={formData.salary}
+                        onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
+                        className="bg-yellow-50 border-yellow-200 text-sm pr-10 group-hover:border-yellow-300 transition-colors"
+                        placeholder="Enter salary amount"
+                      />
+                      <IndianRupee className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <Label
-                  htmlFor="joiningDate"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
-                  Joining Date
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="joiningDate"
-                    type="date"
-                    value={formData.joiningDate}
-                    onChange={(e) =>
-                      setFormData({ ...formData, joiningDate: e.target.value })
-                    }
-                    className="pr-8 border-gray-200 bg-gray-50"
-                  />
-                  <Calendar className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 right-2 top-1/2" />
+
+              {/* Documents Needed */}
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-yellow-600" />
+                  Documents to Generate
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <Checkbox
+                      id="offerLetter"
+                      checked={documents.offerLetter}
+                      onCheckedChange={(checked) => setDocuments({ ...documents, offerLetter: !!checked })}
+                    />
+                    <Label htmlFor="offerLetter" className="text-sm text-gray-700 cursor-pointer">
+                      Offer Letter
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <Checkbox
+                      id="nda"
+                      checked={documents.nda}
+                      onCheckedChange={(checked) => setDocuments({ ...documents, nda: !!checked })}
+                    />
+                    <Label htmlFor="nda" className="text-sm text-gray-700 cursor-pointer">
+                      NDA
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <Checkbox
+                      id="salaryCtcLetter"
+                      checked={documents.salaryCtcLetter}
+                      onCheckedChange={(checked) => setDocuments({ ...documents, salaryCtcLetter: !!checked })}
+                    />
+                    <Label htmlFor="salaryCtcLetter" className="text-sm text-gray-700 cursor-pointer">
+                      Salary/CTC Letter
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <Checkbox
+                      id="Onboarding_Letter"
+                      checked={documents.Onboarding_Letter}
+                      onCheckedChange={(checked) => setDocuments({ ...documents, Onboarding_Letter: !!checked })}
+                    />
+                    <Label htmlFor="Onboarding_Letter" className="text-sm text-gray-700 cursor-pointer">
+                      Onboarding Letter
+                    </Label>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center justify-between p-6 bg-white rounded-xl shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-medium text-white">
+                      {profileData?.fullName?.charAt(0).toUpperCase() || user?.name?.charAt(0).toUpperCase() || "U"}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {profileData?.fullName || user?.name || "User"}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {profileData?.companyName || "Enterprise Account"}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    className="text-sm text-gray-700 border-yellow-200 hover:bg-yellow-50 hover:border-yellow-300 transition-all duration-200"
+                    onClick={handleReset}
+                    disabled={isLoading}
+                  >
+                    Reset
+                  </Button>
+                  <Button
+                    className="text-sm text-white bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    onClick={handleGenerate}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Processing..." : "Generate Documents"}
+                  </Button>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Contact & Payment Details */}
-          <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">
-              Contact & Payment Details
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div>
-                <Label
-                  htmlFor="address"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
-                  Address
-                </Label>
-                <Input
-                  id="address"
-                  value={formData.address}
-                  onChange={(e) =>
-                    setFormData({ ...formData, address: e.target.value })
-                  }
-                  className="w-full border-gray-200 bg-gray-50"
-                />
-              </div>
-
-              <div>
-                <Label
-                  htmlFor="paymentMethod"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
-                  Payment Method
-                </Label>
-                <Select
-                  value={formData.paymentMethod}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, paymentMethod: value })
-                  }
-                >
-                  <SelectTrigger className="w-full border-gray-200 bg-gray-50">
-                    <SelectValue placeholder="Select payment method" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="bank-transfer">Bank Transfer</SelectItem>
-                    <SelectItem value="UPI">UPI</SelectItem>
-                    <SelectItem value="check">Check</SelectItem>
-                  </SelectContent>
-                </Select>
+            {/* Sidebar */}
+            <div className="space-y-4">
+              {/* Quick Tips */}
+              <div className="bg-white rounded-xl p-5 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-yellow-600" />
+                  Quick Tips
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 animate-pulse"></div>
+                    <p className="text-xs text-gray-600">All fields are required for document generation</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 animate-pulse"></div>
+                    <p className="text-xs text-gray-600">Offer letter is automatically generated</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 animate-pulse"></div>
+                    <p className="text-xs text-gray-600">Select additional documents as needed</p>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <Label
-                  htmlFor="tenure"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
-                  Tenure
-                </Label>
-                <Input
-                  id="tenure"
-                  value={formData.tenure}
-                  onChange={(e) =>
-                    setFormData({ ...formData, tenure: e.target.value })
-                  }
-                  className="w-full border-gray-200 bg-gray-50"
-                />
+              {/* How Quick Hire Works */}
+              <div className="bg-white rounded-xl p-5 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Play className="w-4 h-4 text-yellow-600" />
+                  How Quick Hire Works
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs font-semibold text-yellow-700">1</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Fill in employee details and select required documents</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs font-semibold text-yellow-700">2</span>
+                    </div>
+                    <p className="text-xs text-gray-600">AI automatically generates professional documents instantly</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs font-semibold text-yellow-700">3</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Review and customize documents in the editor</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs font-semibold text-yellow-700">4</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Send documents to employee for e-signature</p>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <Label
-                  htmlFor="salary"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
-                  Salary (Monthly)
-                </Label>
-                <Input
-                  id="salary"
-                  value={formData.salary}
-                  onChange={(e) =>
-                    setFormData({ ...formData, salary: e.target.value })
-                  }
-                  className="w-full border-gray-200 bg-gray-50"
-                />
+              {/* Document Preview */}
+              <div className="bg-white rounded-xl p-5 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-yellow-600" />
+                  Document Preview
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <span className="text-xs text-gray-600">Offer Letter</span>
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <span className="text-xs text-gray-600">NDA</span>
+                    <div className={`w-3 h-3 rounded-full ${documents.nda ? 'bg-yellow-500 animate-pulse' : 'bg-gray-300'}`}></div>
+                  </div>
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <span className="text-xs text-gray-600">Salary Letter</span>
+                    <div className={`w-3 h-3 rounded-full ${documents.salaryCtcLetter ? 'bg-yellow-500 animate-pulse' : 'bg-gray-300'}`}></div>
+                  </div>
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-yellow-50 transition-colors">
+                    <span className="text-xs text-gray-600">Onboarding</span>
+                    <div className={`w-3 h-3 rounded-full ${documents.Onboarding_Letter ? 'bg-yellow-500 animate-pulse' : 'bg-gray-300'}`}></div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-
-          {/* Documents Needed */}
-          <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">
-              Documents Needed
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="offerLetter"
-                  checked={documents.offerLetter}
-                  onCheckedChange={(checked) =>
-                    setDocuments({ ...documents, offerLetter: !!checked })
-                  }
-                />
-                <Label htmlFor="offerLetter" className="text-gray-700">
-                  Offer Letter
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="nda"
-                  checked={documents.nda}
-                  onCheckedChange={(checked) =>
-                    setDocuments({ ...documents, nda: !!checked })
-                  }
-                />
-                <Label htmlFor="nda" className="text-gray-700">
-                  NDA
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="salaryCtcLetter"
-                  checked={documents.salaryCtcLetter}
-                  onCheckedChange={(checked) =>
-                    setDocuments({ ...documents, salaryCtcLetter: !!checked })
-                  }
-                />
-                <Label htmlFor="salaryCtcLetter" className="text-gray-700">
-                  Salary/CTC Letter
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="Onboarding_Letter"
-                  checked={documents.Onboarding_Letter}
-                  onCheckedChange={(checked) =>
-                    setDocuments({
-                      ...documents,
-                      Onboarding_Letter: !!checked,
-                    })
-                  }
-                />
-                <Label htmlFor="Onboarding_Letter" className="text-gray-700">
-                  Onboarding Letter
-                </Label>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Section */}
-          <div className="flex items-center justify-between p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 font-medium text-white bg-blue-600 rounded-full">
-                {profileData?.fullName?.charAt(0).toUpperCase() ||
-                  user?.name?.charAt(0).toUpperCase() ||
-                  "U"}
-              </div>
-              <div>
-                <p className="font-medium text-gray-900">
-                  {profileData?.fullName || user?.name || "User"}
-                </p>
-                <p className="text-sm text-gray-500">
-                  {profileData?.companyName || "Enterprise Account"}
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <Button
-                variant="outline"
-                className="text-gray-700 border-gray-300 hover:bg-gray-50"
-                onClick={handleReset}
-                disabled={isLoading}
-              >
-                Reset
-              </Button>
-              <Button
-                className="text-white bg-yellow-600 hover:bg-yellow-700"
-                onClick={handleGenerate}
-                disabled={isLoading}
-              >
-                {isLoading ? "Processing..." : "Generate"}
-              </Button>
             </div>
           </div>
         </div>
@@ -721,10 +891,10 @@ export default function QuickHirePage({ user, profileData }) {
       {/* Success Toast Notification */}
       {showToast && (
         <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
-          <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-lg shadow-lg max-w-sm">
+          <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-xl shadow-lg max-w-sm">
             <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-            <p className="text-green-800 font-medium">
-              Employee details saved and offer letter generated successfully!
+            <p className="text-green-800 text-sm font-medium">
+              Employee details saved and documents generated successfully!
             </p>
             <button
               onClick={closeToast}
@@ -739,7 +909,7 @@ export default function QuickHirePage({ user, profileData }) {
       {/* Error Toast Notification */}
       {showErrorToast && (
         <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
-          <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-lg shadow-lg max-w-sm">
+          <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl shadow-lg max-w-sm">
             <svg
               className="w-5 h-5 text-red-600 flex-shrink-0"
               fill="none"
@@ -753,7 +923,7 @@ export default function QuickHirePage({ user, profileData }) {
                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </svg>
-            <p className="text-red-800 font-medium">{error}</p>
+            <p className="text-red-800 text-sm font-medium">{error}</p>
             <button
               onClick={closeErrorToast}
               className="ml-auto p-1 text-red-600 hover:text-red-800 hover:bg-red-100 rounded-full transition-colors"

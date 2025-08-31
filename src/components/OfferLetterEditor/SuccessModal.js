@@ -13,7 +13,7 @@ import {
   User,
   Building,
   Calendar,
-  DollarSign
+  IndianRupee
 } from "lucide-react";
 
 export default function SuccessModal({ offerLetterData, onClose, onView, onEdit }) {
@@ -100,7 +100,7 @@ export default function SuccessModal({ offerLetterData, onClose, onView, onEdit 
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500">Salary</span>
-                    <span className="font-medium text-gray-900">${employeeDetails.salary?.toLocaleString()}</span>
+                    <span className="font-medium text-gray-900">₹{employeeDetails.salary?.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
