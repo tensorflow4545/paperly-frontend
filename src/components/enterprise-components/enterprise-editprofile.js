@@ -320,10 +320,59 @@ export default function EnterpriseProfilePage() {
   // Show loading if user data is not yet loaded
   if (!user && !isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-6 h-6 border-3 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
-          <p className="mt-3 text-sm text-gray-600">Loading user data...</p>
+      <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+        {/* Header Skeleton */}
+        <div className="px-4 lg:px-6 py-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-between mb-4">
+              <div className="space-y-2">
+                <div className="h-6 bg-yellow-200 rounded-lg animate-pulse w-32"></div>
+                <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-48"></div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Form Content Skeleton */}
+        <div className="px-4 lg:px-6 pb-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Main Form Skeleton */}
+              <div className="lg:col-span-2 space-y-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="bg-white rounded-xl p-5 shadow-sm border border-yellow-200">
+                    <div className="h-5 bg-yellow-200 rounded-lg animate-pulse w-40 mb-4"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[1, 2, 3, 4, 5, 6].map((j) => (
+                        <div key={j} className="space-y-2">
+                          <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-20"></div>
+                          <div className="h-10 bg-yellow-200 rounded-lg animate-pulse"></div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sidebar Skeleton */}
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
+                    <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-32 mb-3"></div>
+                    <div className="space-y-2">
+                      {[1, 2, 3, 4].map((j) => (
+                        <div key={j} className="h-3 bg-yellow-200 rounded-lg animate-pulse"></div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -332,10 +381,59 @@ export default function EnterpriseProfilePage() {
   // Show loading while profile data is being fetched
   if (isLoadingProfile) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-6 h-6 border-3 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
-          <p className="mt-3 text-sm text-gray-600">Loading profile data...</p>
+      <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+        {/* Header Skeleton */}
+        <div className="px-4 lg:px-6 py-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-between mb-4">
+              <div className="space-y-2">
+                <div className="h-6 bg-yellow-200 rounded-lg animate-pulse w-32"></div>
+                <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-48"></div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Form Content Skeleton */}
+        <div className="px-4 lg:px-6 pb-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Main Form Skeleton */}
+              <div className="lg:col-span-2 space-y-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="bg-white rounded-xl p-5 shadow-sm border border-yellow-200">
+                    <div className="h-5 bg-yellow-200 rounded-lg animate-pulse w-40 mb-4"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[1, 2, 3, 4, 5, 6].map((j) => (
+                        <div key={j} className="space-y-2">
+                          <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-20"></div>
+                          <div className="h-10 bg-yellow-200 rounded-lg animate-pulse"></div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sidebar Skeleton */}
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
+                    <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-32 mb-3"></div>
+                    <div className="space-y-2">
+                      {[1, 2, 3, 4].map((j) => (
+                        <div key={j} className="h-3 bg-yellow-200 rounded-lg animate-pulse"></div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -359,7 +457,7 @@ export default function EnterpriseProfilePage() {
   }
 
   return (
-    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+    <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
       {/* Header */}
       <div className="px-4 lg:px-6 py-4">
         <div className="max-w-6xl mx-auto">

@@ -422,7 +422,7 @@ export default function QuickHirePage({ user, profileData }) {
   };
 
   return (
-    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+    <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
       {/* Success Modal */}
       {showSuccessModal && offerLetterData && (
         <SuccessModal
@@ -435,7 +435,7 @@ export default function QuickHirePage({ user, profileData }) {
       {isLoading && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 max-w-lg w-full">
-            {/* Header */}
+      {/* Header */}
             <div className="px-6 py-4 border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center">
@@ -547,221 +547,221 @@ export default function QuickHirePage({ user, profileData }) {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Main Form */}
             <div className="lg:col-span-3 space-y-4">
-              {/* Employment Type */}
+          {/* Employment Type */}
               <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
                 <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <Users className="w-4 h-4 text-yellow-600" />
-                  Employment Type
-                </h2>
-                <RadioGroup
-                  value={employmentType}
-                  onValueChange={setEmploymentType}
-                  className="flex gap-6"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Employee" id="employee" />
+              Employment Type
+            </h2>
+            <RadioGroup
+              value={employmentType}
+              onValueChange={setEmploymentType}
+              className="flex gap-6"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="Employee" id="employee" />
                     <Label htmlFor="employee" className="text-sm text-gray-700">
-                      Employee
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Freelancer" id="freelancer" />
-                    <Label htmlFor="freelancer" className="text-sm text-gray-700">
-                      Freelancer
-                    </Label>
-                  </div>
-                </RadioGroup>
+                  Employee
+                </Label>
               </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="Freelancer" id="freelancer" />
+                    <Label htmlFor="freelancer" className="text-sm text-gray-700">
+                  Freelancer
+                </Label>
+              </div>
+            </RadioGroup>
+          </div>
 
-              {/* Basic Information */}
+          {/* Basic Information */}
               <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
                 <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <User className="w-4 h-4 text-yellow-600" />
-                  Basic Information
-                </h2>
+              Basic Information
+            </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
+              <div>
                     <Label htmlFor="fullName" className="block mb-2 text-xs font-medium text-gray-600">
-                      Full Name
-                    </Label>
+                  Full Name
+                </Label>
                     <div className="relative group">
-                      <Input
-                        id="fullName"
-                        value={formData.fullName}
+                <Input
+                  id="fullName"
+                  value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         className="bg-yellow-50 border-yellow-200 text-sm group-hover:border-yellow-300 transition-colors"
                         placeholder="Enter full name"
                       />
                       <User className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
                     </div>
-                  </div>
-                  <div>
+              </div>
+              <div>
                     <Label htmlFor="emailAddress" className="block mb-2 text-xs font-medium text-gray-600">
-                      Email Address
-                    </Label>
+                  Email Address
+                </Label>
                     <div className="relative group">
-                      <Input
-                        id="emailAddress"
-                        value={formData.emailAddress}
+                  <Input
+                    id="emailAddress"
+                    value={formData.emailAddress}
                         onChange={(e) => setFormData({ ...formData, emailAddress: e.target.value })}
                         className="bg-yellow-50 border-yellow-200 text-sm pr-10 group-hover:border-yellow-300 transition-colors"
                         placeholder="Enter email address"
                       />
                       <Mail className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
-                    </div>
-                  </div>
-                  <div>
+                </div>
+              </div>
+              <div>
                     <Label htmlFor="role" className="block mb-2 text-xs font-medium text-gray-600">
-                      Role
-                    </Label>
+                  Role
+                </Label>
                     <div className="relative group">
-                      <Input
-                        id="role"
-                        value={formData.role}
+                <Input
+                  id="role"
+                  value={formData.role}
                         onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                         className="bg-yellow-50 border-yellow-200 text-sm group-hover:border-yellow-300 transition-colors"
                         placeholder="Enter job role"
                       />
                       <Briefcase className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
                     </div>
-                  </div>
-                  <div>
+              </div>
+              <div>
                     <Label htmlFor="joiningDate" className="block mb-2 text-xs font-medium text-gray-600">
-                      Joining Date
-                    </Label>
+                  Joining Date
+                </Label>
                     <div className="relative group">
-                      <Input
-                        id="joiningDate"
-                        type="date"
-                        value={formData.joiningDate}
+                  <Input
+                    id="joiningDate"
+                    type="date"
+                    value={formData.joiningDate}
                         onChange={(e) => setFormData({ ...formData, joiningDate: e.target.value })}
                         className="bg-yellow-50 border-yellow-200 text-sm pr-10 group-hover:border-yellow-300 transition-colors"
                       />
                       <Calendar className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
-                    </div>
-                  </div>
                 </div>
               </div>
+            </div>
+          </div>
 
-              {/* Contact & Payment Details */}
+          {/* Contact & Payment Details */}
               <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
                 <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <CreditCard className="w-4 h-4 text-yellow-600" />
-                  Contact & Payment Details
-                </h2>
+              Contact & Payment Details
+            </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
+              <div>
                     <Label htmlFor="address" className="block mb-2 text-xs font-medium text-gray-600">
-                      Address
-                    </Label>
+                  Address
+                </Label>
                     <div className="relative group">
-                      <Input
-                        id="address"
-                        value={formData.address}
+                <Input
+                  id="address"
+                  value={formData.address}
                         onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                         className="bg-yellow-50 border-yellow-200 text-sm group-hover:border-yellow-300 transition-colors"
                         placeholder="Enter address"
                       />
                       <MapPin className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
-                    </div>
+              </div>
                   </div>
-                  <div>
+              <div>
                     <Label htmlFor="paymentMethod" className="block mb-2 text-xs font-medium text-gray-600">
-                      Payment Method
-                    </Label>
-                    <Select
-                      value={formData.paymentMethod}
+                  Payment Method
+                </Label>
+                <Select
+                  value={formData.paymentMethod}
                       onValueChange={(value) => setFormData({ ...formData, paymentMethod: value })}
-                    >
+                >
                       <SelectTrigger className="bg-yellow-50 border-yellow-200 text-sm hover:border-yellow-300 transition-colors">
-                        <SelectValue placeholder="Select payment method" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="bank-transfer">Bank Transfer</SelectItem>
-                        <SelectItem value="UPI">UPI</SelectItem>
-                        <SelectItem value="check">Check</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
+                    <SelectValue placeholder="Select payment method" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="bank-transfer">Bank Transfer</SelectItem>
+                    <SelectItem value="UPI">UPI</SelectItem>
+                    <SelectItem value="check">Check</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
                     <Label htmlFor="tenure" className="block mb-2 text-xs font-medium text-gray-600">
-                      Tenure
-                    </Label>
-                    <Input
-                      id="tenure"
-                      value={formData.tenure}
+                  Tenure
+                </Label>
+                <Input
+                  id="tenure"
+                  value={formData.tenure}
                       onChange={(e) => setFormData({ ...formData, tenure: e.target.value })}
                       className="bg-yellow-50 border-yellow-200 text-sm hover:border-yellow-300 transition-colors"
                       placeholder="e.g., 1 year, 6 months"
-                    />
-                  </div>
-                  <div>
+                />
+              </div>
+              <div>
                     <Label htmlFor="salary" className="block mb-2 text-xs font-medium text-gray-600">
-                      Salary (Monthly)
-                    </Label>
+                  Salary (Monthly)
+                </Label>
                     <div className="relative group">
-                      <Input
-                        id="salary"
-                        value={formData.salary}
+                <Input
+                  id="salary"
+                  value={formData.salary}
                         onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
                         className="bg-yellow-50 border-yellow-200 text-sm pr-10 group-hover:border-yellow-300 transition-colors"
                         placeholder="Enter salary amount"
                       />
                       <IndianRupee className="absolute w-4 h-4 text-gray-400 right-3 top-1/2 transform -translate-y-1/2 group-hover:text-yellow-500 transition-colors" />
                     </div>
-                  </div>
-                </div>
               </div>
+            </div>
+          </div>
 
-              {/* Documents Needed */}
+          {/* Documents Needed */}
               <div className="bg-white rounded-xl p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
                 <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <FileText className="w-4 h-4 text-yellow-600" />
                   Documents to Generate
-                </h2>
+            </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
-                    <Checkbox
-                      id="offerLetter"
-                      checked={documents.offerLetter}
+                <Checkbox
+                  id="offerLetter"
+                  checked={documents.offerLetter}
                       onCheckedChange={(checked) => setDocuments({ ...documents, offerLetter: !!checked })}
-                    />
+                />
                     <Label htmlFor="offerLetter" className="text-sm text-gray-700 cursor-pointer">
-                      Offer Letter
-                    </Label>
-                  </div>
+                  Offer Letter
+                </Label>
+              </div>
                   <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
-                    <Checkbox
-                      id="nda"
-                      checked={documents.nda}
+                <Checkbox
+                  id="nda"
+                  checked={documents.nda}
                       onCheckedChange={(checked) => setDocuments({ ...documents, nda: !!checked })}
-                    />
+                />
                     <Label htmlFor="nda" className="text-sm text-gray-700 cursor-pointer">
-                      NDA
-                    </Label>
-                  </div>
+                  NDA
+                </Label>
+              </div>
                   <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
-                    <Checkbox
-                      id="salaryCtcLetter"
-                      checked={documents.salaryCtcLetter}
+                <Checkbox
+                  id="salaryCtcLetter"
+                  checked={documents.salaryCtcLetter}
                       onCheckedChange={(checked) => setDocuments({ ...documents, salaryCtcLetter: !!checked })}
-                    />
+                />
                     <Label htmlFor="salaryCtcLetter" className="text-sm text-gray-700 cursor-pointer">
-                      Salary/CTC Letter
-                    </Label>
-                  </div>
+                  Salary/CTC Letter
+                </Label>
+              </div>
                   <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-50 transition-colors">
-                    <Checkbox
-                      id="Onboarding_Letter"
-                      checked={documents.Onboarding_Letter}
+                <Checkbox
+                  id="Onboarding_Letter"
+                  checked={documents.Onboarding_Letter}
                       onCheckedChange={(checked) => setDocuments({ ...documents, Onboarding_Letter: !!checked })}
                     />
                     <Label htmlFor="Onboarding_Letter" className="text-sm text-gray-700 cursor-pointer">
-                      Onboarding Letter
-                    </Label>
-                  </div>
-                </div>
+                  Onboarding Letter
+                </Label>
               </div>
+            </div>
+          </div>
 
               {/* Action Buttons */}
               <div className="flex items-center justify-between p-6 bg-white rounded-xl shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
@@ -770,32 +770,32 @@ export default function QuickHirePage({ user, profileData }) {
                     <span className="text-sm font-medium text-white">
                       {profileData?.fullName?.charAt(0).toUpperCase() || user?.name?.charAt(0).toUpperCase() || "U"}
                     </span>
-                  </div>
-                  <div>
+              </div>
+              <div>
                     <p className="text-sm font-medium text-gray-900">
-                      {profileData?.fullName || user?.name || "User"}
-                    </p>
+                  {profileData?.fullName || user?.name || "User"}
+                </p>
                     <p className="text-xs text-gray-500">
-                      {profileData?.companyName || "Enterprise Account"}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
+                  {profileData?.companyName || "Enterprise Account"}
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
                     className="text-sm text-gray-700 border-yellow-200 hover:bg-yellow-50 hover:border-yellow-300 transition-all duration-200"
-                    onClick={handleReset}
-                    disabled={isLoading}
-                  >
-                    Reset
-                  </Button>
-                  <Button
+                onClick={handleReset}
+                disabled={isLoading}
+              >
+                Reset
+              </Button>
+              <Button
                     className="text-sm text-white bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                    onClick={handleGenerate}
-                    disabled={isLoading}
-                  >
+                onClick={handleGenerate}
+                disabled={isLoading}
+              >
                     {isLoading ? "Processing..." : "Generate Documents"}
-                  </Button>
+              </Button>
                 </div>
               </div>
             </div>
