@@ -888,10 +888,73 @@ export default function EnterpriseDynamicLayout() {
   // Show loading if user data is not yet loaded
   if (!user && !isAuthenticated && isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading user data...</p>
+      <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
+        <div className="px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto">
+            {/* Header Skeleton */}
+            <div className="flex items-center justify-between mb-8">
+              <div className="space-y-2">
+                <div className="h-8 bg-yellow-200 rounded-lg animate-pulse w-64"></div>
+                <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-48"></div>
+              </div>
+              <div className="flex gap-3">
+                <div className="h-10 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+                <div className="h-10 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Skeleton */}
+        <div className="px-6 lg:px-8 mb-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
+                  <div className="h-8 bg-yellow-200 rounded-lg animate-pulse w-16 mb-2"></div>
+                  <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content Skeleton */}
+        <div className="px-6 lg:px-8 pb-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Main Content Skeleton */}
+              <div className="lg:col-span-2 space-y-6">
+                {[1, 2].map((i) => (
+                  <div key={i} className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200">
+                    <div className="h-6 bg-yellow-200 rounded-lg animate-pulse w-48 mb-4"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[1, 2, 3, 4, 5, 6].map((j) => (
+                        <div key={j} className="space-y-2">
+                          <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+                          <div className="h-12 bg-yellow-200 rounded-lg animate-pulse"></div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sidebar Skeleton */}
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
+                    <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-32 mb-3"></div>
+                    <div className="space-y-2">
+                      {[1, 2, 3, 4].map((j) => (
+                        <div key={j} className="h-3 bg-yellow-200 rounded-lg animate-pulse"></div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -947,6 +1010,9 @@ export default function EnterpriseDynamicLayout() {
     <>
       <EnterpriseNavbar />
       
+      {/* Top Separator Line */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
+      
       {/* Main Content Area with Sidebar */}
       <div className="min-h-screen bg-gray-50 flex relative">
         <Sidebar
@@ -963,6 +1029,9 @@ export default function EnterpriseDynamicLayout() {
         {/* Dynamic Content Area */}
         {renderContent()}
       </div>
+      
+      {/* Bottom Separator Line */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
       
       <Footer />
     </>

@@ -371,10 +371,95 @@ export default function MyEmployeesFreelancers({ setActiveNavItem, setActiveWork
   if (isLoading) {
     return (
       <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="flex flex-col items-center">
-            <div className="w-6 h-6 border-3 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
-            <p className="mt-3 text-sm text-gray-600">Loading team members...</p>
+        {/* Header Skeleton */}
+        <div className="px-4 lg:px-6 py-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-between mb-4">
+              <div className="space-y-2">
+                <div className="h-6 bg-yellow-200 rounded-lg animate-pulse w-32"></div>
+                <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-48"></div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content Skeleton */}
+        <div className="px-4 lg:px-6 pb-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Main Content Skeleton */}
+              <div className="lg:col-span-3 space-y-4">
+                {/* Stats Cards Skeleton */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-2">
+                          <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-16"></div>
+                          <div className="h-6 bg-yellow-200 rounded-lg animate-pulse w-12"></div>
+                        </div>
+                        <div className="w-8 h-8 bg-yellow-200 rounded-lg animate-pulse"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Search and Filter Skeleton */}
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex-1">
+                      <div className="h-10 bg-yellow-200 rounded-lg animate-pulse"></div>
+                    </div>
+                    <div className="h-10 bg-yellow-200 rounded-lg animate-pulse w-32"></div>
+                    <div className="h-10 bg-yellow-200 rounded-lg animate-pulse w-32"></div>
+                  </div>
+                </div>
+
+                {/* Employee Cards Skeleton */}
+                <div className="space-y-4">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-3 flex-1">
+                          <div className="w-12 h-12 bg-yellow-200 rounded-full animate-pulse"></div>
+                          <div className="flex-1 space-y-2">
+                            <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-32"></div>
+                            <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-24"></div>
+                            <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-20"></div>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <div className="w-8 h-8 bg-yellow-200 rounded-lg animate-pulse"></div>
+                          <div className="w-8 h-8 bg-yellow-200 rounded-lg animate-pulse"></div>
+                        </div>
+                      </div>
+                      <div className="mt-4 space-y-2">
+                        <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-full"></div>
+                        <div className="h-3 bg-yellow-200 rounded-lg animate-pulse w-3/4"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sidebar Skeleton */}
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
+                    <div className="h-4 bg-yellow-200 rounded-lg animate-pulse w-32 mb-3"></div>
+                    <div className="space-y-2">
+                      {[1, 2, 3, 4].map((j) => (
+                        <div key={j} className="h-3 bg-yellow-200 rounded-lg animate-pulse"></div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -600,9 +685,9 @@ export default function MyEmployeesFreelancers({ setActiveNavItem, setActiveWork
                             disabled={loadingSignedDocuments}
                           >
                             {loadingSignedDocuments ? (
-                                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600"></div>
+                              <div className="w-3 h-3 bg-yellow-200 rounded-lg animate-pulse"></div>
                             ) : (
-                                  <FileText className="w-3 h-3" />
+                              <FileText className="w-3 h-3" />
                             )}
                           </Button>
                         )}
