@@ -2,6 +2,25 @@
 
 import { useState, useEffect } from "react"
 import { getAuthToken, getUserData, logout } from "@/utils/auth"
+import { 
+  Users, 
+  FileText, 
+  Clock, 
+  CheckCircle, 
+  Building, 
+  Settings, 
+  User, 
+  LogOut, 
+  Plus, 
+  Activity,
+  TrendingUp,
+  Shield,
+  Mail,
+  MapPin,
+  IndianRupee,
+  Calendar,
+  Briefcase
+} from "lucide-react"
 import EnterpriseNavbar from "@/components/enterprise-components/enterprise-navbar"
 import Sidebar from "@/components/enterprise-components/sidebar"
 import Footer from "@/components/enterprise-components/enterprise-footer"
@@ -9,319 +28,324 @@ import EnterpriseWorkspace from "@/components/enterprise-components/enterprise-w
 import EnterpriseEditProfile from "@/components/enterprise-components/enterprise-editprofile"
 import MyEmployeesFreelancers from "@/components/enterprise-components/workspace_myemployee_freelancer"
 
+
 // Home Dashboard Component
-const HomeDashboard = ({ user, profileData }) => {
+const HomeDashboard = ({ user, profileData, setActiveNavItem, setActiveWorkspaceItem }) => {
   return (
-    <div className="w-full bg-[linear-gradient(180deg,#FDF9EDFF_0%,#F5E6A8FF_100%)] flex-1 lg:ml-0">
+    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex-1 lg:ml-0 min-h-screen">
       {/* Header */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 pt-16 lg:pt-12">
-        <div className="w-full p-4 sm:p-6 lg:p-10 rounded-[10px] bg-[#FFF3BBB0]">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 lg:mb-6">
-            <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
-                Welcome back, {profileData?.fullName || user?.name || 'User'}!
+      <div className="px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1 flex items-center gap-2">
+                <User className="w-6 h-6 text-yellow-600" />
+                Welcome back, {profileData?.fullName || user?.name || 'User'}
               </h1>
-              <p className="text-sm sm:text-base text-gray-700">
-                View your company profile and Paprly settings.
-              </p>
+              <p className="text-gray-600 flex items-center gap-2">
+                <Activity className="w-4 h-4 text-yellow-500" />
+                Manage your Team Documentation and Payments all at one place              </p>
             </div>
-            <div className="mt-4 sm:mt-0 sm:ml-6">
-              <button className="bg-[#D4AF37] hover:bg-[#B8941F] text-gray-900 font-medium px-4 sm:px-6 py-2 rounded-md transition-colors text-sm sm:text-base">
-                Explore Paprly Studio
+            <div className="flex gap-3">
+              <button 
+                onClick={() => {
+                  setActiveNavItem("workspace");
+                  setActiveWorkspaceItem("quick-hire");
+                }}
+                className="px-4 py-2 bg-yellow-700 text-white text-sm rounded-lg hover:bg-yellow-800 transition-colors flex items-center gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Quick Hire
+              </button>
+              <button 
+                onClick={() => setActiveNavItem("dashboard")}
+                className="px-4 py-2 bg-white text-gray-700 text-sm rounded-lg hover:bg-yellow-50 transition-colors border border-yellow-200 flex items-center gap-2"
+              >
+                <TrendingUp className="w-4 h-4" />
+                Dashboard
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Form Content */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="w-full space-y-4 sm:space-y-6">
-          {/* Basic Information */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Basic Information</h2>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                <input
-                  type="text"
-                  value={profileData?.fullName || ""}
-                  readOnly
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={profileData?.email || user?.email || ""}
-                    readOnly
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default pr-10"
-                  />
-                  <svg
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-6 sm:mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
-              <input
-                type="text"
-                value={profileData?.companyName || ""}
-                readOnly
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default"
-              />
-            </div>
-
-            {profileData?.companyLogo && (
-              <div className="mb-6 sm:mb-8">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Company Logo</label>
-                <div className="w-20 h-20 overflow-hidden rounded-full border-2 border-gray-200">
-                  <img 
-                    src={profileData.companyLogo} 
-                    alt="Company Logo" 
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Business Details */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Business Details</h2>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Company Type</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={profileData?.companyType || ""}
-                    readOnly
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default pr-10"
-                  />
-                  <svg
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0H8"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Industry</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={profileData?.industry || ""}
-                    readOnly
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default pr-10"
-                  />
-                  <svg
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">GST Number</label>
-                <input
-                  type="text"
-                  value={profileData?.gstNumber || ""}
-                  readOnly
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Registered Address</label>
-                <input
-                  type="text"
-                  value={profileData?.registeredAddress || ""}
-                  readOnly
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Team & Preferences */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Team & Preferences</h2>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Default Currency</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={profileData?.defaultCurrency || ""}
-                    readOnly
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default pr-10"
-                  />
-                  <svg
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Payment Cycle</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={profileData?.defaultPaymentCycle || ""}
-                    readOnly
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default pr-10"
-                  />
-                  <svg
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div className="max-w-full sm:max-w-md">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Language</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={profileData?.preferredLanguage || ""}
-                  readOnly
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default pr-10"
-                />
-                <svg
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+      {/* Stats */}
+      <div className="px-6 lg:px-8 mb-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: 'Active Documents', value: '24', icon: FileText, color: 'text-blue-600', bgColor: 'bg-blue-100' },
+              { title: 'Team Members', value: '12', icon: Users, color: 'text-green-600', bgColor: 'bg-green-100' },
+              { title: 'Pending Reviews', value: '8', icon: Clock, color: 'text-yellow-600', bgColor: 'bg-yellow-100' },
+              { title: 'Completed This Month', value: '156', icon: CheckCircle, color: 'text-purple-600', bgColor: 'bg-purple-100' }
+            ].map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <div 
+                  key={index}
+                  className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200 hover:border-yellow-300 transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                  />
-                </svg>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-2xl font-semibold text-gray-900">{stat.value}</p>
+                    <div className={`p-2 rounded-lg ${stat.bgColor}`}>
+                      <Icon className={`w-5 h-5 ${stat.color}`} />
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-600">{stat.title}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="px-6 lg:px-8 pb-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Company Information */}
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Building className="w-5 h-5 text-yellow-600" />
+                  Company Information
+                </h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <Building className="w-3 h-3 text-yellow-500" />
+                        Company Name
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.companyName || 'Not specified'}</p>
+                      </div>
+              </div>
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <Briefcase className="w-3 h-3 text-yellow-500" />
+                        Company Type
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.companyType || 'Not specified'}</p>
+                </div>
+              </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <TrendingUp className="w-3 h-3 text-yellow-500" />
+                        Industry
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.industry || 'Not specified'}</p>
+            </div>
+                    </div>
+            </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <Shield className="w-3 h-3 text-yellow-500" />
+                        GST Number
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.gstNumber || 'Not specified'}</p>
+                </div>
+              </div>
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-yellow-500" />
+                        Registered Address
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.registeredAddress || 'Not specified'}</p>
+                </div>
+              </div>
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <Mail className="w-3 h-3 text-yellow-500" />
+                        Contact Email
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.email || user?.email || 'Not specified'}</p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+              {/* Preferences */}
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Settings className="w-5 h-5 text-yellow-600" />
+                  Preferences & Settings
+                </h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <IndianRupee className="w-3 h-3 text-yellow-500" />
+                        Default Currency
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.defaultCurrency || 'Not specified'}</p>
+                      </div>
+              </div>
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <Calendar className="w-3 h-3 text-yellow-500" />
+                        Payment Cycle
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.defaultPaymentCycle || 'Not specified'}</p>
               </div>
             </div>
           </div>
 
-          {/* Enterprise Suite Settings */}
-          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">
-              Enterprise Suite Settings
-            </h2>
+                  <div className="space-y-3">
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <User className="w-3 h-3 text-yellow-500" />
+                        Preferred Language
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.preferredLanguage || 'Not specified'}</p>
+                </div>
+              </div>
+              <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                        <FileText className="w-3 h-3 text-yellow-500" />
+                        Signature Style
+                      </label>
+                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                        <p className="text-sm text-gray-900">{profileData?.defaultSignatureStyle || 'Not specified'}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <div className="space-y-4 sm:space-y-6">
+            {/* Sidebar */}
+            <div className="space-y-4">
+              {/* Quick Actions */}
+              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Activity className="w-4 h-4 text-yellow-600" />
+                  Quick Actions
+                </h3>
+                <div className="space-y-2">
+                  {[
+                    { 
+                      label: 'Manage Team', 
+                      description: 'View and manage your teams',
+                      icon: Users,
+                      action: () => {
+                        setActiveNavItem("workspace");
+                        setActiveWorkspaceItem("my-employees");
+                      }
+                    },
+                    { 
+                      label: 'Documents', 
+                      description: 'View and manage your documents',
+                      icon: FileText,
+                      action: () => {
+                        setActiveNavItem("workspace");
+                        setActiveWorkspaceItem("drafts");
+                      }
+                    },
+                    { 
+                      label: 'Profile', 
+                      description: 'Update and edit your company profile',
+                      icon: User,
+                      action: () => setActiveNavItem("edit-profile")
+                    }
+                  ].map((action, index) => {
+                    const Icon = action.icon;
+                    return (
+                      <button
+                        key={index}
+                        onClick={action.action}
+                        className="w-full text-left p-2 rounded-md hover:bg-yellow-50 transition-colors text-xs text-gray-700 flex items-center gap-2"
+                      >
+                        <Icon className="w-3 h-3 text-yellow-500" />
+                        <div className="flex-1 text-left">
+                          <div className="font-medium">{action.label}</div>
+                          <div className="text-xs text-gray-500">{action.description}</div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                  
+                  {/* Logout button - smaller and separated */}
+                  <div className="pt-2 border-t border-yellow-200">
+                    <button
+                      onClick={() => {
+                        logout();
+                        window.location.href = '/sign-in';
+                      }}
+                      className="w-full text-left p-1.5 rounded-md hover:bg-red-50 transition-colors text-xs text-red-600 flex items-center gap-2"
+                    >
+                      <LogOut className="w-3 h-3" />
+                      Logout
+                    </button>
+                  </div>
+            </div>
+          </div>
+
+              {/* Enterprise Features */}
+              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-yellow-600" />
+                  Enterprise Features
+                </h3>
+                <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-sm font-medium text-gray-900">Onboarding Kit</h3>
-                </div>
-                <div
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full ${
-                    profileData?.enableOneClickOnboardingKit ? "bg-yellow-400" : "bg-gray-200"
-                  }`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white ${
-                      profileData?.enableOneClickOnboardingKit ? "translate-x-6" : "translate-x-1"
-                    }`}
-                  />
+                    <span className="text-xs text-gray-700">Onboarding Kit</span>
+                    <div className={`w-10 h-5 rounded-full transition-colors ${
+                      profileData?.enableOneClickOnboardingKit ? 'bg-yellow-500' : 'bg-gray-200'
+                    }`}>
+                      <div className={`w-4 h-4 bg-white rounded-full shadow transform transition-transform ${
+                        profileData?.enableOneClickOnboardingKit ? 'translate-x-5' : 'translate-x-0.5'
+                      }`}></div>
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-sm font-medium text-gray-900">Timestamp Proof</h3>
+                    <span className="text-xs text-gray-700">Timestamp Proof</span>
+                    <div className={`w-10 h-5 rounded-full transition-colors ${
+                      profileData?.enableDocumentTimestampProof ? 'bg-yellow-500' : 'bg-gray-200'
+                    }`}>
+                      <div className={`w-4 h-4 bg-white rounded-full shadow transform transition-transform ${
+                        profileData?.enableDocumentTimestampProof ? 'translate-x-5' : 'translate-x-0.5'
+                      }`}></div>
                 </div>
-                <div
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full ${
-                    profileData?.enableDocumentTimestampProof ? "bg-yellow-400" : "bg-gray-200"
-                  }`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white ${
-                      profileData?.enableDocumentTimestampProof ? "translate-x-6" : "translate-x-1"
-                    }`}
-                  />
+                  </div>
                 </div>
               </div>
 
-              <div className="max-w-full sm:max-w-md">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Default Signature Style</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={profileData?.defaultSignatureStyle || ""}
-                    readOnly
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-gray-900 cursor-default pr-10"
-                  />
-                  <svg
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                    />
-                  </svg>
+              {/* Recent Activity */}
+              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-yellow-600" />
+                  Recent Activity
+                </h3>
+                <div className="space-y-2">
+                  {[
+                    { action: 'Document signed', time: '2 hours ago' },
+                    { action: 'Team member added', time: '1 day ago' },
+                    { action: 'Payment processed', time: '2 days ago' },
+                    { action: 'Document created', time: '3 days ago' }
+                  ].map((activity, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                      <div className="flex-1">
+                        <p className="text-xs text-gray-700">{activity.action}</p>
+                        <p className="text-xs text-gray-500">{activity.time}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -385,6 +409,7 @@ const WorkspaceDrafts = () => {
   });
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState('desc');
+
 
   // Fetch drafts from API
   const fetchDrafts = async (page = 1) => {
@@ -466,6 +491,8 @@ const WorkspaceDrafts = () => {
       setSortOrder('desc');
     }
   };
+
+
 
   // Format date
   const formatDate = (dateString) => {
@@ -715,6 +742,8 @@ const WorkspaceDrafts = () => {
           )}
         </div>
       </div>
+
+
     </div>
   );
 };
@@ -832,7 +861,7 @@ export default function EnterpriseDynamicLayout() {
         case "quick-hire":
           return <EnterpriseWorkspace user={user} profileData={profileData} />
         case "my-employees":
-          return <MyEmployeesFreelancers />
+          return <MyEmployeesFreelancers setActiveNavItem={setActiveNavItem} setActiveWorkspaceItem={setActiveWorkspaceItem} />
         case "payments":
           return <WorkspacePayments />
         case "drafts":
@@ -846,13 +875,13 @@ export default function EnterpriseDynamicLayout() {
 
     switch (activeNavItem) {
       case "home":
-        return <HomeDashboard user={user} profileData={profileData} />
+        return <HomeDashboard user={user} profileData={profileData} setActiveNavItem={setActiveNavItem} setActiveWorkspaceItem={setActiveWorkspaceItem} />
       case "dashboard":
         return <Dashboard />
       case "edit-profile":
         return <EnterpriseEditProfile />
       default:
-        return <HomeDashboard user={user} profileData={profileData} />
+        return <HomeDashboard user={user} profileData={profileData} setActiveNavItem={setActiveNavItem} setActiveWorkspaceItem={setActiveWorkspaceItem} />
     }
   }
 

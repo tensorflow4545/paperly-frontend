@@ -505,6 +505,11 @@ export default function MultiDocumentEditor({ allDocumentsData, onClose, onSave,
         throw new Error("Authentication token not found. Please log in again.");
       }
 
+      // Validate that employee email is provided
+      if (!employeeDetails.emailAddress) {
+        throw new Error("Employee email address is required. Please ensure the employee details include a valid email address.");
+      }
+
       let savedCount = 0;
       let errorCount = 0;
       const errors = [];
@@ -599,9 +604,9 @@ export default function MultiDocumentEditor({ allDocumentsData, onClose, onSave,
           // Create FormData for multipart upload
           const formData = new FormData();
           formData.append('documentType', getApiDocumentType(doc.name));
-          formData.append('employeeName', employeeDetails.fullName || 'Employee');
-          formData.append('employeeEmail', employeeDetails.email || 'employee@example.com');
-          formData.append('documentTitle', `${doc.name} - ${employeeDetails.fullName || 'Employee'}`);
+          formData.append('employeeName', employeeDetails.fullName || '');
+          formData.append('employeeEmail', employeeDetails.emailAddress || '');
+          formData.append('documentTitle', `${doc.name} - ${employeeDetails.fullName || ''}`);
           formData.append('documentDescription', `Draft ${doc.name} for ${employeeDetails.fullName || 'Employee'}`);
           
           // Add metadata
@@ -725,6 +730,13 @@ export default function MultiDocumentEditor({ allDocumentsData, onClose, onSave,
       // Save all documents and collect their IDs
       const savedDocumentIds = [];
       const employeeDetails = availableDocuments[0]?.data?.data?.employeeDetails || {};
+      console.log('Employee details extracted:', employeeDetails);
+      console.log('Employee email:', employeeDetails.emailAddress);
+      
+      // Validate that employee email is provided
+      if (!employeeDetails.emailAddress) {
+        throw new Error("Employee email address is required. Please ensure the employee details include a valid email address.");
+      }
       
       for (const doc of availableDocuments) {
         try {
@@ -818,7 +830,7 @@ export default function MultiDocumentEditor({ allDocumentsData, onClose, onSave,
           const formData = new FormData();
           formData.append('documentType', getApiDocumentType(doc.name));
           formData.append('employeeName', employeeDetails.fullName || 'Employee');
-          formData.append('employeeEmail', employeeDetails.email || 'employee@example.com');
+          formData.append('employeeEmail', employeeDetails.emailAddress || '');
           formData.append('documentTitle', `${doc.name} - ${employeeDetails.fullName || 'Employee'}`);
           formData.append('documentDescription', `Shared ${doc.name} for ${employeeDetails.fullName || 'Employee'}`);
           

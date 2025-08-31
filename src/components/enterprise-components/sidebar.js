@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { logout } from "@/utils/auth"
-import { ChevronDown, ChevronRight } from "lucide-react"
+import { ChevronDown, ChevronRight, Home, Layout, User, LogOut, Users, CreditCard, FileText, Activity } from "lucide-react"
 
 export default function Sidebar({ 
   activeNavItem, 
@@ -14,7 +14,14 @@ export default function Sidebar({
   onWorkspaceItemSelect,
   activeWorkspaceItem
 }) {
-  const [workspaceExpanded, setWorkspaceExpanded] = useState(true)
+  const [workspaceExpanded, setWorkspaceExpanded] = useState(false)
+
+  // Close workspace dropdown when home is active
+  useEffect(() => {
+    if (activeNavItem === "home") {
+      setWorkspaceExpanded(false)
+    }
+  }, [activeNavItem])
 
   const handleWorkspaceClick = () => {
     setWorkspaceExpanded(!workspaceExpanded)
@@ -29,249 +36,212 @@ export default function Sidebar({
     }
   }
 
+  const navItems = [
+    { id: "home", label: "Home", icon: Home },
+    { id: "dashboard", label: "Dashboard", icon: Layout },
+    { id: "edit-profile", label: "Profile", icon: User },
+    { id: "logout", label: "Logout", icon: LogOut }
+  ]
+
+  const workspaceItems = [
+    { id: "quick-hire", label: "Quick Hire", icon: Users },
+    { id: "my-employees", label: "My Team", icon: Users },
+    { id: "payments", label: "Payments", icon: CreditCard },
+    { id: "drafts", label: "Drafts", icon: FileText },
+    { id: "track", label: "Track", icon: Activity }
+  ]
+
   return (
     <>
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div 
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden" 
+          onClick={() => setSidebarOpen(false)} 
+        />
       )}
 
-             {/* Mobile Menu Button */}
-       <button
-         onClick={() => setSidebarOpen(!sidebarOpen)}
-         className="fixed top-0 left-0 z-50 p-2 transition-colors bg-white rounded-md shadow-md lg:hidden hover:bg-gray-50"
-       >
-         <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-         </svg>
-       </button>
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="fixed top-4 left-4 z-50 p-3 transition-all duration-200 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl shadow-sm lg:hidden hover:shadow-sm hover:scale-105 border border-yellow-200"
+      >
+        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
 
       {/* Sidebar */}
       <div
         className={`
-          fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#F6F5FA]   flex flex-col
-          transform transition-transform duration-300 ease-in-out lg:transform-none
+          fixed lg:static inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-yellow-50 to-white border-r border-yellow-200 flex flex-col
+          transform transition-all duration-300 ease-out lg:transform-none
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+          shadow-sm lg:shadow-none
         `}
       >
         <div className="flex-1 p-6">
           {/* Close button for mobile */}
-          <button onClick={() => setSidebarOpen(false)} className="absolute p-2 top-4 right-4 lg:hidden">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button 
+            onClick={() => setSidebarOpen(false)} 
+            className="absolute p-2 top-4 right-4 lg:hidden hover:bg-gray-50 rounded-lg transition-colors"
+          >
+            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
-                     <nav className="mt-8 space-y-1 lg:mt-0">
-             <button
-               onClick={() => onNavItemClick("home")}
-               className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
-                 activeNavItem === "home" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
-               }`}
-             >
-               {activeNavItem === "home" && (
-                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
-               )}
-               <svg
-                 className={`w-5 h-5 ${activeNavItem === "home" ? "text-[#D4AF37]" : "text-gray-500"}`}
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
-               >
-                 <path
-                   strokeLinecap="round"
-                   strokeLinejoin="round"
-                   strokeWidth={2}
-                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                 />
-               </svg>
-               <span className="text-sm font-medium">Home</span>
-             </button>
+          {/* Logo Section */}
+          <div className="flex items-center gap-3 mb-8 pt-2">
+           
+            <div>
+              <h1 className="text-lg font-semibold text-gray-900">Welcome to Paprly</h1>
+              <p className="text-sm text-yellow-600 font-medium border-b-2 border-yellow-200 pb-1">Enterprise Suite Suite section</p>
+            </div>
+          </div>
 
-             {/* Workspace with Dropdown */}
-             <div className="space-y-1">
-               <button
-                 onClick={handleWorkspaceClick}
-                 className={`flex items-center justify-between gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
-                   activeNavItem === "workspace" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
-                 }`}
-               >
-                 <div className="flex items-center gap-3">
-                   {activeNavItem === "workspace" && (
-                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
-                   )}
-                   <svg
-                     className={`w-5 h-5 ${activeNavItem === "workspace" ? "text-[#D4AF37]" : "text-gray-500"}`}
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24"
-                   >
-                     <path
-                       strokeLinecap="round"
-                       strokeLinejoin="round"
-                       strokeWidth={2}
-                       d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                     />
-                   </svg>
-                   <span className="text-sm font-medium">Workspace</span>
-                 </div>
-                 {workspaceExpanded ? (
-                   <ChevronDown className="w-4 h-4 text-gray-500" />
-                 ) : (
-                   <ChevronRight className="w-4 h-4 text-gray-500" />
-                 )}
-               </button>
-
-               {/* Workspace Dropdown Items */}
-               {workspaceExpanded && (
-                 <div className="ml-6 space-y-1">
-                   <button
-                     onClick={() => handleWorkspaceItemClick("quick-hire")}
-                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
-                       activeWorkspaceItem === "quick-hire" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
-                     }`}
-                   >
-                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
-                     <span>Quick Hire</span>
-                   </button>
-                   <button
-                     onClick={() => handleWorkspaceItemClick("my-employees")}
-                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
-                       activeWorkspaceItem === "my-employees" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
-                     }`}
-                   >
-                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
-                     <span>My Employees/Freelancers</span>
-                   </button>
-                   <button
-                     onClick={() => handleWorkspaceItemClick("payments")}
-                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
-                       activeWorkspaceItem === "payments" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
-                     }`}
-                   >
-                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
-                     <span>Payments</span>
-                   </button>
-                   <button
-                     onClick={() => handleWorkspaceItemClick("drafts")}
-                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
-                       activeWorkspaceItem === "drafts" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
-                     }`}
-                   >
-                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
-                     <span>Drafts</span>
-                   </button>
-                   <button
-                     onClick={() => handleWorkspaceItemClick("track")}
-                     className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-colors text-sm ${
-                       activeWorkspaceItem === "track" ? "text-[#D4AF37] bg-white" : "text-gray-600 hover:bg-gray-50"
-                     }`}
-                   >
-                     <div className="w-1 h-1 rounded-full bg-gray-400"></div>
-                     <span>Track</span>
-                   </button>
-                 </div>
-               )}
-             </div>
-
+          {/* Navigation */}
+          <nav className="space-y-3">
+            {/* Home Item */}
             <button
-              onClick={() => onNavItemClick("dashboard")}
-              className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
-                activeNavItem === "dashboard" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
-              }`}
+              onClick={() => onNavItemClick("home")}
+              className={`
+                group flex items-center gap-3 px-4 py-3.5 w-full text-left rounded-xl transition-all duration-200
+                                  ${activeNavItem === "home" 
+                    ? 'bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200' 
+                    : 'text-gray-700 hover:bg-yellow-50 hover:text-gray-900 hover:border hover:border-yellow-100'
+                  }
+              `}
             >
-              {activeNavItem === "dashboard" && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
+              <div className={`
+                p-2.5 rounded-lg transition-all duration-200
+                ${activeNavItem === "home" 
+                  ? 'bg-yellow-500 text-white' 
+                  : 'bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700'
+                }
+              `}>
+                <Home className="w-4 h-4" />
+              </div>
+              <span className="font-semibold text-sm">Home</span>
+              {activeNavItem === "home" && (
+                <div className="ml-auto w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
               )}
-              <svg
-                className={`w-5 h-5 ${activeNavItem === "dashboard" ? "text-[#D4AF37]" : "text-gray-500"}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
-              <span className="text-sm font-medium">Dashboard</span>
             </button>
 
-            <button
-              onClick={() => onNavItemClick("edit-profile")}
-              className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
-                activeNavItem === "edit-profile"
-                  ? "text-[#D4AF37] bg-white relative"
-                  : "text-gray-700 hover:bg-gray-50"
-              }`}
-            >
-              {activeNavItem === "edit-profile" && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
-              )}
-              <svg
-                className={`w-5 h-5 ${activeNavItem === "edit-profile" ? "text-[#D4AF37]" : "text-gray-500"}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            {/* Workspace Section */}
+            <div>
+              <button
+                onClick={handleWorkspaceClick}
+                className={`
+                  group flex items-center justify-between gap-3 px-4 py-3.5 w-full text-left rounded-xl transition-all duration-200
+                  ${activeNavItem === "workspace" 
+                    ? 'bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200' 
+                    : 'text-gray-700 hover:bg-yellow-50 hover:text-gray-900 hover:border hover:border-yellow-100'
+                  }
+                `}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                />
-              </svg>
-              <span className="text-sm font-medium">Edit Profile</span>
-            </button>
+                <div className="flex items-center gap-3">
+                  <div className={`
+                    p-2.5 rounded-lg transition-all duration-200
+                    ${activeNavItem === "workspace" 
+                      ? 'bg-yellow-500 text-white' 
+                      : 'bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700'
+                    }
+                  `}>
+                    <Layout className="w-4 h-4" />
+                  </div>
+                  <span className="font-semibold text-sm">Workspace</span>
+                </div>
+                <div className={`
+                  transition-transform duration-200
+                  ${workspaceExpanded ? 'rotate-180' : ''}
+                `}>
+                  <ChevronDown className="w-4 h-4 text-yellow-500" />
+                </div>
+              </button>
 
-            <button
-              onClick={() => onNavItemClick("logout")}
-              className={`flex items-center gap-3 px-3 py-3 w-full text-left rounded-md transition-colors ${
-                activeNavItem === "logout" ? "text-[#D4AF37] bg-white relative" : "text-gray-700 hover:bg-gray-50"
-              }`}
-            >
-              {activeNavItem === "logout" && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#D4AF37] rounded-l-md"></div>
+              {/* Workspace Dropdown Items */}
+              {workspaceExpanded && (
+                <div className="mt-2 ml-4 space-y-2 border-l-2 border-yellow-200 pl-4">
+                  {workspaceItems.map((item) => {
+                    const Icon = item.icon
+                    const isActive = activeWorkspaceItem === item.id
+                    
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => handleWorkspaceItemClick(item.id)}
+                        className={`
+                          group flex items-center gap-3 px-3 py-2.5 w-full text-left rounded-lg transition-all duration-200
+                          ${isActive 
+                            ? 'bg-yellow-100 text-gray-900 border border-yellow-200' 
+                            : 'text-gray-600 hover:bg-yellow-50 hover:text-gray-800'
+                          }
+                        `}
+                      >
+                        <Icon className={`w-4 h-4 ${isActive ? 'text-yellow-600' : 'text-gray-500 group-hover:text-yellow-600'}`} />
+                        <span className="text-sm font-medium">{item.label}</span>
+                        {isActive && (
+                          <div className="ml-auto w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"></div>
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
               )}
-              <svg
-                className={`w-5 h-5 ${activeNavItem === "logout" ? "text-[#D4AF37]" : "text-gray-500"}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                />
-              </svg>
-              <span className="text-sm font-medium">Logout</span>
-            </button>
+            </div>
+
+            {/* Other Navigation Items */}
+            {navItems.filter(item => item.id !== "home").map((item) => {
+              const Icon = item.icon
+              const isActive = activeNavItem === item.id
+              
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => onNavItemClick(item.id)}
+                  className={`
+                    group flex items-center gap-3 px-4 py-3.5 w-full text-left rounded-xl transition-all duration-200
+                    ${isActive 
+                      ? 'bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200' 
+                      : 'text-gray-700 hover:bg-yellow-50 hover:text-gray-900 hover:border hover:border-yellow-100'
+                    }
+                  `}
+                >
+                  <div className={`
+                    p-2.5 rounded-lg transition-all duration-200
+                    ${isActive 
+                      ? 'bg-yellow-500 text-white' 
+                      : 'bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700'
+                    }
+                  `}>
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="font-semibold text-sm">{item.label}</span>
+                  {isActive && (
+                    <div className="ml-auto w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                  )}
+                </button>
+              )
+            })}
           </nav>
         </div>
 
         {/* Bottom Profile Section */}
-        <div className="p-4 border-t border-gray-200">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full">
+        <div className="p-4 border-t border-yellow-200 bg-gradient-to-r from-yellow-50 to-white">
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-white border border-yellow-200 hover:bg-yellow-50 transition-all duration-200">
+            <div className="flex items-center justify-center w-12 h-12 overflow-hidden bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl">
               {profileData?.companyLogo ? (
                 <img src={profileData.companyLogo} alt="Profile" className="object-cover w-full h-full" />
               ) : (
-                <div className="flex items-center justify-center w-full h-full bg-gray-300 rounded-full">
-                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
+                <User className="w-6 h-6 text-white" />
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">
+              <p className="text-sm font-bold text-gray-900 truncate">
                 {profileData?.fullName || user?.name || 'User'}
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-yellow-600 font-medium truncate">
                 {profileData?.companyName ? `${profileData.companyName}` : 'Enterprise Account'}
               </p>
             </div>
