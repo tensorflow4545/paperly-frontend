@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import MultiDocumentEditor from "@/components/OfferLetterEditor/MultiDocumentEditor";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, FileText } from "lucide-react";
+import { ArrowLeft, FileText, Activity } from "lucide-react";
 
 function OfferLetterEditorContent() {
   const [offerLetterData, setOfferLetterData] = useState(null);
@@ -14,7 +14,7 @@ function OfferLetterEditorContent() {
   const router = useRouter();
   const dataLoadedRef = useRef(false);
 
-    useEffect(() => {
+  useEffect(() => {
     const loadOfferLetterData = () => {
       // Prevent multiple loads
       if (dataLoadedRef.current) {
@@ -81,10 +81,16 @@ function OfferLetterEditorContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading offer letter...</p>
+      <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
+        <div className="px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center">
+                <div className="w-8 h-8 border-4 border-yellow-500 rounded-full border-t-transparent animate-spin mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading document editor...</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -92,15 +98,26 @@ function OfferLetterEditorContent() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-6">
-          <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Error Loading Offer Letter</h2>
-          <p className="text-gray-600 mb-6">{error}</p>
-          <Button onClick={handleClose} className="bg-yellow-600 hover:bg-yellow-700">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Dashboard
-          </Button>
+      <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
+        <div className="px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center max-w-md mx-auto">
+                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <FileText className="w-8 h-8 text-red-600" />
+                </div>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-3">Error Loading Documents</h2>
+                <p className="text-gray-600 mb-8 leading-relaxed">{error}</p>
+                <Button 
+                  onClick={handleClose} 
+                  className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Dashboard
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -108,15 +125,28 @@ function OfferLetterEditorContent() {
 
   if (!offerLetterData) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-6">
-          <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">No Offer Letter Data</h2>
-          <p className="text-gray-600 mb-6">No offer letter data was found. Please generate a new offer letter.</p>
-          <Button onClick={handleClose} className="bg-yellow-600 hover:bg-yellow-700">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Dashboard
-          </Button>
+      <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
+        <div className="px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center max-w-md mx-auto">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <FileText className="w-8 h-8 text-gray-400" />
+                </div>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-3">No Document Data</h2>
+                <p className="text-gray-600 mb-8 leading-relaxed">
+                  No document data was found. Please generate new documents from the dashboard.
+                </p>
+                <Button 
+                  onClick={handleClose} 
+                  className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Dashboard
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -127,7 +157,7 @@ function OfferLetterEditorContent() {
   console.log("Employee ID from offer letter data:", offerLetterData?.employeeId);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
       <MultiDocumentEditor
         allDocumentsData={offerLetterData}
         onClose={handleClose}
@@ -141,10 +171,16 @@ function OfferLetterEditorContent() {
 export default function OfferLetterEditorPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+      <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
+        <div className="px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center">
+                <div className="w-8 h-8 border-4 border-yellow-500 rounded-full border-t-transparent animate-spin mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading...</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     }>
