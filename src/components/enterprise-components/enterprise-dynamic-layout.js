@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { getAuthToken, getUserData, logout } from "@/utils/auth";
-import { 
-  Users, 
-  FileText, 
-  Clock, 
-  CheckCircle, 
-  Building, 
-  Settings, 
-  User, 
-  LogOut, 
-  Plus, 
+import {
+  Users,
+  FileText,
+  Clock,
+  CheckCircle,
+  Building,
+  Settings,
+  User,
+  LogOut,
+  Plus,
   Activity,
   TrendingUp,
   Shield,
@@ -69,7 +69,7 @@ const HomeDashboard = ({
               </p>
             </div>
             <div className="flex gap-3">
-              <button 
+              <button
                 onClick={() => {
                   setActiveNavItem("workspace");
                   setActiveWorkspaceItem("quick-hire");
@@ -79,7 +79,7 @@ const HomeDashboard = ({
                 <Plus className="w-4 h-4" />
                 Quick Hire
               </button>
-              <button 
+              <button
                 onClick={() => setActiveNavItem("dashboard")}
                 className="px-4 py-2 bg-white text-gray-700 text-sm rounded-lg hover:bg-[#fefce8] transition-colors border border-yellow-200 flex items-center gap-2"
               >
@@ -127,7 +127,7 @@ const HomeDashboard = ({
             ].map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <div 
+                <div
                   key={index}
                   className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200 hover:border-yellow-300 transition-colors"
                 >
@@ -158,10 +158,10 @@ const HomeDashboard = ({
                   <Building className="w-5 h-5 text-yellow-600" />
                   Company Information
                 </h2>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-3">
-              <div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <Building className="w-3 h-3 text-yellow-500" />
                         Company Name
@@ -171,9 +171,9 @@ const HomeDashboard = ({
                           {profileData?.companyName || "Not specified"}
                         </p>
                       </div>
-              </div>
-              <div>
-                                            <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <Briefcase className="w-3 h-3 text-yellow-500" />
                         Company Type
                       </label>
@@ -182,9 +182,9 @@ const HomeDashboard = ({
                           {profileData?.companyType || "Not specified"}
                         </p>
                       </div>
-              </div>
+                    </div>
                     <div>
-                                            <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <TrendingUp className="w-3 h-3 text-yellow-500" />
                         Industry
                       </label>
@@ -194,10 +194,10 @@ const HomeDashboard = ({
                         </p>
                       </div>
                     </div>
-            </div>
+                  </div>
 
                   <div className="space-y-3">
-                                        <div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <Shield className="w-3 h-3 text-yellow-500" />
                         GST Number
@@ -208,7 +208,7 @@ const HomeDashboard = ({
                         </p>
                       </div>
                     </div>
-              <div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-yellow-500" />
                         Registered Address
@@ -217,9 +217,9 @@ const HomeDashboard = ({
                         <p className="text-sm text-gray-900">
                           {profileData?.registeredAddress || "Not specified"}
                         </p>
-                </div>
-              </div>
-              <div>
+                      </div>
+                    </div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <Mail className="w-3 h-3 text-yellow-500" />
                         Contact Email
@@ -230,9 +230,9 @@ const HomeDashboard = ({
                         </p>
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
               {/* Preferences */}
               <div className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200">
@@ -240,10 +240,10 @@ const HomeDashboard = ({
                   <Settings className="w-5 h-5 text-yellow-600" />
                   Preferences & Settings
                 </h2>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-3">
-              <div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <IndianRupee className="w-3 h-3 text-yellow-500" />
                         Default Currency
@@ -253,8 +253,8 @@ const HomeDashboard = ({
                           {profileData?.defaultCurrency || "Not specified"}
                         </p>
                       </div>
-              </div>
-              <div>
+                    </div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <Calendar className="w-3 h-3 text-yellow-500" />
                         Payment Cycle
@@ -263,12 +263,12 @@ const HomeDashboard = ({
                         <p className="text-sm text-gray-900">
                           {profileData?.defaultPaymentCycle || "Not specified"}
                         </p>
-              </div>
-            </div>
-          </div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div className="space-y-3">
-              <div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <User className="w-3 h-3 text-yellow-500" />
                         Preferred Language
@@ -277,9 +277,9 @@ const HomeDashboard = ({
                         <p className="text-sm text-gray-900">
                           {profileData?.preferredLanguage || "Not specified"}
                         </p>
-                </div>
-              </div>
-              <div>
+                      </div>
+                    </div>
+                    <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
                         <FileText className="w-3 h-3 text-yellow-500" />
                         Signature Style
@@ -306,7 +306,7 @@ const HomeDashboard = ({
                 </h3>
                 <div className="space-y-2">
                   {[
-                    { 
+                    {
                       label: "Manage Team",
                       description: "View and manage your teams",
                       icon: Users,
@@ -315,7 +315,7 @@ const HomeDashboard = ({
                         setActiveWorkspaceItem("my-employees");
                       },
                     },
-                    { 
+                    {
                       label: "Documents",
                       description: "View and manage your documents",
                       icon: FileText,
@@ -324,7 +324,7 @@ const HomeDashboard = ({
                         setActiveWorkspaceItem("drafts");
                       },
                     },
-                    { 
+                    {
                       label: "Profile",
                       description: "Update and edit your company profile",
                       icon: User,
@@ -348,7 +348,7 @@ const HomeDashboard = ({
                       </button>
                     );
                   })}
-                  
+
                   {/* Logout button - smaller and separated */}
                   <div className="pt-2 border-t border-yellow-200">
                     <button
@@ -361,9 +361,9 @@ const HomeDashboard = ({
                       <LogOut className="w-3 h-3" />
                       Logout
                     </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
               {/* Enterprise Features */}
               <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
@@ -372,7 +372,7 @@ const HomeDashboard = ({
                   Enterprise Features
                 </h3>
                 <div className="space-y-3">
-              <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-700">
                       Onboarding Kit
                     </span>
@@ -390,10 +390,10 @@ const HomeDashboard = ({
                             : "translate-x-0.5"
                         }`}
                       ></div>
-                </div>
-              </div>
+                    </div>
+                  </div>
 
-              <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-700">
                       Timestamp Proof
                     </span>
@@ -411,7 +411,7 @@ const HomeDashboard = ({
                             : "translate-x-0.5"
                         }`}
                       ></div>
-                </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -442,7 +442,7 @@ const HomeDashboard = ({
                 </div>
               </div>
             </div>
-          </div>              
+          </div>
         </div>
       </div>
     </div>
@@ -912,17 +912,17 @@ const WorkspacePayments = () => {
             <div>
               <h1 className="text-xl font-bold text-gray-900 mb-1 flex items-center gap-2">
                 <CreditCard className="w-5 h-5 text-yellow-600" />
-            Payments
-          </h1>
+                Payments
+              </h1>
               <p className="text-sm text-gray-600">
                 Manage employee payments and track payment history
-          </p>
-        </div>
+              </p>
+            </div>
             <div className="flex items-center gap-2 text-xs text-gray-500">
               <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
               <span>Powered by Paprly</span>
-      </div>
-    </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1887,7 +1887,7 @@ const WorkspaceDocuments = ({
     try {
       setLoading(true);
       const token = getAuthToken();
-      
+
       if (!token) {
         throw new Error("Authentication token not found. Please log in again.");
       }
@@ -1897,7 +1897,7 @@ const WorkspaceDocuments = ({
       console.log("=== DOCUMENTS API DEBUG ===");
       console.log("User data:", user);
       console.log("User email:", userEmail);
-      
+
       if (!userEmail) {
         throw new Error("User email not found. Please log in again.");
       }
@@ -1951,7 +1951,7 @@ const WorkspaceDocuments = ({
 
       const data = await response.json();
       console.log("API Response data:", data);
-      
+
       if (data.success) {
         console.log("Documents received:", data.data.documents?.length || 0);
         console.log("Pagination info:", data.data.pagination);
@@ -1985,7 +1985,7 @@ const WorkspaceDocuments = ({
     console.log("User available:", !!user?.email);
     console.log("Current filters:", filters);
     console.log("Current sort:", { sortBy, sortOrder });
-    
+
     if (user?.email) {
       console.log("Fetching documents...");
       fetchDocuments();
@@ -2067,7 +2067,7 @@ const WorkspaceDocuments = ({
 
   return (
     <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
-        {/* Header */}
+      {/* Header */}
       <div className="px-4 lg:px-6 py-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
@@ -2075,7 +2075,7 @@ const WorkspaceDocuments = ({
               <h1 className="text-xl font-semibold text-gray-900 mb-1 flex items-center gap-2">
                 <FileText className="w-5 h-5 text-yellow-600" />
                 Documents
-          </h1>
+              </h1>
               <p className="text-sm text-gray-600">
                 Manage and track all your team documents
               </p>
@@ -2083,10 +2083,10 @@ const WorkspaceDocuments = ({
             <div className="flex items-center gap-2 text-xs text-gray-500">
               <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
               <span>Powered by Paprly</span>
-              </div>
             </div>
           </div>
         </div>
+      </div>
 
       {/* Main Content */}
       <div className="px-4 lg:px-6 pb-8">
@@ -2098,12 +2098,12 @@ const WorkspaceDocuments = ({
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
                   <div className="flex items-center justify-between">
-              <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">Total</p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.total}
                       </p>
-              </div>
+                    </div>
                     <div className="p-2 bg-yellow-100 rounded-lg">
                       <FileText className="w-4 h-4 text-yellow-600" />
                     </div>
@@ -2111,12 +2111,12 @@ const WorkspaceDocuments = ({
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
                   <div className="flex items-center justify-between">
-            <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">NDA</p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.nda}
                       </p>
-            </div>
+                    </div>
                     <div className="p-2 bg-yellow-100 rounded-lg">
                       <Shield className="w-4 h-4 text-yellow-600" />
                     </div>
@@ -2124,14 +2124,14 @@ const WorkspaceDocuments = ({
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
                   <div className="flex items-center justify-between">
-            <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">
                         Offer Letter
                       </p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.offerLetter}
                       </p>
-            </div>
+                    </div>
                     <div className="p-2 bg-yellow-100 rounded-lg">
                       <Briefcase className="w-4 h-4 text-yellow-600" />
                     </div>
@@ -2139,7 +2139,7 @@ const WorkspaceDocuments = ({
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
                   <div className="flex items-center justify-between">
-            <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">Other</p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.other}
@@ -2160,7 +2160,7 @@ const WorkspaceDocuments = ({
                     <Input
                       placeholder="Search by document title or employee..."
                       value={filters.employeeName}
-                onChange={(e) => {
+                      onChange={(e) => {
                         const value = e.target.value;
                         setFilters((prev) => ({
                           ...prev,
@@ -2199,10 +2199,10 @@ const WorkspaceDocuments = ({
                         <SelectItem value="Other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-            </div>
+                  </div>
                   <Button
-                onClick={() => {
-                  setFilters({
+                    onClick={() => {
+                      setFilters({
                         status: "all",
                         documentType: "all",
                         employeeName: "",
@@ -2215,29 +2215,29 @@ const WorkspaceDocuments = ({
                   >
                     Apply Filters
                   </Button>
-            </div>
-        </div>
+                </div>
+              </div>
 
               {/* Documents List */}
               <div className="space-y-3">
-          {!user?.email ? (
-            <div className="flex items-center justify-center py-12">
-              <div className="flex flex-col items-center">
-                <div className="w-8 h-8 border-4 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
-                <p className="mt-4 text-gray-600">Loading user data...</p>
-              </div>
-            </div>
-          ) : loading ? (
-            <div className="flex items-center justify-center py-12">
-              <div className="flex flex-col items-center">
-                <div className="w-8 h-8 border-4 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
-                <p className="mt-4 text-gray-600">Loading documents...</p>
-              </div>
-            </div>
-          ) : error ? (
-            <div className="flex items-center justify-center py-12">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                {!user?.email ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 border-4 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
+                      <p className="mt-4 text-gray-600">Loading user data...</p>
+                    </div>
+                  </div>
+                ) : loading ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 border-4 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
+                      <p className="mt-4 text-gray-600">Loading documents...</p>
+                    </div>
+                  </div>
+                ) : error ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="text-center">
+                      <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg
                           className="w-6 h-6 text-red-600"
                           fill="none"
@@ -2250,34 +2250,34 @@ const WorkspaceDocuments = ({
                             strokeWidth="2"
                             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                           ></path>
-                  </svg>
-                </div>
-                <p className="text-gray-600 mb-2">{error}</p>
-                <button
-                  onClick={() => fetchDocuments()}
-                  className="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"
-                >
-                  Try Again
-                </button>
-              </div>
-            </div>
-          ) : documents.length === 0 ? (
-            <div className="flex items-center justify-center py-12">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">📄</span>
-                </div>
+                        </svg>
+                      </div>
+                      <p className="text-gray-600 mb-2">{error}</p>
+                      <button
+                        onClick={() => fetchDocuments()}
+                        className="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"
+                      >
+                        Try Again
+                      </button>
+                    </div>
+                  </div>
+                ) : documents.length === 0 ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-2xl">📄</span>
+                      </div>
                       <h3 className="text-lg font-medium text-gray-900 mb-2">
                         No documents found
                       </h3>
                       <p className="text-gray-600">
                         You have not created any documents yet.
                       </p>
-              </div>
-            </div>
-          ) : (
-            <>
-                      {documents.map((document) => (
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {documents.map((document) => (
                       <div
                         key={document.id}
                         className="bg-white rounded-xl shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200 p-4"
@@ -2286,7 +2286,7 @@ const WorkspaceDocuments = ({
                           <div className="flex items-center gap-4 flex-1">
                             <div className="p-2 bg-yellow-100 rounded-lg">
                               <FileText className="w-5 h-5 text-yellow-600" />
-                          </div>
+                            </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
                                 <h3 className="text-sm font-semibold text-gray-900 truncate">
@@ -2294,7 +2294,7 @@ const WorkspaceDocuments = ({
                                 </h3>
                                 <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
                                   {document.documentType}
-                          </span>
+                                </span>
                               </div>
                               <div className="flex items-center gap-4 text-xs text-gray-500">
                                 <div className="flex items-center gap-1">
@@ -2308,7 +2308,7 @@ const WorkspaceDocuments = ({
                                 <div className="flex items-center gap-1">
                                   <Calendar className="w-3 h-3" />
                                   <span>
-                          {formatDate(document.dates.createdAt)}
+                                    {formatDate(document.dates.createdAt)}
                                   </span>
                                 </div>
                               </div>
@@ -2325,14 +2325,14 @@ const WorkspaceDocuments = ({
                               View
                             </a>
                           </div>
-              </div>
+                        </div>
                       </div>
                     ))}
 
-              {/* Pagination */}
-              {pagination.totalPages > 1 && (
+                    {/* Pagination */}
+                    {pagination.totalPages > 1 && (
                       <div className="bg-white px-4 py-3 border-t border-yellow-200 rounded-b-xl">
-                  <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between">
                           <div className="text-xs text-gray-600">
                             Showing{" "}
                             {(pagination.currentPage - 1) *
@@ -2345,24 +2345,24 @@ const WorkspaceDocuments = ({
                               pagination.totalDocuments
                             )}{" "}
                             of {pagination.totalDocuments} documents
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <button
                               onClick={() =>
                                 handlePageChange(pagination.currentPage - 1)
                               }
-                        disabled={pagination.currentPage === 1}
+                              disabled={pagination.currentPage === 1}
                               className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        Previous
-                      </button>
+                            >
+                              Previous
+                            </button>
 
                             <div className="flex items-center space-x-1">
                               {Array.from(
                                 { length: pagination.totalPages },
                                 (_, i) => i + 1
                               ).map((page) => (
-                      <button
+                                <button
                                   key={page}
                                   onClick={() => handlePageChange(page)}
                                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
@@ -2384,17 +2384,17 @@ const WorkspaceDocuments = ({
                                 pagination.currentPage === pagination.totalPages
                               }
                               className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      </div>
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
 
             {/* Right Sidebar */}
             <div className="lg:col-span-1 space-y-4">
@@ -2495,7 +2495,7 @@ const WorkspaceDocuments = ({
             </div>
           </div>
         </div>
-    </div>
+      </div>
     </div>
   );
 };
@@ -2532,7 +2532,7 @@ export default function EnterpriseDynamicLayout() {
     const loadUserData = () => {
       const token = getAuthToken();
       const userData = getUserData();
-      
+
       if (token && userData) {
         setUser(userData);
         setIsAuthenticated(true);
@@ -2540,7 +2540,7 @@ export default function EnterpriseDynamicLayout() {
         setIsLoading(false);
       }
     };
-    
+
     loadUserData();
   }, []);
 
@@ -2557,12 +2557,12 @@ export default function EnterpriseDynamicLayout() {
             )}`,
             {
               method: "GET",
-            headers: {
+              headers: {
                 "Content-Type": "application/json",
-            },
+              },
             }
           );
-          
+
           if (response.ok) {
             const data = await response.json();
             if (data.profile) {
@@ -2595,16 +2595,16 @@ export default function EnterpriseDynamicLayout() {
         setIsLoading(false);
       }
     };
-    
+
     if (user !== undefined) {
       loadProfileData();
-    } 
+    }
   }, [user]);
 
   const handleNavItemClick = (item) => {
     setActiveNavItem(item);
     setSidebarOpen(false); // Close sidebar on mobile after selection
-    
+
     // Handle logout
     if (item === "logout") {
       logout();
@@ -2768,7 +2768,7 @@ export default function EnterpriseDynamicLayout() {
           <p className="mb-4 text-gray-600">
             No user data found. Please log in.
           </p>
-          <button 
+          <button
             onClick={() => (window.location.href = "/sign-in")}
             className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
           >
@@ -2797,7 +2797,7 @@ export default function EnterpriseDynamicLayout() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
           <p className="mb-4 text-gray-600">{error}</p>
-          <button 
+          <button
             onClick={() => setActiveNavItem("edit-profile")}
             className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
           >
@@ -2811,10 +2811,10 @@ export default function EnterpriseDynamicLayout() {
   return (
     <>
       <EnterpriseNavbar />
-      
+
       {/* Top Separator Line */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
-      
+
       {/* Main Content Area with Sidebar */}
       <div className="min-h-screen bg-gray-50 flex relative">
         <Sidebar
@@ -2831,10 +2831,10 @@ export default function EnterpriseDynamicLayout() {
         {/* Dynamic Content Area */}
         {renderContent()}
       </div>
-      
+
       {/* Bottom Separator Line */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
-      
+
       <Footer />
     </>
   );

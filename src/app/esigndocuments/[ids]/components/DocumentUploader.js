@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import { Upload } from 'lucide-react';
+import { useState } from "react";
+import { Upload } from "lucide-react";
 
 export default function DocumentUploader({ onFileSelect }) {
   const [dragActive, setDragActive] = useState(false);
@@ -20,23 +20,23 @@ export default function DocumentUploader({ onFileSelect }) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
-      if (file.type === 'application/pdf') {
+      if (file.type === "application/pdf") {
         onFileSelect(file);
       } else {
-        alert('Please upload a PDF file');
+        alert("Please upload a PDF file");
       }
     }
   };
 
   const handleFileInput = (e) => {
     const file = e.target.files[0];
-    if (file && file.type === 'application/pdf') {
+    if (file && file.type === "application/pdf") {
       onFileSelect(file);
     } else if (file) {
-      alert('Please upload a PDF file');
+      alert("Please upload a PDF file");
     }
   };
 
@@ -45,8 +45,8 @@ export default function DocumentUploader({ onFileSelect }) {
       <div
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           dragActive
-            ? 'border-blue-500 bg-blue-50'
-            : 'border-gray-300 hover:border-gray-400'
+            ? "border-blue-500 bg-blue-50"
+            : "border-gray-300 hover:border-gray-400"
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -77,8 +77,3 @@ export default function DocumentUploader({ onFileSelect }) {
     </div>
   );
 }
-
-
-
-
-
