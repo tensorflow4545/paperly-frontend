@@ -70,7 +70,7 @@ const HomeDashboard = ({
               </p>
             </div>
             <div className="flex gap-3">
-              <button 
+              <button
                 onClick={() => {
                   setActiveNavItem("workspace");
                   setActiveWorkspaceItem("quick-hire");
@@ -80,7 +80,7 @@ const HomeDashboard = ({
                 <Plus className="w-4 h-4" />
                 Quick Hire
               </button>
-              <button 
+              <button
                 onClick={() => setActiveNavItem("dashboard")}
                 className="px-4 py-2 bg-white text-gray-700 text-sm rounded-lg hover:bg-[#fefce8] transition-colors border border-yellow-200 flex items-center gap-2"
               >
@@ -128,7 +128,7 @@ const HomeDashboard = ({
             ].map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <div 
+                <div
                   key={index}
                   className="p-4 transition-colors bg-white border border-yellow-200 rounded-lg shadow-sm hover:border-yellow-300"
                 >
@@ -183,7 +183,7 @@ const HomeDashboard = ({
                           {profileData?.companyType || "Not specified"}
                         </p>
                       </div>
-              </div>
+                    </div>
                     <div>
                                             <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <TrendingUp className="w-3 h-3 text-yellow-500" />
@@ -195,7 +195,7 @@ const HomeDashboard = ({
                         </p>
                       </div>
                     </div>
-            </div>
+                  </div>
 
                   <div className="space-y-3">
                                         <div>
@@ -231,9 +231,9 @@ const HomeDashboard = ({
                         </p>
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
               {/* Preferences */}
               <div className="p-6 bg-white border border-yellow-200 rounded-lg shadow-sm">
@@ -264,9 +264,9 @@ const HomeDashboard = ({
                         <p className="text-sm text-gray-900">
                           {profileData?.defaultPaymentCycle || "Not specified"}
                         </p>
-              </div>
-            </div>
-          </div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div className="space-y-3">
               <div>
@@ -307,7 +307,7 @@ const HomeDashboard = ({
                 </h3>
                 <div className="space-y-2">
                   {[
-                    { 
+                    {
                       label: "Manage Team",
                       description: "View and manage your teams",
                       icon: Users,
@@ -316,7 +316,7 @@ const HomeDashboard = ({
                         setActiveWorkspaceItem("my-employees");
                       },
                     },
-                    { 
+                    {
                       label: "Documents",
                       description: "View and manage your documents",
                       icon: FileText,
@@ -325,7 +325,7 @@ const HomeDashboard = ({
                         setActiveWorkspaceItem("drafts");
                       },
                     },
-                    { 
+                    {
                       label: "Profile",
                       description: "Update and edit your company profile",
                       icon: User,
@@ -349,7 +349,7 @@ const HomeDashboard = ({
                       </button>
                     );
                   })}
-                  
+
                   {/* Logout button - smaller and separated */}
                   <div className="pt-2 border-t border-yellow-200">
                     <button
@@ -362,9 +362,9 @@ const HomeDashboard = ({
                       <LogOut className="w-3 h-3" />
                       Logout
                     </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
               {/* Enterprise Features */}
               <div className="p-4 bg-white border border-yellow-200 rounded-lg shadow-sm">
@@ -373,7 +373,7 @@ const HomeDashboard = ({
                   Enterprise Features
                 </h3>
                 <div className="space-y-3">
-              <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-700">
                       Onboarding Kit
                     </span>
@@ -391,10 +391,10 @@ const HomeDashboard = ({
                             : "translate-x-0.5"
                         }`}
                       ></div>
-                </div>
-              </div>
+                    </div>
+                  </div>
 
-              <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-700">
                       Timestamp Proof
                     </span>
@@ -412,7 +412,7 @@ const HomeDashboard = ({
                             : "translate-x-0.5"
                         }`}
                       ></div>
-                </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -443,7 +443,7 @@ const HomeDashboard = ({
                 </div>
               </div>
             </div>
-          </div>              
+          </div>
         </div>
       </div>
     </div>
@@ -913,17 +913,17 @@ const WorkspacePayments = () => {
             <div>
               <h1 className="flex items-center gap-2 mb-1 text-xl font-bold text-gray-900">
                 <CreditCard className="w-5 h-5 text-yellow-600" />
-            Payments
-          </h1>
+                Payments
+              </h1>
               <p className="text-sm text-gray-600">
                 Manage employee payments and track payment history
-          </p>
-        </div>
+              </p>
+            </div>
             <div className="flex items-center gap-2 text-xs text-gray-500">
               <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
               <span>Powered by Paprly</span>
-      </div>
-    </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1888,7 +1888,7 @@ const WorkspaceDocuments = ({
     try {
       setLoading(true);
       const token = getAuthToken();
-      
+
       if (!token) {
         throw new Error("Authentication token not found. Please log in again.");
       }
@@ -1898,7 +1898,7 @@ const WorkspaceDocuments = ({
       console.log("=== DOCUMENTS API DEBUG ===");
       console.log("User data:", user);
       console.log("User email:", userEmail);
-      
+
       if (!userEmail) {
         throw new Error("User email not found. Please log in again.");
       }
@@ -1952,7 +1952,7 @@ const WorkspaceDocuments = ({
 
       const data = await response.json();
       console.log("API Response data:", data);
-      
+
       if (data.success) {
         console.log("Documents received:", data.data.documents?.length || 0);
         console.log("Pagination info:", data.data.pagination);
@@ -1986,7 +1986,7 @@ const WorkspaceDocuments = ({
     console.log("User available:", !!user?.email);
     console.log("Current filters:", filters);
     console.log("Current sort:", { sortBy, sortOrder });
-    
+
     if (user?.email) {
       console.log("Fetching documents...");
       fetchDocuments();
@@ -2076,7 +2076,7 @@ const WorkspaceDocuments = ({
               <h1 className="flex items-center gap-2 mb-1 text-xl font-semibold text-gray-900">
                 <FileText className="w-5 h-5 text-yellow-600" />
                 Documents
-          </h1>
+              </h1>
               <p className="text-sm text-gray-600">
                 Manage and track all your team documents
               </p>
@@ -2084,10 +2084,10 @@ const WorkspaceDocuments = ({
             <div className="flex items-center gap-2 text-xs text-gray-500">
               <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
               <span>Powered by Paprly</span>
-              </div>
             </div>
           </div>
         </div>
+      </div>
 
       {/* Main Content */}
       <div className="px-4 pb-8 lg:px-6">
@@ -2099,12 +2099,12 @@ const WorkspaceDocuments = ({
               <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
                 <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
-              <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">Total</p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.total}
                       </p>
-              </div>
+                    </div>
                     <div className="p-2 bg-yellow-100 rounded-lg">
                       <FileText className="w-4 h-4 text-yellow-600" />
                     </div>
@@ -2112,12 +2112,12 @@ const WorkspaceDocuments = ({
                 </div>
                 <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
-            <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">NDA</p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.nda}
                       </p>
-            </div>
+                    </div>
                     <div className="p-2 bg-yellow-100 rounded-lg">
                       <Shield className="w-4 h-4 text-yellow-600" />
                     </div>
@@ -2125,14 +2125,14 @@ const WorkspaceDocuments = ({
                 </div>
                 <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
-            <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">
                         Offer Letter
                       </p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.offerLetter}
                       </p>
-            </div>
+                    </div>
                     <div className="p-2 bg-yellow-100 rounded-lg">
                       <Briefcase className="w-4 h-4 text-yellow-600" />
                     </div>
@@ -2140,7 +2140,7 @@ const WorkspaceDocuments = ({
                 </div>
                 <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
-            <div>
+                    <div>
                       <p className="text-xs font-medium text-gray-600">Other</p>
                       <p className="text-xl font-bold text-gray-900">
                         {documentStats.other}
@@ -2161,7 +2161,7 @@ const WorkspaceDocuments = ({
                     <Input
                       placeholder="Search by document title or employee..."
                       value={filters.employeeName}
-                onChange={(e) => {
+                      onChange={(e) => {
                         const value = e.target.value;
                         setFilters((prev) => ({
                           ...prev,
@@ -2200,10 +2200,10 @@ const WorkspaceDocuments = ({
                         <SelectItem value="Other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-            </div>
+                  </div>
                   <Button
-                onClick={() => {
-                  setFilters({
+                    onClick={() => {
+                      setFilters({
                         status: "all",
                         documentType: "all",
                         employeeName: "",
@@ -2216,8 +2216,8 @@ const WorkspaceDocuments = ({
                   >
                     Apply Filters
                   </Button>
-            </div>
-        </div>
+                </div>
+              </div>
 
               {/* Documents List */}
               <div className="space-y-3">
@@ -2274,11 +2274,11 @@ const WorkspaceDocuments = ({
                       <p className="text-gray-600">
                         You have not created any documents yet.
                       </p>
-              </div>
-            </div>
-          ) : (
-            <>
-                      {documents.map((document) => (
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {documents.map((document) => (
                       <div
                         key={document.id}
                         className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md"
@@ -2287,7 +2287,7 @@ const WorkspaceDocuments = ({
                           <div className="flex items-center flex-1 gap-4">
                             <div className="p-2 bg-yellow-100 rounded-lg">
                               <FileText className="w-5 h-5 text-yellow-600" />
-                          </div>
+                            </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
                                 <h3 className="text-sm font-semibold text-gray-900 truncate">
@@ -2295,7 +2295,7 @@ const WorkspaceDocuments = ({
                                 </h3>
                                 <span className="px-2 py-1 text-xs text-gray-500 bg-gray-100 rounded-full">
                                   {document.documentType}
-                          </span>
+                                </span>
                               </div>
                               <div className="flex items-center gap-4 text-xs text-gray-500">
                                 <div className="flex items-center gap-1">
@@ -2309,7 +2309,7 @@ const WorkspaceDocuments = ({
                                 <div className="flex items-center gap-1">
                                   <Calendar className="w-3 h-3" />
                                   <span>
-                          {formatDate(document.dates.createdAt)}
+                                    {formatDate(document.dates.createdAt)}
                                   </span>
                                 </div>
                               </div>
@@ -2326,7 +2326,7 @@ const WorkspaceDocuments = ({
                               View
                             </a>
                           </div>
-              </div>
+                        </div>
                       </div>
                     ))}
 
@@ -2346,24 +2346,24 @@ const WorkspaceDocuments = ({
                               pagination.totalDocuments
                             )}{" "}
                             of {pagination.totalDocuments} documents
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <button
                               onClick={() =>
                                 handlePageChange(pagination.currentPage - 1)
                               }
-                        disabled={pagination.currentPage === 1}
+                              disabled={pagination.currentPage === 1}
                               className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        Previous
-                      </button>
+                            >
+                              Previous
+                            </button>
 
                             <div className="flex items-center space-x-1">
                               {Array.from(
                                 { length: pagination.totalPages },
                                 (_, i) => i + 1
                               ).map((page) => (
-                      <button
+                                <button
                                   key={page}
                                   onClick={() => handlePageChange(page)}
                                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
@@ -2385,17 +2385,17 @@ const WorkspaceDocuments = ({
                                 pagination.currentPage === pagination.totalPages
                               }
                               className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      </div>
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
 
             {/* Right Sidebar */}
             <div className="space-y-4 lg:col-span-1">
@@ -2496,7 +2496,7 @@ const WorkspaceDocuments = ({
             </div>
           </div>
         </div>
-    </div>
+      </div>
     </div>
   );
 };
@@ -2533,7 +2533,7 @@ export default function EnterpriseDynamicLayout() {
     const loadUserData = () => {
       const token = getAuthToken();
       const userData = getUserData();
-      
+
       if (token && userData) {
         setUser(userData);
         setIsAuthenticated(true);
@@ -2541,7 +2541,7 @@ export default function EnterpriseDynamicLayout() {
         setIsLoading(false);
       }
     };
-    
+
     loadUserData();
   }, []);
 
@@ -2558,12 +2558,12 @@ export default function EnterpriseDynamicLayout() {
             )}`,
             {
               method: "GET",
-            headers: {
+              headers: {
                 "Content-Type": "application/json",
-            },
+              },
             }
           );
-          
+
           if (response.ok) {
             const data = await response.json();
             if (data.profile) {
@@ -2596,16 +2596,16 @@ export default function EnterpriseDynamicLayout() {
         setIsLoading(false);
       }
     };
-    
+
     if (user !== undefined) {
       loadProfileData();
-    } 
+    }
   }, [user]);
 
   const handleNavItemClick = (item) => {
     setActiveNavItem(item);
     setSidebarOpen(false); // Close sidebar on mobile after selection
-    
+
     // Handle logout
     if (item === "logout") {
       logout();
@@ -2771,7 +2771,7 @@ export default function EnterpriseDynamicLayout() {
           <p className="mb-4 text-gray-600">
             No user data found. Please log in.
           </p>
-          <button 
+          <button
             onClick={() => (window.location.href = "/sign-in")}
             className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
           >
@@ -2800,7 +2800,7 @@ export default function EnterpriseDynamicLayout() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
           <p className="mb-4 text-gray-600">{error}</p>
-          <button 
+          <button
             onClick={() => setActiveNavItem("edit-profile")}
             className="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
           >
@@ -2814,10 +2814,10 @@ export default function EnterpriseDynamicLayout() {
   return (
     <>
       <EnterpriseNavbar />
-      
+
       {/* Top Separator Line */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
-      
+
       {/* Main Content Area with Sidebar */}
       <div className="relative flex min-h-screen bg-gray-50">
         <Sidebar
@@ -2834,10 +2834,10 @@ export default function EnterpriseDynamicLayout() {
         {/* Dynamic Content Area */}
         {renderContent()}
       </div>
-      
+
       {/* Bottom Separator Line */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
-      
+
       <Footer />
     </>
   );
