@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getAuthToken, getUserData, logout } from "@/utils/auth";
+import PaymentsPage from "./userpayment";
 import { 
   Users, 
   FileText, 
@@ -55,15 +56,15 @@ const HomeDashboard = ({
   return (
     <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
       {/* Header */}
-      <div className="px-6 lg:px-8 py-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="px-6 py-8 lg:px-8">
+        <div className="mx-auto max-w-7xl">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-900 mb-1 flex items-center gap-2">
+              <h1 className="flex items-center gap-2 mb-1 text-2xl font-semibold text-gray-900">
                 <User className="w-6 h-6 text-yellow-600" />
                 Welcome back, {profileData?.fullName || user?.name || "User"}
               </h1>
-              <p className="text-gray-600 flex items-center gap-2">
+              <p className="flex items-center gap-2 text-gray-600">
                 <Activity className="w-4 h-4 text-yellow-500" />
                 Manage your Team Documentation and Payments all at one place{" "}
               </p>
@@ -74,7 +75,7 @@ const HomeDashboard = ({
                   setActiveNavItem("workspace");
                   setActiveWorkspaceItem("quick-hire");
                 }}
-                className="px-4 py-2 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 transition-colors flex items-center gap-2"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-white transition-colors bg-yellow-600 rounded-lg hover:bg-yellow-700"
               >
                 <Plus className="w-4 h-4" />
                 Quick Hire
@@ -92,9 +93,9 @@ const HomeDashboard = ({
       </div>
 
       {/* Stats */}
-      <div className="px-6 lg:px-8 mb-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="px-6 mb-8 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 title: "Active Documents",
@@ -129,7 +130,7 @@ const HomeDashboard = ({
               return (
                 <div 
                   key={index}
-                  className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200 hover:border-yellow-300 transition-colors"
+                  className="p-4 transition-colors bg-white border border-yellow-200 rounded-lg shadow-sm hover:border-yellow-300"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-2xl font-semibold text-gray-900">
@@ -148,21 +149,21 @@ const HomeDashboard = ({
       </div>
 
       {/* Main Content */}
-      <div className="px-6 lg:px-8 pb-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="px-6 pb-8 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {/* Company Information */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <div className="space-y-6 lg:col-span-2">
+              <div className="p-6 bg-white border border-yellow-200 rounded-lg shadow-sm">
+                <h2 className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900">
                   <Building className="w-5 h-5 text-yellow-600" />
                   Company Information
                 </h2>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="space-y-3">
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <Building className="w-3 h-3 text-yellow-500" />
                         Company Name
                       </label>
@@ -173,7 +174,7 @@ const HomeDashboard = ({
                       </div>
               </div>
               <div>
-                                            <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                                            <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <Briefcase className="w-3 h-3 text-yellow-500" />
                         Company Type
                       </label>
@@ -184,7 +185,7 @@ const HomeDashboard = ({
                       </div>
               </div>
                     <div>
-                                            <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                                            <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <TrendingUp className="w-3 h-3 text-yellow-500" />
                         Industry
                       </label>
@@ -198,7 +199,7 @@ const HomeDashboard = ({
 
                   <div className="space-y-3">
                                         <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <Shield className="w-3 h-3 text-yellow-500" />
                         GST Number
                       </label>
@@ -209,22 +210,22 @@ const HomeDashboard = ({
                       </div>
                     </div>
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <MapPin className="w-3 h-3 text-yellow-500" />
                         Registered Address
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="p-3 border border-yellow-200 rounded-md bg-yellow-50">
                         <p className="text-sm text-gray-900">
                           {profileData?.registeredAddress || "Not specified"}
                         </p>
                 </div>
               </div>
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <Mail className="w-3 h-3 text-yellow-500" />
                         Contact Email
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="p-3 border border-yellow-200 rounded-md bg-yellow-50">
                         <p className="text-sm text-gray-900">
                           {profileData?.email || user?.email || "Not specified"}
                         </p>
@@ -235,31 +236,31 @@ const HomeDashboard = ({
             </div>
 
               {/* Preferences */}
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <div className="p-6 bg-white border border-yellow-200 rounded-lg shadow-sm">
+                <h2 className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900">
                   <Settings className="w-5 h-5 text-yellow-600" />
                   Preferences & Settings
                 </h2>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="space-y-3">
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <IndianRupee className="w-3 h-3 text-yellow-500" />
                         Default Currency
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="p-3 border border-yellow-200 rounded-md bg-yellow-50">
                         <p className="text-sm text-gray-900">
                           {profileData?.defaultCurrency || "Not specified"}
                         </p>
                       </div>
               </div>
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <Calendar className="w-3 h-3 text-yellow-500" />
                         Payment Cycle
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="p-3 border border-yellow-200 rounded-md bg-yellow-50">
                         <p className="text-sm text-gray-900">
                           {profileData?.defaultPaymentCycle || "Not specified"}
                         </p>
@@ -269,22 +270,22 @@ const HomeDashboard = ({
 
                   <div className="space-y-3">
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <User className="w-3 h-3 text-yellow-500" />
                         Preferred Language
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="p-3 border border-yellow-200 rounded-md bg-yellow-50">
                         <p className="text-sm text-gray-900">
                           {profileData?.preferredLanguage || "Not specified"}
                         </p>
                 </div>
               </div>
               <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1">
+                      <label className="flex items-center block gap-1 mb-1 text-xs font-medium text-gray-600">
                         <FileText className="w-3 h-3 text-yellow-500" />
                         Signature Style
                       </label>
-                      <div className="bg-yellow-50 rounded-md p-3 border border-yellow-200">
+                      <div className="p-3 border border-yellow-200 rounded-md bg-yellow-50">
                         <p className="text-sm text-gray-900">
                           {profileData?.defaultSignatureStyle ||
                             "Not specified"}
@@ -299,8 +300,8 @@ const HomeDashboard = ({
             {/* Sidebar */}
             <div className="space-y-4">
               {/* Quick Actions */}
-              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 rounded-lg shadow-sm">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <Activity className="w-4 h-4 text-yellow-600" />
                   Quick Actions
                 </h3>
@@ -336,7 +337,7 @@ const HomeDashboard = ({
                       <button
                         key={index}
                         onClick={action.action}
-                        className="w-full text-left p-2 rounded-md hover:bg-yellow-50 transition-colors text-xs text-gray-700 flex items-center gap-2"
+                        className="flex items-center w-full gap-2 p-2 text-xs text-left text-gray-700 transition-colors rounded-md hover:bg-yellow-50"
                       >
                         <Icon className="w-3 h-3 text-yellow-500" />
                         <div className="flex-1 text-left">
@@ -366,8 +367,8 @@ const HomeDashboard = ({
           </div>
 
               {/* Enterprise Features */}
-              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 rounded-lg shadow-sm">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <Shield className="w-4 h-4 text-yellow-600" />
                   Enterprise Features
                 </h3>
@@ -417,8 +418,8 @@ const HomeDashboard = ({
               </div>
 
               {/* Recent Activity */}
-              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 rounded-lg shadow-sm">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <Clock className="w-4 h-4 text-yellow-600" />
                   Recent Activity
                 </h3>
@@ -453,12 +454,12 @@ const HomeDashboard = ({
 const Dashboard = () => {
   return (
     <div className="w-full bg-[linear-gradient(180deg,#FDF9EDFF_0%,#F5E6A8FF_100%)] flex-1 lg:ml-0">
-      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 pt-16 lg:pt-12">
+      <div className="px-4 py-6 pt-16 sm:px-6 lg:px-8 sm:py-8 lg:py-12 lg:pt-12">
         <div className="w-full p-4 sm:p-6 lg:p-10 rounded-[10px] bg-[#FFF3BBB0]">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="mb-2 text-xl font-bold text-gray-900 sm:text-2xl lg:text-3xl">
             Dashboard
           </h1>
-          <p className="text-sm sm:text-base text-gray-700">
+          <p className="text-sm text-gray-700 sm:text-base">
             Dashboard functionality coming soon...
           </p>
         </div>
@@ -906,11 +907,11 @@ const WorkspacePayments = () => {
   return (
     <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
       {/* Header */}
-      <div className="px-4 lg:px-6 py-4">
+      <div className="px-4 py-4 lg:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-xl font-bold text-gray-900 mb-1 flex items-center gap-2">
+              <h1 className="flex items-center gap-2 mb-1 text-xl font-bold text-gray-900">
                 <CreditCard className="w-5 h-5 text-yellow-600" />
             Payments
           </h1>
@@ -927,14 +928,14 @@ const WorkspacePayments = () => {
       </div>
 
       {/* Main Content */}
-      <div className="px-4 lg:px-6 pb-8">
+      <div className="px-4 pb-8 lg:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
             {/* Main Content */}
-            <div className="lg:col-span-3 space-y-4">
+            <div className="space-y-4 lg:col-span-3">
               {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-600">
@@ -949,7 +950,7 @@ const WorkspacePayments = () => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-600">Paid</p>
@@ -966,7 +967,7 @@ const WorkspacePayments = () => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-600">
@@ -988,10 +989,10 @@ const WorkspacePayments = () => {
               </div>
 
               {/* Search and Filter */}
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="flex-1 relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <div className="relative flex-1">
+                    <Search className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
                     <Input
                       placeholder="Search by name or email..."
                       value={filters.employeeName || filters.employeeEmail}
@@ -1003,7 +1004,7 @@ const WorkspacePayments = () => {
                           employeeEmail: value,
                         }));
                       }}
-                      className="pl-10 text-sm bg-yellow-50 border-yellow-200 focus:border-yellow-500 focus:ring-yellow-500"
+                      className="pl-10 text-sm border-yellow-200 bg-yellow-50 focus:border-yellow-500 focus:ring-yellow-500"
                     />
                   </div>
                   <div className="sm:w-40">
@@ -1016,7 +1017,7 @@ const WorkspacePayments = () => {
                         }))
                       }
                     >
-                      <SelectTrigger className="text-sm bg-yellow-50 border-yellow-200 focus:border-yellow-500 focus:ring-yellow-500">
+                      <SelectTrigger className="text-sm border-yellow-200 bg-yellow-50 focus:border-yellow-500 focus:ring-yellow-500">
                         <Filter className="w-4 h-4 mr-2" />
                         <SelectValue placeholder="Status" />
                       </SelectTrigger>
@@ -1030,7 +1031,7 @@ const WorkspacePayments = () => {
                   </div>
                   <Button
                     onClick={applyFilters}
-                    className="bg-yellow-600 hover:bg-yellow-700 text-white px-4"
+                    className="px-4 text-white bg-yellow-600 hover:bg-yellow-700"
                   >
                     <Filter className="w-4 h-4 mr-2" />
                     Apply Filters
@@ -1039,7 +1040,7 @@ const WorkspacePayments = () => {
               </div>
 
               {/* Payments List */}
-              <div className="bg-white rounded-xl shadow-sm border border-yellow-200 overflow-hidden">
+              <div className="overflow-hidden bg-white border border-yellow-200 shadow-sm rounded-xl">
                 <div className="p-4 border-b border-yellow-200">
                   <h2 className="text-sm font-semibold text-gray-900">
                     Payment Records ({employees.length})
@@ -1049,7 +1050,7 @@ const WorkspacePayments = () => {
                 {loading && (
                   <div className="p-8 text-center">
                     <div className="inline-flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-yellow-600 border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-yellow-600 rounded-full border-t-transparent animate-spin"></div>
                       <span className="text-sm text-gray-600">
                         Loading payments...
                       </span>
@@ -1059,18 +1060,18 @@ const WorkspacePayments = () => {
 
                 {!loading && employees.length === 0 && (
                   <div className="p-8 text-center">
-                    <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-yellow-100 rounded-full">
                       <CreditCard className="w-8 h-8 text-yellow-600" />
                     </div>
-                    <h3 className="text-sm font-medium text-gray-900 mb-1">
+                    <h3 className="mb-1 text-sm font-medium text-gray-900">
                       No payment records found
                     </h3>
-                    <p className="text-xs text-gray-500 mb-4">
+                    <p className="mb-4 text-xs text-gray-500">
                       Start by adding your first employee payment
                     </p>
                     <Button
                       onClick={() => setShowAddModal(true)}
-                      className="bg-yellow-600 hover:bg-yellow-700 text-white text-sm"
+                      className="text-sm text-white bg-yellow-600 hover:bg-yellow-700"
                     >
                       <Plus className="w-4 h-4 mr-2" />
                       Add Payment
@@ -1079,16 +1080,16 @@ const WorkspacePayments = () => {
                 )}
 
                 {!loading && employees.length > 0 && (
-                  <div className="space-y-3 p-4">
+                  <div className="p-4 space-y-3">
                     {getPaginatedEmployees().map((employee) => (
                       <div
                         key={employee._id}
-                        className="bg-white border border-yellow-200 rounded-lg p-4 hover:shadow-sm transition-all duration-200"
+                        className="p-4 transition-all duration-200 bg-white border border-yellow-200 rounded-lg hover:shadow-sm"
                       >
                         {/* Header Section */}
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center space-x-3">
-                            <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <div className="flex items-center justify-center w-10 h-10 bg-yellow-100 rounded-full">
                               <User className="w-5 h-5 text-yellow-600" />
                             </div>
                             <div>
@@ -1133,7 +1134,7 @@ const WorkspacePayments = () => {
 
                             <button
                               onClick={() => handleDeleteClick(employee)}
-                              className="p-1 text-red-500 hover:text-red-600 transition-colors"
+                              className="p-1 text-red-500 transition-colors hover:text-red-600"
                               title="Delete payment record"
                             >
                               <Trash2 className="w-4 h-4 " />
@@ -1144,7 +1145,7 @@ const WorkspacePayments = () => {
                         {/* Payment Details Grid */}
                         <div className="grid grid-cols-3 gap-3">
                           {/* Payment Amount */}
-                          <div className="bg-gray-50 rounded-md p-3 border border-gray-200">
+                          <div className="p-3 border border-gray-200 rounded-md bg-gray-50">
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-xs font-medium text-gray-600">
                                 Amount
@@ -1157,7 +1158,7 @@ const WorkspacePayments = () => {
                           </div>
 
                           {/* Payment Method */}
-                          <div className="bg-gray-50 rounded-md p-3 border border-gray-200">
+                          <div className="p-3 border border-gray-200 rounded-md bg-gray-50">
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-xs font-medium text-gray-600">
                                 Method
@@ -1170,7 +1171,7 @@ const WorkspacePayments = () => {
                           </div>
 
                           {/* Payment Date */}
-                          <div className="bg-gray-50 rounded-md p-3 border border-gray-200">
+                          <div className="p-3 border border-gray-200 rounded-md bg-gray-50">
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-xs font-medium text-gray-600">
                                 Due Date
@@ -1190,7 +1191,7 @@ const WorkspacePayments = () => {
 
                         {/* Pay Now Button */}
                         {employee.currentMonthPaymentStatus === "pending" && (
-                          <div className="mt-4 pt-3 border-t border-gray-100">
+                          <div className="pt-3 mt-4 border-t border-gray-100">
                             <button
                               onClick={() => {
                                 // You can add payment processing logic here
@@ -1200,7 +1201,7 @@ const WorkspacePayments = () => {
                                   }`
                                 );
                               }}
-                              className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center space-x-2 text-sm"
+                              className="flex items-center justify-center w-full px-4 py-2 space-x-2 text-sm font-medium text-white transition-all duration-200 rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 hover:shadow-lg"
                             >
                               <CreditCard className="w-4 h-4" />
                               <span>Process Payment</span>
@@ -1212,7 +1213,7 @@ const WorkspacePayments = () => {
                         {(employee.lastPaymentDate ||
                           employee.currentMonth ||
                           employee.dateOfJoining) && (
-                          <div className="mt-3 pt-3 border-t border-gray-100">
+                          <div className="pt-3 mt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-4 text-xs text-gray-600">
                               {employee.lastPaymentDate && (
                                 <div className="flex items-center space-x-1">
@@ -1304,15 +1305,15 @@ const WorkspacePayments = () => {
             {/* Sidebar */}
             <div className="space-y-4">
               {/* Quick Actions */}
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 shadow-sm rounded-xl">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <Plus className="w-4 h-4 text-yellow-600" />
                   Quick Actions
                 </h3>
                 <div className="space-y-2">
                   <Button
                     onClick={() => setShowAddModal(true)}
-                    className="w-full bg-yellow-600 hover:bg-yellow-700 text-white text-sm"
+                    className="w-full text-sm text-white bg-yellow-600 hover:bg-yellow-700"
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     Add Payment
@@ -1320,7 +1321,7 @@ const WorkspacePayments = () => {
                   <Button
                     onClick={() => setActiveNavItem("dashboard")}
                     variant="outline"
-                    className="w-full border-yellow-200 text-yellow-700 hover:bg-yellow-50 text-sm"
+                    className="w-full text-sm text-yellow-700 border-yellow-200 hover:bg-yellow-50"
                   >
                     <TrendingUp className="w-4 h-4 mr-2" />
                     Visit Dashboard
@@ -1329,8 +1330,8 @@ const WorkspacePayments = () => {
               </div>
 
               {/* How It Works */}
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 shadow-sm rounded-xl">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <Activity className="w-4 h-4 text-yellow-600" />
                   How It Works
                 </h3>
@@ -1365,8 +1366,8 @@ const WorkspacePayments = () => {
               </div>
 
               {/* Payment Stats */}
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 shadow-sm rounded-xl">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <TrendingUp className="w-4 h-4 text-yellow-600" />
                   Payment Stats ({getCurrentMonth()})
                 </h3>
@@ -1413,10 +1414,10 @@ const WorkspacePayments = () => {
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
 
-            <div className="relative bg-white rounded-lg shadow-xl transform transition-all w-full max-w-4xl mx-auto">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="relative w-full max-w-4xl mx-auto transition-all transform bg-white rounded-lg shadow-xl">
+              <div className="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900">
                     <Plus className="w-5 h-5 text-yellow-600" />
                     Add Employee Payment Details
                   </h3>
@@ -1428,11 +1429,11 @@ const WorkspacePayments = () => {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
                     <Label
                       htmlFor="modal-employeeName"
-                      className="text-sm font-medium text-gray-700 mb-2 block"
+                      className="block mb-2 text-sm font-medium text-gray-700"
                     >
                       Employee Name *
                     </Label>
@@ -1455,7 +1456,7 @@ const WorkspacePayments = () => {
                   <div>
                     <Label
                       htmlFor="modal-employeeEmail"
-                      className="text-sm font-medium text-gray-700 mb-2 block"
+                      className="block mb-2 text-sm font-medium text-gray-700"
                     >
                       Employee Email *
                     </Label>
@@ -1478,7 +1479,7 @@ const WorkspacePayments = () => {
                   <div>
                     <Label
                       htmlFor="modal-modeOfPayment"
-                      className="text-sm font-medium text-gray-700 mb-2 block"
+                      className="block mb-2 text-sm font-medium text-gray-700"
                     >
                       Mode of Payment *
                     </Label>
@@ -1510,7 +1511,7 @@ const WorkspacePayments = () => {
                   <div>
                     <Label
                       htmlFor="modal-paymentAmount"
-                      className="text-sm font-medium text-gray-700 mb-2 block"
+                      className="block mb-2 text-sm font-medium text-gray-700"
                     >
                       Payment Amount *
                     </Label>
@@ -1533,7 +1534,7 @@ const WorkspacePayments = () => {
                   <div className="md:col-span-2">
                     <Label
                       htmlFor="modal-dateOfPayment"
-                      className="text-sm font-medium text-gray-700 mb-2 block"
+                      className="block mb-2 text-sm font-medium text-gray-700"
                     >
                       Due Date (Monthly Payment Date) *
                     </Label>
@@ -1554,22 +1555,22 @@ const WorkspacePayments = () => {
                 </div>
               </div>
 
-              <div className="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
+              <div className="flex justify-end px-6 py-4 space-x-3 bg-gray-50">
                 <Button
                   onClick={() => setShowAddModal(false)}
                   variant="outline"
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50 px-6 py-2"
+                  className="px-6 py-2 text-gray-700 border-gray-300 hover:bg-gray-50"
                 >
                   Cancel
                 </Button>
                 <Button
                   onClick={handleAddEmployee}
                   disabled={isSubmitting}
-                  className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2"
+                  className="px-6 py-2 text-white bg-yellow-600 hover:bg-yellow-700"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                      <div className="w-4 h-4 mr-2 border-2 border-white rounded-full border-t-transparent animate-spin"></div>
                       Adding...
                     </>
                   ) : (
@@ -1596,8 +1597,8 @@ const WorkspacePayments = () => {
               <div className="absolute inset-0 bg-black/50"></div>
             </div>
 
-            <div className="relative bg-white rounded-xl shadow-xl transform transition-all w-full max-w-md mx-auto">
-              <div className="bg-white px-6 py-6">
+            <div className="relative w-full max-w-md mx-auto transition-all transform bg-white shadow-xl rounded-xl">
+              <div className="px-6 py-6 bg-white">
                 <div className="flex items-center justify-between mb-5">
                   <h3 className="text-lg font-semibold text-gray-900">
                     Update Payment Status
@@ -1607,27 +1608,27 @@ const WorkspacePayments = () => {
                       setShowStatusModal(false);
                       setSelectedEmployee(null);
                     }}
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                    className="text-gray-400 transition-colors hover:text-gray-600"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
 
                 <div className="mb-5">
-                  <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                    <div className="flex justify-between items-center mb-2">
+                  <div className="p-4 mb-4 rounded-lg bg-gray-50">
+                    <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-600">Employee</span>
                       <span className="text-sm font-semibold text-gray-900">
                         {selectedEmployee.employeeName}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-600">Amount</span>
                       <span className="text-sm font-semibold text-gray-900">
                         ₹{selectedEmployee.paymentAmount?.toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-600">Method</span>
                       <span className="text-sm font-semibold text-gray-900">
                         {selectedEmployee.modeOfPayment}
@@ -1637,7 +1638,7 @@ const WorkspacePayments = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <p className="text-sm font-medium text-gray-700 mb-3">
+                  <p className="mb-3 text-sm font-medium text-gray-700">
                     Select new status:
                   </p>
 
@@ -1667,8 +1668,8 @@ const WorkspacePayments = () => {
                 </div>
 
                 {isSubmitting && (
-                  <div className="mt-4 flex items-center justify-center">
-                    <div className="w-4 h-4 border-2 border-yellow-600 border-t-transparent rounded-full animate-spin mr-2"></div>
+                  <div className="flex items-center justify-center mt-4">
+                    <div className="w-4 h-4 mr-2 border-2 border-yellow-600 rounded-full border-t-transparent animate-spin"></div>
                     <span className="text-sm text-gray-600">
                       Updating status...
                     </span>
@@ -1691,8 +1692,8 @@ const WorkspacePayments = () => {
               <div className="absolute inset-0 bg-black/50"></div>
             </div>
 
-            <div className="relative bg-white rounded-xl shadow-xl transform transition-all w-full max-w-md mx-auto">
-              <div className="bg-white px-6 py-6">
+            <div className="relative w-full max-w-md mx-auto transition-all transform bg-white shadow-xl rounded-xl">
+              <div className="px-6 py-6 bg-white">
                 <div className="flex items-center justify-between mb-5">
                   <h3 className="text-lg font-semibold text-gray-900">
                     Delete Payment Record
@@ -1702,27 +1703,27 @@ const WorkspacePayments = () => {
                       setShowDeleteModal(false);
                       setSelectedEmployee(null);
                     }}
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                    className="text-gray-400 transition-colors hover:text-gray-600"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
 
                 <div className="mb-5">
-                  <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                    <div className="flex justify-between items-center mb-2">
+                  <div className="p-4 mb-4 rounded-lg bg-gray-50">
+                    <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-600">Employee</span>
                       <span className="text-sm font-semibold text-gray-900">
                         {selectedEmployee.employeeName}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-600">Amount</span>
                       <span className="text-sm font-semibold text-gray-900">
                         ₹{selectedEmployee.paymentAmount?.toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-600">Status</span>
                       <span
                         className={`text-sm font-semibold px-2 py-1 rounded-full ${
@@ -1740,7 +1741,7 @@ const WorkspacePayments = () => {
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-600 mb-5 text-center">
+                <p className="mb-5 text-sm text-center text-gray-600">
                   This action cannot be undone. The payment record will be
                   permanently removed.
                 </p>
@@ -1752,18 +1753,18 @@ const WorkspacePayments = () => {
                       setSelectedEmployee(null);
                     }}
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
+                    className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 disabled:opacity-50"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleDeleteEmployee}
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 border border-transparent rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center space-x-2"
+                    className="flex items-center justify-center flex-1 px-4 py-3 space-x-2 text-sm font-medium text-white transition-colors bg-red-600 border border-transparent rounded-lg hover:bg-red-700 disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin"></div>
                         <span>Deleting...</span>
                       </>
                     ) : (
@@ -2068,11 +2069,11 @@ const WorkspaceDocuments = ({
   return (
     <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
         {/* Header */}
-      <div className="px-4 lg:px-6 py-4">
+      <div className="px-4 py-4 lg:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-xl font-semibold text-gray-900 mb-1 flex items-center gap-2">
+              <h1 className="flex items-center gap-2 mb-1 text-xl font-semibold text-gray-900">
                 <FileText className="w-5 h-5 text-yellow-600" />
                 Documents
           </h1>
@@ -2089,14 +2090,14 @@ const WorkspaceDocuments = ({
         </div>
 
       {/* Main Content */}
-      <div className="px-4 lg:px-6 pb-8">
+      <div className="px-4 pb-8 lg:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
             {/* Main Content */}
-            <div className="lg:col-span-3 space-y-4">
+            <div className="space-y-4 lg:col-span-3">
               {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+                <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
               <div>
                       <p className="text-xs font-medium text-gray-600">Total</p>
@@ -2109,7 +2110,7 @@ const WorkspaceDocuments = ({
                     </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
             <div>
                       <p className="text-xs font-medium text-gray-600">NDA</p>
@@ -2122,7 +2123,7 @@ const WorkspaceDocuments = ({
                     </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
             <div>
                       <p className="text-xs font-medium text-gray-600">
@@ -2137,7 +2138,7 @@ const WorkspaceDocuments = ({
                     </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200">
+                <div className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md">
                   <div className="flex items-center justify-between">
             <div>
                       <p className="text-xs font-medium text-gray-600">Other</p>
@@ -2153,10 +2154,10 @@ const WorkspaceDocuments = ({
               </div>
 
               {/* Search and Filter Bar */}
-              <div className="bg-white rounded-xl shadow-sm border border-yellow-200 p-4">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="flex-1 relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <div className="p-4 bg-white border border-yellow-200 shadow-sm rounded-xl">
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <div className="relative flex-1">
+                    <Search className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
                     <Input
                       placeholder="Search by document title or employee..."
                       value={filters.employeeName}
@@ -2167,7 +2168,7 @@ const WorkspaceDocuments = ({
                           employeeName: value,
                         }));
                       }}
-                      className="pl-10 text-sm bg-yellow-50 border-yellow-200 focus:border-yellow-500 focus:ring-yellow-500"
+                      className="pl-10 text-sm border-yellow-200 bg-yellow-50 focus:border-yellow-500 focus:ring-yellow-500"
                     />
                   </div>
                   <div className="sm:w-40">
@@ -2180,7 +2181,7 @@ const WorkspaceDocuments = ({
                         }))
                       }
                     >
-                      <SelectTrigger className="text-sm bg-yellow-50 border-yellow-200 focus:border-yellow-500 focus:ring-yellow-500">
+                      <SelectTrigger className="text-sm border-yellow-200 bg-yellow-50 focus:border-yellow-500 focus:ring-yellow-500">
                         <Filter className="w-4 h-4 mr-2" />
                         <SelectValue placeholder="Document Type" />
                       </SelectTrigger>
@@ -2211,7 +2212,7 @@ const WorkspaceDocuments = ({
                       setSortBy("createdAt");
                       setSortOrder("desc");
                     }}
-                    className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-lg"
+                    className="px-4 py-2 font-medium text-white transition-all duration-200 rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 hover:shadow-lg"
                   >
                     Apply Filters
                   </Button>
@@ -2237,7 +2238,7 @@ const WorkspaceDocuments = ({
           ) : error ? (
             <div className="flex items-center justify-center py-12">
               <div className="text-center">
-                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
                         <svg
                           className="w-6 h-6 text-red-600"
                           fill="none"
@@ -2252,10 +2253,10 @@ const WorkspaceDocuments = ({
                           ></path>
                   </svg>
                 </div>
-                <p className="text-gray-600 mb-2">{error}</p>
+                <p className="mb-2 text-gray-600">{error}</p>
                 <button
                   onClick={() => fetchDocuments()}
-                  className="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"
+                  className="px-4 py-2 text-white transition-colors bg-yellow-600 rounded-md hover:bg-yellow-700"
                 >
                   Try Again
                 </button>
@@ -2264,10 +2265,10 @@ const WorkspaceDocuments = ({
           ) : documents.length === 0 ? (
             <div className="flex items-center justify-center py-12">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full">
                   <span className="text-2xl">📄</span>
                 </div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      <h3 className="mb-2 text-lg font-medium text-gray-900">
                         No documents found
                       </h3>
                       <p className="text-gray-600">
@@ -2280,10 +2281,10 @@ const WorkspaceDocuments = ({
                       {documents.map((document) => (
                       <div
                         key={document.id}
-                        className="bg-white rounded-xl shadow-sm border border-yellow-200 hover:shadow-md transition-all duration-200 p-4"
+                        className="p-4 transition-all duration-200 bg-white border border-yellow-200 shadow-sm rounded-xl hover:shadow-md"
                       >
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4 flex-1">
+                          <div className="flex items-center flex-1 gap-4">
                             <div className="p-2 bg-yellow-100 rounded-lg">
                               <FileText className="w-5 h-5 text-yellow-600" />
                           </div>
@@ -2292,7 +2293,7 @@ const WorkspaceDocuments = ({
                                 <h3 className="text-sm font-semibold text-gray-900 truncate">
                                   {document.documentTitle}
                                 </h3>
-                                <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                                <span className="px-2 py-1 text-xs text-gray-500 bg-gray-100 rounded-full">
                                   {document.documentType}
                           </span>
                               </div>
@@ -2331,7 +2332,7 @@ const WorkspaceDocuments = ({
 
               {/* Pagination */}
               {pagination.totalPages > 1 && (
-                      <div className="bg-white px-4 py-3 border-t border-yellow-200 rounded-b-xl">
+                      <div className="px-4 py-3 bg-white border-t border-yellow-200 rounded-b-xl">
                   <div className="flex items-center justify-between">
                           <div className="text-xs text-gray-600">
                             Showing{" "}
@@ -2397,10 +2398,10 @@ const WorkspaceDocuments = ({
       </div>
 
             {/* Right Sidebar */}
-            <div className="lg:col-span-1 space-y-4">
+            <div className="space-y-4 lg:col-span-1">
               {/* Quick Actions */}
-              <div className="bg-white rounded-xl shadow-sm border border-yellow-200 p-4">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 shadow-sm rounded-xl">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <Settings className="w-4 h-4 text-yellow-600" />
                   Quick Actions
                 </h3>
@@ -2410,14 +2411,14 @@ const WorkspaceDocuments = ({
                       setActiveNavItem("workspace");
                       setActiveWorkspaceItem("track");
                     }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 bg-yellow-50 border border-yellow-200 rounded-lg hover:bg-yellow-100 transition-colors"
+                    className="flex items-center w-full gap-2 px-3 py-2 text-sm text-gray-700 transition-colors border border-yellow-200 rounded-lg bg-yellow-50 hover:bg-yellow-100"
                   >
                     <Activity className="w-4 h-4" />
                     Track Documents
                   </button>
                   <button
                     onClick={() => setActiveNavItem("dashboard")}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="flex items-center w-full gap-2 px-3 py-2 text-sm text-gray-700 transition-colors border border-gray-200 rounded-lg bg-gray-50 hover:bg-gray-100"
                   >
                     <TrendingUp className="w-4 h-4" />
                     View Dashboard
@@ -2426,8 +2427,8 @@ const WorkspaceDocuments = ({
               </div>
 
               {/* How It Works */}
-              <div className="bg-white rounded-xl shadow-sm border border-yellow-200 p-4">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 shadow-sm rounded-xl">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <Activity className="w-4 h-4 text-yellow-600" />
                   How It Works
                 </h3>
@@ -2460,31 +2461,31 @@ const WorkspaceDocuments = ({
               </div>
 
               {/* Document Stats */}
-              <div className="bg-white rounded-xl shadow-sm border border-yellow-200 p-4">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="p-4 bg-white border border-yellow-200 shadow-sm rounded-xl">
+                <h3 className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900">
                   <FileText className="w-4 h-4 text-yellow-600" />
                   Document Stats
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-600">Total</span>
                     <span className="text-sm font-semibold text-gray-900">
                       {documentStats.total}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-600">NDA</span>
                     <span className="text-sm font-semibold text-yellow-600">
                       {documentStats.nda}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-600">Offer Letter</span>
                     <span className="text-sm font-semibold text-yellow-600">
                       {documentStats.offerLetter}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-600">Other</span>
                     <span className="text-sm font-semibold text-yellow-600">
                       {documentStats.other}
@@ -2503,12 +2504,12 @@ const WorkspaceDocuments = ({
 const WorkspaceTrack = () => {
   return (
     <div className="w-full bg-[linear-gradient(180deg,#FDF9EDFF_0%,#F5E6A8FF_100%)] flex-1 lg:ml-0">
-      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 pt-16 lg:pt-12">
+      <div className="px-4 py-6 pt-16 sm:px-6 lg:px-8 sm:py-8 lg:py-12 lg:pt-12">
         <div className="w-full p-4 sm:p-6 lg:p-10 rounded-[10px] bg-[#FFF3BBB0]">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="mb-2 text-xl font-bold text-gray-900 sm:text-2xl lg:text-3xl">
             Track
           </h1>
-          <p className="text-sm sm:text-base text-gray-700">
+          <p className="text-sm text-gray-700 sm:text-base">
             Tracking functionality coming soon...
           </p>
         </div>
@@ -2661,6 +2662,8 @@ export default function EnterpriseDynamicLayout() {
         return <Dashboard />;
       case "edit-profile":
         return <EnterpriseEditProfile />;
+         case "Userpayments": 
+      return <PaymentsPage />;
       default:
         return (
           <HomeDashboard
@@ -2677,33 +2680,33 @@ export default function EnterpriseDynamicLayout() {
   if (!user && !isAuthenticated && isLoading) {
     return (
       <div className="w-full bg-gradient-to-br from-[#fefce8] to-[#fef9c3] flex-1 lg:ml-0 min-h-screen">
-        <div className="px-6 lg:px-8 py-8">
-          <div className="max-w-7xl mx-auto">
+        <div className="px-6 py-8 lg:px-8">
+          <div className="mx-auto max-w-7xl">
             {/* Header Skeleton */}
             <div className="flex items-center justify-between mb-8">
               <div className="space-y-2">
-                <div className="h-8 bg-yellow-100 rounded-lg animate-pulse w-64"></div>
-                <div className="h-4 bg-yellow-100 rounded-lg animate-pulse w-48"></div>
+                <div className="w-64 h-8 bg-yellow-100 rounded-lg animate-pulse"></div>
+                <div className="w-48 h-4 bg-yellow-100 rounded-lg animate-pulse"></div>
               </div>
               <div className="flex gap-3">
-                <div className="h-10 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
-                <div className="h-10 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
+                <div className="w-24 h-10 bg-yellow-100 rounded-lg animate-pulse"></div>
+                <div className="w-24 h-10 bg-yellow-100 rounded-lg animate-pulse"></div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Stats Skeleton */}
-        <div className="px-6 lg:px-8 mb-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="px-6 mb-8 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
               {[1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200"
+                  className="p-4 bg-white border border-yellow-200 rounded-lg shadow-sm"
                 >
-                  <div className="h-8 bg-yellow-100 rounded-lg animate-pulse w-16 mb-2"></div>
-                  <div className="h-4 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
+                  <div className="w-16 h-8 mb-2 bg-yellow-100 rounded-lg animate-pulse"></div>
+                  <div className="w-24 h-4 bg-yellow-100 rounded-lg animate-pulse"></div>
                 </div>
               ))}
             </div>
@@ -2711,21 +2714,21 @@ export default function EnterpriseDynamicLayout() {
         </div>
 
         {/* Main Content Skeleton */}
-        <div className="px-6 lg:px-8 pb-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="px-6 pb-8 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               {/* Main Content Skeleton */}
-              <div className="lg:col-span-2 space-y-6">
+              <div className="space-y-6 lg:col-span-2">
                 {[1, 2].map((i) => (
                   <div
                     key={i}
-                    className="bg-white rounded-lg p-6 shadow-sm border border-yellow-200"
+                    className="p-6 bg-white border border-yellow-200 rounded-lg shadow-sm"
                   >
-                    <div className="h-6 bg-yellow-100 rounded-lg animate-pulse w-48 mb-4"></div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="w-48 h-6 mb-4 bg-yellow-100 rounded-lg animate-pulse"></div>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       {[1, 2, 3, 4, 5, 6].map((j) => (
                         <div key={j} className="space-y-2">
-                          <div className="h-3 bg-yellow-100 rounded-lg animate-pulse w-24"></div>
+                          <div className="w-24 h-3 bg-yellow-100 rounded-lg animate-pulse"></div>
                           <div className="h-12 bg-yellow-100 rounded-lg animate-pulse"></div>
                         </div>
                       ))}
@@ -2739,9 +2742,9 @@ export default function EnterpriseDynamicLayout() {
                 {[1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200"
+                    className="p-4 bg-white border border-yellow-200 rounded-lg shadow-sm"
                   >
-                    <div className="h-4 bg-yellow-100 rounded-lg animate-pulse w-32 mb-3"></div>
+                    <div className="w-32 h-4 mb-3 bg-yellow-100 rounded-lg animate-pulse"></div>
                     <div className="space-y-2">
                       {[1, 2, 3, 4].map((j) => (
                         <div
@@ -2816,7 +2819,7 @@ export default function EnterpriseDynamicLayout() {
       <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
       
       {/* Main Content Area with Sidebar */}
-      <div className="min-h-screen bg-gray-50 flex relative">
+      <div className="relative flex min-h-screen bg-gray-50">
         <Sidebar
           activeNavItem={activeNavItem}
           onNavItemClick={handleNavItemClick}

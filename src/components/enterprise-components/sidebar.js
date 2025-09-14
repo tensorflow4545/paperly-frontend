@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { logout } from "@/utils/auth";
 import { Borel } from "next/font/google";
+import Link from "next/link";
 import {
   ChevronDown,
-  ChevronRight,
   Home,
   Layout,
   User,
@@ -14,7 +14,9 @@ import {
   CreditCard,
   FileText,
   Activity,
+  Wallet, // ✅ added import
 } from "lucide-react";
+import PaymentsPage from "./userpayment"; // Import the PaymentsPage component
 
 const borel = Borel({
   subsets: ["latin"],
@@ -57,6 +59,7 @@ export default function Sidebar({
     { id: "home", label: "Home", icon: Home },
     { id: "dashboard", label: "Dashboard", icon: Layout },
     { id: "edit-profile", label: "Profile", icon: User },
+    { id: "user-payment", label: "User Payment", icon: User },
     { id: "logout", label: "Logout", icon: LogOut },
   ];
 
@@ -81,7 +84,7 @@ export default function Sidebar({
       {/* Mobile Menu Button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="fixed top-4 left-4 z-50 p-3 transition-all duration-200 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl shadow-sm lg:hidden hover:shadow-sm hover:scale-105 border border-yellow-200"
+        className="fixed z-50 p-3 transition-all duration-200 border border-yellow-200 shadow-sm top-4 left-4 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl lg:hidden hover:shadow-sm hover:scale-105"
       >
         <svg
           className="w-5 h-5 text-white"
@@ -113,7 +116,7 @@ export default function Sidebar({
           {/* Close button for mobile */}
           <button
             onClick={() => setSidebarOpen(false)}
-            className="absolute p-2 top-4 right-4 lg:hidden hover:bg-gray-50 rounded-lg transition-colors"
+            className="absolute p-2 transition-colors rounded-lg top-4 right-4 lg:hidden hover:bg-gray-50"
           >
             <svg
               className="w-5 h-5 text-gray-600"
@@ -131,12 +134,12 @@ export default function Sidebar({
           </button>
 
           {/* Logo Section */}
-          <div className="flex items-center gap-3 mb-8 pt-2">
+          <div className="flex items-center gap-3 pt-2 mb-8">
             <div>
               <h1 className="text-lg font-borel font-semibold text-[#B29200]">
                 Welcome to <span className={`${borel.className}`}>paprly</span>
               </h1>
-              <p className="text-sm text-yellow-600 font-medium border-b-2 border-yellow-200 pb-1">
+              <p className="pb-1 text-sm font-medium text-yellow-600 border-b-2 border-yellow-200">
                 Enterprise Suite section
               </p>
             </div>
@@ -149,28 +152,28 @@ export default function Sidebar({
               onClick={() => onNavItemClick("home")}
               className={`
                 group flex items-center gap-3 px-3 py-2.5 w-full text-left rounded-lg transition-all duration-200
-                                  ${
-                                    activeNavItem === "home"
-                                      ? "bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200"
-                                      : "text-gray-700 hover:bg-yellow-50 hover:text-gray-900"
-                                  }
+                ${
+                  activeNavItem === "home"
+                    ? "bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200"
+                    : "text-gray-700 hover:bg-yellow-50 hover:text-gray-900"
+                }
               `}
             >
               <div
                 className={`
-                p-1.5 rounded-md transition-all duration-200
-                ${
-                  activeNavItem === "home"
-                    ? "bg-yellow-500 text-white"
-                    : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
-                }
-              `}
+                  p-1.5 rounded-md transition-all duration-200
+                  ${
+                    activeNavItem === "home"
+                      ? "bg-yellow-500 text-white"
+                      : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
+                  }
+                `}
               >
                 <Home className="w-4 h-4" />
               </div>
-              <span className="font-semibold text-sm">Home</span>
+              <span className="text-sm font-semibold">Home</span>
               {activeNavItem === "home" && (
-                <div className="ml-auto w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 ml-auto bg-yellow-500 rounded-full animate-pulse"></div>
               )}
             </button>
 
@@ -190,23 +193,23 @@ export default function Sidebar({
                 <div className="flex items-center gap-3">
                   <div
                     className={`
-                    p-1.5 rounded-md transition-all duration-200
-                    ${
-                      activeNavItem === "workspace"
-                        ? "bg-yellow-500 text-white"
-                        : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
-                    }
-                  `}
+                      p-1.5 rounded-md transition-all duration-200
+                      ${
+                        activeNavItem === "workspace"
+                          ? "bg-yellow-500 text-white"
+                          : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
+                      }
+                    `}
                   >
                     <Layout className="w-4 h-4" />
                   </div>
-                  <span className="font-semibold text-sm">Workspace</span>
+                  <span className="text-sm font-semibold">Workspace</span>
                 </div>
                 <div
                   className={`
-                  transition-transform duration-200
-                  ${workspaceExpanded ? "rotate-180" : ""}
-                `}
+                    transition-transform duration-200
+                    ${workspaceExpanded ? "rotate-180" : ""}
+                  `}
                 >
                   <ChevronDown className="w-4 h-4 text-yellow-500" />
                 </div>
@@ -214,7 +217,7 @@ export default function Sidebar({
 
               {/* Workspace Dropdown Items */}
               {workspaceExpanded && (
-                <div className="mt-2 ml-4 space-y-2 border-l-2 border-yellow-200 pl-4">
+                <div className="pl-4 mt-2 ml-4 space-y-2 border-l-2 border-yellow-200">
                   {workspaceItems.map((item) => {
                     const Icon = item.icon;
                     const isActive = activeWorkspaceItem === item.id;
@@ -252,52 +255,132 @@ export default function Sidebar({
               )}
             </div>
 
-            {/* Other Navigation Items */}
-            {navItems
-              .filter((item) => item.id !== "home")
-              .map((item) => {
-                const Icon = item.icon;
-                const isActive = activeNavItem === item.id;
+            {/* Dashboard Item - Rendered separately */}
+            <button
+              onClick={() => onNavItemClick("dashboard")}
+              className={`
+                group flex items-center gap-3 px-3 py-2.5 w-full text-left rounded-lg transition-all duration-200
+                ${
+                  activeNavItem === "dashboard"
+                    ? "bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200"
+                    : "text-gray-700 hover:bg-yellow-50 hover:text-gray-900"
+                }
+              `}
+            >
+              <div
+                className={`
+                  p-1.5 rounded-md transition-all duration-200
+                  ${
+                    activeNavItem === "dashboard"
+                      ? "bg-yellow-500 text-white"
+                      : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
+                  }
+                `}
+              >
+                <Layout className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-semibold">Dashboard</span>
+              {activeNavItem === "dashboard" && (
+                <div className="w-2 h-2 ml-auto bg-yellow-500 rounded-full animate-pulse"></div>
+              )}
+            </button>
 
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => onNavItemClick(item.id)}
-                    className={`
-                    group flex items-center gap-3 px-3 py-2.5 w-full text-left rounded-lg transition-all duration-200
-                    ${
-                      isActive
-                        ? "bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200"
-                        : "text-gray-700 hover:bg-yellow-50 hover:text-gray-900"
-                    }
-                  `}
-                  >
-                    <div
-                      className={`
-                    p-1.5 rounded-md transition-all duration-200
-                    ${
-                      isActive
-                        ? "bg-yellow-500 text-white"
-                        : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
-                    }
-                  `}
-                    >
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <span className="font-semibold text-sm">{item.label}</span>
-                    {isActive && (
-                      <div className="ml-auto w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-                    )}
-                  </button>
-                );
-              })}
+            {/* Profile Item */}
+            <button
+              onClick={() => onNavItemClick("edit-profile")}
+              className={`
+                group flex items-center gap-3 px-3 py-2.5 w-full text-left rounded-lg transition-all duration-200
+                ${
+                  activeNavItem === "edit-profile"
+                    ? "bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200"
+                    : "text-gray-700 hover:bg-yellow-50 hover:text-gray-900"
+                }
+              `}
+            >
+              <div
+                className={`
+                  p-1.5 rounded-md transition-all duration-200
+                  ${
+                    activeNavItem === "edit-profile"
+                      ? "bg-yellow-500 text-white"
+                      : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
+                  }
+                `}
+              >
+                <User className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-semibold">Profile</span>
+              {activeNavItem === "edit-profile" && (
+                <div className="w-2 h-2 ml-auto bg-yellow-500 rounded-full animate-pulse"></div>
+              )}
+            </button>
+
+            {/* User Payments Tab - Added between Profile and Logout */}
+            <button
+              onClick={() => onNavItemClick("Userpayments")}
+              className={`
+                group flex items-center gap-3 px-3 py-2.5 w-full text-left rounded-lg transition-all duration-200
+                ${
+                  activeNavItem === "Userpayments"
+                    ? "bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200"
+                    : "text-gray-700 hover:bg-yellow-50 hover:text-gray-900"
+                }
+              `}
+            >
+              <div
+                className={`
+                  p-1.5 rounded-md transition-all duration-200
+                  ${
+                    activeNavItem === "Userpayments"
+                      ? "bg-yellow-500 text-white"
+                      : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
+                  }
+                `}
+              >
+                <Wallet className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-semibold">User payments</span>
+              {activeNavItem === "Userpayments" && (
+                <div className="w-2 h-2 ml-auto bg-yellow-500 rounded-full animate-pulse"></div>
+              )}
+            </button>
+
+            {/* Logout Item */}
+            <button
+              onClick={() => onNavItemClick("logout")}
+              className={`
+                group flex items-center gap-3 px-3 py-2.5 w-full text-left rounded-lg transition-all duration-200
+                ${
+                  activeNavItem === "logout"
+                    ? "bg-gradient-to-r from-yellow-100 to-yellow-50 text-gray-900 border border-yellow-200"
+                    : "text-gray-700 hover:bg-yellow-50 hover:text-gray-900"
+                }
+              `}
+            >
+              <div
+                className={`
+                  p-1.5 rounded-md transition-all duration-200
+                  ${
+                    activeNavItem === "logout"
+                      ? "bg-yellow-500 text-white"
+                      : "bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:text-yellow-700"
+                  }
+                `}
+              >
+                <LogOut className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-semibold">Logout</span>
+              {activeNavItem === "logout" && (
+                <div className="w-2 h-2 ml-auto bg-yellow-500 rounded-full animate-pulse"></div>
+              )}
+            </button>
           </nav>
         </div>
 
         {/* Bottom Profile Section */}
         <div className="p-3 border-t border-yellow-200 bg-gradient-to-r from-yellow-50 to-white">
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-white border border-yellow-200 hover:bg-yellow-50 transition-all duration-200">
-            <div className="flex items-center justify-center w-8 h-8 overflow-hidden bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg">
+          <div className="flex items-center gap-2 p-2 transition-all duration-200 bg-white border border-yellow-200 rounded-lg hover:bg-yellow-50">
+            <div className="flex items-center justify-center w-8 h-8 overflow-hidden rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600">
               {profileData?.companyLogo ? (
                 <img
                   src={profileData.companyLogo}
@@ -321,6 +404,13 @@ export default function Sidebar({
           </div>
         </div>
       </div>
+
+      {/* Main Content Area - Display PaymentsPage when activeNavItem is "Userpayments" */}
+      {activeNavItem === "Userpayments" && (
+        <div className="flex-1 p-6 ml-0 lg:ml-[260px]">
+          
+        </div>
+      )}
     </>
   );
 }

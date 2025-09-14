@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono, Dancing_Script, Satisfy, Great_Vibes, Sacramento, Allura } from "next/font/google";
 import "./globals.css";
+import { Toaster } from 'sonner';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -108,8 +110,10 @@ export default function Layout({ children }) {
           name="google-adsense-account" content="ca-pub-4918938808225819"
         />
       </head>
-      <body className="bg-white text-gray-900">
-        <div className=" mx-auto mx-w-[1]">{children}</div>
+      <body className="text-gray-900 bg-white">
+        <div className=" mx-auto mx-w-[1]">{children}
+          <Toaster />
+        </div>
       </body>
     </html>
   );
